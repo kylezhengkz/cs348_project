@@ -1,6 +1,7 @@
 # CS 348 Project
 
 [![Static Badge](https://img.shields.io/badge/PostgreSQL-336690?style=for-the-badge)](https://www.postgresql.org/)
+[![Static Badge](https://img.shields.io/badge/Python-254F72?style=for-the-badge)](https://www.python.org/downloads/)
 
 <br>
 
@@ -48,15 +49,13 @@ For simplicity each .csv file references a particular table in the database.
 > The id keys within a dataset are only for convenience for debugging.
 > The ids will be regenerated on the dataase side
 
-<br>
-
 > [!NOTE]
 > Datetimes within the database are assumed to be in UTC timezone.
 > Similarly, datetimes within the .csv files are expected to be in UTC timezone.
 
 
 ### Step 1.
-Create a new folder for the dataset at [Tools/DataImporter/data]
+Create a new folder for the dataset at [Tools/DataImporter/data](Tools/DataImporter/data)
 
 <br>
 
