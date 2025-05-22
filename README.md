@@ -12,3 +12,38 @@
 | Ananya Ohrie | https://github.com/ananyao3 |
 | Anthony Tieu | https://github.com/Akali404 |
 | Kyle Zheng | https://github.com/kylezhengkz |
+
+<br>
+
+## How to Create Raw Datasets
+
+Our datasets are synthetically generated.
+
+A dataset is a folder that contains many .csv files. 
+For simplicity each .csv file references a particular table in the database.
+
+> [!NOTE]
+> The id keys within a dataset are only for convenience for debugging.
+> The ids will be regenerated on the dataase side
+
+<br>
+
+> [!NOTE]
+> Datetimes within the database are assumed to be in UTC timezone.
+> Similarly, datetimes within the .csv files are expected to be in UTC timezone.
+
+
+### Step 1.
+Create a new folder for the dataset at [Tools/DataImporter/data]
+
+<br>
+
+### Step 2.
+Create the corresponding .csv files based on the tables within the databases
+
+<br>
+<br>
+
+## How to Load Datasets to the Database
+
+Follow the instructions at [Tools/DataImporter](Tools/DataImporter/README.md)
