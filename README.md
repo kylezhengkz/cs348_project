@@ -53,6 +53,7 @@ For simplicity each .csv file references a particular table in the database.
 > Datetimes within the database are assumed to be in UTC timezone.
 > Similarly, datetimes within the .csv files are expected to be in UTC timezone.
 
+<br>
 
 ### Step 1.
 Create a new folder for the dataset at [Tools/DataImporter/data](Tools/DataImporter/data)
