@@ -7,34 +7,34 @@
 ## Members
 |     |     |
 | --- | --- |
-| Alex Au | https://github.com/Alex-Au1 |
-| Anika Awasthi | https://github.com/anikawas |
-| Ananya Ohrie | https://github.com/ananyao3 |
-| Anthony Tieu | https://github.com/Akali404 |
-| Kyle Zheng | https://github.com/kylezhengkz |
+| **Alex Au** | https://github.com/Alex-Au1 |
+| **Anika Awasthi** | https://github.com/anikawas |
+| **Ananya Ohrie** | https://github.com/ananyao3 |
+| **Anthony Tieu** | https://github.com/Akali404 |
+| **Kyle Zheng** | https://github.com/kylezhengkz |
 
 <br>
 
 ## Hello World
-
-Description:
 - A simple "hello world" project with PostgreSQL, Flask, and web interface.
 - Supports ability to auto-populate table, clear table, and search by user name.
 - Uses toy dataset (does not reflect actual project dataset/schema).
 
-Prerequisites:
+### Prerequisites:
 - Assumes installation of Python 3.12.10
 - Assumes installation of Poetry
 
-Run Instructions:
+<br>
+
+### Run Instructions:
 - Create a .env file with database credentials in the project root folder
 - Open terminal in project root
-
 ```
 poetry install
 poetry run gunicorn hello_world.app:app
 ```
 
+<br>
 <br>
 
 ## How to Create Raw Datasets
