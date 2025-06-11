@@ -5,3 +5,4 @@ class TableNames(Enum):
     Buiding = "Building"
     Booking = "Booking"
     Room = "Room"
+    Cancellation = "Cancellation"

@@ -5,8 +5,7 @@ from typing import Optional
 
 # DBSecrets: Class to hold the secrets for the databases server
 class DBSecrets():
-    def __init__(self, db: str = "", username: str = "", password: str= "", host: str = "", port: str = ""):
-        self.db = db
+    def __init__(self, username: str = "", password: str= "", host: str = "", port: str = ""):
         self.username = username
         self.password = password
         self.host = host
@@ -20,9 +19,8 @@ class DBSecrets():
 
         load_dotenv(dotenv_path = envPath)
 
-        db = os.getenv("DATABASE")
         username = os.getenv("DBUSERNAME")
         password = os.getenv("DBPASSWORD")
         host = os.getenv("HOST")
         port = os.getenv("PORT")
-        return cls(db, username, password, host, port)
+        return cls(username = username, password = password, host = host, port = port)

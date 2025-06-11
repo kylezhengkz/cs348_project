@@ -1,4 +1,6 @@
-﻿uid,name,email,password
-1,Alice Margatroid,PerfectCherryBlossom@gmail.com,Doll123
-2,Bobby Tables,LittleBobbyTables@hotmail.com,RobertDropTables456
-3,Charlie Brown,Snoopy@gmail.com,PeanutButter784
+﻿userID,username,email,password,permissionLevel
+1,Alice Margatroid,PerfectCherryBlossom@gmail.com,Doll123,1
+2,Bobby Tables,LittleBobbyTables@hotmail.com,RobertDropTables456,1
+3,Charlie Brown,Snoopy@gmail.com,PeanutButter784,2
+4,Jane Doe,janedoe@yahoo.com,zzz123,1
+5,Mr Anderson,neo@gmail.com,theMatrix321,2

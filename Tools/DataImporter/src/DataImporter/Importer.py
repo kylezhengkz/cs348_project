@@ -1,28 +1,31 @@
 import psycopg2
 import pandas as pd
+import numpy as np
 import os
 import psycopg2.sql
 import sqlalchemy
 from typing import Optional, Union, List, Dict, Any, Tuple
 
 from .DBSecrets import DBSecrets
-from .AreYouSureError import AreYouSureError
-from .ColNames import ColNames
-from .TableNames import TableNames
+from .exceptions.AreYouSureError import AreYouSureError
+from .constants.ColNames import ColNames
+from .constants.TableNames import TableNames
+from .constants.DBNames import DBNames
 
 
 # Importer: The importer for adding data into the database
 class Importer():
-    def __init__(self, secrets: DBSecrets):
+    def __init__(self, secrets: DBSecrets, database: str = DBNames.Toy.value):
         self.secrets = secrets
+        self.database = database
 
     # connectDB(): Creates a connection to the database
     def connectDB(self) -> psycopg2.extensions.connection:
-        return psycopg2.connect(database = self.secrets.db, user = self.secrets.username, password = self.secrets.password, 
+        return psycopg2.connect(database = self.database, user = self.secrets.username, password = self.secrets.password, 
                                     host = self.secrets.host, port = self.secrets.port)
     
     def createSQLEngine(self) -> sqlalchemy.engine.Engine:
-        return sqlalchemy.create_engine(f"postgresql+psycopg2://{self.secrets.username}:{self.secrets.password}@{self.secrets.host}/{self.secrets.db}")
+        return sqlalchemy.create_engine(f"postgresql+psycopg2://{self.secrets.username}:{self.secrets.password}@{self.secrets.host}/{self.database}")
     
     # executeSQL(sql, vars, commit, closeConn): Execute some SQL query
     def executeSQL(self, sql: Union[str, psycopg2.sql.SQL], vars: Optional[Union[List[Any], Dict[str, Any]]] = None, commit: bool = False, closeConn: bool = True, conn: Optional[psycopg2.extensions.connection] = None) -> Tuple[psycopg2.extensions.connection, Optional[psycopg2.extensions.cursor], Optional[Exception]]:
@@ -52,6 +55,8 @@ class Importer():
     def insert(self, data: Union[str, pd.DataFrame], tableName: str, returnCols: Optional[List[str]] = None) -> Optional[pd.DataFrame]:
         if (isinstance(data, str)):
             data = pd.read_csv(data)
+
+        data = data.replace(np.nan, None)
 
         # let pandas handle how to insert a dataframe
         if (returnCols is None or not returnCols):
@@ -95,7 +100,7 @@ class Importer():
     # clearTable(tableName, isSure): Clears all the data from a table
     def clearTable(self, tableName: str, isSure: bool = False):
         if (not isSure):
-            raise AreYouSureError(f"CLEAR ALL THE DATA IN THE TABLE BY THE NAME: {tableName}")
+            raise AreYouSureError(f"CLEAR ALL THE DATA IN THE TABLE BY THE NAME: {tableName} FOR THE DATABASE, '{self.database}'")
         
         sql = psycopg2.sql.SQL("TRUNCATE {table} CASCADE;").format(table = psycopg2.sql.Identifier(tableName))
         self.executeSQL(sql, commit = True)
@@ -103,7 +108,7 @@ class Importer():
     # clearAll(isSure): Clears all the data from all the imported tables
     def clearAll(self, isSure: bool = False):
         if (not isSure):
-            raise AreYouSureError(f"CLEAR ALL THE DATA IN THE DATABASE")
+            raise AreYouSureError(f"CLEAR ALL THE DATA IN THE DATABASE BY THE NAME '{self.database}'")
         
         tablesToClear = [
             TableNames.User.value,
@@ -116,25 +121,60 @@ class Importer():
             print(f"Clearing {table}...")
             self.clearTable(table, isSure = True)
 
-    # toDateTime(data, cols, format): Converts certain columns in the data to a datetime
-    def toDateTime(self, data: pd.DataFrame, cols: List[str], format: Optional[str] = None) -> pd.DataFrame:
-        if (format is None):
-            format = '%Y-%m-%d %H:%M:%S'
+    # toDateTime(data, cols, formats): Converts certain columns in the data to a datetime
+    def toDateTime(self, data: pd.DataFrame, cols: List[str], formats: Optional[List[str]] = None) -> pd.DataFrame:
+        if (formats is None):
+            formats = ['%Y-%m-%d %I:%M:%S %p',
+                       '%Y-%m-%d %H:%M:%S',
+
+                        # Seriously Excel, what is wrong with your datetime autoconversion?
+                        #   I try to disable your datatype conversion and you convert my datetime to number seconds since epoch time instead
+                        '%Y-%m-%d %H:%M']
 
         for col in cols:
-            data[col] = pd.to_datetime(data[col], format = format)
+            for format in formats:
+                try:
+                    data[col] = pd.to_datetime(data[col], format = format)
+                except ValueError:
+                    continue
+                else:
+                    break
+
+        return data
+    
+    # fillNaN(data, vals): Fills the NaN values in certain columns of the table with the specified values
+    def fillNaN(self, data: pd.DataFrame, vals: Dict[str, str]) -> pd.DataFrame:
+        for col in vals:
+            replaceVal = vals[col]
+            if (replaceVal is None):
+                data[col] = data[col].replace(np.nan, None)
+                continue
+
+            data[col] = data[col].fillna(vals[col])
 
         return data
 
     # replaceIds(data, originalIds, generatedIds, idColName): Replaces the ids in the original data with the newly generated ids
     def replaceIds(self, data: pd.DataFrame, originalIds: pd.DataFrame, generatedIds: pd.DataFrame, idColName: str) -> pd.DataFrame:
-        tempIdColName = f"temp{idColName}"
-        data = data.rename(columns = {idColName: tempIdColName})
+        oldIdColName = f"old_{idColName}"
+        tempIdColName = f"temp_{idColName}"
+        idExistsColName = f"{idColName}_exists"
+
+        data = data.rename(columns = {idColName: oldIdColName})
+        data[tempIdColName] = data[oldIdColName]
         originalIds = originalIds.rename(columns = {idColName: tempIdColName})
         originalIds = pd.concat([originalIds, generatedIds], axis = 1)
+        
+        data[tempIdColName] = np.where(data[idExistsColName] == 0, data[oldIdColName], None)
+
+        originalIds[tempIdColName] = originalIds[tempIdColName].astype(str)
+        data[tempIdColName] = data[tempIdColName].astype(str)
 
         data = pd.merge(data, originalIds, on = tempIdColName, how = "left")
-        data = data.drop(columns = [tempIdColName])
+        data[idColName] = data[idColName].infer_objects(copy=False)
+        data[idColName] = data[idColName].fillna(value = data[oldIdColName])
+
+        data = data.drop(columns = [tempIdColName, oldIdColName, idExistsColName])
         return data
     
     # insertAndReplaceIds(dataToInsert, insertTableName, dataNeedingReplace, idColName): Inserts the data and replaces the foreign ids of the other
@@ -162,16 +202,20 @@ class Importer():
         buildingFile = os.path.join(dataFolder, "Building.csv")
         roomFile = os.path.join(dataFolder, "Room.csv")
         bookingFile = os.path.join(dataFolder, "Booking.csv")
+        cancellationFile = os.path.join(dataFolder, "Cancellation.csv")
 
         userData = pd.read_csv(userFile)
         buildingData = pd.read_csv(buildingFile)
         roomData = pd.read_csv(roomFile)
         bookingData = pd.read_csv(bookingFile)
+        cancellationData = pd.read_csv(cancellationFile)
 
-        bookingData = self.toDateTime(bookingData, [ColNames.BookingStartTime.value, ColNames.BookingEndTime.value])
+        # clean the datatypes of the raw datasets
+        buildingData = self.fillNaN(buildingData, {ColNames.BuildingAddressLine2.value: None, ColNames.BuildingProvince.value: None})
+        bookingData = self.toDateTime(bookingData, [ColNames.BookingStartTime.value, ColNames.BookingEndTime.value, ColNames.BookingTime.value])
 
         print(f"Inserting User Data...")
-        bookingData = self.insertAndReplaceIds(userData, TableNames.User.value, [bookingData], ColNames.UserId.value)
+        bookingData, cancellationData = self.insertAndReplaceIds(userData, TableNames.User.value, [bookingData, cancellationData], ColNames.UserId.value)
 
         print(f"Inserting Building Data...")
         roomData = self.insertAndReplaceIds(buildingData, TableNames.Buiding.value, [roomData], ColNames.BuildingId.value)
@@ -180,6 +224,8 @@ class Importer():
         bookingData = self.insertAndReplaceIds(roomData, TableNames.Room.value, [bookingData], ColNames.RoomId.value)
 
         print(f"Inserting Booking Data...")
-        bookingData = bookingData.drop(ColNames.BookingId.value, axis = 1)
-        self.insert(bookingData, TableNames.Booking.value)
+        cancellationData = self.insertAndReplaceIds(bookingData, TableNames.Booking.value, [cancellationData], ColNames.BookingId.value)
+
+        print(f"Inserting Cancellation Data...")
+        self.insert(cancellationData, TableNames.Cancellation.value)
         

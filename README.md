@@ -1,5 +1,6 @@
 # CS 348 Project
 
+[![Static Badge](https://img.shields.io/badge/React-09d9fe?style=for-the-badge)](https://react.dev/)
 [![Static Badge](https://img.shields.io/badge/PostgreSQL-336690?style=for-the-badge)](https://www.postgresql.org/)
 [![Static Badge](https://img.shields.io/badge/Python-254F72?style=for-the-badge)](https://www.python.org/downloads/)
 
