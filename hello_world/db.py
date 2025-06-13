@@ -51,14 +51,14 @@ def db_populate():
                 )
             """)
             cur.executemany("INSERT INTO users (uid, name, age, pop) VALUES (%s, %s, %s, %s) ON CONFLICT (uid) DO NOTHING", toy_dataset)
-    db_connection.commit()
+    # db_connection.commit()
 
 def db_clear():
     global db_connection
     with db_connection:
         with db_connection.cursor() as cur:
             cur.execute("DELETE FROM users")
-    db_connection.commit()
+    # db_connection.commit()
 
 def db_fetch_all():
     global db_connection
