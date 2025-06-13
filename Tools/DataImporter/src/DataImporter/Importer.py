@@ -2,15 +2,16 @@ import psycopg2
 import pandas as pd
 import numpy as np
 import os
+import sys
 import psycopg2.sql
 import sqlalchemy
 from typing import Optional, Union, List, Dict, Any, Tuple
 
-from .DBSecrets import DBSecrets
-from .exceptions.AreYouSureError import AreYouSureError
-from .constants.ColNames import ColNames
-from .constants.TableNames import TableNames
-from .constants.DBNames import DBNames
+from .constants.Paths import UtilsPath
+
+sys.path.insert(1, UtilsPath)
+
+from PyUtils import DBSecrets, AreYouSureError, ColNames, TableNames, DBNames
 
 
 # Importer: The importer for adding data into the database
