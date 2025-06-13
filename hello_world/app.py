@@ -42,3 +42,5 @@ signal.signal(signal.SIGINT, app_shutdown)
 atexit.register(app_shutdown)
 
 app = app_initialize()
+if __name__ == "__main__":
+    app.run(debug=True)
