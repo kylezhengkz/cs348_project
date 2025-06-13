@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -96,4 +96,47 @@
             </tbody>
         </table>
     </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room Booking System</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f8f8f8;
+            margin: 5rem 20rem;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 2rem;
+        }
+        button {
+            background-color: #5dc18d;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4aa674;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Room Booking System</h1>
+
+    <form action="/view" method="get" style="display: inline;">
+        <button type="submit">View Available Rooms</button>
+    </form>
+
+    <form action="/book_cancel" method="get" style="display: inline;">
+        <button type="submit">Book or Cancel a Room</button>
+    </form>
+</body>
 </html>
