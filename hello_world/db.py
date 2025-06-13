@@ -73,3 +73,27 @@ def db_fetch_by_name(name):
         with db_connection.cursor() as cur:
             cur.execute("SELECT * FROM users WHERE name ILIKE %s ORDER BY uid", (f"%{name}%", ))
             return cur.fetchall()
+          
+def db_fetch_rooms(roomName, minCapacity, maxCapacity):
+  global db_connection
+  query = 'SELECT * FROM "Room" WHERE TRUE'
+  params = []
+  
+  if roomName:
+    query += ' AND "roomName" ILIKE %s'
+    params.append(f'%{roomName}%')
+  
+  if minCapacity:
+    query += ' AND "capacity" >= %s'
+    params.append(minCapacity)
+  
+  if maxCapacity:
+    query += ' AND "capacity" <= %s'
+    params.append(maxCapacity)
+      
+  with db_connection:
+    with db_connection.cursor() as cur:
+      # print below for debugging purposes
+      # print(cur.mogrify(query, params).decode())
+      cur.execute(query, params)
+      return cur.fetchall()

@@ -2,7 +2,7 @@ import atexit
 import signal
 import sys
 from flask import Flask, render_template, request
-from hello_world.db import db_open_connection, db_close_connection, db_populate, db_clear, db_fetch_all, db_fetch_by_name
+from hello_world.db import db_open_connection, db_close_connection, db_populate, db_clear, db_fetch_all, db_fetch_by_name, db_fetch_rooms
 
 def app_initialize():
     try:
@@ -29,7 +29,22 @@ def app_initialize():
             response = db_fetch_all()
         return render_template("index.html", response=response)
     
+    @app.route("/view", methods=["GET", "POST"])
+    def view():
+      response = []
+      if request.method == "GET":
+        db_operation = request.args.get("db_operation")
+        if db_operation == "filter":
+          roomName = request.args.get("room_name", None)
+          minCapacity = request.args.get("min_capacity", None)
+          maxCapacity = request.args.get("max_capacity", None)
+          response = db_fetch_rooms(roomName, minCapacity, maxCapacity)
+        else:
+          response = db_fetch_rooms(None, None, None)
+      return render_template("view.html", response=response)
+    
     return app
+  
 
 def app_shutdown():
     try:
