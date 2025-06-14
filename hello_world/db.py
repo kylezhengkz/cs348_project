@@ -15,13 +15,16 @@ db_connection = None
 
 def db_open_connection():
     global db_connection
+    print(f"{DB} AND {DB_USERNAME} AND{DB_PASSWORD} AND {DB_HOST} AND {DB_PORT}")
+
     try:
         db_connection = psycopg2.connect(database = DB, user = DB_USERNAME, password = DB_PASSWORD, host = DB_HOST, port = DB_PORT)
         print("[\033[92mOK\033[0m] Open DB Connection")
-    except Exception:
+    except Exception as e:
         db_connection = None
+        print(f"HELLO")
         print("[\033[91mFAIL\033[0m] Open DB Connection")
-        raise
+        raise e
 
 def db_close_connection():
     global db_connection

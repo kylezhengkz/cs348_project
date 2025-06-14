@@ -1,6 +1,7 @@
 from enum import Enum
 
 class DBNames(Enum):
-    Toy = "postgres"
+    Toy = "toy"
     Dev = "development"
     Prod = "production"
+    Default = "postgres"
