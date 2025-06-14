@@ -1,4 +1,4 @@
-﻿buildingID,name,addressLine1,addressLine2,city,province,country,postalCode
+﻿buildingID,buildingName,addressLine1,addressLine2,city,province,country,postalCode
 1,MC,200 University Avenue West,MC,Waterloo,Ontario,Canada,N2L 3G1
 2,RCH,200 University Avenue West,RCH,Waterloo,Ontario,Canada,N2L 3G1
 3,E7,200 University Avenue West,E7,Waterloo,Ontario,Canada,N2L 3G1

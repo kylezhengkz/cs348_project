@@ -1,126 +1,21 @@
-import psycopg2
 import pandas as pd
 import numpy as np
 import os
 import sys
-import psycopg2.sql
-import sqlalchemy
-from typing import Optional, Union, List, Dict, Any, Tuple
+from typing import Optional, Union, List, Dict
 
 from .constants.Paths import UtilsPath
+from .constants.ImportLevel import ImportLevel
 
 sys.path.insert(1, UtilsPath)
 
-from PyUtils import DBSecrets, AreYouSureError, ColNames, TableNames, DBNames
+from PyUtils import DBSecrets, ColNames, TableNames, DBNames, DBTool, DBBuilder, DBCleaner
 
 
 # Importer: The importer for adding data into the database
-class Importer():
+class Importer(DBTool):
     def __init__(self, secrets: DBSecrets, database: str = DBNames.Toy.value):
-        self.secrets = secrets
-        self.database = database
-
-    # connectDB(): Creates a connection to the database
-    def connectDB(self) -> psycopg2.extensions.connection:
-        return psycopg2.connect(database = self.database, user = self.secrets.username, password = self.secrets.password, 
-                                    host = self.secrets.host, port = self.secrets.port)
-    
-    def createSQLEngine(self) -> sqlalchemy.engine.Engine:
-        return sqlalchemy.create_engine(f"postgresql+psycopg2://{self.secrets.username}:{self.secrets.password}@{self.secrets.host}/{self.database}")
-    
-    # executeSQL(sql, vars, commit, closeConn): Execute some SQL query
-    def executeSQL(self, sql: Union[str, psycopg2.sql.SQL], vars: Optional[Union[List[Any], Dict[str, Any]]] = None, commit: bool = False, closeConn: bool = True, conn: Optional[psycopg2.extensions.connection] = None) -> Tuple[psycopg2.extensions.connection, Optional[psycopg2.extensions.cursor], Optional[Exception]]:
-        if (conn is None):
-            conn = self.connectDB()
-
-        cursor = None
-        error = None
-
-        try:
-            cursor = conn.cursor()
-            cursor.execute(sql, vars = vars)
-
-            if (commit):
-                conn.commit()
-        except Exception as e:
-            error = e
-            if (commit):
-                conn.rollback()
-        finally:
-            if (closeConn):
-                conn.close()
-
-        return (conn, cursor, error)
-
-    # insert(data, tableName): Inserts data from a CSV file to a table
-    def insert(self, data: Union[str, pd.DataFrame], tableName: str, returnCols: Optional[List[str]] = None) -> Optional[pd.DataFrame]:
-        if (isinstance(data, str)):
-            data = pd.read_csv(data)
-
-        data = data.replace(np.nan, None)
-
-        # let pandas handle how to insert a dataframe
-        if (returnCols is None or not returnCols):
-            sqlEngine = self.createSQLEngine()
-            data.to_sql(tableName, sqlEngine, if_exists = "append", index = False)
-            return
-
-        colPrefix = "col"
-        returnPrefix = "ret"
-        insertParams = ", ".join(["%s"] * len(data.columns))
-        columnParams = ",".join(map(lambda col: "{" + f"{colPrefix}{col}" + "}", data.columns))
-        returnParams = ",".join(map(lambda col: "{" + f"{returnPrefix}{col}" + "}", returnCols))
-        
-        identifiers = {"table": psycopg2.sql.Identifier(tableName)}
-        for col in data.columns:
-            identifiers[f"{colPrefix}{col}"] = psycopg2.sql.Identifier(col)
-
-        for col in returnCols:
-            identifiers[f"{returnPrefix}{col}"] = psycopg2.sql.Identifier(col)
-
-        sql = psycopg2.sql.SQL(f"INSERT INTO {{table}} ({columnParams}) VALUES ({insertParams}) RETURNING {returnParams}").format(**identifiers)
-        returnVals = []
-        err = None
-        conn = self.connectDB()
-
-        # insert each tuple individually to get the return values in the proper order
-        for row in data.itertuples(index = False):
-            conn, cursor, err = self.executeSQL(sql, vars = tuple(row), commit = True, closeConn = False, conn = conn)
-            if (err is not None):
-                break
-            
-            currentReturnVal = cursor.fetchone()
-            returnVals.append(currentReturnVal)
-
-        conn.close()
-        if (err):
-            raise err
-
-        return pd.DataFrame(returnVals, columns = returnCols)
-
-    # clearTable(tableName, isSure): Clears all the data from a table
-    def clearTable(self, tableName: str, isSure: bool = False):
-        if (not isSure):
-            raise AreYouSureError(f"CLEAR ALL THE DATA IN THE TABLE BY THE NAME: {tableName} FOR THE DATABASE, '{self.database}'")
-        
-        sql = psycopg2.sql.SQL("TRUNCATE {table} CASCADE;").format(table = psycopg2.sql.Identifier(tableName))
-        self.executeSQL(sql, commit = True)
-
-    # clearAll(isSure): Clears all the data from all the imported tables
-    def clearAll(self, isSure: bool = False):
-        if (not isSure):
-            raise AreYouSureError(f"CLEAR ALL THE DATA IN THE DATABASE BY THE NAME '{self.database}'")
-        
-        tablesToClear = [
-            TableNames.User.value,
-            TableNames.Buiding.value,
-            TableNames.Room.value,
-            TableNames.Booking.value
-        ]
-
-        for table in tablesToClear:
-            print(f"Clearing {table}...")
-            self.clearTable(table, isSure = True)
+        super().__init__(secrets, database)
 
     # toDateTime(data, cols, formats): Converts certain columns in the data to a datetime
     def toDateTime(self, data: pd.DataFrame, cols: List[str], formats: Optional[List[str]] = None) -> pd.DataFrame:
@@ -196,9 +91,25 @@ class Importer():
         if (dataNeedingReplaceLen == 1):
             return dataNeedingReplace[0]
         return dataNeedingReplace
+    
+    # clean(isSure, cleanLevel): Cleans up a particular dataset
+    def clean(self, isSure: bool = False, cleanLevel: ImportLevel = ImportLevel.Tuples):
+        dbCleaner = DBCleaner(self)
 
-    # importData(dataFolder): Inserts all the data from a particular dataset
-    def importData(self, dataFolder: str):
+        if (cleanLevel == ImportLevel.Database):
+            print(f"Deleting Database by the name, {self.database} ...")
+            dbCleaner.deleteDB(isSure = isSure)
+
+        elif (cleanLevel == ImportLevel.Tables):
+            print(f"Deleting all tables...")
+            dbCleaner.deleteAllTables(isSure = isSure)
+
+        elif (cleanLevel == ImportLevel.Tuples):
+            print(f"Clearing all tables...")
+            dbCleaner.clearAll(isSure = isSure)
+
+    # importData(dataFolder, buildLevel, clearLevel): Inserts all the data from a particular dataset
+    def importData(self, dataFolder: str, buildLevel: ImportLevel = ImportLevel.Tuples, cleanLevel: Optional[ImportLevel] = None):
         userFile = os.path.join(dataFolder, "User.csv")
         buildingFile = os.path.join(dataFolder, "Building.csv")
         roomFile = os.path.join(dataFolder, "Room.csv")
@@ -214,6 +125,19 @@ class Importer():
         # clean the datatypes of the raw datasets
         buildingData = self.fillNaN(buildingData, {ColNames.BuildingAddressLine2.value: None, ColNames.BuildingProvince.value: None})
         bookingData = self.toDateTime(bookingData, [ColNames.BookingStartTime.value, ColNames.BookingEndTime.value, ColNames.BookingTime.value])
+
+        dbBuilder = DBBuilder(self)
+
+        if (cleanLevel is not None):
+            self.clean(isSure = True, cleanLevel = cleanLevel)
+
+        if (buildLevel.value >= ImportLevel.Database.value):
+            print(f"Constructing the database by the name, {self.database} ...")
+            dbBuilder.buildDB()
+
+        if (buildLevel.value >= ImportLevel.Tables.value):
+            print(f"Constructing all tables...")
+            dbBuilder.build()
 
         print(f"Inserting User Data...")
         bookingData, cancellationData = self.insertAndReplaceIds(userData, TableNames.User.value, [bookingData, cancellationData], ColNames.UserId.value)

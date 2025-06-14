@@ -1,0 +1,23 @@
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project]
+name = "PyUtils"
+version = "1.0.0"
+description = "Helper module to import a raw dataset into the database"
+authors = [
+    {name = "Alex Au", email = "a32au@uwaterloo.ca"},
+    {name = "Anika Awasthi", email = "a5awasth@uwaterloo.ca"},
+    {name = "Ananya Ohrie", email = "aohrie@uwaterloo.ca"},
+    {name = "Anthony Tieu", email = "anthony.tieu@uwaterloo.ca"},
+    {name = "Kyle Zheng", email = "k4zheng@uwaterloo.ca"}
+]
+readme = "README.md"
+requires-python = ">=3.6"
+dependencies = [
+    "psycopg2",
+    "python-dotenv",
+    "pandas",
+    "sqlalchemy"
+]
