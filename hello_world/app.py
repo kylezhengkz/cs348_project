@@ -41,6 +41,7 @@ def app_initialize():
           response = db_fetch_rooms(roomName, minCapacity, maxCapacity)
         else:
           response = db_fetch_rooms(None, None, None)
+      # print(response)
       return render_template("view.html", response=response)
     
     return app
