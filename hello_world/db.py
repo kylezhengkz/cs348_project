@@ -2,6 +2,7 @@ import os
 import psycopg2
 import sys
 from dotenv import load_dotenv
+from datetime import datetime
 
 load_dotenv()
 DB = os.getenv("DB")
@@ -73,10 +74,25 @@ def db_fetch_by_name(name):
         with db_connection.cursor() as cur:
             cur.execute("SELECT * FROM users WHERE name ILIKE %s ORDER BY uid", (f"%{name}%", ))
             return cur.fetchall()
-          
+
 def db_fetch_rooms(roomName, minCapacity, maxCapacity):
+  
+  current_datetime = datetime.now()
+  print("Time right now: {}".format(current_datetime))
+  
   global db_connection
-  query = 'SELECT * FROM "Room" WHERE TRUE'
+  query = ('SELECT "name", "roomName", count(bo."bookEndDateTime") as bookings, "capacity", "addressLine1", '
+  '"city", "province", "country", "postalCode" ')
+      
+  query += (
+  'FROM "Building" bu '
+  'JOIN "Room" r ON bu."buildingID" = r."buildingID" '
+  'LEFT OUTER JOIN "Booking" bo ON bo."roomID" = r."roomID" '
+  'AND bo."bookEndDateTime" > \'{}\' '
+  'AND bo."bookingID" NOT IN (SELECT "bookingID" FROM "Cancellation")'
+  .format(current_datetime)
+  )
+  
   params = []
   
   if roomName:
@@ -90,10 +106,17 @@ def db_fetch_rooms(roomName, minCapacity, maxCapacity):
   if maxCapacity:
     query += ' AND "capacity" <= %s'
     params.append(maxCapacity)
+  
+  query += (
+  ' GROUP BY '
+  '"name", "roomName", "capacity", "addressLine1", '
+  '"city", "province", "country", "postalCode" '
+  )
+  
       
   with db_connection:
     with db_connection.cursor() as cur:
       # print below for debugging purposes
-      # print(cur.mogrify(query, params).decode())
+      print(cur.mogrify(query, params).decode())
       cur.execute(query, params)
       return cur.fetchall()
