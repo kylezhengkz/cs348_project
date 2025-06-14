@@ -34,13 +34,18 @@ def app_initialize():
       response = []
       if request.method == "GET":
         db_operation = request.args.get("db_operation")
+        print("DB_OPERATION", db_operation)
         if db_operation == "filter":
+          print("CUSTOM FILTER", db_operation)
           roomName = request.args.get("room_name", None)
           minCapacity = request.args.get("min_capacity", None)
           maxCapacity = request.args.get("max_capacity", None)
-          response = db_fetch_rooms(roomName, minCapacity, maxCapacity)
+          startTime = request.args.get("start_time", None)
+          endTime = request.args.get("end_time", None)
+          response = db_fetch_rooms(roomName, minCapacity, maxCapacity, startTime, endTime)
         else:
-          response = db_fetch_rooms(None, None, None)
+          print("NO FILTER PRINT ALL", db_operation)
+          response = db_fetch_rooms(None, None, None, None, None)
       # print(response)
       return render_template("view.html", response=response)
     
