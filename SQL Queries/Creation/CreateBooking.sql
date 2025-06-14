@@ -5,6 +5,7 @@ CREATE TABLE {BookingTable} (
     "bookDateTime" TIMESTAMP WITHOUT TIME ZONE,
     "bookStartDateTime" TIMESTAMP WITHOUT TIME ZONE,
     "bookEndDateTime" TIMESTAMP WITHOUT TIME ZONE,
+    "participants" INT,
 
     PRIMARY KEY("bookingID"),
     FOREIGN KEY("userID") REFERENCES {UserTable}("userID")
