@@ -5,5 +5,7 @@ CREATE TABLE {UserTable} (
     "password" TEXT,
     "permissionLevel" INT,
 
-    PRIMARY KEY("userID")
+    PRIMARY KEY("userID"),
+
+    CONSTRAINT validPermissionLevel CHECK ({UserTable}."permissionLevel" > 0 AND {UserTable}."permissionLevel" <= 2)
 );

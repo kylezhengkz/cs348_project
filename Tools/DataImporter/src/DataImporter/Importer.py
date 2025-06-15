@@ -97,12 +97,15 @@ class Importer(DBTool):
         dbCleaner = DBCleaner(self)
 
         if (cleanLevel == ImportLevel.Database):
-            print(f"Deleting Database by the name, {self.database} ...")
+            print(f"Deleting database by the name, {self.database} ...")
             dbCleaner.deleteDB(isSure = isSure)
 
         elif (cleanLevel == ImportLevel.Tables):
             print(f"Deleting all tables...")
             dbCleaner.deleteAllTables(isSure = isSure)
+
+            print(f"Deleting all functions...")
+            dbCleaner.deleteAllFuncs(isSure = isSure)
 
         elif (cleanLevel == ImportLevel.Tuples):
             print(f"Clearing all tables...")
@@ -123,7 +126,15 @@ class Importer(DBTool):
         cancellationData = pd.read_csv(cancellationFile)
 
         # clean the datatypes of the raw datasets
-        buildingData = self.fillNaN(buildingData, {ColNames.BuildingAddressLine2.value: None, ColNames.BuildingProvince.value: None})
+        buildingData = self.fillNaN(buildingData, {ColNames.BuildingName.value: "",
+                                                   ColNames.BuildingName.value: "",
+                                                   ColNames.BuildingAddressLine1.value: "",
+                                                   ColNames.BuildingAddressLine2.value: "",
+                                                   ColNames.BuildingCity.value: "",
+                                                   ColNames.BuildingProvince.value: "",
+                                                   ColNames.BuildingCountry.value: "",
+                                                   ColNames.BuildingPostalCode.value: ""})
+
         bookingData = self.toDateTime(bookingData, [ColNames.BookingStartTime.value, ColNames.BookingEndTime.value, ColNames.BookingTime.value])
 
         dbBuilder = DBBuilder(self)
