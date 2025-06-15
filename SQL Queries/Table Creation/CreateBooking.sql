@@ -13,5 +13,8 @@ CREATE TABLE {BookingTable} (
         ON UPDATE CASCADE,
     FOREIGN KEY("roomID") REFERENCES {RoomTable}("roomID")
         ON DELETE CASCADE
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
+
+    CONSTRAINT validBookingCommitDate CHECK({BookingTable}."bookDateTime" < {BookingTable}."bookStartDateTime"),
+    CONSTRAINT validBookingRange CHECK({BookingTable}."bookStartDateTime" < {BookingTable}."bookEndDateTime")
 );

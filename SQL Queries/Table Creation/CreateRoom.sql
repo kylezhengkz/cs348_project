@@ -7,5 +7,7 @@ CREATE TABLE {RoomTable} (
     PRIMARY KEY("roomID"),
     FOREIGN KEY("buildingID") REFERENCES {BuildingTable}("buildingID")
         ON DELETE CASCADE
-        ON UPDATE CASCADE
+        ON UPDATE CASCADE,
+
+    CONSTRAINT validCapacity CHECK ({RoomTable}."capacity" > 0)
 );

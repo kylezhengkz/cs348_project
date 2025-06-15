@@ -2,20 +2,24 @@ import psycopg2
 import psycopg2.sql
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 import os
-from typing import Union, Optional, List, Any, Dict
+from typing import Union, Optional, List, Any, Dict, Tuple
 
 from ..constants.TableNames import TableNames
+from ..constants.DBFuncNames import DBFuncNames
 from ..constants.Paths import Paths
 from .DBTool import DBTool
 
 
 # DBBuilder: Class to build tables and databases
 class DBBuilder():
-    TableNameIdentifiers = {"UserTable": psycopg2.sql.Identifier(TableNames.User.value),
-                            "BuildingTable": psycopg2.sql.Identifier(TableNames.Buiding.value),
-                            "RoomTable": psycopg2.sql.Identifier(TableNames.Room.value),
-                            "BookingTable": psycopg2.sql.Identifier(TableNames.Booking.value),
-                            "CancellationTable": psycopg2.sql.Identifier(TableNames.Cancellation.value)}
+    NameIdentifiers = {"UserTable": psycopg2.sql.Identifier(TableNames.User.value),
+                       "BuildingTable": psycopg2.sql.Identifier(TableNames.Buiding.value),
+                       "RoomTable": psycopg2.sql.Identifier(TableNames.Room.value),
+                       "BookingTable": psycopg2.sql.Identifier(TableNames.Booking.value),
+                       "CancellationTable": psycopg2.sql.Identifier(TableNames.Cancellation.value),
+                        
+                       "BookingParticipantsCheckFunc": psycopg2.sql.Identifier(DBFuncNames.CheckBookingParticipants.value),
+                       "CancellationDateTimeCheckFunc": psycopg2.sql.Identifier(DBFuncNames.CheckCancellationDateTime.value)}
 
     def __init__(self, dbTool: DBTool):
         self._dbTool = dbTool
@@ -33,7 +37,7 @@ class DBBuilder():
 
     # _buildTable(table, sql, vars, closeConn, conn, installExtensions): Builds some generic table
     def _buildTable(self, table: str, sql: Union[str, psycopg2.sql.SQL], vars: Optional[Union[List[Any], Dict[str, Any]]] = None, 
-                    closeConn: bool = True, conn: Optional[psycopg2.extensions.connection] = None, installExtensions: bool = True):
+                    closeConn: bool = True, conn: Optional[psycopg2.extensions.connection] = None, installExtensions: bool = True) -> Tuple[psycopg2.extensions.connection, Optional[psycopg2.extensions.cursor]]:
 
         if (installExtensions):
             self._setExtensions()
@@ -41,41 +45,73 @@ class DBBuilder():
         conn, cursor, error = self._dbTool.executeSQL(sql, vars = vars, closeConn = False, commit = True, conn = conn)
         self._grantOwnership(table, conn = conn, closeConn = closeConn)
 
+        return (conn, cursor)
+
     # _buildTableFromFile(table, identifiers, vars, closeConn, conn, installExtensions): Builds some generic table based on some file
     def _buildTableFromFile(self, table: str, file: str, identifiers: Optional[Dict[str, psycopg2.sql.Identifier]] = None, 
                             vars: Optional[Union[List[Any], Dict[str, Any]]] = None, closeConn: bool = True, 
-                            conn: Optional[psycopg2.extensions.connection] = None, installExtensions: bool = True):
+                            conn: Optional[psycopg2.extensions.connection] = None, installExtensions: bool = True) -> Tuple[psycopg2.extensions.connection, Optional[psycopg2.extensions.cursor]]:
+        
+        if (identifiers is None):
+            identifiers = {}
+
         sql = self._dbTool.readSQLFile(file)
         sql = psycopg2.sql.SQL(sql).format(**identifiers)
-        self._buildTable(table, sql, vars = vars, closeConn = closeConn, conn = conn, installExtensions = installExtensions)
+        return self._buildTable(table, sql, vars = vars, closeConn = closeConn, conn = conn, installExtensions = installExtensions)
+
+    # _buildTrigger(sql, vars, closeConn, conn): Builds a trigger
+    def _buildTrigger(self, sql: Union[str, psycopg2.sql.SQL], 
+                      vars: Optional[Union[List[Any], Dict[str, Any]]] = None, closeConn: bool = True, 
+                      conn: Optional[psycopg2.extensions.connection] = None) -> Tuple[psycopg2.extensions.connection, Optional[psycopg2.extensions.cursor]]:
+
+        conn, cursor, error = self._dbTool.executeSQL(sql, vars = vars, closeConn = closeConn, commit = True, conn = conn)
+        return conn, cursor
+
+    # _buildTriggerFromFile(file, vars, closeConn, conn): Builds a trigger based on some file
+    def _buildTriggerFromFile(self, file: str, identifiers: Optional[Dict[str, psycopg2.sql.Identifier]] = None, 
+                              vars: Optional[Union[List[Any], Dict[str, Any]]] = None, closeConn: bool = True, 
+                              conn: Optional[psycopg2.extensions.connection] = None):
+
+        if (identifiers is None):
+            identifiers = {}
+
+        sql = self._dbTool.readSQLFile(file)
+        sql = psycopg2.sql.SQL(sql).format(**identifiers)
+        return self._buildTrigger(sql, vars = vars, closeConn = closeConn, conn = conn)
 
     # ============================================================
 
 
     # buildUserTable(): Builds the table for the Users
     def buildUserTable(self, installExtensions: bool = True):
-        sqlFile = os.path.join(Paths.SQLCreationQueriesFolder.value, "CreateUser.sql")
-        self._buildTableFromFile(TableNames.User.value, sqlFile, identifiers = self.TableNameIdentifiers, installExtensions = installExtensions)
+        sqlFile = os.path.join(Paths.SQLTableCreationFolder.value, "CreateUser.sql")
+        self._buildTableFromFile(TableNames.User.value, sqlFile, identifiers = self.NameIdentifiers, installExtensions = installExtensions)
 
     # buildBuildingTable(): Builds the table for the Buildings
     def buildBuildingTable(self, installExtensions: bool = True):
-        sqlFile = os.path.join(Paths.SQLCreationQueriesFolder.value, "CreateBuilding.sql")
-        self._buildTableFromFile(TableNames.Buiding.value, sqlFile, identifiers = self.TableNameIdentifiers, installExtensions = installExtensions)
+        sqlFile = os.path.join(Paths.SQLTableCreationFolder.value, "CreateBuilding.sql")
+        self._buildTableFromFile(TableNames.Buiding.value, sqlFile, identifiers = self.NameIdentifiers, installExtensions = installExtensions)
 
     # buildRoomTable(): Builds the table for the rooms
     def buildRoomTable(self, installExtensions: bool = True):
-        sqlFile = os.path.join(Paths.SQLCreationQueriesFolder.value, "CreateRoom.sql")
-        self._buildTableFromFile(TableNames.Room.value, sqlFile, identifiers = self.TableNameIdentifiers, installExtensions = installExtensions)
+        sqlFile = os.path.join(Paths.SQLTableCreationFolder.value, "CreateRoom.sql")
+        self._buildTableFromFile(TableNames.Room.value, sqlFile, identifiers = self.NameIdentifiers, installExtensions = installExtensions)
 
     # buildBookingTable(): Builds the table for the bookings
     def buildBookingTable(self, installExtensions: bool = True):
-        sqlFile = os.path.join(Paths.SQLCreationQueriesFolder.value, "CreateBooking.sql")
-        self._buildTableFromFile(TableNames.Room.value, sqlFile, identifiers = self.TableNameIdentifiers, installExtensions = installExtensions)
+        sqlFile = os.path.join(Paths.SQLTableCreationFolder.value, "CreateBooking.sql")
+        conn, cursor = self._buildTableFromFile(TableNames.Room.value, sqlFile, identifiers = self.NameIdentifiers, installExtensions = installExtensions, closeConn = False)
+
+        checkParticipantTriggerFile = os.path.join(Paths.SQLTriggerCreationFolder.value, "validBooking.sql")
+        self._buildTriggerFromFile(checkParticipantTriggerFile, identifiers = self.NameIdentifiers, conn = conn)
 
     # buildCancellationTable(): Builds the table for the cancellations
     def buildCancellationTable(self, installExtensions: bool = True):
-        sqlFile = os.path.join(Paths.SQLCreationQueriesFolder.value, "CreateCancellation.sql")
-        self._buildTableFromFile(TableNames.Room.value, sqlFile, identifiers = self.TableNameIdentifiers, installExtensions = installExtensions)
+        sqlFile = os.path.join(Paths.SQLTableCreationFolder.value, "CreateCancellation.sql")
+        conn, cursor = self._buildTableFromFile(TableNames.Room.value, sqlFile, identifiers = self.NameIdentifiers, installExtensions = installExtensions, closeConn = False)
+
+        checkCancelDateTriggerFile = os.path.join(Paths.SQLTriggerCreationFolder.value, "validCancellation.sql")
+        self._buildTriggerFromFile(checkCancelDateTriggerFile, identifiers = self.NameIdentifiers, conn = conn)
 
     # buildTables(): Builds all the necessary tables
     def buildTables(self):
@@ -90,7 +126,7 @@ class DBBuilder():
         if (database is None):
             database = self._dbTool.database
 
-        sqlFile = os.path.join(Paths.SQLCreationQueriesFolder.value, "CreateDatabase.sql")
+        sqlFile = os.path.join(Paths.SQLDBCreationFolder.value, "CreateDatabase.sql")
         identifiers = {"DatabaseName": psycopg2.sql.Identifier(database), "OwnerName": psycopg2.sql.Identifier(self._dbTool._secrets.username)}
 
         sql = self._dbTool.readSQLFile(sqlFile)

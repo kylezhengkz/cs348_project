@@ -5,6 +5,7 @@ from typing import Optional
 
 from .DBTool import DBTool
 from ..constants.TableNames import TableNames
+from ..constants.DBFuncNames import DBFuncNames
 from ..exceptions.AreYouSureError import AreYouSureError
 
 
@@ -16,7 +17,7 @@ class DBCleaner():
     # clearTable(tableName, isSure): Clears all the data from a table
     def clearTable(self, tableName: str, isSure: bool = False):
         if (not isSure):
-            raise AreYouSureError(f"CLEAR ALL THE DATA IN THE TABLE BY THE NAME: {tableName} FOR THE DATABASE, '{self.database}'")
+            raise AreYouSureError(f"CLEAR ALL THE DATA IN THE TABLE BY THE NAME: '{tableName}' FOR THE DATABASE, '{self.database}'")
         
         sql = psycopg2.sql.SQL("TRUNCATE {table} CASCADE;").format(table = psycopg2.sql.Identifier(tableName))
         self._dbTool.executeSQL(sql, commit = True)
@@ -32,7 +33,7 @@ class DBCleaner():
     # deleteTable(tableName, isSure): Deletes a table
     def deleteTable(self, tableName: str, isSure: bool = False):
         if (not isSure):
-            raise AreYouSureError(f"DELETE THE TABLE BY THE NAME: {tableName} FOR THE DATABASE, '{self.database}'")
+            raise AreYouSureError(f"DELETE THE TABLE BY THE NAME: '{tableName}' FOR THE DATABASE, '{self.database}'")
         
         sql = psycopg2.sql.SQL("DROP TABLE IF EXISTS {table} CASCADE;").format(table = psycopg2.sql.Identifier(tableName))
         self._dbTool.executeSQL(sql, commit = True)
@@ -44,6 +45,22 @@ class DBCleaner():
         
         for table in TableNames:
             self.deleteTable(table.value, isSure = True)
+
+    # deleteFunc(funcName, isSure): Deletes a function in the database
+    def deleteFunc(self, funcName: str, isSure: bool = False):
+        if (not isSure):
+            raise AreYouSureError(f"DELETE THE FUNCTION BY THE NAME: '{funcName}' FOR THE DATABASE, '{self.database}'")
+        
+        sql = psycopg2.sql.SQL("DROP FUNCTION {func}").format(func = psycopg2.sql.Identifier(funcName))
+        self._dbTool.executeSQL(sql, commit = True)
+
+    # deleteAllFuncs(isSure): Deletes all the functions in the database
+    def deleteAllFuncs(self, isSure: bool = False):
+        if (not isSure):
+            raise AreYouSureError(f"DELETE ALL FUNCTIONS FOR THE DATABASE, '{self.database}'")
+        
+        for dbFunc in DBFuncNames:
+            self.deleteFunc(dbFunc.value, isSure = True)
 
     # deleteDB(database, isSure): Deletes a database
     def deleteDB(self, database: Optional[str] = None, isSure: bool = False):
