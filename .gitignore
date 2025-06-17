@@ -3,6 +3,12 @@ __pycache__/
 *.pyo
 *.pyd
 .env
+*Secrets.env
+*secrets.env
 .venv
 .poetry/
 .cache/.env
+/node_modules
+
+!template.env
+!modeSecretsTemplate.env

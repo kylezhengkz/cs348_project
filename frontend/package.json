@@ -1,0 +1,58 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.1.1",
+    "@mui/material": "^7.1.1",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.10.0",
+    "cross-env": "^7.0.3",
+    "datatables.net-dt": "^2.3.2",
+    "dotenv-cli": "^8.0.0",
+    "jquery": "^3.7.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start:prod": "cross-env PORT=9110 dotenv -e .env.prod react-scripts start",
+    "start:dev": "cross-env PORT=9111 dotenv -e .env.dev react-scripts start",
+    "start:toy": "cross-env PORT=9112 dotenv -e .env.toy react-scripts start",
+    "start": "cross-env PORT=9112 dotenv -e .env.toy react-scripts start",
+    "build:toy": "dotenv -e .env.toy react-scripts build",
+    "build:dev": "dotenv -e .env.dev react-scripts build",
+    "build:prod": "dotenv -e .env.prod react-scripts build",
+    "build": "echo \"Please use either build:toy, build:dev or build:prod \" && exit 1",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.3"
+  }
+}

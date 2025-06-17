@@ -9,23 +9,18 @@ from .constants.ImportLevel import ImportLevel
 
 sys.path.insert(1, UtilsPath)
 
-from PyUtils import DBSecrets, ColNames, TableNames, DBNames, DBTool, DBBuilder, DBCleaner
+from PyUtils import DBSecrets, ColNames, TableNames, DBNames, DBTool, DBBuilder, DBCleaner, DateTimeTool
 
 
 # Importer: The importer for adding data into the database
 class Importer(DBTool):
-    def __init__(self, secrets: DBSecrets, database: str = DBNames.Toy.value):
-        super().__init__(secrets, database)
+    def __init__(self, secrets: DBSecrets, database: str = DBNames.Toy.value, useConnPool: bool = False):
+        super().__init__(secrets, database, useConnPool = useConnPool)
 
     # toDateTime(data, cols, formats): Converts certain columns in the data to a datetime
     def toDateTime(self, data: pd.DataFrame, cols: List[str], formats: Optional[List[str]] = None) -> pd.DataFrame:
         if (formats is None):
-            formats = ['%Y-%m-%d %I:%M:%S %p',
-                       '%Y-%m-%d %H:%M:%S',
-
-                        # Seriously Excel, what is wrong with your datetime autoconversion?
-                        #   I try to disable your datatype conversion and you convert my datetime to number seconds since epoch time instead
-                        '%Y-%m-%d %H:%M']
+            formats = DateTimeTool.StrFormats
 
         for col in cols:
             for format in formats:
