@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./Tools/DataImporter/src",
+        "./Tools/PyUtils/src"
+    ]
+}
