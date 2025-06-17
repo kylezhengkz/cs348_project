@@ -3,6 +3,8 @@ import psycopg2
 import sys
 from dotenv import load_dotenv
 from datetime import datetime
+import PyUtils as PU
+import DataImporter as DI
 
 load_dotenv()
 DB = os.getenv("DB")
@@ -80,7 +82,7 @@ def db_fetch_by_name(name):
 
 
 
-def db_fetch_rooms(roomName, minCapacity, maxCapacity, startTimeStr, endTimeStr):
+def db_fetch_rooms(roomName=None, minCapacity=None, maxCapacity=None, startTimeStr=None, endTimeStr=None):
   
   print(roomName, minCapacity, maxCapacity, startTimeStr, endTimeStr)
   
@@ -100,56 +102,23 @@ def db_fetch_rooms(roomName, minCapacity, maxCapacity, startTimeStr, endTimeStr)
     
   print("Time right now: {}".format(current_datetime))
   
-  global db_connection
-  query = ('SELECT "buildingName", "roomName", count(bo."bookEndDateTime") as bookings, "capacity", "addressLine1", '
-  '"city", "province", "country", "postalCode" ')
-      
-  query += (
-  'FROM "Building" bu '
-  'JOIN "Room" r ON bu."buildingID" = r."buildingID" '
-  'LEFT OUTER JOIN "Booking" bo ON bo."roomID" = r."roomID" '
-  'AND bo."bookingID" NOT IN (SELECT "bookingID" FROM "Cancellation") '
-  )
-  
-  if use_current:
-    query += (
-    'AND (bo."bookStartDateTime" > \'{}\' '
-    'OR bo."bookEndDateTime" < \'{}\') '
-    .format(current_datetime, current_datetime)
-    )
+  Secrets = PU.DBSecrets.load()
+  Database = PU.DBNames.Toy.value
+  importer = DI.Importer(Secrets, database = Database)
+  sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R6/R6.sql")
+  sql = PU.DBTool.readSQLFile(sqlFile)
+  params = {
+    'room_name': f'%{roomName}%' if roomName and roomName.strip() != '' else None,
+    'min_capacity': int(minCapacity) if minCapacity is not None and minCapacity.strip() != "" else None,
+    'max_capacity': int(maxCapacity) if maxCapacity is not None and maxCapacity.strip() != "" else None,
+    'start_time': current_datetime if use_current else dt_start_time,
+    'end_time': current_datetime if use_current else dt_end_time
+  }
+  conn, cursor, err = importer.executeSQL(sql, vars=params, commit=True, closeConn=False)
+
+  if (err is None):
+    output = cursor.fetchall()
+    conn.close()
+    return output
   else:
-    query += (
-    'AND (bo."bookEndDateTime" < \'{}\' '
-    'OR bo."bookStartDateTime" > \'{}\') '
-    .format(dt_start_time, dt_end_time)
-    )
-  
-  params = []
-  
-  query += 'WHERE TRUE '
-  
-  if roomName:
-    query += 'AND "roomName" ILIKE %s '
-    params.append(f'%{roomName}%')
-  
-  if minCapacity:
-    query += 'AND "capacity" >= %s '
-    params.append(minCapacity)
-  
-  if maxCapacity:
-    query += 'AND "capacity" <= %s '
-    params.append(maxCapacity)
-  
-  query += (
-  'GROUP BY '
-  '"buildingName", "roomName", "capacity", "addressLine1", '
-  '"city", "province", "country", "postalCode" '
-  )
-  
-      
-  with db_connection:
-    with db_connection.cursor() as cur:
-      # print below for debugging purposes
-      # print(cur.mogrify(query, params).decode())
-      cur.execute(query, params)
-      return cur.fetchall()
+    conn.close()
