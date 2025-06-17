@@ -11,5 +11,6 @@ class Paths(Enum):
     SQLTableCreationFolder = os.path.abspath(os.path.join(SQLQueriesFolder, "Table Creation"))
     SQLDBCreationFolder = os.path.abspath(os.path.join(SQLQueriesFolder, "Database Creation"))
     SQLTriggerCreationFolder = os.path.abspath(os.path.join(SQLQueriesFolder, "Trigger Creation"))
+    SQLFeaturesFolder = os.path.abspath(os.path.join(SQLQueriesFolder, "Features"))
     PyUtilsFolder = os.path.abspath(os.path.join(FileDir, "..", ".."))
     DataImporterFolder = os.path.abspath(os.path.join(ProjectFolder, "Tool", "DataImporter", "src"))
