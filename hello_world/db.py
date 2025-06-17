@@ -7,11 +7,11 @@ import PyUtils as PU
 import DataImporter as DI
 
 load_dotenv()
-DB = os.getenv("DB")
-DB_USERNAME = os.getenv("DB_USERNAME")
-DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
+DB = os.getenv("DATABASE")
+DB_USERNAME = os.getenv("DBUSERNAME")
+DB_PASSWORD = os.getenv("DBPASSWORD")
+DB_HOST = os.getenv("DBHOST")
+DB_PORT = os.getenv("DBPORT")
 
 db_connection = None
 
@@ -122,3 +122,77 @@ def db_fetch_rooms(roomName=None, minCapacity=None, maxCapacity=None, startTimeS
     return output
   else:
     conn.close()
+
+
+import uuid
+from datetime import datetime
+
+def db_book_room(user_id, room_id, book_date, start_time, end_time, participants):
+    global db_connection
+    try:
+        user_uuid = uuid.UUID(user_id)
+        room_uuid = uuid.UUID(room_id)
+    except ValueError:
+        return False, "Invalid UUID format for user ID or room ID."
+
+    with db_connection:
+        with db_connection.cursor() as cur:
+            # Check if room exists
+            cur.execute('SELECT 1 FROM "Room" WHERE "roomID" = %s', (str(room_uuid),))
+            if not cur.fetchone():
+                return False, "Room does not exist."
+
+            # Check for overlapping bookings
+            cur.execute("""
+                SELECT 1 FROM "Booking"
+                WHERE "roomID" = %s
+                AND NOT (%s >= "bookEndDateTime" OR %s <= "bookStartDateTime")
+            """, (str(room_uuid), start_time, end_time))
+
+            if cur.fetchone():
+                return False, "Room is already booked for the selected time."
+
+            # Inserting booking
+            cur.execute("""
+                INSERT INTO "Booking" ("userID", "roomID", "bookDateTime", "bookStartDateTime", "bookEndDateTime", "participants")
+                VALUES (%s, %s, %s, %s, %s, %s)
+                RETURNING "bookingID"
+            """, (str(user_uuid), str(room_uuid),datetime.now(), start_time, end_time,participants))
+            
+            booking_id = cur.fetchone()[0]
+            return True, f"Booking successful! Booking ID: {booking_id}"
+
+
+def db_cancel_booking(booking_id, user_id):
+    global db_connection
+    try:
+        booking_uuid = uuid.UUID(booking_id)
+        user_uuid = uuid.UUID(user_id)
+    except ValueError:
+        return False, "Invalid UUID format for booking ID or user ID."
+
+    with db_connection:
+        with db_connection.cursor() as cur:
+            # Verify booking exists and belongs to the user
+            cur.execute("""
+                SELECT * FROM "Booking" 
+                WHERE "bookingID" = %s AND "userID" = %s
+            """, (str(booking_uuid), str(user_uuid)))
+            booking = cur.fetchone()
+
+            if not booking:
+                return False, "Booking ID not found or does not belong to the user."
+
+            # Insert into Cancellation table
+            cur.execute("""
+                INSERT INTO "Cancellation" ("bookingID", "userID", "cancelDateTime")
+                VALUES (%s, %s, NOW())
+            """, (str(booking_uuid), str(user_uuid)))
+
+            # Remove from Booking table
+            cur.execute("""
+                DELETE FROM "Booking" 
+                WHERE "bookingID" = %s
+            """, (str(booking_uuid),))
+            
+            return True, "Booking successfully cancelled."
