@@ -1,6 +1,7 @@
 SELECT
     bu."buildingName",
     r."roomName",
+    count(bo."bookingID") as "bookingNum",
     r."capacity",
     bu."addressLine1",
     bu."city",
@@ -9,6 +10,7 @@ SELECT
     bu."postalCode"
 FROM "Room" AS r
 JOIN "Building" AS bu ON bu."buildingID" = r."buildingID"
+LEFT OUTER JOIN "Booking" AS bo ON bo."roomID" = r."roomID"
 WHERE TRUE
     AND (%(room_name)s IS NULL OR r."roomName" ILIKE %(room_name)s)
     AND (%(min_capacity)s IS NULL OR r."capacity" >= %(min_capacity)s)
