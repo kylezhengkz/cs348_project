@@ -1,4 +1,4 @@
--- get number of booked participants per room within time [start_time, end_time]
+-- maps each roomID to number of booked participants that overlap with [start_time, end_time]
 with bookingCount as (
   select 
   	r."roomID",
@@ -16,6 +16,8 @@ with bookingCount as (
   group by r."roomID"
 )
 
+
+-- display the appropriate columns to the view rooms
 select b."buildingName", r."roomName", bc."bookingNum", r."capacity", b."addressLine1", b."city", b."province", b."country", b."postalCode"
 from bookingCount as bc 
 join "Room" as r on r."roomID" = bc."roomID"
