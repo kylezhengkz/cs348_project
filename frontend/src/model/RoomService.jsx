@@ -6,7 +6,7 @@ export class RoomService extends BaseAPIService {
     async getAvailable(roomName, minCapacity, maxCapacity, 
                  startTimeStr, endTimeStr) {
         
-        const kvps = {
+        const kwargs = {
             "room_name": roomName,
             "minCapacity": minCapacity,
             "maxCapacity": maxCapacity,
@@ -14,11 +14,15 @@ export class RoomService extends BaseAPIService {
             "endTimeStr": endTimeStr
         }
 
-        let ext = APITool.addURLQuerySep("/viewAvailableRooms", Object.values(kvps));
-        for (const key in kvps) {
-            ext += APITool.getQueryKVP(key, kvps[key]);
+        let ext = "/viewAvailableRooms";
+        const queryVarsAvailable = APITool.hasQueryVars(Object.values(kwargs));
+
+        if (queryVarsAvailable) {
+            kwargs["db_operation"] = "filter";
+            ext += "?";            
         }
 
+        ext += APITool.getQueryKwargsStr(kwargs);
         console.log("EXT: ", ext);
 
         const res = await this.apiTool.get(ext);

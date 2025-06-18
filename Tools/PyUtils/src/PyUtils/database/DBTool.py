@@ -45,6 +45,11 @@ class DBTool():
         return psycopg2.connect(database = database, user = self._secrets.username, password = self._secrets.password, 
                                 host = self._secrets.host, port = self._secrets.port)
     
+    # closeDBPools(): Close all the database connection pools
+    def closeDBPools(self):
+        for pool in self.connPools:
+            self.connPools[pool].closeall()
+    
     # getSQlEngine(flush): Retrievess the SQL engine for executing queries
     def getSQLEngine(self, flush: bool = False) -> sqlalchemy.engine.Engine:
         if (self._sqlEngine is None or flush):

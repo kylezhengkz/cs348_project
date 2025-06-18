@@ -6,18 +6,35 @@ export class APITool {
         this._apiInstance = axios.create({ baseURL });
     }
 
-    static addURLQuerySep(ext, apiVars) {
+    static hasQueryVars(apiVars) {
         for (const apiVar of apiVars) {
-            if (apiVar == null || apiVar == undefined) {
-                return ext;
+            if (apiVar !== null && apiVar !== undefined) {
+                return true;
             }
         }
 
-        return `${ext}?`;
+        return false;
     }
 
-    static getQueryKVP(key, val) {
-        return (val == null || val == undefined) ? "" : `${key}=${val}`;
+    static addURLQuerySep(ext, apiVars) {
+        const queryVarsAvailable = APITool.hasQueryVars(apiVars);
+        return queryVarsAvailable ? `${ext}?` : ext;
+    }
+
+    static getQueryKVPStr(key, val) {
+        return (val === null || val === undefined) ? "" : `${key}=${val}`;
+    }
+
+    static getQueryKwargsStr(kwargs) {
+        const result = [];
+        for (const key in kwargs) {
+            const queryKVPStr = APITool.getQueryKVPStr(key, kwargs[key]);
+            if (queryKVPStr !== "") {
+                result.push(queryKVPStr);
+            }
+        }
+
+        return result.join("&");
     }
 
     async get(apiExt) {

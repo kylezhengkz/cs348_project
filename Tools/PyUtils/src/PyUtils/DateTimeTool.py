@@ -9,7 +9,10 @@ class DateTimeTool():
 
                   # Seriously Excel, what is wrong with your datetime autoconversion?
                   #   I try to disable your datatype conversion and you convert my datetime to number seconds since epoch time instead
-                  '%Y-%m-%d %H:%M']
+                  '%Y-%m-%d %H:%M',
+                  
+                  # Used by Javascript
+                  '%Y-%m-%dT%H:%M']
 
     # strToDateTime(dateTimeStr, formats): Converts a string to a datetime
     @classmethod

@@ -52,21 +52,21 @@ class RoomService(BaseAPIService):
             .format(dtStartTime, dtEndTime)
             )
         
-        params = []
+        params = {}
         
         query += 'WHERE TRUE '
         
         if roomName:
-            query += 'AND "roomName" ILIKE %s '
-            params.append(f'%{roomName}%')
+            query += 'AND "roomName" ILIKE %(roomName)s '
+            params["roomName"] = f'%{roomName}%'
         
         if minCapacity:
-            query += 'AND "capacity" >= %s '
-            params.append(minCapacity)
+            query += 'AND "capacity" >= %(minCapacity)s '
+            params["minCapacity"] = f"{minCapacity}"
         
         if maxCapacity:
-            query += 'AND "capacity" <= %s '
-            params.append(maxCapacity)
+            query += 'AND "capacity" <= %(maxCapacity)s '
+            params["maxCapacity"] = f"{maxCapacity}"
         
         query += (
         'GROUP BY '
@@ -75,6 +75,5 @@ class RoomService(BaseAPIService):
         )
 
         sqlEngine = self._dbTool.getSQLEngine()
-        result = pd.read_sql(query, sqlEngine)
-        print(f"RESULT: {result}")
+        result = pd.read_sql(query, sqlEngine, params = params)
         return result.to_dict('records')

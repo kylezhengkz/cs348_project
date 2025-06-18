@@ -6,7 +6,7 @@ export const FooterContainer = styled(Box)(({theme}) => ({
     paddingTop: "100px",
     paddingBottom: "30px",
     paddingLeft: "30px",
-    backgroundColor: theme.palette.surface.main,
+    backgroundColor: theme.palette.surface.dark,
     maxWidth: false,
     disableGutters: true,
     justifyContent: "center",

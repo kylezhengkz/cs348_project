@@ -72,9 +72,9 @@ class App():
         
         self._app = app
         return app
-    
-    #TODO: Implement any cleaning procedures once the backend shutsdown
+
     def shutdown(self, sig: Optional[int] = None, frame: Optional[int] = None):
+        self._dbTool.closeDBPools()
         sys.exit(0)
 
     def registerShutdown(self):

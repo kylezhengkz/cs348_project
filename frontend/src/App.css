@@ -1,38 +1,85 @@
-.App {
-  text-align: center;
+/* =========== Buttons ================================ */
+
+.btn-primary {
+    --bs-btn-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-btn-bg: var(--mui-palette-primary-main) !important;
+    --bs-btn-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-hover-color: var(--mui-palette-primary-main) !important;
+    --bs-btn-hover-bg: var(--mui-palette-onPrimary-mainHover) !important;
+    --bs-btn-hover-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-active-color: var(--mui-palette-onPrimary-mainHover) !important;
+    --bs-btn-active-bg: var(--mui-palette-primary-main) !important;
+    --bs-btn-active-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-disabled-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-btn-disabled-bg: var(--mui-palette-primary-main) !important;
+    --bs-btn-disabled-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    transition: var(--mui-transitions-medium) !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn-secondary {
+    --bs-btn-color: var(--onSecondary) !important;
+    --bs-btn-bg: var(--mui-palette-seconday-main) !important;
+    --bs-btn-border-color: var(--mui-palette-seconday-mainBorderColour) !important;
+    --bs-btn-hover-color: var(--mui-palette-seconday-mainHover) !important;
+    --bs-btn-hover-bg: var(--onSecondaryHover) !important;
+    --bs-btn-hover-border-color: var(--mui-palette-seconday-mainBorderColour) !important;
+    --bs-btn-active-color: var(--onSecondaryHover) !important;
+    --bs-btn-active-bg: var(--mui-palette-seconday-mainHover) !important;
+    --bs-btn-active-border-color: var(--mui-palette-seconday-mainBorderColour) !important;
+    --bs-btn-disabled-color: var(--onSecondary) !important;
+    --bs-btn-disabled-bg: var(--mui-palette-seconday-main) !important;
+    --bs-btn-disabled-border-color: var(--mui-palette-seconday-mainBorderColour) !important;
+    transition: var(--mui-transitions-medium) !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btn-danger {
+    --bs-btn-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-btn-bg: var(--error) !important;
+    --bs-btn-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-hover-color: var(--error) !important;
+    --bs-btn-hover-bg: var(--mui-palette-onPrimary-mainHover) !important;
+    --bs-btn-hover-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-active-color: var(--error) !important;
+    --bs-btn-active-bg: var(--mui-palette-primary-main) !important;
+    --bs-btn-active-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-disabled-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-btn-disabled-bg: var(--error) !important;
+    --bs-btn-disabled-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    transition: var(--mui-transitions-medium) !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* ==================================================== */
+/* ======== Pagination =============================== */
+
+.pagination {
+    --bs-pagination-color: var(--mui-palette-primary-main) !important;
+    --bs-pagination-bg: var(--mui-palette-onPrimary-mainHover) !important;
+    --bs-pagination-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-pagination-hover-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-pagination-hover-bg: var(--mui-palette-primary-main) !important;
+    --bs-pagination-hover-border-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-pagination-active-bg: var(--mui-palette-primary-main) !important;
+    --bs-pagination-active-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-pagination-active-border-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-pagination-focus-color: var(--mui-palette-primary-main) !important;
+    --bs-pagination-focus-bg: var(--mui-palette-onPrimary-main) !important;
+    --bs-pagination-disabled-border-color: var(--mui-palette-seconday-mainBorderColour) !important;
+    --bs-pagination-disabled-color: var(--mui-palette-seconday-main) !important;
 }
 
-.App-link {
-  color: #61dafb;
+/* =================================================== */
+/* ======== Text Input =============================== */
+
+.form-control {
+    background-color: var(--mui-palette-background-main) !important;
+    color: var(--mui-palette-text-primary) !important;
+    transition: var(--mui-transitions-fast) !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-control:focus {
+    background-color: var(--mui-palette-background-main) !important;
+    box-shadow: 0 0 0 .25rem var(--mui-palette-secondary-main) !important;
+    color: var(--mui-palette-text-primary) !important;
 }
+
+/* =================================================== */

@@ -1,11 +1,20 @@
 import { createTheme } from "@mui/material";
 
 const DefaultTheme = createTheme({
+    cssVariables: true,
     palette: {
         primary: {
             main: "rgb(158, 115, 165)",
             light: "rgb(212, 193, 215)",
             dark: "rgb(104, 70, 109)",
+        },
+
+        onPrimary: {
+            main: "rgb(255,255,255)"
+        },
+
+        onSecondary: {
+            main: "rgb(255, 255, 255)"
         },
 
         secondary: {
@@ -30,7 +39,9 @@ const DefaultTheme = createTheme({
         },
 
         surface: {
-            main: "rgb(55, 62, 73)"
+            main: "rgb(255, 255, 255)",
+            secondary: "rgb(251, 252, 248)",
+            dark: "rgb(55, 62, 73)"
         }
     },
 
@@ -40,6 +51,12 @@ const DefaultTheme = createTheme({
 
     transitions: {
         medium: "all 0.5s ease-in-out",
+        fast: "all 0.25s ease-in-out"
+    },
+
+    bordersRadius: {
+        small: "5px",
+        normal: "10px"
     }
 })
 
