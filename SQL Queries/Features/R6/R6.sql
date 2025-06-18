@@ -1,35 +1,23 @@
-SELECT
-    bu."buildingName",
-    r."roomName",
-    count(bo."bookingID") as "bookingNum",
-    r."capacity",
-    bu."addressLine1",
-    bu."city",
-    bu."province",
-    bu."country",
-    bu."postalCode"
-FROM "Room" AS r
-JOIN "Building" AS bu ON bu."buildingID" = r."buildingID"
-LEFT OUTER JOIN "Booking" AS bo ON bo."roomID" = r."roomID"
-WHERE TRUE
-    AND (%(room_name)s IS NULL OR r."roomName" ILIKE %(room_name)s)
-    AND (%(min_capacity)s IS NULL OR r."capacity" >= %(min_capacity)s)
-    AND (%(max_capacity)s IS NULL OR r."capacity" <= %(max_capacity)s)
-    AND NOT EXISTS (
-        SELECT 1
-        FROM "Booking" AS bo
-        LEFT JOIN "Cancellation" AS c ON bo."bookingID" = c."bookingID"
-        WHERE bo."roomID" = r."roomID"
-            AND c."bookingID" IS NULL
-            AND bo."bookStartDateTime" < %(end_time)s
-            AND bo."bookEndDateTime" > %(start_time)s
-    )
-GROUP BY
-    bu."buildingName",
-    r."roomName",
-    r."capacity",
-    bu."addressLine1",
-    bu."city",
-    bu."province",
-    bu."country",
-    bu."postalCode";
+-- get number of booked participants per room within time [start_time, end_time]
+with bookingCount as (
+  select 
+  	r."roomID",
+	sum(bo."participants") as "bookingNum"
+  from "Room" as r 
+  left outer join "Booking" as bo on bo."roomID" = r."roomID"
+  and (
+	  not exists ( -- disregard cancalled bookings and bookings that do not overlap with [start_time, end_time]
+		select 1 
+		from "Cancellation" as c
+		where c."bookingID" = bo."bookingID" -- cancelled
+			or (bo."bookStartDateTime" >= %(end_time)s or bo."bookEndDateTime" <= %(start_time)s) -- overlap
+	  )
+  )
+  group by r."roomID"
+)
+
+select b."buildingName", r."roomName", bc."bookingNum", r."capacity", b."addressLine1", b."city", b."province", b."country", b."postalCode"
+from bookingCount as bc 
+join "Room" as r on r."roomID" = bc."roomID"
+join "Building" as b on b."buildingID" = r."buildingID"
+;
