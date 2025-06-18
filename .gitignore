@@ -6,3 +6,6 @@ __pycache__/
 .venv
 .poetry/
 .cache/.env
+venv
+.vscode
+.DS_Store
