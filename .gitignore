@@ -12,6 +12,8 @@ venv
 .vscode
 .DS_Store
 /node_modules
+**/Production\ Dataset/
+**/Sample\ Dataset/
 
 !template.env
 !modeSecretsTemplate.env
