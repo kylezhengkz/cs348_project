@@ -1,27 +1,28 @@
-import signal
 import sys
+import signal
+import pytz
 from flask import Flask, request
 from flask_cors import CORS
-from typing import Optional, Iterable
+from typing import Optional, Iterable, List, Dict, Any, Tuple
+
+import PyUtils as PU
 
 from .constants.EnvironmentModes import EnvironmentModes
 from .Config import Config
 from .model.RoomService import RoomService
-from .constants.Paths import UtilsPath
-
-sys.path.insert(1, UtilsPath)
-
-from PyUtils import DBTool
+from .model.BookingService import BookingService
 
 
 class App():
     def __init__(self, env: EnvironmentModes):
+        self._isInitalized = False
         self._env = env
         self._app: Optional[Flask] = None
         self._config = Config.load(env)
 
-        self._dbTool = DBTool(self._config.dbSecrets, database = self._config.database, useConnPool = True)
+        self._dbTool = PU.DBTool(self._config.dbSecrets, database = self._config.database, useConnPool = True)
         self._roomService = RoomService(self._dbTool)
+        self._bookingService = BookingService(self._dbTool)
 
 
     # Reference: See the __call__ operator in app.py of Flask's source code
@@ -42,6 +43,10 @@ class App():
         return self._config.port
 
     def initialize(self):
+        if (self._isInitalized):
+            return
+        
+        self._isInitalized = True
         self.registerShutdown()
 
         app = Flask(__name__)
@@ -52,24 +57,59 @@ class App():
         def index():
             return 'This is the backend server for the room booking app.'
         
-        @app.route("/viewAvailableRooms", methods=["GET", "POST"])
-        def view():
+        @app.route("/viewAvailableRooms", methods=["GET"])
+        def viewAvailableRooms() -> List[Dict[str, Any]]:
             response = []
-            if request.method == "GET":
-                db_operation = request.args.get("db_operation")
+            db_operation = request.args.get("db_operation")
 
-                if db_operation == "filter":
-                    roomName = request.args.get("room_name", None)
-                    minCapacity = request.args.get("min_capacity", None)
-                    maxCapacity = request.args.get("max_capacity", None)
-                    startTime = request.args.get("start_time", None)
-                    endTime = request.args.get("end_time", None)
-                    response = self._roomService.fetchAvailableRooms(roomName, minCapacity, maxCapacity, startTime, endTime)
-                else:
-                    response = self._roomService.fetchAvailableRooms()
+            if db_operation == "filter":
+                roomName = request.args.get("room_name", None)
+                minCapacity = request.args.get("min_capacity", None)
+                maxCapacity = request.args.get("max_capacity", None)
+                startTime = request.args.get("start_time", None)
+                endTime = request.args.get("end_time", None)
+                response = self._roomService.fetchAvailableRooms(roomName, minCapacity, maxCapacity, startTime, endTime)
+            else:
+                response = self._roomService.fetchAvailableRooms()
 
             return response
         
+        @app.route("/bookRoom", methods=["POST"])
+        def bookRoom() -> Tuple[bool, str]:
+            data = request.get_json()
+            if (not data):
+                return [False, "No JSON data received"]
+
+            userId = data.get("user_id")
+            roomId = data.get("room_id")
+            startDateTimeStr = data.get("start_time")
+            endDateTimeStr = data.get("end_time")
+            participants = data.get("participants")
+
+            try:
+                startDateTime = PU.DateTimeTool.strToDateTime(f"{startDateTimeStr}", tzinfo = pytz.utc)
+            except ValueError:
+                return [False, "Invalid datetime format for the start datetime"]
+
+            try:
+                endDateTime = PU.DateTimeTool.strToDateTime(f"{endDateTimeStr}", tzinfo = pytz.utc)
+            except ValueError:
+                return [False, "Invalid datetime format for the end datetime"]
+
+            return self._bookingService.bookRoom(userId, roomId, startDateTime, endDateTime, participants)
+        
+        @app.route("/cancelBooking", methods=["POST"])
+        def cancelBooking():
+            data = request.get_json()
+            if (not data):
+                return [False, "No JSON data received"]
+
+            bookingId = data.get("booking_id")
+            userId = data.get("user_id")
+
+            return self._bookingService.cancelBooking(bookingId, userId)
+
+
         self._app = app
         return app
 

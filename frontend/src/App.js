@@ -9,6 +9,8 @@ import { Footer } from './view/components/footer/Footer';
 import { Header } from './view/components/header/Header';
 import { Home } from './view/pages/home';
 import { ViewBooking } from './view/pages/viewBooking/ViewBooking';
+import { CreateBooking } from './view/pages/createBooking/CreateBooking';
+import { CancelBooking } from './view/pages/cancelBooking/CancelBooking';
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="viewBooking" element={<ViewBooking />} />
+          <Route path="bookRoom" element={<CreateBooking />} />
+          <Route path="cancelBooking" element={<CancelBooking />} />
         </Routes>
 
         <Footer />

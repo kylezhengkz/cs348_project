@@ -85,15 +85,27 @@ class DBTool():
     def resetSQLRead(cls):
         cls.readSQLFile.cache_clear()
 
-    # readSQLFile(): Reads some file containing SQL with memoization
     @classmethod
-    @lru_cache(maxsize = 128)
-    def readSQLFile(cls, file: str) -> str:
+    def _readSQLFile(cls, file: str) -> str:
         sql = ""
         with open(file, mode = "r", encoding = FileEncodings.UTF8.value) as f:
             sql = f.read()
 
         return sql
+
+    # readSQLCachedFile(file): Reads some file containing SQL with memoization
+    @classmethod
+    @lru_cache(maxsize = 128)
+    def readSQLCachedFile(cls, file: str) -> str:
+        return cls._readSQLFile(file)
+
+
+    # readSQLFile(file, cached): Reads some file containing SQL
+    @classmethod
+    def readSQLFile(cls, file: str, cached: bool = True) -> str:
+        if (cached):
+            return cls.readSQLCachedFile(file)
+        return cls._readSQLFile(file)
     
     # executeSQL(sql, vars, commit, closeConn): Execute some SQL query
     def executeSQL(self, sql: Union[str, psycopg2.sql.SQL], vars: Optional[Union[List[Any], Dict[str, Any]]] = None, commit: bool = False, 

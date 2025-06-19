@@ -1,14 +1,10 @@
-import sys
 import os
 from dotenv import load_dotenv
 from typing import Optional
 
-from .constants.Paths import UtilsPath
+import PyUtils as PU
+
 from .constants.EnvironmentModes import EnvironmentModes
-
-sys.path.insert(1, UtilsPath)
-
-from PyUtils import DBSecrets, Paths
 
 
 class Config():
@@ -18,7 +14,7 @@ class Config():
         EnvironmentModes.Prod: "loadProd"
     }
 
-    def __init__(self, dbSecrets: DBSecrets, database: str, port: int):
+    def __init__(self, dbSecrets: PU.DBSecrets, database: str, port: int):
         self.dbSecrets = dbSecrets
         self.database = database
         self.port = port
@@ -26,9 +22,9 @@ class Config():
     @classmethod
     def loadFromFiles(cls, envPublicConfigsFile: str, globalSecretsFile: Optional[str] = None) -> "Config":
         if (globalSecretsFile is None):
-            globalSecretsFile = os.path.join(Paths.BackEndFolder.value, ".env")
+            globalSecretsFile = os.path.join(PU.Paths.BackEndFolder.value, ".env")
 
-        dbSecrets = DBSecrets.load(envPath = globalSecretsFile)
+        dbSecrets = PU.DBSecrets.load(envPath = globalSecretsFile)
 
         load_dotenv(dotenv_path = envPublicConfigsFile)
         database = os.getenv("DATABASE")
@@ -39,17 +35,17 @@ class Config():
     
     @classmethod
     def loadDev(cls) -> "Config":
-        envPublicConfigsFile = os.path.join(Paths.BackEndFolder.value, "dev.env")
+        envPublicConfigsFile = os.path.join(PU.Paths.BackEndFolder.value, "dev.env")
         return cls.loadFromFiles(envPublicConfigsFile)
     
     @classmethod
     def loadProd(cls) -> "Config":
-        envPublicConfigsFile = os.path.join(Paths.BackEndFolder.value, "prod.env")
+        envPublicConfigsFile = os.path.join(PU.Paths.BackEndFolder.value, "prod.env")
         return cls.loadFromFiles(envPublicConfigsFile)
     
     @classmethod
     def loadToy(cls) -> "Config":
-        envPublicConfigsFile = os.path.join(Paths.BackEndFolder.value, "toy.env")
+        envPublicConfigsFile = os.path.join(PU.Paths.BackEndFolder.value, "toy.env")
         return cls.loadFromFiles(envPublicConfigsFile)
     
     @classmethod

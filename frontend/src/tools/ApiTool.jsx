@@ -16,8 +16,8 @@ export class APITool {
         return false;
     }
 
-    static addURLQuerySep(ext, apiVars) {
-        const queryVarsAvailable = APITool.hasQueryVars(apiVars);
+    static addURLQuerySep(ext, kwargs) {
+        const queryVarsAvailable = APITool.hasQueryVars(Object.values(kwargs));
         return queryVarsAvailable ? `${ext}?` : ext;
     }
 
@@ -39,6 +39,12 @@ export class APITool {
 
     async get(apiExt) {
         const res = await this._apiInstance.get(`${apiExt}`);
+        return res;
+    }
+
+    async post(apiExt, data) {
+        console.log("EXT: ", apiExt, " AND ", data);
+        const res = await this._apiInstance.post(`${apiExt}`, data);
         return res;
     }
 }

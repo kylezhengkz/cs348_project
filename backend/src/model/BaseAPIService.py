@@ -1,12 +1,6 @@
-import sys
-
-from ..constants.Paths import UtilsPath
-
-sys.path.insert(1, UtilsPath)
-
-from PyUtils import DBTool
+import PyUtils as PU
 
 
 class BaseAPIService():
-    def __init__(self, dbTool: DBTool):
+    def __init__(self, dbTool: PU.DBTool):
         self._dbTool = dbTool

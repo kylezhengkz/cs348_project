@@ -7,6 +7,7 @@ const DefaultTheme = createTheme({
             main: "rgb(158, 115, 165)",
             light: "rgb(212, 193, 215)",
             dark: "rgb(104, 70, 109)",
+            borderColour: "rgb(125, 130, 139)",
         },
 
         onPrimary: {

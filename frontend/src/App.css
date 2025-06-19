@@ -83,3 +83,21 @@
 }
 
 /* =================================================== */
+/* ======== Popup Modals ============================= */
+
+.modal {
+    --bs-modal-bg: var(--mui-palette-surface-main);
+    --bs-modal-header-border-color: var(--mui-palette-primary-borderColour);
+    --bs-modal-footer-border-color: var(--mui-palette-primary-borderColour);
+}
+
+/* The "X" button on the popup */
+.popupExitBtnIcon {
+    color: var(--mui-palette-secondary-main);
+}
+
+.modal .btn-close {
+    --bs-btn-close-bg: none;
+}
+
+/* =================================================== */

@@ -17,24 +17,42 @@
 
 <br>
 
-## Hello World
-- A simple "hello world" project with PostgreSQL, Flask, and web interface.
-- Supports ability to auto-populate table, clear table, and search by user name.
-- Uses toy dataset (does not reflect actual project dataset/schema).
-
 ### Prerequisites:
-- Assumes installation of Python 3.12.10
-- Assumes installation of Poetry
+- Python 3.12.10
+- Poetry
+- Node.js 16+
+
+Install all the Python dependencies for the project by running the command:
+```
+Poetry install
+```
 
 <br>
 
-### Run Instructions:
-- Create a .env file with database credentials in the project root folder
-- Open terminal in project root
-```
-poetry install
-poetry run gunicorn hello_world.app:app
-```
+## Room Booking App
+The app has the 3 types of environment modes:
+
+<br>
+
+| Environment Name | Description |
+| ---------------- | ----------- |
+| Production | Contains the production dataset |
+| Development | Contains the sample dataset |
+| Toy | Contains the toy dataset |
+
+<br>
+
+Also, the app is split into a frontend and a backend to follow a client-server architecture. 
+See the links below on instructions for how to run each part:
+
+- [Client Frontend](frontend/README.md)
+- [Backend Server](backend/README.md)
+
+<br>
+
+## Hello World App
+A very basic app to test connection to the database.
+For more info, you can visit [hello_world](hello_world/README.md)
 
 <br>
 <br>

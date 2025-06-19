@@ -48,6 +48,7 @@ export function ViewBooking() {
 
 
     const columns = [
+        {title: "Room Id", data: "roomID"},
         {title: "Building", data: "buildingName"},
         {title: "Room", data: "roomName"},
         {title: "Address Line 1", data: "addressLine1"},
@@ -63,7 +64,7 @@ export function ViewBooking() {
 
     return (
         <Container maxWidth="xl">
-            <Typography variant="h2" gutterBottom className='mt-5'>This is the view booking page</Typography>
+            <Typography variant="h2" gutterBottom className='mt-5 mb-5'>Available Rooms</Typography>
 
             <Accordion className='mt-3'>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content">
@@ -90,12 +91,12 @@ export function ViewBooking() {
 
                         <Box className="mt-3" display={"flex"} gap={"30px"}>
                             <Box>
-                                <Typography variant='subtitle1'>Start Time</Typography>
+                                <Typography variant='subtitle1'>Start DateTime</Typography>
                                 <TextField variant="outlined" inputRef={startTimeRef} type="datetime-local"></TextField>
                             </Box>
 
                             <Box>
-                                <Typography variant='subtitle1'>End Time</Typography>
+                                <Typography variant='subtitle1'>End DateTime</Typography>
                                 <TextField variant="outlined" inputRef={endTimeRef} type="datetime-local"></TextField>
                             </Box>
                         </Box>
@@ -105,7 +106,7 @@ export function ViewBooking() {
                 </AccordionDetails>
             </Accordion>
 
-            <ReactDataTable data={data} columns={columns} tableContainerProps={{className: "mt-5"}}></ReactDataTable>
+            <ReactDataTable data={data} columns={columns} tableContainerProps={{className: "mt-5 mb-5"}}></ReactDataTable>
         </Container>
     );
 }
