@@ -1,10 +1,10 @@
-import atexit
 import signal
 import sys
 from flask import Flask, render_template, request
 from hello_world.db import db_open_connection, db_close_connection, db_populate, db_clear, db_fetch_all, db_fetch_by_name, db_fetch_rooms
 from hello_world.db import db_book_room, db_cancel_booking
 from datetime import datetime
+from typing import Optional
 
 def app_initialize():
     try:
@@ -85,15 +85,16 @@ def app_initialize():
     return app
   
 
-def app_shutdown():
+def app_shutdown(sig: Optional[int] = None, frame: Optional[int] = None):
     try:
         db_close_connection()
     except Exception:
         sys.exit(4)
+    else:
+        sys.exit(0)
 
 signal.signal(signal.SIGTERM, app_shutdown)
 signal.signal(signal.SIGINT, app_shutdown)
-atexit.register(app_shutdown)
 
 app = app_initialize()
 if __name__ == "__main__":
