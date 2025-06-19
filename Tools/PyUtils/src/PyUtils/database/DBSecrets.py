@@ -2,6 +2,8 @@ import os
 from dotenv import load_dotenv
 from typing import Optional
 
+from ..constants.Paths import Paths
+
 
 # DBSecrets: Class to hold the secrets for the databases server
 class DBSecrets():
@@ -15,7 +17,7 @@ class DBSecrets():
     @classmethod
     def load(cls, envPath: Optional[str] = None):
         if (envPath is None):
-            envPath = ".env"
+            envPath = os.path.join(Paths.ProjectFolder.value, ".env")
 
         load_dotenv(dotenv_path = envPath)
 

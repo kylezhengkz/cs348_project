@@ -5,7 +5,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta, time
 from pathlib import Path
 
-from DataPopulator.scrapers.WebScraper import scrape_building_names
+from ..scrapers.WebScraper import scrape_building_names
 
 @dataclass
 class Building:

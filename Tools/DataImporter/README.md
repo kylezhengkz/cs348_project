@@ -16,8 +16,8 @@ Tool to help import a raw dataset into the database
 ## How to Run
 
 ### Step 1.
-Configure the proper database credentials by making a `.env` file in this folder. For the specific format for the `.env` file,
-please refer to [template.env](template.env)
+If you have not done so already, configure the proper database credentials by making a `.env` file in the project's root folder.
+For more details, see [the project's README](../../README.md)
 
 <br>
 
