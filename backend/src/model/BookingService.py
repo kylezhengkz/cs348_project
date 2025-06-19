@@ -19,28 +19,29 @@ class BookingService(BaseAPIService):
         except ValueError:
             return [False, "Invalid UUID format for user ID or room ID."]
         
-        # Check if room exists
-        sql = 'SELECT 1 FROM "Room" WHERE "roomID" = %s'
-        connData, cursor, error = self._dbTool.executeSQL(sql, vars = (str(roomUUID),), closeConn = False)
-        if not cursor.fetchone():
-            return [False, "Room does not exist."]
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R7/R7.sql")
+        try:
+            with open(sqlPath, 'r') as f:
+                bookingSQL = f.read()
+        except FileNotFoundError:
+            return False, f"Booking SQL file not found at {sqlPath}"
         
-        # Check for overlapping bookings
-        sql = '''
-              SELECT 1 FROM "Booking"
-              WHERE "roomID" = %s
-              AND NOT (%s >= "bookEndDateTime" OR %s <= "bookStartDateTime");
-              '''
-        connData, cursor, error = self._dbTool.executeSQL(sql, vars = (str(roomUUID), startTime, endTime), closeConn = False, connData = connData)
-        if cursor.fetchone():
-            return [False, "Room is already booked for the selected time."]
+        connData, cursor, error = self._dbTool.executeSQL(bookingSQL, 
+                                                          vars = {"userID": str(userUUID),
+                                                                  "roomID": str(roomUUID),
+                                                                  "bookDateTime": datetime.now(timezone.utc),
+                                                                  "startTime": startTime,
+                                                                  "endTime": endTime,
+                                                                  "participants": participants}, 
+                                                          commit = True, closeConn = False)
         
-        # Inserting booking
-        sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R7/R7.sql")
-        sql = PU.DBTool.readSQLFile(sqlFile)
-        connData, cursor, error = self._dbTool.executeSQL(sql, vars = (str(userUUID), str(roomUUID), datetime.now(timezone.utc), startTime, endTime, participants), commit = True, connData = connData)
-        booking_id = cursor.fetchone()[0]
-        return [True, f"Booking successful! Booking ID: {booking_id}"]
+        row = cursor.fetchone()
+        connData.putConn()
+
+        if row:
+            return [True, f"Booking successful! Booking ID: {row[0]}"]
+        else:
+            return [False, "Booking failed: room does not exist or is already booked."]
 
     # cancelBooking(booking_id, user_id): Cancels a booking
     def cancelBooking(self, booking_id: Optional[str], user_id: Optional[str]) -> Tuple[bool, str]:
@@ -50,26 +51,22 @@ class BookingService(BaseAPIService):
         except ValueError:
             return [False, "Invalid UUID format for booking ID or user ID."]
         
-        # Verify booking exists and belongs to the user
-        sql = '''
-                SELECT * FROM "Booking" 
-                WHERE "bookingID" = %s AND "userID" = %s
-            '''
-        connData, cursor, error = self._dbTool.executeSQL(sql, vars = (str(bookingUUID), str(userUUID)), closeConn = False)
-        booking = cursor.fetchone()
-        if not booking:
-            return [False, "Booking ID not found or does not belong to the user."]
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R8/R8.sql")
+        try:
+            cancelSQL = PU.DBTool.readSQLFile(sqlPath)
+        except FileNotFoundError:
+            return [False, f"Cancel SQL file not found at {sqlPath}"]
         
-        # check if the booking is already cancelled
-        sql = 'SELECT "bookingID" FROM "Cancellation" WHERE "bookingID" = %s;'
-        connData, cursor, error = self._dbTool.executeSQL(sql, vars = [str(bookingUUID)], closeConn = False)
-        cancelledBooking = cursor.fetchone()
-        if (cancelledBooking is not None):
-            return [False, "The booking has already been cancelled."]
-        
-        # Insert into Cancellation table
-        sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R8/R8.sql")
-        sql = PU.DBTool.readSQLFile(sqlFile)
-        connData, cursor, error = self._dbTool.executeSQL(sql, vars = {"booking_id": str(bookingUUID), "user_id": str(userUUID)}, commit = True, connData = connData)
+        connData, cursor, error = self._dbTool.executeSQL(cancelSQL, 
+                                                          vars = {"booking_id": str(bookingUUID), 
+                                                                  "user_id": str(userUUID),
+                                                                  "cancel_date": datetime.now(timezone.utc)}, 
+                                                          commit = True, closeConn = False)
 
-        return [True, "Booking successfully cancelled."]
+        cancelledResultLen = cursor.rowcount
+        connData.putConn()
+
+        if cancelledResultLen > 0:
+            return [True, "Booking successfully cancelled."]
+        else:
+            return [False, "Booking already cancelled or not found."]
