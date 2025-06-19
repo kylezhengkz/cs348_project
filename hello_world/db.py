@@ -10,10 +10,10 @@ from datetime import datetime
 
 load_dotenv()
 DB = os.getenv("DATABASE")
-DB_USERNAME = os.getenv("DBUSERNAME")
-DB_PASSWORD = os.getenv("DBPASSWORD")
-DB_HOST = os.getenv("DBHOST")
-DB_PORT = os.getenv("DBPORT")
+DB_USERNAME = os.getenv("DB_USERNAME")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
+DB_PORT = os.getenv("DB_PORT")
 
 db_connection = None
 
@@ -114,14 +114,14 @@ def db_fetch_rooms(roomName=None, minCapacity=None, maxCapacity=None, startTimeS
     'start_time': current_datetime if use_current else dt_start_time,
     'end_time': current_datetime if use_current else dt_end_time
   }
-  conn, cursor, err = importer.executeSQL(sql, vars=params, commit=True, closeConn=False)
+  connData, cursor, err = importer.executeSQL(sql, vars=params, commit=True, closeConn=False)
 
   if (err is None):
     output = cursor.fetchall()
-    conn.close()
+    connData.putConn()
     return output
   else:
-    conn.close()
+    connData.putConn()
 
 def db_book_room(user_id, room_id, book_date, start_time, end_time, participants):
     global db_connection
