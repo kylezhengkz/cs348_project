@@ -10,7 +10,7 @@ with bookingCount as (
 		select 1 
 		from "Cancellation" as c
 		where c."bookingID" = bo."bookingID" -- cancelled
-			or (bo."bookStartDateTime" >= %(end_time)s or bo."bookEndDateTime" <= %(start_time)s) -- overlap
+			or not (bo."bookStartDateTime" >= %(end_time)s or bo."bookEndDateTime" <= %(start_time)s) -- overlap
 	  )
   )
   group by r."roomID"
