@@ -2,7 +2,7 @@ import csv
 import random
 import re
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 from pathlib import Path
 
 from DataPopulator.scrapers.WebScraper import scrape_building_names
@@ -128,6 +128,8 @@ class SampleDataGenerator:
         return users
     
     def _generate_bookings(self, rooms, users):
+        bound_start = time(7, 0, 1)
+        bound_end = time(21, 59, 59)
         bookings = []
         booking_id = 1
         booking_length = timedelta(hours=1)
@@ -137,6 +139,11 @@ class SampleDataGenerator:
         for room in rooms:
             current_start = base_date
             for _ in range(self.bookings_per_room):
+                if current_start.time() < bound_start:
+                    current_start = current_start.replace(hour=19, minute=0, second=1, microsecond=0)
+                if current_start.time() > bound_end:
+                    current_start = current_start + timedelta(days=1)
+                    current_start = current_start.replace(hour=19, minute=0, second=1, microsecond=0)
                 current_end = current_start + booking_length
                 user = random.choice(users)
 
