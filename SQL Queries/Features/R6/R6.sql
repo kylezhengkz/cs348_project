@@ -6,12 +6,12 @@ with bookingCount as (
   from "Room" as r 
   left outer join "Booking" as bo on bo."roomID" = r."roomID"
   and (
-	  not exists ( -- disregard cancalled bookings and bookings that do not overlap with [start_time, end_time]
+	  not exists ( -- disregard cancelled bookings and join bookings that overlap with [start_time, end_time]
 		select 1 
 		from "Cancellation" as c
 		where c."bookingID" = bo."bookingID" -- cancelled
-			or not (bo."bookStartDateTime" >= %(end_time)s or bo."bookEndDateTime" <= %(start_time)s) -- overlap
 	  )
+	  and not (bo."bookStartDateTime" >= %(end_time)s or bo."bookEndDateTime" <= %(start_time)s) -- overlap
   )
   group by r."roomID"
 )
