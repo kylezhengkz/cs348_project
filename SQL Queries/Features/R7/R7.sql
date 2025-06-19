@@ -2,7 +2,6 @@ WITH valid_room AS (
     SELECT 1 FROM "Room" WHERE "roomID" = %(roomID)s
 ),
 
--- Step 2: Check that there is no active overlapping booking
 valid_booking AS (
     SELECT 1
     FROM "Booking" AS b
@@ -17,7 +16,6 @@ valid_booking AS (
       )
 )
 
--- Step 3: Insert the booking only if room exists and no conflict
 INSERT INTO "Booking" (
     "userID", "roomID", "bookDateTime",
     "bookStartDateTime", "bookEndDateTime", "participants"
