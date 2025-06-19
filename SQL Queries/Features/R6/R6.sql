@@ -2,7 +2,7 @@
 with bookingCount as (
   select 
   	r."roomID",
-	sum(bo."participants") as "bookingNum"
+	count(bo."bookingID") as "overlappingBookings"
   from "Room" as r 
   left outer join "Booking" as bo on bo."roomID" = r."roomID"
   and (
@@ -18,7 +18,7 @@ with bookingCount as (
 
 
 -- display the appropriate columns to the view rooms
-select r."roomID", b."buildingName", r."roomName", bc."bookingNum", r."capacity", b."addressLine1", b."addressLine2", b."city", b."province", b."country", b."postalCode"
+select r."roomID", b."buildingName", r."roomName", bc."overlappingBookings", r."capacity", b."addressLine1", b."addressLine2", b."city", b."province", b."country", b."postalCode"
 from bookingCount as bc 
 join "Room" as r on r."roomID" = bc."roomID"
 join "Building" as b on b."buildingID" = r."buildingID"
