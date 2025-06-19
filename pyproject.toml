@@ -13,7 +13,8 @@ readme = "README.md"
 
 packages = [
     { include = "DataImporter", from = "Tools/DataImporter/src" },
-    { include = "PyUtils", from = "Tools/PyUtils/src" }
+    { include = "PyUtils", from = "Tools/PyUtils/src" },
+    { include = "DataPopulator", from = "Tools/DataPopulator/src" }
 ]
 
 [tool.poetry.dependencies]
@@ -24,6 +25,9 @@ python-dotenv = ">=1.1.0,<2.0.0"
 pandas = ">=2.3.0,<3.0.0"
 sqlalchemy = ">=2.0.41,<3.0.0"
 pytest = ">=8.4.0,<9.0.0"
+bs4 = "^0.0.2"
+requests = "^2.32.4"
+playwright = "^1.52.0"
 waitress = ">=3.0.2,<4.0.0"
 flask-cors = "^6.0.1"
 pytz = "^2025.2"
@@ -31,6 +35,7 @@ tzlocal = "^5.3.1"
 
 [tool.poetry.scripts]
 hello_world = "hello_world.main:main"
+db_pop = "Tools.DataPopulator.src.DataPopulator.DataPopulator:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

@@ -15,7 +15,8 @@ class Paths(Enum):
 
     SQLFeaturesFolder = os.path.abspath(os.path.join(SQLQueriesFolder, "Features"))
     PyUtilsFolder = os.path.abspath(os.path.join(FileDir, "..", ".."))
-    DataImporterFolder = os.path.abspath(os.path.join(ProjectFolder, "Tool", "DataImporter", "src"))
+    DataImporterFolder = os.path.abspath(os.path.join(ProjectFolder, "Tools", "DataImporter", "src"))
 
     BackEndFolder = os.path.abspath(os.path.join(ProjectFolder, "Backend"))
     FrontEndFolder = os.path.abspath(os.path.join(ProjectFolder, "Frontend"))
+    DataPopulatorFolder = os.path.abspath(os.path.join(ProjectFolder, "Tools", "DataPopulator"))
