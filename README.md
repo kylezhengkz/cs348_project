@@ -88,3 +88,24 @@ Create the corresponding .csv files based on the tables within the databases
 ## How to Load Datasets to the Database
 
 Follow the instructions at [Tools/DataImporter](Tools/DataImporter/README.md)
+
+<br>
+<br>
+
+## How to Load Sample Datasets
+
+### Step 1.
+Ensure that `playwright` is properly installed by running the command:
+```
+poetry run playright install
+```
+
+<br>
+
+### Step 2.
+To populate the `toy` database with sample data. Run the command:
+```
+poetry run db_pop
+```
+
+<br>
