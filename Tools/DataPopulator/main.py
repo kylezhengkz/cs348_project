@@ -3,11 +3,11 @@ from pathlib import Path
 
 import PyUtils as PU
 import DataImporter as DI
-from DataPopulator.generators.SampleDataGenerator import SampleDataGenerator
+from DataPopulator import SampleDataGenerator
 
 def main():
     Secrets = PU.DBSecrets.load()
-    Database = PU.DBNames.Toy.value
+    Database = PU.DBNames.Dev.value
     importer = DI.Importer(Secrets, database = Database)
 
     parser = argparse.ArgumentParser(description="Populates database.")
@@ -38,3 +38,7 @@ def main():
     print("===== STARTING DATA UPLOAD ========")
     importer.importData(dataFolder=Path(PU.Paths.DataPopulatorFolder.value) / "data" / "Sample Dataset", cleanLevel=DI.ImportLevel.Tuples)
     print("===== DATA UPLOAD COMPLETE ========")
+
+
+if __name__ == "__main__":
+    main()
