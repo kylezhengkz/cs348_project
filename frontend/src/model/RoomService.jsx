@@ -8,10 +8,10 @@ export class RoomService extends BaseAPIService {
         
         const kwargs = {
             "room_name": roomName,
-            "minCapacity": minCapacity,
-            "maxCapacity": maxCapacity,
-            "startTimeStr": startTimeStr,
-            "endTimeStr": endTimeStr
+            "min_capacity": minCapacity,
+            "max_capacity": maxCapacity,
+            "start_time": startTimeStr,
+            "end_time": endTimeStr
         }
 
         let ext = "/viewAvailableRooms";
@@ -23,6 +23,8 @@ export class RoomService extends BaseAPIService {
         }
 
         ext += APITool.getQueryKwargsStr(kwargs);
+
+        console.log("EXT: ", ext);
 
         const res = await this.apiTool.get(ext);
         return res.data;

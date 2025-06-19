@@ -43,7 +43,6 @@ export class APITool {
     }
 
     async post(apiExt, data) {
-        console.log("EXT: ", apiExt, " AND ", data);
         const res = await this._apiInstance.post(`${apiExt}`, data);
         return res;
     }

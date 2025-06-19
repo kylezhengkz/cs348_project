@@ -63,13 +63,16 @@ class App():
             db_operation = request.args.get("db_operation")
 
             if db_operation == "filter":
-                roomName = request.args.get("room_name", None)
-                minCapacity = request.args.get("min_capacity", None)
-                maxCapacity = request.args.get("max_capacity", None)
-                startTime = request.args.get("start_time", None)
-                endTime = request.args.get("end_time", None)
+                roomName = request.args.get("room_name")
+                minCapacity = request.args.get("min_capacity")
+                maxCapacity = request.args.get("max_capacity")
+                startTime = request.args.get("start_time")
+                endTime = request.args.get("end_time")
+                print(f"OHOHOH: {request}")
+                print(f"LALA: {roomName}, {minCapacity}, {maxCapacity}, {startTime}, {endTime}")
                 response = self._roomService.fetchAvailableRooms(roomName, minCapacity, maxCapacity, startTime, endTime)
             else:
+                print(f"NANI")
                 response = self._roomService.fetchAvailableRooms()
 
             return response
