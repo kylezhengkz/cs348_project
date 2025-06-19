@@ -18,8 +18,11 @@ with bookingCount as (
 
 
 -- display the appropriate columns to the view rooms
-select r."roomID", b."buildingName", r."roomName", bc."bookingNum", r."capacity", b."addressLine1", b."city", b."province", b."country", b."postalCode"
+select r."roomID", b."buildingName", r."roomName", bc."bookingNum", r."capacity", b."addressLine1", b."addressLine2", b."city", b."province", b."country", b."postalCode"
 from bookingCount as bc 
 join "Room" as r on r."roomID" = bc."roomID"
 join "Building" as b on b."buildingID" = r."buildingID"
-;
+WHERE TRUE
+    AND (%(room_name)s IS NULL OR r."roomName" ILIKE %(room_name)s)
+    AND (%(min_capacity)s IS NULL OR r."capacity" >= %(min_capacity)s)
+    AND (%(max_capacity)s IS NULL OR r."capacity" <= %(max_capacity)s);

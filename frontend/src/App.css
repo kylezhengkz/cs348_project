@@ -1,0 +1,103 @@
+/* =========== Buttons ================================ */
+
+.btn-primary {
+    --bs-btn-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-btn-bg: var(--mui-palette-primary-main) !important;
+    --bs-btn-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-hover-color: var(--mui-palette-primary-main) !important;
+    --bs-btn-hover-bg: var(--mui-palette-onPrimary-mainHover) !important;
+    --bs-btn-hover-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-active-color: var(--mui-palette-onPrimary-mainHover) !important;
+    --bs-btn-active-bg: var(--mui-palette-primary-main) !important;
+    --bs-btn-active-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-disabled-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-btn-disabled-bg: var(--mui-palette-primary-main) !important;
+    --bs-btn-disabled-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    transition: var(--mui-transitions-medium) !important;
+}
+
+.btn-secondary {
+    --bs-btn-color: var(--onSecondary) !important;
+    --bs-btn-bg: var(--mui-palette-seconday-main) !important;
+    --bs-btn-border-color: var(--mui-palette-seconday-mainBorderColour) !important;
+    --bs-btn-hover-color: var(--mui-palette-seconday-mainHover) !important;
+    --bs-btn-hover-bg: var(--onSecondaryHover) !important;
+    --bs-btn-hover-border-color: var(--mui-palette-seconday-mainBorderColour) !important;
+    --bs-btn-active-color: var(--onSecondaryHover) !important;
+    --bs-btn-active-bg: var(--mui-palette-seconday-mainHover) !important;
+    --bs-btn-active-border-color: var(--mui-palette-seconday-mainBorderColour) !important;
+    --bs-btn-disabled-color: var(--onSecondary) !important;
+    --bs-btn-disabled-bg: var(--mui-palette-seconday-main) !important;
+    --bs-btn-disabled-border-color: var(--mui-palette-seconday-mainBorderColour) !important;
+    transition: var(--mui-transitions-medium) !important;
+}
+
+.btn-danger {
+    --bs-btn-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-btn-bg: var(--error) !important;
+    --bs-btn-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-hover-color: var(--error) !important;
+    --bs-btn-hover-bg: var(--mui-palette-onPrimary-mainHover) !important;
+    --bs-btn-hover-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-active-color: var(--error) !important;
+    --bs-btn-active-bg: var(--mui-palette-primary-main) !important;
+    --bs-btn-active-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-btn-disabled-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-btn-disabled-bg: var(--error) !important;
+    --bs-btn-disabled-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    transition: var(--mui-transitions-medium) !important;
+}
+
+/* ==================================================== */
+/* ======== Pagination =============================== */
+
+.pagination {
+    --bs-pagination-color: var(--mui-palette-primary-main) !important;
+    --bs-pagination-bg: var(--mui-palette-onPrimary-mainHover) !important;
+    --bs-pagination-border-color: var(--mui-palette-primary-mainBorderColour) !important;
+    --bs-pagination-hover-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-pagination-hover-bg: var(--mui-palette-primary-main) !important;
+    --bs-pagination-hover-border-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-pagination-active-bg: var(--mui-palette-primary-main) !important;
+    --bs-pagination-active-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-pagination-active-border-color: var(--mui-palette-onPrimary-main) !important;
+    --bs-pagination-focus-color: var(--mui-palette-primary-main) !important;
+    --bs-pagination-focus-bg: var(--mui-palette-onPrimary-main) !important;
+    --bs-pagination-disabled-border-color: var(--mui-palette-seconday-mainBorderColour) !important;
+    --bs-pagination-disabled-color: var(--mui-palette-seconday-main) !important;
+}
+
+/* =================================================== */
+/* ======== Text Input =============================== */
+
+.form-control {
+    background-color: var(--mui-palette-background-main) !important;
+    color: var(--mui-palette-text-primary) !important;
+    transition: var(--mui-transitions-fast) !important;
+}
+
+.form-control:focus {
+    background-color: var(--mui-palette-background-main) !important;
+    box-shadow: 0 0 0 .25rem var(--mui-palette-secondary-main) !important;
+    color: var(--mui-palette-text-primary) !important;
+}
+
+/* =================================================== */
+/* ======== Popup Modals ============================= */
+
+.modal {
+    --bs-modal-bg: var(--mui-palette-surface-main);
+    --bs-modal-header-border-color: var(--mui-palette-primary-borderColour);
+    --bs-modal-footer-border-color: var(--mui-palette-primary-borderColour);
+}
+
+/* The "X" button on the popup */
+.popupExitBtnIcon {
+    color: var(--mui-palette-secondary-main);
+}
+
+.modal .btn-close {
+    --bs-btn-close-bg: none;
+}
+
+/* =================================================== */

@@ -1,0 +1,118 @@
+.tableContainer {
+    background-color: var(--mui-palette-surface-main);
+    padding: 10px;
+    border-radius: var(--mui-bordersRadius-small);
+}
+
+.tableContainer .dataTable, .tableContainer .dt-scroll-headInner {
+    width: 100% !important;
+}
+
+/* ----- sort icons ----- */
+
+/* Previously displayed two separate icons, hide first one */
+.dt-column-order {
+    top: 0.18em !important;
+    font-family: 'Font Awesome 6 Free' !important;
+    font-size: 1.3em !important;
+}
+ 
+.dt-column-order:before, .dt-column-order:after {
+    content: "" !important;
+}
+
+
+/* font-family and font-weight needed for Font Awesome icons to display by CSS */
+.dt-column-order::before {
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+ 
+/* Only display in after */
+.dt-orderable-asc .dt-column-order::before
+{
+    /*right:    0 !important;*/
+    content: "\f0dc" !important;
+    color: var(--mui-palette-onPrimary-main) !important;
+    opacity: 1 !important;
+    top: unset !important;
+    bottom: 0.3em !important;
+    line-height: unset !important;
+    padding-left: 5px;
+}
+
+/* sort ascending */
+.dt-ordering-asc span.dt-column-order::before {
+    content: "\f161" !important;
+    color: var(--mui-palette-onPrimary-main) !important;
+    opacity: 1 !important;
+    top: unset !important;
+    bottom: 0.3em !important;
+    line-height: unset !important; /* DataTable 1.12 set to 9px */
+    padding-left: inherit;
+}
+
+/* sort descending */
+.dt-ordering-desc span.dt-column-order::before {
+    content: "\f160" !important;
+    color: var(--mui-palette-onPrimary-main) !important;
+    opacity: 1 !important;
+    top: unset !important;
+    bottom: 0.3em !important;
+    line-height: unset !important; /* DataTable 1.12 set to 9px */
+    padding-left: inherit;
+}
+
+/* ---------------------- */
+
+.dataTable th {
+    background-color: var(--mui-palette-primary-main) !important;
+    color: var(--mui-palette-onPrimary-main);
+    text-align: center !important;
+}
+
+
+.dataTable th:first-child {
+    border-radius: var(--mui-bordersRadius-small) 0 0 0;
+}
+
+.dataTable th:last-child {
+    border-radius: 0 var(--mui-bordersRadius-small) 0 0;
+}
+
+.dataTable td {
+    color: var(--mui-palette-text-primary);
+    text-align: center !important;
+}
+
+.dataTable tr:nth-child(even) td {
+    background-color: var(--mui-palette-surface-secondary) !important;
+    opacity: 0.95;
+}
+
+.dataTable tr:nth-child(odd) td {
+    background-color: var(--mui-palette-surface-main) !important;
+    opacity: 0.95;
+    box-shadow: none !important;
+}
+
+.dt-scroll {
+    width: 100%;
+}
+
+.dt-scroll-body {
+    overflow: scroll !important;
+}
+
+.dt-scroll-body thead {
+    display: none;
+}
+
+.dt-layout-row {
+    margin: 20px 0
+}

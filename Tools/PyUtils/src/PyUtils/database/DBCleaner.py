@@ -1,9 +1,9 @@
-import psycopg2
-import psycopg2.sql
+from psycopg2.sql import SQL, Identifier
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from typing import Optional
 
 from .DBTool import DBTool
+from .DBConnData import DBConnData
 from ..constants.TableNames import TableNames
 from ..constants.DBFuncNames import DBFuncNames
 from ..exceptions.AreYouSureError import AreYouSureError
@@ -19,7 +19,7 @@ class DBCleaner():
         if (not isSure):
             raise AreYouSureError(f"CLEAR ALL THE DATA IN THE TABLE BY THE NAME: '{tableName}' FOR THE DATABASE, '{self.database}'")
         
-        sql = psycopg2.sql.SQL("TRUNCATE {table} CASCADE;").format(table = psycopg2.sql.Identifier(tableName))
+        sql = SQL("TRUNCATE {table} CASCADE;").format(table = Identifier(tableName))
         self._dbTool.executeSQL(sql, commit = True)
 
     # clearAll(isSure): Clears all the data from all the imported tables
@@ -35,7 +35,7 @@ class DBCleaner():
         if (not isSure):
             raise AreYouSureError(f"DELETE THE TABLE BY THE NAME: '{tableName}' FOR THE DATABASE, '{self.database}'")
         
-        sql = psycopg2.sql.SQL("DROP TABLE IF EXISTS {table} CASCADE;").format(table = psycopg2.sql.Identifier(tableName))
+        sql = SQL("DROP TABLE IF EXISTS {table} CASCADE;").format(table = Identifier(tableName))
         self._dbTool.executeSQL(sql, commit = True)
 
     # deleteAllTables(isSure): Deletes all the tables
@@ -51,7 +51,7 @@ class DBCleaner():
         if (not isSure):
             raise AreYouSureError(f"DELETE THE FUNCTION BY THE NAME: '{funcName}' FOR THE DATABASE, '{self.database}'")
         
-        sql = psycopg2.sql.SQL("DROP FUNCTION {func}").format(func = psycopg2.sql.Identifier(funcName))
+        sql = SQL("DROP FUNCTION IF EXISTS {func}").format(func = Identifier(funcName))
         self._dbTool.executeSQL(sql, commit = True)
 
     # deleteAllFuncs(isSure): Deletes all the functions in the database
@@ -70,9 +70,9 @@ class DBCleaner():
         if (database is None):
             database = self._dbTool.database
         
-        sql = psycopg2.sql.SQL("DROP DATABASE {dbName} WITH (FORCE);").format(dbName = psycopg2.sql.Identifier(database))
+        sql = SQL("DROP DATABASE {dbName} WITH (FORCE);").format(dbName = Identifier(database))
 
-        conn = self._dbTool.connectDB(defaultDB = True)
-        conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT) # Needed for creating/deleting databases
+        connData = DBConnData(conn = self._dbTool.connectDB(defaultDB = True))
+        connData.conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT) # Needed for creating/deleting databases
 
-        self._dbTool.executeSQL(sql, conn = conn)
+        self._dbTool.executeSQL(sql, connData = connData)

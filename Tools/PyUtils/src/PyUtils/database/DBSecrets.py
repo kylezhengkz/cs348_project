@@ -19,8 +19,8 @@ class DBSecrets():
 
         load_dotenv(dotenv_path = envPath)
 
-        username = os.getenv("DBUSERNAME")
-        password = os.getenv("DBPASSWORD")
-        host = os.getenv("HOST")
-        port = os.getenv("PORT")
+        username = os.getenv("DB_USERNAME")
+        password = os.getenv("DB_PASSWORD")
+        host = os.getenv("DB_HOST")
+        port = os.getenv("DB_PORT")
         return cls(username = username, password = password, host = host, port = port)
