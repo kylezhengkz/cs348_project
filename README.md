@@ -22,10 +22,25 @@
 - Poetry
 - Node.js 16+
 
+
+## Step 1.
 Install all the Python dependencies for the project by running the command:
 ```
 Poetry install
 ```
+
+<br>
+
+## Step 2.
+Create a new file called `.env` in the folder where this README.MD is created. 
+
+For what parameters to put in this new `.env` file, follow the format specified at [template.env](template.env)
+
+<br>
+
+> [!NOTE]
+> For the values of the paramters (eg. database credentials), checkout the credentials listed in the report from Milestone 1
+s
 
 <br>
 
