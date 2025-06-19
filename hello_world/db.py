@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from datetime import datetime
 import PyUtils as PU
 import DataImporter as DI
+import uuid
+from datetime import datetime
 
 load_dotenv()
 DB = os.getenv("DATABASE")
@@ -121,76 +123,66 @@ def db_fetch_rooms(roomName=None, minCapacity=None, maxCapacity=None, startTimeS
   else:
     conn.close()
 
-
-import uuid
-from datetime import datetime
-
 def db_book_room(user_id, room_id, book_date, start_time, end_time, participants):
     global db_connection
+
     try:
         user_uuid = uuid.UUID(user_id)
         room_uuid = uuid.UUID(room_id)
     except ValueError:
         return False, "Invalid UUID format for user ID or room ID."
 
+    sql_path = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R7/R7.sql")
+    try:
+        with open(sql_path, 'r') as f:
+            booking_sql = f.read()
+    except FileNotFoundError:
+        return False, f"Booking SQL file not found at {sql_path}"
+
     with db_connection:
         with db_connection.cursor() as cur:
-            # Check if room exists
-            cur.execute('SELECT 1 FROM "Room" WHERE "roomID" = %s', (str(room_uuid),))
-            if not cur.fetchone():
-                return False, "Room does not exist."
+            cur.execute(booking_sql, {
+                "userID": str(user_uuid),
+                "roomID": str(room_uuid),
+                "bookDateTime": datetime.now(),
+                "startTime": start_time,
+                "endTime": end_time,
+                "participants": participants
+            })
 
-            # Check for overlapping bookings
-            cur.execute("""
-                SELECT 1 FROM "Booking"
-                WHERE "roomID" = %s
-                AND NOT (%s >= "bookEndDateTime" OR %s <= "bookStartDateTime")
-            """, (str(room_uuid), start_time, end_time))
-
-            if cur.fetchone():
-                return False, "Room is already booked for the selected time."
-
-            # Inserting booking
-            cur.execute("""
-                INSERT INTO "Booking" ("userID", "roomID", "bookDateTime", "bookStartDateTime", "bookEndDateTime", "participants")
-                VALUES (%s, %s, %s, %s, %s, %s)
-                RETURNING "bookingID"
-            """, (str(user_uuid), str(room_uuid),datetime.now(), start_time, end_time,participants))
-            
-            booking_id = cur.fetchone()[0]
-            return True, f"Booking successful! Booking ID: {booking_id}"
+            row = cur.fetchone()
+            if row:
+                return True, f"Booking successful! Booking ID: {row[0]}"
+            else:
+                return False, "Booking failed: room does not exist or is already booked."
 
 
 def db_cancel_booking(booking_id, user_id):
     global db_connection
+
     try:
         booking_uuid = uuid.UUID(booking_id)
         user_uuid = uuid.UUID(user_id)
     except ValueError:
         return False, "Invalid UUID format for booking ID or user ID."
 
+   
+    sql_path = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R8/R8.sql")
+    try:
+        with open(sql_path, 'r') as f:
+            cancel_sql = f.read()
+    except FileNotFoundError:
+        return False, f"Cancel SQL file not found at {sql_path}"
+
     with db_connection:
         with db_connection.cursor() as cur:
-            # Verify booking exists and belongs to the user
-            cur.execute("""
-                SELECT * FROM "Booking" 
-                WHERE "bookingID" = %s AND "userID" = %s
-            """, (str(booking_uuid), str(user_uuid)))
-            booking = cur.fetchone()
+            cur.execute(cancel_sql, {
+                "booking_id": str(booking_uuid),
+                "user_id": str(user_uuid)
+            })
 
-            if not booking:
-                return False, "Booking ID not found or does not belong to the user."
-
-            # Insert into Cancellation table
-            cur.execute("""
-                INSERT INTO "Cancellation" ("bookingID", "userID", "cancelDateTime")
-                VALUES (%s, %s, NOW())
-            """, (str(booking_uuid), str(user_uuid)))
-
-            # Remove from Booking table
-            cur.execute("""
-                DELETE FROM "Booking" 
-                WHERE "bookingID" = %s
-            """, (str(booking_uuid),))
-            
-            return True, "Booking successfully cancelled."
+            if cur.rowcount > 0:
+                return True, "Booking successfully cancelled."
+            else:
+                return False, "Booking already cancelled or not found."
+        
