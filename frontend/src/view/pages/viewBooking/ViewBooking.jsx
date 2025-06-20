@@ -48,14 +48,14 @@ export function ViewBooking() {
 
 
     const columns = [
-        {title: "Room Id", data: "roomID"},
-        {title: "Building", data: "buildingName"},
-        {title: "Room", data: "roomName"},
-        {title: "Address Line 1", data: "addressLine1"},
-        {title: "Address Line 2", data: "addressLine2"},
-        {title: "City", data: "city"},
-        {title: "Country", data: "country"},
-        {title: "Postal Code", data: "postalCode"}
+        {title: "Room Id", data: "roomID", width: "400px"},
+        {title: "Building", data: "buildingName", width: "200px"},
+        {title: "Room", data: "roomName", width: "200px"},
+        {title: "Address Line 1", data: "addressLine1", width: "200px"},
+        {title: "Address Line 2", data: "addressLine2", width: "200px"},
+        {title: "City", data: "city", width: "150px"},
+        {title: "Country", data: "country", width: "150px"},
+        {title: "Postal Code", data: "postalCode", width: "100px"}
     ];
 
     useEffect(() => {
@@ -106,7 +106,7 @@ export function ViewBooking() {
                 </AccordionDetails>
             </Accordion>
 
-            <ReactDataTable data={data} columns={columns} tableContainerProps={{className: "mt-5 mb-5"}}></ReactDataTable>
+            <ReactDataTable data={data} columns={columns} tableContainerProps={{className: "mt-5 mb-5"}} dataTableKwargs={{autoWidth: false}}></ReactDataTable>
         </Container>
     );
 }

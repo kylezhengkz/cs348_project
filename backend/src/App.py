@@ -68,11 +68,8 @@ class App():
                 maxCapacity = request.args.get("max_capacity")
                 startTime = request.args.get("start_time")
                 endTime = request.args.get("end_time")
-                print(f"OHOHOH: {request}")
-                print(f"LALA: {roomName}, {minCapacity}, {maxCapacity}, {startTime}, {endTime}")
                 response = self._roomService.fetchAvailableRooms(roomName, minCapacity, maxCapacity, startTime, endTime)
             else:
-                print(f"NANI")
                 response = self._roomService.fetchAvailableRooms()
 
             return response
