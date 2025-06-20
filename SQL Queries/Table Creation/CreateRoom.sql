@@ -9,5 +9,6 @@ CREATE TABLE {RoomTable} (
         ON DELETE CASCADE
         ON UPDATE CASCADE,
 
-    CONSTRAINT validCapacity CHECK ({RoomTable}."capacity" > 0)
+    CONSTRAINT validCapacity CHECK ({RoomTable}."capacity" > 0),
+    UNIQUE("buildingID", "roomName")
 );
