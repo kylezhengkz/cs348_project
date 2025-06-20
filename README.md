@@ -39,8 +39,7 @@ For what parameters to put in this new `.env` file, follow the format specified 
 <br>
 
 > [!NOTE]
-> For the values of the paramters (eg. database credentials), checkout the credentials listed in the report from Milestone 1
-s
+> For the values of the paramters (eg. database credentials), checkout the credentials mentioned in the report for Milestone 1
 
 <br>
 
