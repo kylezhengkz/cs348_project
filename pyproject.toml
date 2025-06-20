@@ -35,7 +35,7 @@ tzlocal = "^5.3.1"
 
 [tool.poetry.scripts]
 hello_world = "hello_world.main:main"
-db_pop = "Tools.DataPopulator.src.DataPopulator.DataPopulator:main"
+db_pop = "Tools.DataPopulator.main:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

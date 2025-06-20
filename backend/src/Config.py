@@ -22,7 +22,7 @@ class Config():
     @classmethod
     def loadFromFiles(cls, envPublicConfigsFile: str, globalSecretsFile: Optional[str] = None) -> "Config":
         if (globalSecretsFile is None):
-            globalSecretsFile = os.path.join(PU.Paths.BackEndFolder.value, ".env")
+            globalSecretsFile = os.path.join(PU.Paths.ProjectFolder.value, ".env")
 
         dbSecrets = PU.DBSecrets.load(envPath = globalSecretsFile)
 

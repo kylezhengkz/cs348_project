@@ -30,14 +30,12 @@ class RoomService(BaseAPIService):
         sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R6/R6.sql")
         sql = PU.DBTool.readSQLFile(sqlFile)
 
-        print(f"MINMAX: {minCapacity} AND {maxCapacity}")
-
         params = {
             'room_name': f'%{roomName}%' if roomName and roomName.strip() != '' else None,
             'min_capacity': int(minCapacity) if minCapacity is not None and minCapacity.strip() != "" else None,
             'max_capacity': int(maxCapacity) if maxCapacity is not None and maxCapacity.strip() != "" else None,
-            'start_time': None if useCurrent else dtStartTime,
-            'end_time': None if useCurrent else dtEndTime
+            'start_time': current_datetime if useCurrent else dtStartTime,
+            'end_time': current_datetime if useCurrent else dtEndTime
         }
 
         sqlEngine = self._dbTool.getSQLEngine()

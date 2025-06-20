@@ -16,5 +16,7 @@ CREATE TABLE {BookingTable} (
         ON UPDATE CASCADE,
 
     CONSTRAINT validBookingCommitDate CHECK({BookingTable}."bookDateTime" < {BookingTable}."bookStartDateTime"),
-    CONSTRAINT validBookingRange CHECK({BookingTable}."bookStartDateTime" < {BookingTable}."bookEndDateTime")
+    CONSTRAINT validBookingRange CHECK({BookingTable}."bookStartDateTime" < {BookingTable}."bookEndDateTime"),
+    CONSTRAINT bookingStartWindow CHECK ("bookStartDateTime"::time >= TIME '07:00'),
+    CONSTRAINT bookingEndWindow CHECK ("bookEndDateTime"::time <= TIME '23:00')
 );

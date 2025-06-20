@@ -37,7 +37,13 @@
     ```
     npm install
     ```
-3. Place `.env` (credential) files in the project root folder and in the `backend/` folder.
+3. Create a new file called `.env` in the folder where this README.MD is created. For what parameters to put in this new `.env` file, follow the format specified at [template.env](template.env)
+
+<br>
+
+> [!NOTE]
+> For the values of the paramters (eg. database credentials), checkout the credentials mentioned in the report for Milestone 1
+
 <br>
 <br>
 
