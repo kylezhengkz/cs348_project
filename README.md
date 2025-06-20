@@ -16,31 +16,47 @@
 | **Kyle Zheng** | https://github.com/kylezhengkz |
 
 <br>
+<br>
 
-### Prerequisites:
+## Prerequisites:
 - Python 3.12.10
 - Poetry
 - Node.js 16+
 
-
-## Step 1.
-Install all the Python dependencies for the project by running the command:
-```
-Poetry install
-```
-
+<br>
 <br>
 
-## Step 2.
-Create a new file called `.env` in the folder where this README.MD is created. 
-
-For what parameters to put in this new `.env` file, follow the format specified at [template.env](template.env)
+## Setting Up Dependencies:
+1. From the project root folder run the commands:
+    ```
+    poetry lock
+    poetry install
+    poetry run playwright install
+    ```
+2. From `frontend/`, run the command:
+    ```
+    npm install
+    ```
+3. Create a new file called `.env` in the folder where this README.MD is created. For what parameters to put in this new `.env` file, follow the format specified at [template.env](template.env)
 
 <br>
 
 > [!NOTE]
 > For the values of the paramters (eg. database credentials), checkout the credentials mentioned in the report for Milestone 1
 
+<br>
+<br>
+
+## Overview
+As we transition into Milestone 1, new tools have been developed and old tools have been depreciated.
+
+The following is a list of current apps/tools:
+- Room booking app (frontend + backend).
+- hello_world: A now depreciated app, previously used for Milestone 0.
+- DataImporter: A powerful tool for database setup and administration (i.e., table creation, data importation, etc.).
+- DataPopulator: A tool for generating datasets, either artificially or by scraping real-world data. 
+
+<br>
 <br>
 
 ## Room Booking App
@@ -62,6 +78,13 @@ See the links below on instructions for how to run each part:
 - [Client Frontend](frontend/README.md)
 - [Backend Server](backend/README.md)
 
+Currently supported features include:
+
+- The ability to filter available rooms based on room name, min. and max. capacity, and time-slot.
+- The ability to book a room.
+- The ability to cancel an existing booking.
+
+<br>
 <br>
 
 ## Hello World App
@@ -71,7 +94,7 @@ For more info, you can visit [hello_world](hello_world/README.md)
 <br>
 <br>
 
-## How to Create Raw Datasets
+## DataImporter: How to Create Raw Datasets
 
 Our datasets are synthetically generated.
 
@@ -99,27 +122,26 @@ Create the corresponding .csv files based on the tables within the databases
 <br>
 <br>
 
-## How to Load Datasets to the Database
+## DataImporter: How to Load Datasets to the Database
 
 Follow the instructions at [Tools/DataImporter](Tools/DataImporter/README.md)
 
 <br>
 <br>
 
-## How to Load Sample Datasets
+## DataPopulator: How to Load Sample Datasets
 
-### Step 1.
-Ensure that `playwright` is properly installed by running the command:
-```
-poetry run playright install
-```
-
-<br>
-
-### Step 2.
 To populate the `toy` database with sample data. Run the command:
 ```
 poetry run db_pop
 ```
 
 <br>
+<br>
+
+## Quick Start Guide
+
+1. Run `DataImporter` to create tables and constraints.
+2. Run `DataPopulator` to add sample data.
+3. Run the contents of `backend/`.
+4. Run the contents of `frontend/`.
