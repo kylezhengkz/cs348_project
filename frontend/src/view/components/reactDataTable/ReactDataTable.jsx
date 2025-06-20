@@ -5,7 +5,7 @@ import DataTable from 'datatables.net-bs5';
 import { useRef, useEffect } from 'react';
 
 
-export function ReactDataTable({data, columns, tableContainerProps, tableProps}) {
+export function ReactDataTable({data, columns, tableContainerProps, tableProps, dataTableKwargs}) {
     const ref = useRef();
 
     if (tableContainerProps === undefined) {
@@ -24,7 +24,8 @@ export function ReactDataTable({data, columns, tableContainerProps, tableProps})
             destroy: true,
             scrollCollapse: true,
             scrollX: true,
-            scrollY: '300px'
+            scrollY: '300px',
+            ...dataTableKwargs
         });
 
         return () => {
