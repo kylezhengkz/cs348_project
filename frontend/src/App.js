@@ -7,6 +7,9 @@ import { Helmet } from 'react-helmet';
 
 import { Footer } from './view/components/footer/Footer';
 import { Header } from './view/components/header/Header';
+import { Splash } from './view/pages/splash/Splash';
+import { Login } from './view/pages/login/Login';
+import { Signup } from './view/pages/signup/Signup';
 import { Home } from './view/pages/home';
 import { ViewBooking } from './view/pages/viewBooking/ViewBooking';
 import { CreateBooking } from './view/pages/createBooking/CreateBooking';
@@ -30,7 +33,10 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Splash />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="login" element={<Login />} />
+          <Route path="home" element={<Home />} />
           <Route path="viewBooking" element={<ViewBooking />} />
           <Route path="bookRoom" element={<CreateBooking />} />
           <Route path="cancelBooking" element={<CancelBooking />} />

@@ -1,0 +1,12 @@
+@media (min-width: 576px) {
+  .container-sm {
+    padding-left: 20vw !important;
+    padding-right: 20vw !important;
+    outline: 3px solid rgb(176, 126, 126) !important;
+    background-color: rgb(7, 7, 7);
+  }
+}
+
+.btn-primary:hover {
+  background-color: #39313981 !important;
+}
