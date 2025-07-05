@@ -35,8 +35,8 @@ export function Splash() {
                 </Box>    
 
                 <Box justifyContent="center" display="flex" className="mt-3" gap={"20px"}>
-                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "signup"}}>Sign up</FeatureButtonLink>
-                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "login"}}>login</FeatureButtonLink>
+                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/signup"}}>Sign up</FeatureButtonLink>
+                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/login"}}>login</FeatureButtonLink>
                 </Box> 
             </Box>
         </Container>

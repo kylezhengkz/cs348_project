@@ -35,9 +35,9 @@ export function Home() {
                 </Box>    
 
                 <Box justifyContent="center" display="flex" className="mt-3" gap={"20px"}>
-                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "viewBooking"}}>View Available Rooms</FeatureButtonLink>
-                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "bookRoom"}}>Book a Room</FeatureButtonLink>
-                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "cancelBooking"}}>Cancel a Booking</FeatureButtonLink>
+                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/viewBooking"}}>View Available Rooms</FeatureButtonLink>
+                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/bookRoom"}}>Book a Room</FeatureButtonLink>
+                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/cancelBooking"}}>Cancel a Booking</FeatureButtonLink>
                 </Box> 
             </Box>
         </Container>
