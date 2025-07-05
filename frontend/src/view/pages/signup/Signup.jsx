@@ -18,6 +18,7 @@ export function Signup() {
     console.log(data.username, data.password, data.passwordConfirm)
     if (data.password === data.passwordConfirm) {
       navigate("/home")
+      return
     }
     setError("passwordConfirm", {
       type: "not match",
