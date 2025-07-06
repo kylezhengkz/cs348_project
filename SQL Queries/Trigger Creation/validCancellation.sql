@@ -9,7 +9,7 @@ BEGIN
     WHERE "bookingID" = NEW."bookingID";
 
     IF (NEW."cancelDateTime" < bookingCommitDateTime) THEN
-        RAISE EXCEPTION 'The datetime for the cancellation (%) cannot be earlier than the datetime for the booking (%)', NEW."cancelDateTime", bookingCommitDateTime;
+        RAISE EXCEPTION 'CancelEarlierThanBookingError: The datetime for the cancellation (%) cannot be earlier than the datetime for the booking (%)', NEW."cancelDateTime", bookingCommitDateTime;
     END IF;
 
     RETURN NEW;

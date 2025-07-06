@@ -1,5 +1,6 @@
 import psycopg2
 import psycopg2.sql
+from psycopg2.extras import execute_values
 from psycopg2.pool import AbstractConnectionPool, SimpleConnectionPool
 from psycopg2.extensions import connection
 import sqlalchemy
@@ -21,9 +22,11 @@ class DBTool():
         self._secrets = secrets
         self._database = database
         self._sqlEngine: Optional[sqlalchemy.engine.Engine] = None
-        self.useConnPool = useConnPool
-        self.connPools = {DBNames.Default.value: self.createConnPool(defaultDB = True),
-                          self.database: self.createConnPool()}
+        self._useConnPool = useConnPool
+        self.connPools = {DBNames.Default.value: self.createConnPool(defaultDB = True)}
+
+        if (useConnPool):
+            self.connPools[self.database] = self.createConnPool()
 
     @property
     def database(self) -> str:
@@ -37,6 +40,19 @@ class DBTool():
 
         self._database = otherDatabase
         self.connPools[otherDatabase] = self.createConnPool()
+
+    @property
+    def useConnPool(self) -> bool:
+        return self._useConnPools
+    
+    @useConnPool.setter
+    def useConnPool(self, otherUseConnPool: bool):
+        if (self._useConnPool and not otherUseConnPool):
+            self.connPools.pop(self.database, None)
+        elif (not self._useConnPool and otherUseConnPool):
+            self.connPools[self.database] = self.createConnPool()
+
+        self._useConnPool = otherUseConnPool
 
     # connectDB(defaultDB): Creates a connection to a database
     def connectDB(self, defaultDB: bool = False) -> connection:
@@ -68,7 +84,7 @@ class DBTool():
     def getConn(self, defaultDB: bool = False) -> DBConnData:
         database = DBNames.Default.value if (defaultDB) else self.database
 
-        if (self.useConnPool):
+        if (self._useConnPool):
             connPool = self.connPools[database]
             return DBConnData(conn = connPool.getconn(), pool = connPool)
 
@@ -157,7 +173,6 @@ class DBTool():
 
         colPrefix = "col"
         returnPrefix = "ret"
-        insertParams = ", ".join(["%s"] * len(data.columns))
         columnParams = ",".join(map(lambda col: "{" + f"{colPrefix}{col}" + "}", data.columns))
         returnParams = ",".join(map(lambda col: "{" + f"{returnPrefix}{col}" + "}", returnCols))
         
@@ -167,23 +182,33 @@ class DBTool():
 
         for col in returnCols:
             identifiers[f"{returnPrefix}{col}"] = psycopg2.sql.Identifier(col)
+        
+        values = [tuple(x) for x in data.to_numpy()]
 
-        sql = psycopg2.sql.SQL(f"INSERT INTO {{table}} ({columnParams}) VALUES ({insertParams}) RETURNING {returnParams}").format(**identifiers)
+        sql = psycopg2.sql.SQL(f"INSERT INTO {{table}} ({columnParams}) VALUES %s RETURNING {returnParams}").format(**identifiers)
+
         returnVals = []
-        err = None
         connData = self.getConn()
+        conn = connData.getConn()
 
-        # insert each tuple individually to get the return values in the proper order
-        for row in data.itertuples(index = False):
-            _, cursor, err = self.executeSQL(sql, vars = tuple(row), commit = True, closeConn = False, connData = connData, raiseException = False)
-            if (err is not None):
-                break
-            
-            currentReturnVal = cursor.fetchone()
-            returnVals.append(currentReturnVal)
+        if (conn.closed != 0 and connData.pool is None):
+            conn = self.connectDB()
+            connData.conn = conn
 
-        connData.putConn()
-        if (err):
-            raise err
+        cursor = conn.cursor()
 
-        return pd.DataFrame(returnVals, columns = returnCols)
+        # https://stackoverflow.com/questions/5439293/is-insert-returning-guaranteed-to-return-things-in-the-right-order
+        #
+        # I cross my fingers that what this dude says is true
+        #   and return values are generally in the order tuples are inserted
+        try:
+            returnVals = execute_values(cursor, sql, values, fetch = True)
+            conn.commit()
+        except Exception as e:
+            conn.rollback()
+            raise e
+        finally:
+            connData.putConn()
+
+        result = pd.DataFrame(returnVals, columns = returnCols)
+        return result

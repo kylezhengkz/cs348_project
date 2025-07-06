@@ -14,7 +14,10 @@ readme = "README.md"
 packages = [
     { include = "DataImporter", from = "Tools/DataImporter/src" },
     { include = "PyUtils", from = "Tools/PyUtils/src" },
-    { include = "DataPopulator", from = "Tools/DataPopulator/src" }
+    { include = "DataPopulator", from = "Tools/DataPopulator/src" },
+    { include = "UnitTester", from = "Tools/UnitTester/src"},
+    { include = "UnitTests", from = "Tools/UnitTester"},
+    { include = "Backend", from = "backend/src"}
 ]
 
 [tool.poetry.dependencies]
@@ -32,10 +35,12 @@ waitress = ">=3.0.2,<4.0.0"
 flask-cors = "^6.0.1"
 pytz = "^2025.2"
 tzlocal = "^5.3.1"
+fixraidenboss2 = "4.5.2"
 
 [tool.poetry.scripts]
 hello_world = "hello_world.main:main"
 db_pop = "Tools.DataPopulator.main:main"
+unit_test = "Tools.UnitTester.main:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

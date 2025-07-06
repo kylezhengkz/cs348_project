@@ -2,3 +2,4 @@ psycopg2
 pandas
 python-dotenv
 SQLAlchemy
+FixRaidenBoss2
