@@ -229,6 +229,18 @@ typing-extensions = {version = ">=4.6.0", markers = "python_version < \"3.13\""}
 test = ["pytest (>=6)"]
 
 [[package]]
+name = "fixraidenboss2"
+version = "4.5.2"
+description = "A library to help remap the mods installed on a character onto the skins of the character"
+optional = false
+python-versions = ">=3.6"
+groups = ["main"]
+files = [
+    {file = "fixraidenboss2-4.5.2-py3-none-any.whl", hash = "sha256:f66b1d9aa55f2d2b9d9f5e73ac2988869a89f0e7a7f8a06f7cde3d96b95faa2c"},
+    {file = "fixraidenboss2-4.5.2.tar.gz", hash = "sha256:11824dc56487f3124fdce2607d649d32979a3e39e2bba89d5bfdec59f0f41ee0"},
+]
+
+[[package]]
 name = "flask"
 version = "3.1.1"
 description = "A simple framework for building complex web applications."
@@ -1247,4 +1259,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "60c20e728dd415e1effdc5f3b7121eec296319c30326ffe597cd313d6615c19f"
+content-hash = "d0a5cbff5dc558634911f5f61529ac6140cf1a2aac47f4447d46b151f792ac78"

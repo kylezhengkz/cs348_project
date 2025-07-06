@@ -13,6 +13,8 @@ venv
 .DS_Store
 /node_modules
 */DataPopulator/data
+UnitTestResults.txt
+UnitTestOutputs.txt
 
 !template.env
 !modeSecretsTemplate.env

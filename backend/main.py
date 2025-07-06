@@ -1,5 +1,5 @@
 from waitress import serve
-from src import App, CommandBuilder
+from src.Backend import App, CommandBuilder
 
 
 command = CommandBuilder()

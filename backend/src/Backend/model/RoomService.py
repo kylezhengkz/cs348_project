@@ -2,7 +2,7 @@ import os
 from datetime import datetime, timezone
 import pandas as pd
 import pytz
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 
 import PyUtils as PU
 
@@ -13,7 +13,7 @@ class RoomService(BaseAPIService):
     
     # fetchAvailableRooms(roomName, minCapacity, maxCapacity, startTimeStr, endTimeStr): Retrieves all the available rooms
     def fetchAvailableRooms(self, roomName: Optional[str] = None, minCapacity:Optional[str] = None, maxCapacity: Optional[str] = None, 
-                            startTimeStr: Optional[str] = None, endTimeStr: Optional[str] = None) -> Dict[str, Dict[str, Any]]:
+                            startTimeStr: Optional[str] = None, endTimeStr: Optional[str] = None) -> List[Dict[str, Any]]:
         
         useCurrent = True
         current_datetime = datetime.now(timezone.utc)
@@ -40,4 +40,5 @@ class RoomService(BaseAPIService):
 
         sqlEngine = self._dbTool.getSQLEngine()
         result = pd.read_sql(sql, sqlEngine, params = params)
+
         return result.to_dict('records')

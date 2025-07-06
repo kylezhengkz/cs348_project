@@ -20,9 +20,9 @@ class DateTimeTool():
         tzinfo = get_localzone()
         return dateTime.replace(tzinfo = tzinfo)
 
-    # strToDateTime(dateTimeStr, formats): Converts a string to a datetime
+    # strToDateTime(dateTimeStr, formats, tzinfo, localize): Converts a string to a datetime
     @classmethod
-    def strToDateTime(cls, dateTimeStr: str, formats: Optional[List[str]] = None, tzinfo: Optional[str] = None) -> datetime:
+    def strToDateTime(cls, dateTimeStr: str, formats: Optional[List[str]] = None, tzinfo: Optional[str] = None, localize: bool = False) -> datetime:
         if (formats is None):
             formats = cls.StrFormats
 
@@ -33,9 +33,14 @@ class DateTimeTool():
             except ValueError as e:
                 continue
 
-            result = cls.getLocalDateTime(result)
+            if (localize):
+                result = cls.getLocalDateTime(result)
+
             if (tzinfo is None):
                 return result
+            elif (not localize):
+                return result.replace(tzinfo = tzinfo)
+
             return result.astimezone(tz = tzinfo)
 
         raise ValueError(f"The following datetime string ({dateTimeStr}) cannot be converted using any of the following formats: {formats}")

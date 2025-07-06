@@ -1,0 +1,1 @@
+{'roomID': UUID('00000000-0000-0000-0000-000000000006'), 'buildingName': 'MC', 'roomName': 'MC 1085', 'overlappingBookings': 0, 'capacity': 200, 'addressLine1': '200 University Avenue West', 'addressLine2': 'MC', 'city': 'Waterloo', 'province': 'Ontario', 'country': 'Canada', 'postalCode': 'N2L 3G1'}

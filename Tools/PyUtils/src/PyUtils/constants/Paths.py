@@ -24,3 +24,6 @@ class Paths(Enum):
     BackEndFolder = os.path.abspath(os.path.join(ProjectFolder, "Backend"))
     FrontEndFolder = os.path.abspath(os.path.join(ProjectFolder, "Frontend"))
     DataPopulatorFolder = os.path.abspath(os.path.join(ProjectFolder, "Tools", "DataPopulator"))
+
+    UnitTesterFolder = os.path.abspath(os.path.join(ProjectFolder, "Tools", "UnitTester"))
+    UnitTestsFolder = os.path.abspath(os.path.join(UnitTesterFolder, "UnitTests"))

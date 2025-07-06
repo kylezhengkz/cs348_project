@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 import sys
+import uuid
 from typing import Optional, Union, List, Dict
 
 from .constants.Paths import UtilsPath
@@ -30,6 +31,20 @@ class Importer(DBTool):
                     continue
                 else:
                     break
+
+        return data
+    
+    # convertUUID(id): Transforms 'id' to a UUID
+    def convertUUID(self, id: Union[str, int]):
+        try:
+            return uuid.UUID(id)
+        except AttributeError:
+            return uuid.UUID(int = id)
+    
+    # toUUID(data, cols): Converts certain columns in the data to UUID 
+    def toUUID(self, data: pd.DataFrame, cols: List[str]):
+        for col in cols:
+            data[col] = data[col].apply(self.convertUUID)
 
         return data
     
@@ -106,8 +121,9 @@ class Importer(DBTool):
             print(f"Clearing all tables...")
             dbCleaner.clearAll(isSure = isSure)
 
-    # importData(dataFolder, buildLevel, clearLevel): Inserts all the data from a particular dataset
-    def importData(self, dataFolder: str, buildLevel: ImportLevel = ImportLevel.Tuples, cleanLevel: Optional[ImportLevel] = None):
+    # importData(dataFolder, buildLevel, clearLevel, randomIDs): Inserts all the data from a particular dataset
+    def importData(self, dataFolder: str, buildLevel: ImportLevel = ImportLevel.Tuples, cleanLevel: Optional[ImportLevel] = None,
+                   randomIDs: bool = True):
         userFile = os.path.join(dataFolder, "User.csv")
         buildingFile = os.path.join(dataFolder, "Building.csv")
         roomFile = os.path.join(dataFolder, "Room.csv")
@@ -132,6 +148,13 @@ class Importer(DBTool):
 
         bookingData = self.toDateTime(bookingData, [ColNames.BookingStartTime.value, ColNames.BookingEndTime.value, ColNames.BookingTime.value])
 
+        if (not randomIDs):
+            userData = self.toUUID(userData, [ColNames.UserId.value])
+            buildingData = self.toUUID(buildingData, [ColNames.BuildingId.value])
+            roomData = self.toUUID(roomData, [ColNames.BuildingId.value, ColNames.RoomId.value])
+            bookingData = self.toUUID(bookingData, [ColNames.BookingId.value, ColNames.UserId.value, ColNames.RoomId.value])
+            cancellationData = self.toUUID(cancellationData, [ColNames.BookingId.value, ColNames.UserId.value])
+
         dbBuilder = DBBuilder(self)
 
         if (cleanLevel is not None):
@@ -146,17 +169,34 @@ class Importer(DBTool):
             dbBuilder.build()
 
         print(f"Inserting User Data...")
-        bookingData, cancellationData = self.insertAndReplaceIds(userData, TableNames.User.value, [bookingData, cancellationData], ColNames.UserId.value)
+        if (randomIDs):
+            bookingData, cancellationData = self.insertAndReplaceIds(userData, TableNames.User.value, [bookingData, cancellationData], ColNames.UserId.value)
+        else:
+            self.insert(userData, TableNames.User.value)
 
         print(f"Inserting Building Data...")
-        roomData = self.insertAndReplaceIds(buildingData, TableNames.Buiding.value, [roomData], ColNames.BuildingId.value)
+        if (randomIDs):
+            roomData = self.insertAndReplaceIds(buildingData, TableNames.Buiding.value, [roomData], ColNames.BuildingId.value)
+        else:
+            self.insert(buildingData, TableNames.Buiding.value)
 
         print(f"Inserting Room Data...")
-        bookingData = self.insertAndReplaceIds(roomData, TableNames.Room.value, [bookingData], ColNames.RoomId.value)
+        if (randomIDs):
+            bookingData = self.insertAndReplaceIds(roomData, TableNames.Room.value, [bookingData], ColNames.RoomId.value)
+        else:
+            roomData = roomData.drop([ColNames.BuildingIdExists.value], axis = 1)
+            self.insert(roomData, TableNames.Room.value)
 
         print(f"Inserting Booking Data...")
-        cancellationData = self.insertAndReplaceIds(bookingData, TableNames.Booking.value, [cancellationData], ColNames.BookingId.value)
+        if (randomIDs):
+            cancellationData = self.insertAndReplaceIds(bookingData, TableNames.Booking.value, [cancellationData], ColNames.BookingId.value)
+        else:
+            bookingData = bookingData.drop([ColNames.UserIdExists.value, ColNames.RoomIdExists.value], axis=1)
+            self.insert(bookingData, TableNames.Booking.value)
 
         print(f"Inserting Cancellation Data...")
+        if (not randomIDs):
+            cancellationData = cancellationData.drop([ColNames.BookingIdExists.value, ColNames.UserIdExists.value], axis = 1)
+
         self.insert(cancellationData, TableNames.Cancellation.value)
         
