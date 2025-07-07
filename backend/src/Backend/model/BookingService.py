@@ -2,8 +2,9 @@ import uuid
 import os
 import FixRaidenBoss2 as FRB
 # TODO: Ensure the 'fixraidenboss2' module is installed and available, or replace with the correct module.
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Optional, Tuple, Callable
+import pytz
 
 import PyUtils as PU
 
@@ -31,20 +32,24 @@ class BookingService(BaseAPIService):
     
     def _buildBookingErrorSearchDFA(self) -> FRB.BaseAhoCorasickDFA:
         data = {
-            "bookingendwindow": "Booking end time must be earlier than 11:00 PM UTC",
-            "bookingstartwindow": "Booking start time must be later than 7:00 AM UTC",
+            "bookingendwindow": "Booking end time must be earlier than 11:00 PM EST",
+            "bookingstartwindow": "Booking start time must be later than 7:00 AM EST",
             "validbookingcommitdate": "Booking time range must be later than the current time",
             "validbookingrange": "Booking time range is invalid",
             "RoomOverCapacityError": None,
-            "Booking_userID_fkey": "User does not exist",
-            "Booking_roomID_fkey": "Room does not exist"
+            "Booking_userID_fkey": "User does not exist", #dont need anymore
+            "Booking_roomID_fkey": "Room does not exist", #dont need anymore
+            "Booking time overlaps with your own booking": "You already have a booking at a similar time!",
+            "Room is already booked": "Room not available at this time"
         }
 
         return FRB.AhoCorasickBuilder().build(data = data)
 
     def _getBookingErrorMsg(self, errorMsg: str) -> str:
+        errorMsg = errorMsg.lower()
         return self._getErrorMsg("booking", errorMsg, "Booking encountered an unknown error!", self._buildBookingErrorSearchDFA)
 
+    
     # bookRoom(userId, roomId, startTime, endTime, participants): Creates a new booking
     def bookRoom(self, userId: Optional[str], roomId: Optional[str], startTime: datetime, 
                  endTime: datetime, participants: Optional[str]) -> Tuple[bool, str, Optional[str]]:
@@ -64,7 +69,7 @@ class BookingService(BaseAPIService):
         connData, cursor, error = self._dbTool.executeSQL(bookingSQL, 
                                                           vars = {"userID": str(userUUID),
                                                                   "roomID": str(roomUUID),
-                                                                  "bookDateTime": datetime.now(timezone.utc),
+                                                                  "bookDateTime": datetime.now(pytz.timezone("US/Eastern")).replace(tzinfo=None).replace(tzinfo=timezone.utc),
                                                                   "startTime": startTime,
                                                                   "endTime": endTime,
                                                                   "participants": participants}, 
@@ -74,6 +79,8 @@ class BookingService(BaseAPIService):
         if (error is not None):
             errorMsg = self._getBookingErrorMsg(f"{error}")
             return [False, errorMsg, None]
+        
+        
         
         row = cursor.fetchone()
         connData.putConn()
@@ -129,39 +136,32 @@ class BookingService(BaseAPIService):
         
 
     def getFutureBookings(self, user_id: str) -> Tuple[bool, list]:
-        print(f"[DEBUG] getFutureBookings() called with user_id = {user_id}")
     
         try:
             userUUID = uuid.UUID(user_id)
-            print(f"[DEBUG] UUID parsed: {userUUID}")
         except ValueError as e:
-            print(f"[ERROR] Invalid UUID format: {e}")
             return [False, "Invalid UUID format for user ID."]
     
         sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R8/R8ii.sql")
-        print(f"[DEBUG] Looking for SQL at {sqlPath}")
+        
     
         if not os.path.exists(sqlPath):
-            print(f"[ERROR] SQL file not found at {sqlPath}")
             return [False, f"SQL file not found at {sqlPath}"]
     
         try:
             query = PU.DBTool.readSQLFile(sqlPath)
-            print(f"[DEBUG] SQL read successfully")
         except Exception as e:
-            print(f"[ERROR] Failed to read SQL: {e}")
             return [False, f"Error reading SQL file: {e}"]
     
         try:
-            now = datetime.now(timezone.utc)
-            print(f"[DEBUG] Executing SQL with now = {now}")
+            utc_now = datetime.now(timezone.utc)
+            fake_utc_est_now = utc_now - timedelta(hours=4)
+            now = fake_utc_est_now
             connData, cursor, error = self._dbTool.executeSQL(query,
                                                               vars={"user_id": str(userUUID), "now": now},
                                                               commit=False, closeConn=False)
             result = cursor.fetchall()
             connData.putConn()
-            print(f"[DEBUG] Query returned {len(result)} rows")
             return [True, result]
         except Exception as e:
-            print(f"[ERROR] SQL execution failed: {e}")
             return [False, f"SQL execution error: {e}"]

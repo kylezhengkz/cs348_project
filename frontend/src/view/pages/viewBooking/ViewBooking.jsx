@@ -1,5 +1,5 @@
 /* global bootstrap */
-
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
@@ -15,6 +15,9 @@ import { roomService } from '../../../model/RoomService';
 import { bookingService } from '../../../model/BookingService';
 import { ReactDataTable } from '../../components/reactDataTable/ReactDataTable';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 
 
 export function ViewBooking() {
@@ -27,6 +30,13 @@ export function ViewBooking() {
     const startTimeRef = useRef();
     const endTimeRef = useRef();
 
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [alertSeverity, setAlertSeverity] = useState("info");
+    const [alertMessage, setAlertMessage] = useState("");
+
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
 
     function getRooms(setData, roomName, minCapacity, maxCapacity, startTime, endTime) {
         roomService.getAvailable(roomName, minCapacity, maxCapacity, startTime, endTime).then(rooms => {
@@ -75,17 +85,28 @@ export function ViewBooking() {
             const res = await bookingService.bookRoom(userId, roomId, startTime, endTime, participants);
 
           
-            const [success, message] = res.data || [];
+            const { success, message } = res.data || {};
 
             if (success) {
-                alert("Booking successful!");
+              setAlertSeverity("success");
+              setAlertMessage("Booking successful!");
             } else {
-                alert("Booking failed: " + (message || "Unknown error"));
+              setAlertSeverity("error");
+              setAlertMessage("Booking failed: " + (message || "Unknown error"));
             }
-        } catch (error) {
+            setAlertOpen(true);
+            } catch (error) {
             console.error("Booking request failed:", error);
-            alert("Booking failed due to a server error.");
-        }
+
+                if (error.response && error.response.data && error.response.data.message) {
+                    setAlertMessage("Booking failed: " + error.response.data.message);
+                } else {
+                    setAlertMessage("Booking failed due to a server error.");
+                }
+
+             setAlertSeverity("error");
+            setAlertOpen(true);
+            }
 
         // Close the modal
         const modal = bootstrap.Modal.getInstance(document.getElementById('bookModal'));
@@ -264,6 +285,15 @@ export function ViewBooking() {
                     </div>
                 </div>
             </div>
+            <Snackbar open={alertOpen} autoHideDuration={5000} onClose={() => setAlertOpen(false)}>
+  <Alert
+    onClose={() => setAlertOpen(false)}
+    severity={alertSeverity}
+    sx={{ width: '100%', backgroundColor: '#9b5aa7', color: 'white' }}
+  >
+    {alertMessage}
+  </Alert>
+</Snackbar>
         </Container>
     );
 }
