@@ -1,3 +1,5 @@
+/* global bootstrap */
+
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
@@ -10,10 +12,13 @@ import Button from '@mui/material/Button';
 import { useEffect, useState, useRef } from 'react';
 
 import { roomService } from '../../../model/RoomService';
+import { bookingService } from '../../../model/BookingService';
 import { ReactDataTable } from '../../components/reactDataTable/ReactDataTable';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 export function ViewBooking() {
+    const selectedRoomId = useRef();
     const [data, setData] = useState([]);
 
     const roomRef = useRef();
@@ -46,21 +51,113 @@ export function ViewBooking() {
         getRooms(setData, roomName, minCapacity, maxCapacity, startTime, endTime);
     }
 
+    function handleBookButtonClick(roomId) {
+        
+        selectedRoomId.current = roomId;
+        console.log("clicked", roomId);
+        const modal = new bootstrap.Modal(document.getElementById('bookModal'));
+        modal.show();
+    }
+
+    async function submitBooking() {
+        const userId = "6a51e4df-f4d8-4398-b603-5fd42c7738d0"; // TODO: get from session
+        const roomId = selectedRoomId.current;
+        const startTime = startTimeRef.current.value;
+        const endTime = endTimeRef.current.value;
+        const participants = minCapactiyRef.current.value;
+
+        if (!startTime || !endTime) {
+            alert("Please provide both start and end time.");
+            return;
+        }
+
+        try {
+            const res = await bookingService.bookRoom(userId, roomId, startTime, endTime, participants);
+
+          
+            const [success, message] = res.data || [];
+
+            if (success) {
+                alert("Booking successful!");
+            } else {
+                alert("Booking failed: " + (message || "Unknown error"));
+            }
+        } catch (error) {
+            console.error("Booking request failed:", error);
+            alert("Booking failed due to a server error.");
+        }
+
+        // Close the modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('bookModal'));
+        modal.hide();
+
+        document.body.classList.remove('modal-open');
+        const backdrops = document.querySelectorAll('.modal-backdrop');
+        backdrops.forEach(b => b.remove());
+    }
+
 
     const columns = [
-        {title: "Room Id", data: "roomID", width: "400px"},
+        // {title: "Room Id", data: "roomID", width: "400px"},
         {title: "Building", data: "buildingName", width: "200px"},
         {title: "Room", data: "roomName", width: "200px"},
-        {title: "Address Line 1", data: "addressLine1", width: "200px"},
-        {title: "Address Line 2", data: "addressLine2", width: "200px"},
-        {title: "City", data: "city", width: "150px"},
-        {title: "Country", data: "country", width: "150px"},
-        {title: "Postal Code", data: "postalCode", width: "100px"}
+        {title: "Address", data: null,
+                    render: function (data, type, row) {
+                        return `${row.addressLine1 || ""} ${row.addressLine2 || ""}`.trim();
+                }, width: "200px"},
+        {title: "City", data: "city", width: "140px"},
+        {title: "Country", data: "country", width: "140px"},
+        {title: "Postal Code", data: "postalCode", width: "170px"},
+        {
+        title: "Actions",
+        data: null,
+        width: "150px",
+        render: function (data, type, row) {
+    return `<button 
+        class='book-btn'
+        data-room-id='${row.roomID}' 
+        style="
+            min-width: 150px;
+            padding: 6px 12px;
+            background-color: #9b5aa7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;"
+        onmouseover="this.style.backgroundColor='transparent'; this.style.color='#9b5aa7';"
+        onmouseout="this.style.backgroundColor='#9b5aa7'; this.style.color='white';"
+    >Book</button>`;
+}
+    }
     ];
 
     useEffect(() => {
         getRooms(setData);
     }, []);
+    useEffect(() => {
+    const wrapper = document.querySelector('#DataTables_Table_0_wrapper');
+    console.log("Wrapper found?", wrapper);
+
+    const handleClick = (event) => {
+        const target = event.target.closest('.book-btn');
+        if (target) {
+            const roomId = target.getAttribute('data-room-id');
+            console.log("CLICK DETECTED:", roomId);
+            handleBookButtonClick(roomId);
+        }
+    };
+
+    if (wrapper) {
+        wrapper.addEventListener('click', handleClick);
+    }
+
+    return () => {
+        if (wrapper) {
+            wrapper.removeEventListener('click', handleClick);
+        }
+    };
+}, [data]);
 
     return (
         <Container maxWidth="xl">
@@ -106,7 +203,67 @@ export function ViewBooking() {
                 </AccordionDetails>
             </Accordion>
 
-            <ReactDataTable data={data} columns={columns} tableContainerProps={{className: "mt-5 mb-5"}} dataTableKwargs={{autoWidth: false}}></ReactDataTable>
+          
+            <Box display="flex" justifyContent="center">
+                <Box className="mt-5 mb-5" sx={{ width: '100%' }}>
+                    <ReactDataTable
+                        data={data}
+                        columns={columns}
+                        tableContainerProps={{ style: { width: '100%' } }}
+                        dataTableKwargs={{
+                            autoWidth: false,
+                            scrollX: true, 
+                            drawCallback: function () {
+                                const buttons = document.querySelectorAll('.book-btn');
+                                buttons.forEach(button => {
+                                    button.onclick = (e) => {
+                                        const roomId = button.getAttribute('data-room-id');
+                                        handleBookButtonClick(roomId);
+                                    };
+                                });
+                            }
+                        }}
+                    />
+                </Box>
+            </Box>
+
+            <div className="modal fade" id="bookModal" tabIndex="-1" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Book Room</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <TextField
+                                fullWidth
+                                label="Start Time"
+                                type="datetime-local"
+                                inputRef={startTimeRef}
+                            />
+                            <TextField
+                                fullWidth
+                                className="mt-3"
+                                label="End Time"
+                                type="datetime-local"
+                                inputRef={endTimeRef}
+                            />
+                            <TextField
+                                fullWidth
+                                className="mt-3"
+                                label="Participants"
+                                inputRef={minCapactiyRef}
+                                type="number"
+                            />
+                        </div>
+                        <div className="modal-footer">
+                            <Button variant="contained" onClick={submitBooking}>
+                                Confirm Booking
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </Container>
     );
 }

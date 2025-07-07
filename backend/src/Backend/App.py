@@ -96,8 +96,7 @@ class App():
             except ValueError:
                 return [False, "Invalid datetime format for the end datetime"]
 
-            success, msg, bookingId = self._bookingService.bookRoom(userId, roomId, startDateTime, endDateTime, participants)
-            return [success, msg]
+            return self._bookingService.bookRoom(userId, roomId, startDateTime, endDateTime, participants)
         
         @app.route("/cancelBooking", methods=["POST"])
         def cancelBooking():
@@ -109,6 +108,12 @@ class App():
             userId = data.get("user_id")
 
             return self._bookingService.cancelBooking(bookingId, userId)
+        
+        @app.route("/getFutureBookings", methods=["GET"])
+        def getFutureBookings():
+            userId = request.args.get("userId")
+            print(f"[GET] /getFutureBookings - userId: {userId}")
+            return self._bookingService.getFutureBookings(userId)
 
 
         self._app = app
