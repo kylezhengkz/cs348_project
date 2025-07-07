@@ -116,3 +116,10 @@
 .dt-layout-row {
     margin: 20px 0
 }
+
+
+.wide-book-btn {
+  min-width: 100px !important;
+  padding: 8px 16px !important;
+  font-weight: 500;
+}

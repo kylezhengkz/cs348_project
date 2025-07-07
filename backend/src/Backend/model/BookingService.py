@@ -1,6 +1,7 @@
 import uuid
 import os
 import FixRaidenBoss2 as FRB
+# TODO: Ensure the 'fixraidenboss2' module is installed and available, or replace with the correct module.
 from datetime import datetime, timezone
 from typing import Optional, Tuple, Callable
 
@@ -125,3 +126,42 @@ class BookingService(BaseAPIService):
             return [True, "Booking successfully cancelled."]
         else:
             return [False, "Booking already cancelled or not found."]
+        
+
+    def getFutureBookings(self, user_id: str) -> Tuple[bool, list]:
+        print(f"[DEBUG] getFutureBookings() called with user_id = {user_id}")
+    
+        try:
+            userUUID = uuid.UUID(user_id)
+            print(f"[DEBUG] UUID parsed: {userUUID}")
+        except ValueError as e:
+            print(f"[ERROR] Invalid UUID format: {e}")
+            return [False, "Invalid UUID format for user ID."]
+    
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "FutureBookings/FutureBookings.sql")
+        print(f"[DEBUG] Looking for SQL at {sqlPath}")
+    
+        if not os.path.exists(sqlPath):
+            print(f"[ERROR] SQL file not found at {sqlPath}")
+            return [False, f"SQL file not found at {sqlPath}"]
+    
+        try:
+            query = PU.DBTool.readSQLFile(sqlPath)
+            print(f"[DEBUG] SQL read successfully")
+        except Exception as e:
+            print(f"[ERROR] Failed to read SQL: {e}")
+            return [False, f"Error reading SQL file: {e}"]
+    
+        try:
+            now = datetime.now(timezone.utc)
+            print(f"[DEBUG] Executing SQL with now = {now}")
+            connData, cursor, error = self._dbTool.executeSQL(query,
+                                                              vars={"user_id": str(userUUID), "now": now},
+                                                              commit=False, closeConn=False)
+            result = cursor.fetchall()
+            connData.putConn()
+            print(f"[DEBUG] Query returned {len(result)} rows")
+            return [True, result]
+        except Exception as e:
+            print(f"[ERROR] SQL execution failed: {e}")
+            return [False, f"SQL execution error: {e}"]
