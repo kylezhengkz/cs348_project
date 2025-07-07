@@ -32,13 +32,13 @@ class BookingService(BaseAPIService):
     
     def _buildBookingErrorSearchDFA(self) -> FRB.BaseAhoCorasickDFA:
         data = {
-            "bookingendwindow": "Booking end time must be earlier than 11:00 PM EST",
-            "bookingstartwindow": "Booking start time must be later than 7:00 AM EST",
+            "bookingendwindow": "Booking end time must be earlier than 11:00 PM UTC",
+            "bookingstartwindow": "Booking start time must be later than 7:00 AM UTC",
             "validbookingcommitdate": "Booking time range must be later than the current time",
             "validbookingrange": "Booking time range is invalid",
             "RoomOverCapacityError": None,
-            "Booking_userID_fkey": "User does not exist", #dont need anymore
-            "Booking_roomID_fkey": "Room does not exist", #dont need anymore
+            "Booking_userID_fkey": "User does not exist",
+            "Booking_roomID_fkey": "Room does not exist",
             "Booking time overlaps with your own booking": "You already have a booking at a similar time!",
             "Room is already booked": "Room not available at this time"
         }
@@ -46,7 +46,6 @@ class BookingService(BaseAPIService):
         return FRB.AhoCorasickBuilder().build(data = data)
 
     def _getBookingErrorMsg(self, errorMsg: str) -> str:
-        errorMsg = errorMsg.lower()
         return self._getErrorMsg("booking", errorMsg, "Booking encountered an unknown error!", self._buildBookingErrorSearchDFA)
 
     
@@ -79,8 +78,6 @@ class BookingService(BaseAPIService):
         if (error is not None):
             errorMsg = self._getBookingErrorMsg(f"{error}")
             return [False, errorMsg, None]
-        
-        
         
         row = cursor.fetchone()
         connData.putConn()
