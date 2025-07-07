@@ -65,6 +65,10 @@ except for the `--env` option and `command` argument
 | -b, --buffer | Buffer stdout and stderr during tests |
 | -k TESTNAMEPATTERNS | Only run tests which match the given substring |
 | -e ENV, --env ENV | The environment mode to run the tester. <br> <br> The available environment modes are: <br> - toy <br> - dev <br> -prod |
+| -u USERNAME, --username USERNAME | Override the username to the database |
+| -p PASSWORD, --password PASSWORD | Override the password to the database |
+| -ho HOST, --host HOST | Override the host to the database |
+| -po PORT, --port PORT | Override the port to the database |
 
 <br>
 

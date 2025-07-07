@@ -6,3 +6,4 @@ class ConfigKeys(PU.StrEnum):
     DbTool = "dbTool"
     DbCleaner = "dbCleaner"
     EnvironmentMode = "environmentMode"
+    UserDBSecrets = "userDBSecrets"

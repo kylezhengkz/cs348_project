@@ -1,3 +1,5 @@
+import PyUtils as PU
+
 from .constants.Commands import Commands
 from .constants.ConfigKeys import ConfigKeys
 from .constants.EnvironmentModes import EnvironmentModes
@@ -8,4 +10,5 @@ from .constants.EnvironmentModes import EnvironmentModes
 Config = {ConfigKeys.Command: Commands.RunSuite,
           ConfigKeys.DbTool: None,
           ConfigKeys.DbCleaner: None,
-          ConfigKeys.EnvironmentMode: EnvironmentModes.Dev}
+          ConfigKeys.EnvironmentMode: EnvironmentModes.Dev,
+          ConfigKeys.UserDBSecrets: PU.DBSecrets()}
