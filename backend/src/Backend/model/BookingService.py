@@ -1,7 +1,6 @@
 import uuid
 import os
 import FixRaidenBoss2 as FRB
-# TODO: Ensure the 'fixraidenboss2' module is installed and available, or replace with the correct module.
 from datetime import datetime, timezone, timedelta
 from typing import Optional, Tuple, Callable
 import pytz
