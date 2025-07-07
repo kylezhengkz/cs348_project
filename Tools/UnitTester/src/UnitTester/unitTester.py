@@ -1,5 +1,6 @@
 import unittest
 import sys
+import os
 import signal
 import traceback
 import psycopg2
@@ -25,10 +26,11 @@ class UnitTester():
     }
 
     def __init__(self):
-        self._secrets = PU.DBSecrets.load()
+        envPath = os.path.join(PU.Paths.ProjectFolder.value, ".env")
+        self._secrets = PU.DBSecrets.load() if (os.path.isfile(envPath)) else PU.DBSecrets()
         self._dbname = PU.DBNames.Default.value
 
-        self.DbTool = PU.DBTool(self._secrets, database = self._dbname, useConnPool = True)
+        self.DbTool = PU.DBTool(self._secrets, database = self._dbname, useConnPool = False)
         self._dbBuilder = PU.DBBuilder(self.DbTool)
         self._dbCleaner = PU.DBCleaner(self.DbTool)
 
@@ -52,15 +54,34 @@ class UnitTester():
         test = self._testLoader.loadTestsFromTestCase(testCls)
         self._testSuite.addTest(test)
 
+    def _updateDBSecrets(self):
+        newSecrets = Config[ConfigKeys.UserDBSecrets]
+
+        if (newSecrets.username != ""):
+            self._secrets.username = newSecrets.username
+
+        if (newSecrets.password != ""):
+            self._secrets.password = newSecrets.password
+
+        if (newSecrets.host != ""):
+            self._secrets.host = newSecrets.host
+
+        if (newSecrets.port != ""):
+            self._secrets.port = newSecrets.port
+
     def _run(self):
         with open(TestFileTools.UnitTestResultsFile, "w", encoding = PU.FileEncodings.UTF8.value) as f:
             runner = unittest.TextTestRunner(f)
             unitTester = UnitTestProgram(testRunner=runner, exit = False)
             unitTester.testCommandBuilder.parse()
 
+            self._updateDBSecrets()
+            self.DbTool._secrets = self._secrets
+
             environmentMode = Config[ConfigKeys.EnvironmentMode]
             self._dbname = self.DBNames[environmentMode]
             self.DbTool.database = self._dbname
+            self.DbTool.useConnPool = True
 
             unitTester.run(self._testSuite)
 

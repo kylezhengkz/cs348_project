@@ -23,10 +23,11 @@ class DBTool():
         self._database = database
         self._sqlEngine: Optional[sqlalchemy.engine.Engine] = None
         self._useConnPool = useConnPool
-        self.connPools = {DBNames.Default.value: self.createConnPool(defaultDB = True)}
+        self.connPools = {}
 
         if (useConnPool):
-            self.connPools[self.database] = self.createConnPool()
+            self.connPools = {DBNames.Default.value: self.createConnPool(defaultDB = True),
+                              self.database: self.createConnPool()}
 
     @property
     def database(self) -> str:
@@ -48,9 +49,10 @@ class DBTool():
     @useConnPool.setter
     def useConnPool(self, otherUseConnPool: bool):
         if (self._useConnPool and not otherUseConnPool):
-            self.connPools.pop(self.database, None)
+            self.connPools = {}
         elif (not self._useConnPool and otherUseConnPool):
-            self.connPools[self.database] = self.createConnPool()
+            self.connPools = {DBNames.Default.value: self.createConnPool(defaultDB = True),
+                              self.database: self.createConnPool()}
 
         self._useConnPool = otherUseConnPool
 

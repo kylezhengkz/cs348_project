@@ -31,8 +31,12 @@ class CommandBuilder(PU.BaseCommandBuilder, Generic[GenericTypes.ConfigKey.value
         allEnvironments = set(map(lambda command: f"  - {command}", EnvironmentModes.getAll()))
         allEnvironments = "\n".join(allEnvironments)
 
-
         self._argParser.add_argument(ShortCommandOpts.EnvironmentMode.value, CommandOpts.EnvironmentMode.value, action='store', type=str, help=f"The environment mode to run the tester.\n\nThe available environment modes are:\n{allEnvironments}")
+        self._argParser.add_argument(ShortCommandOpts.DBUserName.value, CommandOpts.DBUserName.value, action='store', type=str, help=f"Override the username to the database")
+        self._argParser.add_argument(ShortCommandOpts.DBPassword.value, CommandOpts.DBPassword.value, action='store', type=str, help=f"Override the password to the database")
+        self._argParser.add_argument(ShortCommandOpts.DBHost.value, CommandOpts.DBHost.value, action='store', type=str, help=f"Override the host to the database")
+        self._argParser.add_argument(ShortCommandOpts.DBPort.value, CommandOpts.DBPort.value, action='store', type=str, help=f"Override the port to the database")
+        
         self._argParser.add_argument("command", type=str, help=f"The command to run the unit tester.\n\nThe available commands are:\n{allCommands}")
         super()._addArguments()
 
@@ -56,8 +60,33 @@ class CommandBuilder(PU.BaseCommandBuilder, Generic[GenericTypes.ConfigKey.value
         else:
             self._configs[ConfigKeys.EnvironmentMode] = environmentMode
 
+    def _parseDBSecrets(self):
+        username = self._args.username
+        password = self._args.password
+        host = self._args.host
+        port = self._args.port
+
+        if (username is None):
+            username = ""
+
+        if (password is None):
+            password = ""
+
+        if (host is None):
+            host = ""
+
+        if (port is None):
+            port = ""
+
+        secrets = self._configs[ConfigKeys.UserDBSecrets]
+        secrets.username = username
+        secrets.password = password
+        secrets.host = host
+        secrets.port = port
+
     def parseArgs(self) -> argparse.Namespace:
         super().parseArgs()
         self._parseCommand()
         self._parseEnvironment()
+        self._parseDBSecrets()
         return self._args
