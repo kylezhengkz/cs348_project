@@ -1,6 +1,7 @@
 # Unit Tester
 
 [![Static Badge](https://img.shields.io/badge/Python-254F72?style=for-the-badge)](https://www.python.org/downloads/)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Alex-Au1/CampusBookingWebApp/unit-tests.yml?style=for-the-badge&label=Unit%20Tests)](https://github.com/Alex-Au1/CampusBookingWebApp/actions/workflows/unit-tests.yml)
 
 A unit tester to test the backend SQL queries of the app
 
