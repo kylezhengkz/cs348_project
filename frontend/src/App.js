@@ -15,6 +15,8 @@ import { ViewBooking } from './view/pages/viewBooking/ViewBooking';
 import { CreateBooking } from './view/pages/createBooking/CreateBooking';
 import { CancelBooking } from './view/pages/cancelBooking/CancelBooking';
 
+import { AuthProvider } from './wrappers/AuthContext'
+import { ProtectedRoutes } from './wrappers/ProtectedRoutes'
 
 function App() {
   return (
@@ -30,19 +32,20 @@ function App() {
                 integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
         </Helmet>
 
-        <Header />
+        <AuthProvider>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Splash />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<Login />} />
+            <Route path="home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+            <Route path="viewBooking" element={<ProtectedRoutes><ViewBooking /></ProtectedRoutes>} />
+            <Route path="bookRoom" element={<ProtectedRoutes><CreateBooking /></ProtectedRoutes>} />
+            <Route path="cancelBooking" element={<ProtectedRoutes><CancelBooking /></ProtectedRoutes>} />
+          </Routes>
+          <Footer />
+        </AuthProvider>
 
-        <Routes>
-          <Route path="/" element={<Splash />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="login" element={<Login />} />
-          <Route path="home" element={<Home />} />
-          <Route path="viewBooking" element={<ViewBooking />} />
-          <Route path="bookRoom" element={<CreateBooking />} />
-          <Route path="cancelBooking" element={<CancelBooking />} />
-        </Routes>
-
-        <Footer />
       </ThemeProvider>
     </BrowserRouter>
   );

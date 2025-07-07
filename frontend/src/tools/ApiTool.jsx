@@ -48,5 +48,4 @@ export class APITool {
     }
 }
 
-
 export const apiTool = new APITool(process.env.REACT_APP_API_URL);

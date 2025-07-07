@@ -11,7 +11,7 @@ from .constants.EnvironmentModes import EnvironmentModes
 from .Config import Config
 from .model.RoomService import RoomService
 from .model.BookingService import BookingService
-
+from .model.UserService import UserService
 
 class App():
     def __init__(self, env: EnvironmentModes):
@@ -23,6 +23,7 @@ class App():
         self._dbTool = PU.DBTool(self._config.dbSecrets, database = self._config.database, useConnPool = True)
         self._roomService = RoomService(self._dbTool)
         self._bookingService = BookingService(self._dbTool)
+        self._userService = UserService(self._dbTool)
 
 
     # Reference: See the __call__ operator in app.py of Flask's source code
@@ -50,7 +51,7 @@ class App():
         self.registerShutdown()
 
         app = Flask(__name__)
-        cors = CORS(app)
+        cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
         app.config['CORS_HEADERS'] = 'Content-Type'
 
         @app.route('/')
@@ -110,6 +111,15 @@ class App():
 
             return self._bookingService.cancelBooking(bookingId, userId)
 
+        @app.route("/signup", methods=["POST"])
+        def signup():
+          data = request.get_json()
+          print("––––––––––––")
+          print("RECEIVED IN SIGNUP")
+          print(data)
+          print("––––––––––––")
+                    
+          return self._userService.signup(data["username"], data["email"], data["password"])
 
         self._app = app
         return app
