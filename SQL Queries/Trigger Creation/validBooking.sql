@@ -14,7 +14,7 @@ BEGIN
     WHERE "roomID" = NEW."roomID";
 
     IF (NEW."participants" > roomCapacity) THEN
-        RAISE EXCEPTION 'The number of participants in the booking (%) is not smaller or equal to the capacity of the room (%)', NEW."participants", roomCapacity;
+        RAISE EXCEPTION 'RoomOverCapacityError: The number of participants in the booking (%) is not smaller or equal to the capacity of the room (%)', NEW."participants", roomCapacity;
     END IF;
 
     RETURN NEW;

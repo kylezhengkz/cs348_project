@@ -108,10 +108,15 @@ class UnitTester():
 
     def run(self):
         self.setup()
+        error = None
 
         try:
             self._run()
         except Exception as e:
             print(traceback.format_exc())
+            error = e
         finally:
             self.tearDown()
+
+        if (error is not None):
+            raise error
