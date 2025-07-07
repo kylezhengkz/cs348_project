@@ -102,7 +102,7 @@ class BookingService(BaseAPIService):
         except ValueError:
             return [False, "Invalid UUID format for booking ID or user ID."]
         
-        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R8/R8.sql")
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R8/R8i.sql")
         try:
             cancelSQL = PU.DBTool.readSQLFile(sqlPath)
         except FileNotFoundError:
@@ -138,7 +138,7 @@ class BookingService(BaseAPIService):
             print(f"[ERROR] Invalid UUID format: {e}")
             return [False, "Invalid UUID format for user ID."]
     
-        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "FutureBookings/FutureBookings.sql")
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R8/R8ii.sql")
         print(f"[DEBUG] Looking for SQL at {sqlPath}")
     
         if not os.path.exists(sqlPath):
