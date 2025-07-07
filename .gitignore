@@ -18,3 +18,5 @@ UnitTestOutputs.txt
 
 !template.env
 !modeSecretsTemplate.env
+
+test3.py

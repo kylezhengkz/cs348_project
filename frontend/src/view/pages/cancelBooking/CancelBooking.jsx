@@ -1,3 +1,4 @@
+import React from 'react';
 import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -6,8 +7,12 @@ import { useRef, useState, useEffect } from 'react';
 import { bookingService } from '../../../model/BookingService';
 import { ReactDataTable } from '../../components/reactDataTable/ReactDataTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 const DUMMY_USER_ID = "6a51e4df-f4d8-4398-b603-5fd42c7738d0";
+
+
+
 
 export function CancelBooking() {
     const bookSuccess = useRef(false);
@@ -16,18 +21,30 @@ export function CancelBooking() {
     const [openModal, setOpenModal] = useState(false);
     const [futureBookings, setFutureBookings] = useState([]);
 
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [alertSeverity, setAlertSeverity] = useState("info");
+    const [alertMessage, setAlertMessage] = useState("");
+
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+
     function closeModal() {
         setOpenModal(false);
     }
 
     function handleCancelFromList(bookingId) {
         bookingService.cancelBooking(DUMMY_USER_ID, bookingId).then(res => {
-            const [success, message] = res.data || [false, "Unexpected error"];
-            alert(success ? "Booking cancelled!" : `Cancellation failed: ${message}`);
-
+            const { success, message } = res.data || {};
             if (success) {
+                setAlertSeverity("success");
+                setAlertMessage("Booking cancelled successfully!");
                 setFutureBookings(prev => prev.filter(b => b.bookingID !== bookingId));
+            } else {
+                setAlertSeverity("error");
+                setAlertMessage("Cancellation failed: " + message);
             }
+        setAlertOpen(true);
         });
     }
 
@@ -37,8 +54,8 @@ export function CancelBooking() {
             if (success) {
                 setFutureBookings(data.map(b => ({
                     bookingID: b[0],
-                    startTime: new Date(b[1]).toLocaleString(),
-                    endTime: new Date(b[2]).toLocaleString(),
+                    startTime: new Date(b[1]).toLocaleString("en-US", { timeZone: "UTC" }),
+                    endTime: new Date(b[2]).toLocaleString("en-US", { timeZone: "UTC" }),
                     roomName: b[3],
                     address: b[4],
                     buildingName: b[5],
@@ -154,6 +171,16 @@ export function CancelBooking() {
                     }}
                 />
             </Box>
+
+            <Snackbar open={alertOpen} autoHideDuration={5000} onClose={() => setAlertOpen(false)}>
+  <Alert
+    onClose={() => setAlertOpen(false)}
+    severity={alertSeverity}
+    sx={{ width: '100%', backgroundColor: '#9b5aa7', color: 'white' }}
+  >
+    {alertMessage}
+  </Alert>
+</Snackbar>
         </Container>
     );
 }
