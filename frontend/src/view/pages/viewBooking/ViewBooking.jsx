@@ -18,7 +18,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-
+import { useAuth } from "../../../wrappers/AuthContext"
 
 export function ViewBooking() {
     const selectedRoomId = useRef();
@@ -37,6 +37,8 @@ export function ViewBooking() {
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
+
+    const { authUserId, setAuthUserId } = useAuth();
 
     function getRooms(setData, roomName, minCapacity, maxCapacity, startTime, endTime) {
         roomService.getAvailable(roomName, minCapacity, maxCapacity, startTime, endTime).then(rooms => {
@@ -70,7 +72,7 @@ export function ViewBooking() {
     }
 
     async function submitBooking() {
-        const userId = "6a51e4df-f4d8-4398-b603-5fd42c7738d0"; // TODO: get from session
+        const userId = authUserId;
         const roomId = selectedRoomId.current;
         const startTime = startTimeRef.current.value;
         const endTime = endTimeRef.current.value;
