@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useEffect, useState, useRef } from 'react';
+import { useAuth } from "../../../wrappers/AuthContext";
 
 import { roomService } from '../../../model/RoomService';
 import { bookingService } from '../../../model/BookingService';
@@ -21,6 +22,7 @@ import MuiAlert from '@mui/material/Alert';
 
 
 export function ViewBooking() {
+    const { authUserId } = useAuth();
     const selectedRoomId = useRef();
     const [data, setData] = useState([]);
 
@@ -70,7 +72,6 @@ export function ViewBooking() {
     }
 
     async function submitBooking() {
-        const userId = "6a51e4df-f4d8-4398-b603-5fd42c7738d0"; // TODO: get from session
         const roomId = selectedRoomId.current;
         const startTime = startTimeRef.current.value;
         const endTime = endTimeRef.current.value;
@@ -82,7 +83,7 @@ export function ViewBooking() {
         }
 
         try {
-            const res = await bookingService.bookRoom(userId, roomId, startTime, endTime, participants);
+            const res = await bookingService.bookRoom(authUserId, roomId, startTime, endTime, participants);
 
           
             const { success, message } = res.data || {};
@@ -261,6 +262,7 @@ export function ViewBooking() {
                                 label="Start Time"
                                 type="datetime-local"
                                 inputRef={startTimeRef}
+                                InputLabelProps={{ shrink: true }}
                             />
                             <TextField
                                 fullWidth
@@ -268,6 +270,7 @@ export function ViewBooking() {
                                 label="End Time"
                                 type="datetime-local"
                                 inputRef={endTimeRef}
+                                InputLabelProps={{ shrink: true }}
                             />
                             <TextField
                                 fullWidth
