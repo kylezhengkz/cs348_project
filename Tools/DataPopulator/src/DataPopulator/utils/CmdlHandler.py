@@ -37,25 +37,25 @@ def _dir_path(val):
     return path_val
 
 def _database_env(val):
-    str_val = str(val)
+    str_val = str(val).lower()
     env_val = None
-    match str_val.lower():
-        case 'toy':
-            env_val = PU.DBNames.Toy.value
-        case 'dev':
-            env_val = PU.DBNames.Dev.value
-        case 'prod':
-            env_val = PU.DBNames.Prod.value
-        case 'toyunittest':
-            env_val = PU.DBNames.ToyUnitTest.value
-        case 'devunittest':
-            env_val = PU.DBNames.DevUnitTest.value
-        case 'produnittest':
-            env_val = PU.DBNames.ProdUnitTest.value
-        case 'postgres':
-            env_val = PU.DBNames.Default.value
-        case _:
-            raise argparse.ArgumentTypeError(f'Invalid database environment: {str_val}')
+
+    if str_val == 'toy':
+        env_val = PU.DBNames.Toy.value
+    elif str_val == 'dev':
+        env_val = PU.DBNames.Dev.value
+    elif str_val == 'prod':
+        env_val = PU.DBNames.Prod.value
+    elif str_val == 'toyunittest':
+        env_val = PU.DBNames.ToyUnitTest.value
+    elif str_val == 'devunittest':
+        env_val = PU.DBNames.DevUnitTest.value
+    elif str_val == 'produnittest':
+        env_val = PU.DBNames.ProdUnitTest.value
+    elif str_val == 'postgres':
+        env_val = PU.DBNames.Default.value
+    else:
+        raise argparse.ArgumentTypeError(f'Invalid database environment: {str_val}')
             
     return env_val
 
