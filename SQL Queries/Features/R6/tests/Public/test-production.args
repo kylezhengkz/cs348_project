@@ -1,0 +1,10 @@
+{
+    "args": [],
+    "kwargs": {
+        "roomName": "CAPB3 1",
+        "minCapacity": "100",
+        "maxCapacity": "200",
+        "startTimeStr": "2025-06-23 17:46:05",
+        "endTimeStr": "2025-06-23 20:07:05"
+    }
+}   

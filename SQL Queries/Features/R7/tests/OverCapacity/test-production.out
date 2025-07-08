@@ -1,0 +1,1 @@
+RoomOverCapacityError: The number of participants in the booking (9999) is not smaller or equal to the capacity of the room (200)

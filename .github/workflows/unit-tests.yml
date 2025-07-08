@@ -31,4 +31,4 @@ jobs:
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         DB_HOST: ${{ secrets.DB_HOST }}
         DB_PORT: ${{ secrets.DB_PORT }}
-      run: python3 -m poetry run unit_test -e toy -u "$DB_USERNAME" -p "$DB_PASSWORD" -ho "$DB_HOST" -po "$DB_PORT" runSuite
+      run: python3 -m poetry run unit_test -e prod -u "$DB_USERNAME" -p "$DB_PASSWORD" -ho "$DB_HOST" -po "$DB_PORT" runSuite
