@@ -86,7 +86,7 @@ class BookingService(BaseAPIService):
             bookingId = row[0]
             return [True, f"Booking successful! Booking ID: {bookingId}", bookingId]
         else:
-            return [False, "Booking failed: room does not exist or is already booked.", None]
+            return [False, "Booking failed: room is already booked.", None]
         
     def _buildCancelErrorSearchDFA(self) -> FRB.BaseAhoCorasickDFA:
         data = {

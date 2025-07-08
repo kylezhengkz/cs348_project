@@ -3,18 +3,21 @@ import Typography from '@mui/material/Typography';
 import { Container } from '@mui/material';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { bookingService } from '../../../model/BookingService';
 import { ReactDataTable } from '../../components/reactDataTable/ReactDataTable';
+import { useAuth } from "../../../wrappers/AuthContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-const DUMMY_USER_ID = "6a51e4df-f4d8-4398-b603-5fd42c7738d0";
+
+// const DUMMY_USER_ID = "6a51e4df-f4d8-4398-b603-5fd42c7738d0";
 
 
 
 
 export function CancelBooking() {
+    const { authUserId } = useAuth();
     const bookSuccess = useRef(false);
     const bookResultMsg = useRef("");
 
@@ -33,8 +36,8 @@ export function CancelBooking() {
         setOpenModal(false);
     }
 
-    function handleCancelFromList(bookingId) {
-        bookingService.cancelBooking(DUMMY_USER_ID, bookingId).then(res => {
+    const handleCancelFromList = useCallback((bookingId) => {
+        bookingService.cancelBooking(authUserId, bookingId).then(res => {
             const { success, message } = res.data || {};
             if (success) {
                 setAlertSeverity("success");
@@ -44,12 +47,13 @@ export function CancelBooking() {
                 setAlertSeverity("error");
                 setAlertMessage("Cancellation failed: " + message);
             }
-        setAlertOpen(true);
+            setAlertOpen(true);
         });
-    }
+    }, [authUserId]);
 
     useEffect(() => {
-        bookingService.getFutureBookings(DUMMY_USER_ID).then(res => {
+        if (!authUserId) return;
+        bookingService.getFutureBookings(authUserId).then(res => { //------------
             const [success, data] = res.data || [];
             if (success) {
                 setFutureBookings(data.map(b => ({
@@ -66,7 +70,7 @@ export function CancelBooking() {
                 console.error("Failed to fetch bookings");
             }
         });
-    }, []);
+    }, [authUserId]);
 
     const columns = [
         { title: "Building", data: "buildingName", width: "200px" },
@@ -121,7 +125,7 @@ export function CancelBooking() {
                 wrapper.removeEventListener('click', handleClick);
             }
         };
-    }, [futureBookings]);
+    }, [futureBookings, handleCancelFromList]);
 
     return (
         <Container className="mt-5 mb-5" maxWidth="xl">
