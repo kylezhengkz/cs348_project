@@ -120,6 +120,16 @@ class App():
           print("––––––––––––")
                     
           return self._userService.signup(data["username"], data["email"], data["password"])
+      
+        @app.route("/login", methods=["POST"])
+        def login():
+          data = request.get_json()
+          print("––––––––––––")
+          print("RECEIVED IN LOGIN")
+          print(data)
+          print("––––––––––––")
+                    
+          return self._userService.login(data["username"], data["password"])
 
         self._app = app
         return app

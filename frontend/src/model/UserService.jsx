@@ -10,12 +10,24 @@ export class UserService extends BaseAPIService {
         }
 
         let ext = "/signup";
-        const queryVarsAvailable = APITool.hasQueryVars(Object.values(kwargs));
-
         console.log("EXT: ", ext);
 
         const res = await this.apiTool.post(ext, kwargs);
 
+        return res.data;
+    }
+
+    async login(username, password) {
+        const kwargs = {
+            "username": username,
+            "password": password
+        }
+
+        let ext = "/login";
+        console.log("EXT: ", ext);
+
+        const res = await this.apiTool.post(ext, kwargs);
+        
         return res.data;
     }
 }

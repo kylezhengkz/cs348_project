@@ -6,8 +6,10 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAuth } from "../../../wrappers/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export function Header() {
+    const navigate = useNavigate();
     const { authUserId, setAuthUserId } = useAuth();
     
     return (
@@ -26,7 +28,9 @@ export function Header() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         News
                     </Typography>
-                    <Button color="inherit">{authUserId}</Button>
+                    {authUserId !== null && <Button color="inherit">{authUserId}</Button>}
+                    {authUserId !== null && <Button color="inherit" onClick={() => setAuthUserId(null)}>Logout</Button>}
+                    {authUserId === null && <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>}
                 </Toolbar>
             </AppBar>
         </Box>
