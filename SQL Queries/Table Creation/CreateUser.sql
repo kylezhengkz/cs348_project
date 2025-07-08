@@ -1,7 +1,7 @@
 CREATE TABLE {UserTable} (
     "userID" UUID NOT NULL DEFAULT uuid_generate_v4(),
     "username" TEXT UNIQUE,
-    "email" TEXT,
+    "email" TEXT UNIQUE,
     "password" TEXT,
     "permissionLevel" INT,
 

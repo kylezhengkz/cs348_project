@@ -1,8 +1,9 @@
 import uuid
 import os
 import FixRaidenBoss2 as FRB
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Optional, Tuple, Callable
+import pytz
 
 import PyUtils as PU
 
@@ -36,7 +37,9 @@ class BookingService(BaseAPIService):
             "validbookingrange": "Booking time range is invalid",
             "RoomOverCapacityError": None,
             "Booking_userID_fkey": "User does not exist",
-            "Booking_roomID_fkey": "Room does not exist"
+            "Booking_roomID_fkey": "Room does not exist",
+            "Booking time overlaps with your own booking": "You already have a booking at a similar time!",
+            "Room is already booked": "Room not available at this time"
         }
 
         return FRB.AhoCorasickBuilder().build(data = data)
@@ -44,6 +47,7 @@ class BookingService(BaseAPIService):
     def _getBookingErrorMsg(self, errorMsg: str) -> str:
         return self._getErrorMsg("booking", errorMsg, "Booking encountered an unknown error!", self._buildBookingErrorSearchDFA)
 
+    
     # bookRoom(userId, roomId, startTime, endTime, participants): Creates a new booking
     def bookRoom(self, userId: Optional[str], roomId: Optional[str], startTime: datetime, 
                  endTime: datetime, participants: Optional[str]) -> Tuple[bool, str, Optional[str]]:
@@ -63,7 +67,7 @@ class BookingService(BaseAPIService):
         connData, cursor, error = self._dbTool.executeSQL(bookingSQL, 
                                                           vars = {"userID": str(userUUID),
                                                                   "roomID": str(roomUUID),
-                                                                  "bookDateTime": datetime.now(timezone.utc),
+                                                                  "bookDateTime": datetime.now(pytz.timezone("US/Eastern")).replace(tzinfo=None).replace(tzinfo=timezone.utc),
                                                                   "startTime": startTime,
                                                                   "endTime": endTime,
                                                                   "participants": participants}, 
@@ -101,7 +105,7 @@ class BookingService(BaseAPIService):
         except ValueError:
             return [False, "Invalid UUID format for booking ID or user ID."]
         
-        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R8/R8.sql")
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R8/R8i.sql")
         try:
             cancelSQL = PU.DBTool.readSQLFile(sqlPath)
         except FileNotFoundError:
@@ -125,3 +129,35 @@ class BookingService(BaseAPIService):
             return [True, "Booking successfully cancelled."]
         else:
             return [False, "Booking already cancelled or not found."]
+        
+
+    def getFutureBookings(self, user_id: str) -> Tuple[bool, list]:
+    
+        try:
+            userUUID = uuid.UUID(user_id)
+        except ValueError as e:
+            return [False, "Invalid UUID format for user ID."]
+    
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R8/R8ii.sql")
+        
+    
+        if not os.path.exists(sqlPath):
+            return [False, f"SQL file not found at {sqlPath}"]
+    
+        try:
+            query = PU.DBTool.readSQLFile(sqlPath)
+        except Exception as e:
+            return [False, f"Error reading SQL file: {e}"]
+    
+        try:
+            utc_now = datetime.now(timezone.utc)
+            fake_utc_est_now = utc_now - timedelta(hours=4)
+            now = fake_utc_est_now
+            connData, cursor, error = self._dbTool.executeSQL(query,
+                                                              vars={"user_id": str(userUUID), "now": now},
+                                                              commit=False, closeConn=False)
+            result = cursor.fetchall()
+            connData.putConn()
+            return [True, result]
+        except Exception as e:
+            return [False, f"SQL execution error: {e}"]

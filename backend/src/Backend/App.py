@@ -1,9 +1,10 @@
 import sys
 import signal
 import pytz
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 from typing import Optional, Iterable, List, Dict, Any, Tuple
+from datetime import time, datetime
 
 import PyUtils as PU
 
@@ -60,6 +61,7 @@ class App():
         
         @app.route("/viewAvailableRooms", methods=["GET"])
         def viewAvailableRooms() -> List[Dict[str, Any]]:
+            
             response = []
             db_operation = request.args.get("db_operation")
 
@@ -76,40 +78,66 @@ class App():
             return response
         
         @app.route("/bookRoom", methods=["POST"])
-        def bookRoom() -> Tuple[bool, str]:
+        def bookRoom():
             data = request.get_json()
-            if (not data):
-                return [False, "No JSON data received"]
 
-            userId = data.get("user_id")
-            roomId = data.get("room_id")
-            startDateTimeStr = data.get("start_time")
-            endDateTimeStr = data.get("end_time")
-            participants = data.get("participants")
+            if not data:
+                return jsonify({ "success": False, "message": "No JSON data received" }), 400
 
             try:
-                startDateTime = PU.DateTimeTool.strToDateTime(f"{startDateTimeStr}", tzinfo = pytz.utc)
-            except ValueError:
-                return [False, "Invalid datetime format for the start datetime"]
+                userId = data.get("user_id")
+                roomId = data.get("room_id")
+                startDateTimeStr = data.get("start_time")
+                endDateTimeStr = data.get("end_time")
+                participants = data.get("participants")
 
-            try:
-                endDateTime = PU.DateTimeTool.strToDateTime(f"{endDateTimeStr}", tzinfo = pytz.utc)
-            except ValueError:
-                return [False, "Invalid datetime format for the end datetime"]
+                if not all([userId, roomId, startDateTimeStr, endDateTimeStr]):
+                    return jsonify({ "success": False, "message": "Missing required fields" }), 400
 
-            success, msg, bookingId = self._bookingService.bookRoom(userId, roomId, startDateTime, endDateTime, participants)
-            return [success, msg]
+                start_dt = datetime.fromisoformat(startDateTimeStr)
+                end_dt = datetime.fromisoformat(endDateTimeStr)
+
+
+                # Call booking service
+                success, message, bookingId = self._bookingService.bookRoom(userId, roomId, start_dt, end_dt, participants)
+                #print(" BookingService.bookRoom returned ->", success, message, bookingId)
+
+                return jsonify({
+                    "success": success,
+                    "message": message,
+                    "booking_id": bookingId
+                }), 200 if success else 400
+
+            except Exception as e:
+                print(" Booking validation failed:", str(e))
+                return jsonify({
+                    "success": False,
+                    "message": str(e) or "Booking failed due to an unknown error."
+                }), 400
+
         
         @app.route("/cancelBooking", methods=["POST"])
         def cancelBooking():
             data = request.get_json()
-            if (not data):
-                return [False, "No JSON data received"]
+            if not data:
+                return jsonify({ "success": False, "message": "No JSON data received" }), 400
 
             bookingId = data.get("booking_id")
             userId = data.get("user_id")
 
-            return self._bookingService.cancelBooking(bookingId, userId)
+            try:
+                success, message = self._bookingService.cancelBooking(bookingId, userId)
+                return jsonify({ "success": success, "message": message }), 200 if success else 400
+            except Exception as e:
+                print("CancelBooking error:", str(e))
+                return jsonify({ "success": False, "message": "Cancellation failed due to server error." }), 500
+
+        
+        @app.route("/getFutureBookings", methods=["GET"])
+        def getFutureBookings():
+            userId = request.args.get("userId")
+            print(f"[GET] /getFutureBookings - userId: {userId}")
+            return self._bookingService.getFutureBookings(userId)
 
         @app.route("/signup", methods=["POST"])
         def signup():
