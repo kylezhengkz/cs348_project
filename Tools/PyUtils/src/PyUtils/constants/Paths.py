@@ -11,6 +11,7 @@ class Paths(Enum):
     DataFolder = os.path.abspath(os.path.join(ProjectFolder, "Data"))
     ToyDatasetFolder = os.path.abspath(os.path.join(DataFolder, "Toy Dataset"))
     SampleDatasetFolder = os.path.abspath(os.path.join(DataFolder, "Sample Dataset"))
+    ProdDatasetFolder = os.path.abspath(os.path.join(DataFolder, "Production Dataset"))
 
     SQLQueriesFolder = os.path.abspath(os.path.join(ProjectFolder, "SQL Queries"))
     SQLTableCreationFolder = os.path.abspath(os.path.join(SQLQueriesFolder, "Table Creation"))

@@ -31,14 +31,15 @@ class BookingService(BaseAPIService):
     
     def _buildBookingErrorSearchDFA(self) -> FRB.BaseAhoCorasickDFA:
         data = {
-            "bookingendwindow": "Booking end time must be earlier than 11:00 PM UTC",
-            "bookingstartwindow": "Booking start time must be later than 7:00 AM UTC",
+            "bookingendwindow": "Booking end time must be earlier than 11:00 PM EST",
+            "bookingstartwindow": "Booking start time must be later than 7:00 AM EST",
             "validbookingcommitdate": "Booking time range must be later than the current time",
             "validbookingrange": "Booking time range is invalid",
             "RoomOverCapacityError": None,
             "Booking_userID_fkey": "User does not exist",
             "Booking_roomID_fkey": "Room does not exist",
             "Booking time overlaps with your own booking": "You already have a booking at a similar time!",
+            "User already has an overlapping booking on this day.": "You already have a booking at a similar time!",
             "Room is already booked": "Room not available at this time"
         }
 
