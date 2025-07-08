@@ -31,6 +31,7 @@ export function Header() {
                     {authUserId !== null && <Button color="inherit">{authUserId}</Button>}
                     {authUserId !== null && <Button color="inherit" onClick={() => setAuthUserId(null)}>Logout</Button>}
                     {authUserId === null && <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>}
+                    {authUserId === null && <Button color="inherit" onClick={() => navigate("/login")}>Signup</Button>}
                 </Toolbar>
             </AppBar>
         </Box>
