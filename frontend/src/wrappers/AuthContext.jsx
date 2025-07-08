@@ -3,11 +3,11 @@ import { useState, createContext, useContext, useEffect } from "react"
 const AuthContext = createContext()
 
 export function AuthProvider({children}) {
-  const [authUserId, setAuthUserId] = useState(() => localStorage.getItem("authUserId"));
+  const [authUserId, setAuthUserId] = useState(() => sessionStorage.getItem("authUserId"));
 
   useEffect(() => {
     if (authUserId !== null) {
-      localStorage.setItem("authUserId", authUserId);
+      sessionStorage.setItem("authUserId", authUserId);
     }
   }, [authUserId]);
 
