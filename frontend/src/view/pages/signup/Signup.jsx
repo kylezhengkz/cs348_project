@@ -15,6 +15,10 @@ export function Signup() {
     if (res[0] === true) {
       console.log(`Setting userId to ${res[2]}`)
       setAuthUserId(res[2])
+      return true;
+    } else {
+      console.log("Returning false")
+      return false;
     }
   }
 
@@ -29,16 +33,23 @@ export function Signup() {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data.username, data.email, data.password, data.passwordConfirm)
-    if (data.password === data.passwordConfirm) {
-      createAccount(data.username, data.email, data.password)
-      navigate("/home")
+    if (data.password !== data.passwordConfirm) {
+      setError("passwordConfirm", {
+        type: "not match",
+        message: "Passwords do not match",
+      });
+      return;
+    }
+    let status = await createAccount(data.username, data.email, data.password);
+    if (status) {
+      navigate("/home");
       return
     }
     setError("passwordConfirm", {
-      type: "not match",
-      message: "Passwords do not match",
+      type: "cannot add account",
+      message: "Unable to create account"
     })
   }
 
@@ -70,6 +81,7 @@ export function Signup() {
           <input type="password" id="passwordConfirm" name="passwordConfirm" className="form-control" {...register("passwordConfirm", { required: true })}></input>
           {errors.passwordConfirm?.type === "required" && <span className="text-warning">This field is required</span>}
           {errors.passwordConfirm?.type === "not match" && <span className="text-warning">Password does not match</span>}
+          {errors.passwordConfirm?.type === "cannot add account" && <span className="text-warning">Unable to add account</span>}
         </div>
         
         <div className="form-group pt-4 mx-auto text-center">

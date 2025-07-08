@@ -23,7 +23,7 @@ class UserService(BaseAPIService):
         
         connData, cursor, error = self._dbTool.executeSQL(bookingSQL, 
                                                           vars = {
-                                                                  "userID": username,
+                                                                  "username": username,
                                                                   "email": email,
                                                                   "passwrd": password
                                                                   },
@@ -42,3 +42,33 @@ class UserService(BaseAPIService):
             return [True, f"Signup successful! User ID: {userId}", userId]
         else:
             return [False, "Signup failed", None]
+    
+    
+    def login(self, username, password):
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R10/R10b.sql")
+        try:
+            with open(sqlPath, 'r') as f:
+                bookingSQL = f.read()
+        except FileNotFoundError:
+            return [False, f"Booking SQL file not found at {sqlPath}", None]
+        
+        connData, cursor, error = self._dbTool.executeSQL(bookingSQL, 
+                                                          vars = {
+                                                                  "username": username,
+                                                                  "passwrd": password
+                                                                  },
+                                                          commit = True, closeConn = False,
+                                                          raiseException = False)
+        
+        if (error is not None):
+            errorMsg = f"{error}"
+            return [False, errorMsg, None]
+        
+        row = cursor.fetchone()
+        connData.putConn()
+
+        if row:
+            userId = row[0]
+            return [True, f"Login successful! User ID: {userId}", userId]
+        else:
+            return [False, "Login failed", None]
