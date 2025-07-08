@@ -1,0 +1,1001 @@
+buildingID,buildingName,addressLine1,addressLine2,city,province,country,postalCode
+0,Math Arena 1,859 King Ave S,,Kitchener,Ontario,Canada,K8C 9S0
+1,Architecture Building 1,323 Philips Ln N,,Brampton,Ontario,Canada,L8S 3T9
+2,Minota Hagey East Block 1,990 University Ave W,,Hamilton,Ontario,Canada,M2J 5E1
+3,Federation Building 1,467 King Ln E,,Toronto,Ontario,Canada,N8E 6C8
+4,Dana Porter South Block 1,743 Main Blvd S,,Waterloo,Ontario,Canada,K3M 1K1
+5,Federation Campus 1,564 King Ave E,,Hamilton,Ontario,Canada,L4C 9H8
+6,Pharmacy Residence 1,573 Queen Blvd S,,Sudbury,Ontario,Canada,M0K 0N6
+7,Minota Hagey Building 1,316 Main Blvd S,,Sudbury,Ontario,Canada,N6T 2L2
+8,Pharmacy North Block 1,674 Main Blvd W,,Ottawa,Ontario,Canada,N5K 2X7
+9,Chemistry East Block 1,148 University Ave S,,Sudbury,Ontario,Canada,N9C 6R9
+10,Ira G. Needles Garage 1,357 Main St N,,Sudbury,Ontario,Canada,P4N 1M6
+11,Arts Hall 1,103 King Ln S,,Brampton,Ontario,Canada,K4X 9J2
+12,Douglas Wright East Block 1,265 Main Ln N,,Ottawa,Ontario,Canada,M7A 1P4
+13,Pharmacy Arena 1,346 Main St N,,Oshawa,Ontario,Canada,K8G 2V8
+14,Arts Campus 1,640 Main Rd S,,Brampton,Ontario,Canada,L4R 5T8
+15,Ira G. Needles Building 1,353 Philips St E,,Toronto,Ontario,Canada,P8K 9K0
+16,Chemistry North Block 1,746 University Ave N,,Toronto,Ontario,Canada,M1X 3L7
+17,Science Garage 1,235 Main Ln W,,Mississauga,Ontario,Canada,N6J 1E6
+18,Douglas Wright Services 1,520 Queen St N,,Toronto,Ontario,Canada,N5E 3J3
+19,Margaret Atwood Hall 1,243 Queen Ave E,,Oshawa,Ontario,Canada,L1T 8E0
+20,Margaret Atwood South Block 1,115 University Ave S,,Windsor,Ontario,Canada,N7J 6B2
+21,Federation Arena 1,499 King Rd E,,Windsor,Ontario,Canada,P7G 3M3
+22,Engineering Lecture Hall 1,853 Main St E,,Toronto,Ontario,Canada,K9V 8X2
+23,Engineering Garage 1,182 Philips St N,,Sudbury,Ontario,Canada,L6E 9K9
+24,Engineering Lecture Hall 2,183 Queen Ln E,,Vaughan,Ontario,Canada,L5K 4R2
+25,Dana Porter Hall 1,423 University St W,,Ottawa,Ontario,Canada,P1C 8J8
+26,Minota Hagey Residence 1,457 University Ave E,,Vaughan,Ontario,Canada,L7Y 4X0
+27,Margaret Atwood Campus 1,779 University Ave E,,Waterloo,Ontario,Canada,K8G 4M9
+28,Science North Block 1,451 Philips Blvd W,,Vaughan,Ontario,Canada,K1S 4B0
+29,Columbia Lake East Block 1,233 King Ave W,,Brampton,Ontario,Canada,N8A 1C2
+30,Margaret Atwood Arena 1,954 King Ln S,,Windsor,Ontario,Canada,L0M 5B5
+31,Science Center 1,355 University Blvd W,,Ottawa,Ontario,Canada,L3H 2S0
+32,Arts North Block 1,440 Queen Ave E,,Kitchener,Ontario,Canada,K6B 7K3
+33,Ira G. Needles Village 1,412 Philips Ave N,,Sudbury,Ontario,Canada,L6N 4C4
+34,Douglas Wright Center 1,621 Queen Ln E,,Toronto,Ontario,Canada,K4H 9L0
+35,Math Lecture Hall 1,544 King Blvd W,,Ottawa,Ontario,Canada,P1R 9J4
+36,Engineering North Block 1,546 University Ln S,,Hamilton,Ontario,Canada,N1N 9N1
+37,Dana Porter Garage 1,416 Queen Blvd W,,Vaughan,Ontario,Canada,P2J 6R2
+38,Jane Austen Campus 1,515 Main St E,,Vaughan,Ontario,Canada,L6N 7T7
+39,Science Garage 2,584 Philips St E,,Brampton,Ontario,Canada,P5C 3M3
+40,Science Residence 1,125 University Ave W,,Ottawa,Ontario,Canada,K7S 9J6
+41,Carl A. Pollock Services 1,349 Philips St N,,Windsor,Ontario,Canada,L2X 7B8
+42,Pharmacy West Block 1,968 University Rd S,,Oshawa,Ontario,Canada,P8N 7X6
+43,Margaret Atwood Hall 2,262 Queen Rd E,,Mississauga,Ontario,Canada,M8V 3L7
+44,Chemistry North Block 2,392 Philips Blvd E,,Hamilton,Ontario,Canada,P1G 2K6
+45,Health North Block 1,319 University Rd W,,Hamilton,Ontario,Canada,P7S 0J6
+46,Federation West Block 1,888 Main St W,,Oshawa,Ontario,Canada,K5M 6S8
+47,Margaret Atwood East Block 1,717 Philips Rd S,,Vaughan,Ontario,Canada,N7A 6N6
+48,Arts South Block 1,578 Philips Ln N,,Windsor,Ontario,Canada,P9A 1S2
+49,Ira G. Needles Residence 1,151 King Rd E,,Mississauga,Ontario,Canada,N5N 6L6
+50,Minota Hagey South Block 1,183 Queen St N,,Hamilton,Ontario,Canada,L1B 0K3
+51,Architecture Lecture Hall 1,256 Philips Ave W,,Sudbury,Ontario,Canada,K9J 7L5
+52,Arts Lecture Hall 1,721 University Ave E,,Waterloo,Ontario,Canada,P0M 9R6
+53,Science Building 1,706 Philips St E,,Sudbury,Ontario,Canada,P1B 5Y6
+54,Douglas Wright Building 1,618 King St W,,Oshawa,Ontario,Canada,K6P 7G6
+55,Arts North Block 2,634 King Ln W,,Oshawa,Ontario,Canada,N9L 5K1
+56,Minota Hagey West Block 1,561 Philips Rd W,,Hamilton,Ontario,Canada,K7N 2V3
+57,Douglas Wright East Block 2,364 King Blvd E,,Brampton,Ontario,Canada,K8J 1K6
+58,Carl A. Pollock Garage 1,876 Philips Rd W,,Oshawa,Ontario,Canada,K1M 3R3
+59,Dana Porter Center 1,695 King Rd E,,Windsor,Ontario,Canada,P5P 7L4
+60,Minota Hagey Library 1,223 Philips Blvd N,,Brampton,Ontario,Canada,L3J 7L9
+61,Virginia Woolf Lecture Hall 1,389 University Ave E,,Mississauga,Ontario,Canada,M2M 0Y2
+62,Minota Hagey Arena 1,155 Main Blvd S,,Sudbury,Ontario,Canada,N1A 9M7
+63,Carl A. Pollock Hall 1,448 Philips St E,,Oshawa,Ontario,Canada,K1R 7C9
+64,Engineering Residence 1,252 Main Blvd N,,Mississauga,Ontario,Canada,K8S 9K8
+65,Federation Hall 1,553 King Ln W,,Vaughan,Ontario,Canada,P9B 9E3
+66,Science Campus 1,776 University Ave S,,Kitchener,Ontario,Canada,P1H 0S7
+67,Carl A. Pollock Campus 1,133 Philips Blvd E,,Oshawa,Ontario,Canada,K3L 9J6
+68,Math Garage 1,330 Philips Blvd S,,Waterloo,Ontario,Canada,K2M 9M7
+69,Math Hall 1,805 King Rd E,,Brampton,Ontario,Canada,P7T 1B6
+70,Columbia Lake Lecture Hall 1,356 University St S,,Sudbury,Ontario,Canada,P9A 4B2
+71,Carl A. Pollock Garage 2,767 Queen Blvd S,,Ottawa,Ontario,Canada,N7C 7P6
+72,Columbia Lake Village 1,786 University Ave E,,Windsor,Ontario,Canada,N4R 8B7
+73,Chemistry Village 1,358 King St W,,Brampton,Ontario,Canada,K8T 6B3
+74,Virginia Woolf Village 1,737 Queen Rd N,,Mississauga,Ontario,Canada,M8G 4T7
+75,Math Arena 2,745 Main Ave S,,Vaughan,Ontario,Canada,P0Y 6C3
+76,Math Hall 2,220 Philips Rd E,,Brampton,Ontario,Canada,M6V 7K7
+77,Margaret Atwood Residence 1,492 Philips Ln S,,Waterloo,Ontario,Canada,M6N 8L0
+78,Dana Porter North Block 1,405 Main Ln W,,Kitchener,Ontario,Canada,N8V 5N8
+79,Margaret Atwood Services 1,566 King Ave S,,Ottawa,Ontario,Canada,N3S 0N7
+80,Federation Services 1,779 Philips Rd N,,Kitchener,Ontario,Canada,P9N 1T1
+81,Virginia Woolf West Block 1,567 University Ave W,,Sudbury,Ontario,Canada,L1V 4N9
+82,Federation Center 1,182 King Ln W,,Hamilton,Ontario,Canada,N8B 9C3
+83,Dana Porter Library 1,864 University Rd N,,Sudbury,Ontario,Canada,K7H 4A0
+84,Columbia Lake East Block 2,157 King Blvd E,,Windsor,Ontario,Canada,L3X 6H2
+85,Arts Building 1,724 Queen Ln S,,Oshawa,Ontario,Canada,P2K 7L7
+86,Minota Hagey Center 1,109 Queen Blvd S,,Waterloo,Ontario,Canada,N5M 6L7
+87,Dana Porter Library 2,493 Queen St S,,Windsor,Ontario,Canada,P5M 4A6
+88,Minota Hagey Arena 2,679 University Ln W,,Vaughan,Ontario,Canada,L9P 3J9
+89,Minota Hagey Center 2,873 Philips St N,,Vaughan,Ontario,Canada,N0P 2C4
+90,Columbia Lake North Block 1,525 Philips Ave S,,Brampton,Ontario,Canada,M8X 4H4
+91,Carl A. Pollock East Block 1,402 King St W,,Waterloo,Ontario,Canada,L3R 8P1
+92,Federation Arena 2,370 Main St W,,Hamilton,Ontario,Canada,M9R 5E3
+93,Carl A. Pollock Arena 1,734 Main Blvd S,,Sudbury,Ontario,Canada,K7M 6E2
+94,Engineering Arena 1,411 Queen St N,,Mississauga,Ontario,Canada,P2R 7P8
+95,Claudette Millar Lecture Hall 1,860 Philips Rd N,,Oshawa,Ontario,Canada,P6L 0P3
+96,Ira G. Needles Hall 1,341 King St E,,Brampton,Ontario,Canada,M0R 4J1
+97,Ira G. Needles Building 2,778 Philips Ln N,,Toronto,Ontario,Canada,M3G 9J1
+98,Margaret Atwood Library 1,700 Philips Ave E,,Kitchener,Ontario,Canada,P0L 2G8
+99,Minota Hagey East Block 2,278 University St S,,Toronto,Ontario,Canada,M3N 0H4
+100,Engineering Residence 2,859 Queen Ln N,,Waterloo,Ontario,Canada,N7P 8E7
+101,Virginia Woolf Library 1,729 University Ln E,,Oshawa,Ontario,Canada,K0V 6S1
+102,Carl A. Pollock North Block 1,554 University St E,,Ottawa,Ontario,Canada,L1G 4Y5
+103,Federation Lecture Hall 1,643 King Rd W,,Waterloo,Ontario,Canada,K8J 6T3
+104,Claudette Millar Village 1,947 Queen Rd W,,Waterloo,Ontario,Canada,M6N 4P2
+105,Carl A. Pollock Building 1,193 University St W,,Waterloo,Ontario,Canada,M2Y 0Y8
+106,Columbia Lake Center 1,225 Queen Blvd W,,Toronto,Ontario,Canada,M9M 5E9
+107,Virginia Woolf Library 2,258 Queen Ave N,,Hamilton,Ontario,Canada,P5E 4K6
+108,Margaret Atwood East Block 2,938 Main Ln N,,Ottawa,Ontario,Canada,M0H 4M5
+109,Douglas Wright Arena 1,285 Philips Ln W,,Waterloo,Ontario,Canada,L0C 8J6
+110,Claudette Millar Hall 1,449 Philips Blvd E,,Hamilton,Ontario,Canada,P9C 0G2
+111,Engineering Center 1,183 King Rd W,,Oshawa,Ontario,Canada,P7S 4J8
+112,Math Village 1,540 University Blvd W,,Brampton,Ontario,Canada,M0K 6B0
+113,Science Campus 2,316 Philips Blvd E,,Hamilton,Ontario,Canada,K0V 6H2
+114,Federation Garage 1,820 Philips Ln E,,Waterloo,Ontario,Canada,N0S 0T1
+115,Columbia Lake Lecture Hall 2,539 Main Rd W,,Vaughan,Ontario,Canada,K6A 5H9
+116,Ira G. Needles South Block 1,806 King St W,,Waterloo,Ontario,Canada,L6R 8C6
+117,Dana Porter North Block 2,447 Philips Blvd S,,Waterloo,Ontario,Canada,P1X 8J5
+118,Douglas Wright North Block 1,938 Philips Ave N,,Kitchener,Ontario,Canada,M3H 9G1
+119,Arts East Block 1,743 Queen Rd W,,Sudbury,Ontario,Canada,P9N 5G7
+120,Chemistry Hall 1,552 King Blvd N,,Hamilton,Ontario,Canada,P1M 7T0
+121,Engineering Village 1,951 King St N,,Ottawa,Ontario,Canada,P8R 7Y0
+122,Ira G. Needles West Block 1,929 Main Ave E,,Ottawa,Ontario,Canada,N8G 0T1
+123,Columbia Lake North Block 2,186 Main Ave N,,Mississauga,Ontario,Canada,N7X 8H5
+124,Douglas Wright West Block 1,389 Queen Rd E,,Sudbury,Ontario,Canada,P0N 1N1
+125,Margaret Atwood Center 1,495 King Blvd S,,Hamilton,Ontario,Canada,K9G 5M6
+126,Health Lecture Hall 1,825 University Blvd W,,Sudbury,Ontario,Canada,M2X 1S8
+127,Douglas Wright Arena 2,471 King Ave S,,Hamilton,Ontario,Canada,N3K 2G1
+128,Dana Porter South Block 2,907 University Ln N,,Sudbury,Ontario,Canada,M9G 9R2
+129,Arts Residence 1,951 Main Ave W,,Toronto,Ontario,Canada,N5K 7M7
+130,Pharmacy Garage 1,344 King Rd S,,Hamilton,Ontario,Canada,P7T 4R8
+131,Virginia Woolf Services 1,265 Philips Ln S,,Vaughan,Ontario,Canada,K7P 8E8
+132,Math Campus 1,185 Philips Blvd W,,Brampton,Ontario,Canada,L6C 3T5
+133,Architecture Services 1,154 Queen Ln E,,Mississauga,Ontario,Canada,N1P 3A5
+134,Math South Block 1,831 King Ave S,,Toronto,Ontario,Canada,M7G 7T9
+135,Architecture West Block 1,181 University Blvd S,,Kitchener,Ontario,Canada,P9X 6E4
+136,Pharmacy Campus 1,224 University Ave W,,Sudbury,Ontario,Canada,P7C 1V9
+137,Margaret Atwood Arena 2,747 Main Ln S,,Kitchener,Ontario,Canada,M6A 9P3
+138,Jane Austen Services 1,291 University Ln E,,Waterloo,Ontario,Canada,P8X 8Y0
+139,Federation South Block 1,581 University Rd E,,Vaughan,Ontario,Canada,K5C 5K1
+140,Jane Austen North Block 1,874 King Ave N,,Hamilton,Ontario,Canada,P5H 7V2
+141,Health Building 1,833 Queen St E,,Mississauga,Ontario,Canada,K3B 5M8
+142,Federation South Block 2,656 Queen Blvd N,,Sudbury,Ontario,Canada,L4P 0N4
+143,Math East Block 1,476 Queen Rd W,,Windsor,Ontario,Canada,M2V 7P8
+144,Minota Hagey East Block 3,184 Queen St W,,Ottawa,Ontario,Canada,L8M 5E1
+145,Columbia Lake Center 2,402 King Rd W,,Kitchener,Ontario,Canada,N5T 0P9
+146,Claudette Millar Campus 1,754 University St W,,Hamilton,Ontario,Canada,P2A 2T0
+147,Health Building 2,341 King Blvd W,,Ottawa,Ontario,Canada,K9G 7P5
+148,Ira G. Needles East Block 1,178 Main Ave E,,Windsor,Ontario,Canada,M4K 1A2
+149,Carl A. Pollock Garage 3,496 Main St E,,Vaughan,Ontario,Canada,N3M 7J1
+150,Health South Block 1,175 Queen Ave W,,Waterloo,Ontario,Canada,M5C 8Y4
+151,Dana Porter South Block 3,261 Philips Blvd S,,Waterloo,Ontario,Canada,L2K 7A5
+152,Margaret Atwood Lecture Hall 1,477 Queen Ln S,,Ottawa,Ontario,Canada,K1M 6V8
+153,Claudette Millar East Block 1,519 Main St S,,Hamilton,Ontario,Canada,K7T 8P2
+154,Margaret Atwood Center 2,701 Philips Ave W,,Brampton,Ontario,Canada,K1X 2M2
+155,Arts Village 1,826 Philips Blvd E,,Waterloo,Ontario,Canada,M3Y 4G4
+156,Margaret Atwood Building 1,614 Philips Ln S,,Kitchener,Ontario,Canada,P9N 9B0
+157,Chemistry Arena 1,756 Main Blvd S,,Ottawa,Ontario,Canada,N9A 7Y4
+158,Dana Porter Hall 2,350 Queen Blvd W,,Waterloo,Ontario,Canada,K2T 6V7
+159,Science Village 1,721 Philips Blvd E,,Hamilton,Ontario,Canada,N2P 8Y1
+160,Columbia Lake Library 1,577 University Blvd W,,Mississauga,Ontario,Canada,L1B 4R9
+161,Claudette Millar Library 1,986 Philips Blvd E,,Mississauga,Ontario,Canada,L7X 7V4
+162,Carl A. Pollock Arena 2,192 Queen Ln W,,Mississauga,Ontario,Canada,L9P 0B4
+163,Carl A. Pollock Lecture Hall 1,963 Queen Blvd N,,Waterloo,Ontario,Canada,N2L 5R5
+164,Engineering Services 1,152 Main Ln S,,Hamilton,Ontario,Canada,P4C 6X7
+165,Margaret Atwood Campus 2,945 Main Ln N,,Kitchener,Ontario,Canada,K6P 5Y5
+166,Health Library 1,716 Main Rd N,,Toronto,Ontario,Canada,K2N 7X7
+167,Health Lecture Hall 2,627 Philips Blvd E,,Kitchener,Ontario,Canada,N9M 9N8
+168,Virginia Woolf Garage 1,601 Main Blvd W,,Toronto,Ontario,Canada,M5E 6M0
+169,Carl A. Pollock Campus 2,771 Main Ln S,,Toronto,Ontario,Canada,P7H 8R2
+170,Pharmacy Arena 2,686 University Ave N,,Oshawa,Ontario,Canada,M6G 6J6
+171,Virginia Woolf East Block 1,726 Queen St S,,Brampton,Ontario,Canada,L8N 7X6
+172,Columbia Lake Residence 1,570 Main Blvd E,,Sudbury,Ontario,Canada,M9V 3K4
+173,Margaret Atwood Campus 3,330 King Blvd S,,Oshawa,Ontario,Canada,M7P 8L4
+174,Math Lecture Hall 2,792 Main Rd W,,Hamilton,Ontario,Canada,L4B 4C5
+175,Ira G. Needles Center 1,362 Queen Ave S,,Brampton,Ontario,Canada,M8L 2E9
+176,Jane Austen Library 1,348 University Ln S,,Sudbury,Ontario,Canada,L0E 6N7
+177,Math Center 1,889 Philips St S,,Windsor,Ontario,Canada,N7J 4N4
+178,Engineering West Block 1,887 University Ln S,,Brampton,Ontario,Canada,K2S 2B6
+179,Carl A. Pollock Residence 1,866 King St N,,Vaughan,Ontario,Canada,P9E 5M7
+180,Margaret Atwood Garage 1,605 Philips Ln W,,Vaughan,Ontario,Canada,L1N 2T4
+181,Arts Arena 1,854 King Blvd S,,Kitchener,Ontario,Canada,P6S 8N1
+182,Federation Center 2,197 Philips Ave W,,Hamilton,Ontario,Canada,L0L 6K7
+183,Minota Hagey Village 1,409 Main Ln N,,Vaughan,Ontario,Canada,M3B 1T4
+184,Arts Services 1,802 Main Blvd N,,Sudbury,Ontario,Canada,M5K 3G7
+185,Health Hall 1,865 Main Blvd W,,Brampton,Ontario,Canada,N8J 3C8
+186,Ira G. Needles Garage 2,820 King St N,,Toronto,Ontario,Canada,P8J 9Y2
+187,Arts Village 2,974 Main Rd N,,Sudbury,Ontario,Canada,L9V 1X7
+188,Engineering Hall 1,235 Main Rd W,,Ottawa,Ontario,Canada,K8T 4A6
+189,Minota Hagey South Block 2,103 Philips Ln N,,Toronto,Ontario,Canada,N5C 8B1
+190,Carl A. Pollock Arena 3,393 Queen Ave S,,Sudbury,Ontario,Canada,N5R 7R6
+191,Chemistry Center 1,777 Main Ave E,,Waterloo,Ontario,Canada,L8R 8G3
+192,Architecture East Block 1,123 King Rd W,,Brampton,Ontario,Canada,N3K 7P2
+193,Minota Hagey Library 2,996 University St W,,Ottawa,Ontario,Canada,K3J 1E9
+194,Engineering Hall 2,712 University Ave N,,Windsor,Ontario,Canada,N3Y 3B2
+195,Virginia Woolf Campus 1,339 Main Blvd E,,Mississauga,Ontario,Canada,M2X 3S4
+196,Minota Hagey Arena 3,670 Main Ave W,,Brampton,Ontario,Canada,N0P 6X5
+197,Claudette Millar Services 1,252 King Rd S,,Brampton,Ontario,Canada,N3K 4G7
+198,Engineering Garage 2,522 Queen Ln S,,Windsor,Ontario,Canada,L4J 5C7
+199,Douglas Wright Building 2,648 Philips St E,,Windsor,Ontario,Canada,P9B 1J9
+200,Margaret Atwood Library 2,590 Philips Blvd E,,Toronto,Ontario,Canada,L3E 7K9
+201,Science Services 1,345 Main Blvd E,,Windsor,Ontario,Canada,N8P 4L5
+202,Virginia Woolf West Block 2,609 Queen St W,,Hamilton,Ontario,Canada,L5N 6B9
+203,Pharmacy North Block 2,249 University Blvd W,,Vaughan,Ontario,Canada,L3N 3R9
+204,Pharmacy Hall 1,663 King Blvd W,,Sudbury,Ontario,Canada,N7H 5H2
+205,Margaret Atwood Hall 3,288 Main St N,,Waterloo,Ontario,Canada,K0S 2K1
+206,Health Arena 1,323 Main Rd E,,Toronto,Ontario,Canada,P9V 7A0
+207,Margaret Atwood Garage 2,521 University St E,,Brampton,Ontario,Canada,M0X 6H1
+208,Math Garage 2,252 Philips Ave E,,Hamilton,Ontario,Canada,M6C 5R7
+209,Jane Austen Library 2,813 Philips Blvd N,,Sudbury,Ontario,Canada,K1R 6R8
+210,Carl A. Pollock Arena 4,752 University Ave N,,Oshawa,Ontario,Canada,N5E 8B3
+211,Science West Block 1,988 Main Rd E,,Toronto,Ontario,Canada,K4Y 9B2
+212,Columbia Lake Arena 1,312 Main Ave W,,Waterloo,Ontario,Canada,M2K 9R8
+213,Columbia Lake Services 1,873 Philips St E,,Toronto,Ontario,Canada,K6K 1N9
+214,Federation East Block 1,434 University Blvd W,,Oshawa,Ontario,Canada,L5Y 6S2
+215,Jane Austen Center 1,489 University Ln E,,Mississauga,Ontario,Canada,K1L 2R2
+216,Federation Village 1,469 University St N,,Vaughan,Ontario,Canada,N5L 1G1
+217,Arts Services 2,559 Main Ln W,,Waterloo,Ontario,Canada,K1P 8C9
+218,Columbia Lake South Block 1,494 University Blvd W,,Windsor,Ontario,Canada,K8K 9X2
+219,Federation Residence 1,242 King Blvd E,,Oshawa,Ontario,Canada,L1H 6L6
+220,Dana Porter Hall 3,901 University Blvd E,,Mississauga,Ontario,Canada,N9J 7E2
+221,Dana Porter Arena 1,505 King Ln W,,Hamilton,Ontario,Canada,N5S 9G4
+222,Columbia Lake Lecture Hall 3,811 Philips Rd E,,Kitchener,Ontario,Canada,N5M 7K5
+223,Federation Campus 2,936 Queen Blvd N,,Ottawa,Ontario,Canada,L9Y 2Y0
+224,Ira G. Needles North Block 1,314 Queen Blvd N,,Windsor,Ontario,Canada,N2M 3L2
+225,Claudette Millar East Block 2,486 University Rd W,,Ottawa,Ontario,Canada,N8X 6Y0
+226,Douglas Wright North Block 2,931 Main Ln N,,Waterloo,Ontario,Canada,L5H 9B9
+227,Federation East Block 2,439 Queen St N,,Waterloo,Ontario,Canada,M3X 8Y9
+228,Jane Austen Library 3,556 King Rd W,,Sudbury,Ontario,Canada,P8G 5A7
+229,Math Campus 2,525 University St S,,Hamilton,Ontario,Canada,M5T 3X7
+230,Douglas Wright Hall 1,199 Queen Rd E,,Waterloo,Ontario,Canada,M0E 0N1
+231,Arts West Block 1,858 Philips Ln S,,Brampton,Ontario,Canada,L5Y 6T3
+232,Federation Center 3,288 Philips Rd W,,Toronto,Ontario,Canada,P3T 9S6
+233,Architecture North Block 1,319 Philips Blvd N,,Ottawa,Ontario,Canada,K8H 5N3
+234,Ira G. Needles Building 3,368 Queen Ln E,,Ottawa,Ontario,Canada,N9R 9E5
+235,Douglas Wright South Block 1,568 Main Ave E,,Ottawa,Ontario,Canada,P1G 5E3
+236,Dana Porter Building 1,287 King Ave W,,Windsor,Ontario,Canada,P2R 6H7
+237,Margaret Atwood North Block 1,760 Philips Ln S,,Oshawa,Ontario,Canada,M2H 5T9
+238,Engineering South Block 1,467 University Rd S,,Mississauga,Ontario,Canada,N8X 7S7
+239,Claudette Millar North Block 1,960 Queen Rd S,,Waterloo,Ontario,Canada,P0K 4B4
+240,Pharmacy Garage 2,395 Philips Rd W,,Brampton,Ontario,Canada,P1E 4Y5
+241,Margaret Atwood South Block 2,874 University Rd S,,Windsor,Ontario,Canada,K3M 0T4
+242,Douglas Wright South Block 2,936 University Rd N,,Mississauga,Ontario,Canada,L9P 9S2
+243,Health East Block 1,311 Philips St E,,Brampton,Ontario,Canada,M9Y 2N4
+244,Dana Porter Lecture Hall 1,373 Main St S,,Windsor,Ontario,Canada,K4G 2K2
+245,Columbia Lake South Block 2,353 Queen Rd S,,Ottawa,Ontario,Canada,M6R 7C1
+246,Federation Garage 2,867 King Blvd W,,Oshawa,Ontario,Canada,M9A 1T5
+247,Chemistry East Block 2,647 Queen Ave W,,Mississauga,Ontario,Canada,N4N 4N8
+248,Jane Austen Residence 1,679 Queen Blvd N,,Toronto,Ontario,Canada,K7A 1H7
+249,Ira G. Needles Arena 1,538 Philips Ave E,,Kitchener,Ontario,Canada,M1P 4C5
+250,Arts Arena 2,505 King Ave W,,Sudbury,Ontario,Canada,K1A 3V1
+251,Health Lecture Hall 3,331 Main Rd N,,Toronto,Ontario,Canada,M1S 2V1
+252,Pharmacy Services 1,191 University St E,,Hamilton,Ontario,Canada,M2R 2G1
+253,Virginia Woolf Lecture Hall 2,108 Main Ave W,,Hamilton,Ontario,Canada,L2S 9T3
+254,Chemistry West Block 1,202 Philips St W,,Hamilton,Ontario,Canada,N5G 3L1
+255,Pharmacy Garage 3,715 Main Ln E,,Toronto,Ontario,Canada,M3X 9X3
+256,Federation Campus 3,761 University Ave W,,Windsor,Ontario,Canada,K3V 9C8
+257,Architecture Village 1,424 Philips Rd W,,Hamilton,Ontario,Canada,P2V 1A9
+258,Chemistry Arena 2,368 Philips St N,,Windsor,Ontario,Canada,P4X 6S6
+259,Chemistry Center 2,649 Main Ln S,,Vaughan,Ontario,Canada,K4C 8J2
+260,Margaret Atwood Village 1,500 Main St E,,Windsor,Ontario,Canada,L0K 1S1
+261,Ira G. Needles Lecture Hall 1,723 University Blvd S,,Waterloo,Ontario,Canada,K2A 2V5
+262,Virginia Woolf Garage 2,901 King Ave E,,Kitchener,Ontario,Canada,M1A 5S4
+263,Virginia Woolf Building 1,369 Main St W,,Oshawa,Ontario,Canada,P5B 7H5
+264,Arts Campus 2,891 University Ln N,,Mississauga,Ontario,Canada,P0B 0K0
+265,Carl A. Pollock Village 1,492 Philips Ave N,,Brampton,Ontario,Canada,N3N 3S5
+266,Minota Hagey South Block 3,179 Main Blvd N,,Brampton,Ontario,Canada,K2K 8B6
+267,Chemistry West Block 2,576 King Blvd E,,Waterloo,Ontario,Canada,P7A 5J4
+268,Jane Austen East Block 1,411 Main Ave W,,Hamilton,Ontario,Canada,P7J 8K2
+269,Architecture West Block 2,519 University Ave E,,Sudbury,Ontario,Canada,K5A 6M1
+270,Science Garage 3,343 Queen Rd N,,Kitchener,Ontario,Canada,M1B 3X6
+271,Douglas Wright Hall 2,865 University Ln N,,Brampton,Ontario,Canada,L6C 9B6
+272,Health Library 2,398 King Blvd W,,Hamilton,Ontario,Canada,M7L 3C3
+273,Health East Block 2,888 Main St S,,Waterloo,Ontario,Canada,L7T 5S1
+274,Margaret Atwood Village 2,888 Philips Rd E,,Oshawa,Ontario,Canada,M1C 2M9
+275,Engineering Library 1,955 King Ave N,,Mississauga,Ontario,Canada,M6X 0M4
+276,Arts Arena 3,514 Queen Ln S,,Waterloo,Ontario,Canada,N1G 1A0
+277,Pharmacy Residence 2,302 Queen Blvd N,,Ottawa,Ontario,Canada,P4C 0C3
+278,Ira G. Needles East Block 2,231 University Blvd N,,Toronto,Ontario,Canada,N0H 9S6
+279,Carl A. Pollock Arena 5,491 Queen Ave E,,Mississauga,Ontario,Canada,L4L 7G0
+280,Pharmacy Center 1,402 Queen Rd W,,Toronto,Ontario,Canada,K4R 2S3
+281,Virginia Woolf Library 3,745 Main St W,,Hamilton,Ontario,Canada,N8V 5X5
+282,Federation Campus 4,284 University Blvd S,,Toronto,Ontario,Canada,M0V 8P9
+283,Pharmacy Residence 3,202 Philips Ave E,,Brampton,Ontario,Canada,K3R 5H2
+284,Pharmacy Lecture Hall 1,425 King Ln N,,Hamilton,Ontario,Canada,P9G 9J7
+285,Margaret Atwood Campus 4,279 Queen St N,,Toronto,Ontario,Canada,L9K 0X7
+286,Architecture Village 2,728 Philips Ave E,,Kitchener,Ontario,Canada,M0A 2G1
+287,Virginia Woolf South Block 1,473 University Blvd W,,Ottawa,Ontario,Canada,K5M 5G2
+288,Claudette Millar East Block 3,754 Queen Blvd S,,Brampton,Ontario,Canada,P5K 9H6
+289,Dana Porter North Block 3,805 King Ave S,,Toronto,Ontario,Canada,P6B 2N9
+290,Pharmacy Center 2,679 University Rd S,,Hamilton,Ontario,Canada,K3P 5H1
+291,Columbia Lake Hall 1,111 King Ave S,,Waterloo,Ontario,Canada,M4E 0B6
+292,Ira G. Needles North Block 2,529 Philips Rd W,,Windsor,Ontario,Canada,M8R 1V9
+293,Pharmacy Residence 4,562 University St E,,Toronto,Ontario,Canada,M4E 1N2
+294,Federation Residence 2,849 University Ln N,,Hamilton,Ontario,Canada,P9V 0S2
+295,Claudette Millar Residence 1,154 University Blvd S,,Mississauga,Ontario,Canada,N8Y 4M4
+296,Pharmacy Building 1,150 Queen Ln W,,Kitchener,Ontario,Canada,K5A 6C4
+297,Carl A. Pollock Library 1,199 University Ave S,,Sudbury,Ontario,Canada,M1V 1M6
+298,Carl A. Pollock Hall 2,776 King St W,,Kitchener,Ontario,Canada,M6P 2T0
+299,Minota Hagey Hall 1,576 King Ave E,,Ottawa,Ontario,Canada,K2E 1P8
+300,Claudette Millar East Block 4,703 Philips Ln N,,Windsor,Ontario,Canada,P6Y 7K7
+301,Dana Porter Building 2,504 University Ln S,,Waterloo,Ontario,Canada,N2H 3J2
+302,Engineering Services 2,180 Queen Ave S,,Ottawa,Ontario,Canada,M5C 1R8
+303,Federation Garage 3,433 King Ln W,,Toronto,Ontario,Canada,P9X 6E6
+304,Health Residence 1,680 Main Ln N,,Waterloo,Ontario,Canada,P1M 8P6
+305,Minota Hagey Services 1,770 Queen Ln W,,Toronto,Ontario,Canada,L4R 2R0
+306,Federation West Block 2,439 Philips St W,,Vaughan,Ontario,Canada,M0N 4M4
+307,Carl A. Pollock South Block 1,812 University Ave S,,Vaughan,Ontario,Canada,N5L 6C3
+308,Ira G. Needles Library 1,943 Queen Rd E,,Toronto,Ontario,Canada,P2C 4X6
+309,Health East Block 3,971 Main Ln N,,Kitchener,Ontario,Canada,L3B 3B7
+310,Engineering West Block 2,469 Philips Blvd E,,Oshawa,Ontario,Canada,P6E 0K5
+311,Carl A. Pollock Lecture Hall 2,556 Philips Rd E,,Hamilton,Ontario,Canada,L4C 4A6
+312,Engineering Residence 3,974 Main Ave S,,Sudbury,Ontario,Canada,L3L 6X0
+313,Architecture Hall 1,235 Philips Ln N,,Mississauga,Ontario,Canada,M9M 4S6
+314,Douglas Wright Hall 3,358 Philips Rd E,,Sudbury,Ontario,Canada,P9R 9E0
+315,Virginia Woolf Center 1,963 King Ln E,,Vaughan,Ontario,Canada,K7C 5L5
+316,Minota Hagey Campus 1,771 King Ave S,,Brampton,Ontario,Canada,L0R 5G0
+317,Carl A. Pollock Campus 3,365 Queen Rd W,,Toronto,Ontario,Canada,P9J 5K8
+318,Carl A. Pollock West Block 1,787 King Ln E,,Kitchener,Ontario,Canada,P2M 1V2
+319,Minota Hagey North Block 1,927 Main Ave E,,Sudbury,Ontario,Canada,K3P 3M6
+320,Columbia Lake Village 2,366 Main Blvd W,,Waterloo,Ontario,Canada,N0C 7J8
+321,Math South Block 2,797 Queen Ln E,,Windsor,Ontario,Canada,K2G 3N6
+322,Jane Austen West Block 1,568 Philips Blvd S,,Waterloo,Ontario,Canada,N5H 5B0
+323,Ira G. Needles Campus 1,314 Philips Ln S,,Oshawa,Ontario,Canada,K2S 6R6
+324,Carl A. Pollock Services 2,104 University Ln S,,Hamilton,Ontario,Canada,K5X 3A0
+325,Pharmacy Library 1,810 King Blvd S,,Waterloo,Ontario,Canada,N8M 2C0
+326,Dana Porter Campus 1,566 Main Ln E,,Windsor,Ontario,Canada,L5V 5J2
+327,Federation Arena 3,333 Philips Ave S,,Toronto,Ontario,Canada,P8H 1P0
+328,Federation West Block 3,755 King Ln N,,Ottawa,Ontario,Canada,K1A 0E6
+329,Ira G. Needles Services 1,226 Main Blvd W,,Kitchener,Ontario,Canada,L0M 6E8
+330,Minota Hagey Lecture Hall 1,720 Philips Rd N,,Brampton,Ontario,Canada,P1M 1E7
+331,Science Lecture Hall 1,304 King Ln S,,Hamilton,Ontario,Canada,N4H 0Y7
+332,Science North Block 2,592 King Ave N,,Toronto,Ontario,Canada,K1V 2C8
+333,Chemistry North Block 3,840 University Blvd S,,Oshawa,Ontario,Canada,M4T 0E2
+334,Engineering South Block 2,397 King Blvd W,,Waterloo,Ontario,Canada,K0A 2H5
+335,Douglas Wright West Block 2,548 Main Blvd N,,Hamilton,Ontario,Canada,M2E 6R7
+336,Minota Hagey South Block 4,494 Queen Rd S,,Waterloo,Ontario,Canada,L0H 1S9
+337,Carl A. Pollock East Block 2,682 Queen Ave W,,Hamilton,Ontario,Canada,P0G 7V1
+338,Claudette Millar Hall 2,147 University Blvd E,,Toronto,Ontario,Canada,P9K 5X8
+339,Math Services 1,777 Philips Rd E,,Sudbury,Ontario,Canada,N2Y 9B0
+340,Arts Garage 1,969 Queen Rd S,,Waterloo,Ontario,Canada,N5K 5L0
+341,Virginia Woolf Library 4,663 Queen Rd S,,Waterloo,Ontario,Canada,N7T 1V7
+342,Columbia Lake Building 1,609 University St W,,Windsor,Ontario,Canada,K8Y 0C9
+343,Dana Porter West Block 1,620 Main Ave W,,Hamilton,Ontario,Canada,M0K 7N8
+344,Carl A. Pollock North Block 2,772 King Rd N,,Waterloo,Ontario,Canada,L0N 5M8
+345,Virginia Woolf Village 2,818 University St S,,Oshawa,Ontario,Canada,L6E 4J3
+346,Math West Block 1,972 Queen Ave W,,Mississauga,Ontario,Canada,M1S 0E7
+347,Ira G. Needles Center 2,703 Main Ave W,,Toronto,Ontario,Canada,P0Y 6V8
+348,Arts North Block 3,692 Philips Ave N,,Windsor,Ontario,Canada,P9N 8R6
+349,Pharmacy Campus 2,507 King Blvd W,,Kitchener,Ontario,Canada,L6X 4Y5
+350,Margaret Atwood Center 3,322 Philips Ave E,,Sudbury,Ontario,Canada,M2H 8Y5
+351,Math East Block 2,460 Main Rd W,,Sudbury,Ontario,Canada,P4S 0X1
+352,Architecture Services 2,248 University St S,,Vaughan,Ontario,Canada,L4L 2B4
+353,Science East Block 1,654 University Blvd W,,Waterloo,Ontario,Canada,P8K 8R3
+354,Virginia Woolf East Block 2,915 King St W,,Windsor,Ontario,Canada,N5Y 0A4
+355,Science Lecture Hall 2,989 Queen Ave E,,Ottawa,Ontario,Canada,P9J 3M7
+356,Arts Center 1,176 Philips Ave N,,Windsor,Ontario,Canada,K6L 8L2
+357,Arts Lecture Hall 2,966 King St E,,Oshawa,Ontario,Canada,L0G 5B9
+358,Dana Porter Hall 4,908 Main Ln E,,Waterloo,Ontario,Canada,M8K 2X1
+359,Virginia Woolf Residence 1,525 Main Ln W,,Waterloo,Ontario,Canada,M3J 5N5
+360,Dana Porter Library 3,870 Main Ln W,,Brampton,Ontario,Canada,K1P 7K9
+361,Pharmacy Arena 3,798 King Rd N,,Windsor,Ontario,Canada,M8M 0X5
+362,Virginia Woolf East Block 3,620 Queen Rd N,,Vaughan,Ontario,Canada,L5X 1E2
+363,Margaret Atwood Garage 3,107 University Ave S,,Sudbury,Ontario,Canada,N1J 8S1
+364,Health Arena 2,570 King St N,,Waterloo,Ontario,Canada,K2L 8C9
+365,Pharmacy West Block 2,364 Queen Rd W,,Sudbury,Ontario,Canada,N6N 0R1
+366,Margaret Atwood Arena 3,756 Main St N,,Waterloo,Ontario,Canada,M8E 4M9
+367,Chemistry Campus 1,883 Queen Rd W,,Sudbury,Ontario,Canada,K7H 8K2
+368,Federation East Block 3,916 Main Blvd S,,Vaughan,Ontario,Canada,M0Y 8G1
+369,Engineering Arena 2,686 Main Rd N,,Vaughan,Ontario,Canada,L5J 6X2
+370,Arts Residence 2,326 Main Blvd S,,Waterloo,Ontario,Canada,L9B 8T8
+371,Chemistry Campus 2,787 University Blvd N,,Mississauga,Ontario,Canada,P7N 5G3
+372,Math Campus 3,734 University Ave E,,Oshawa,Ontario,Canada,N5M 9G9
+373,Jane Austen Village 1,927 King Rd S,,Toronto,Ontario,Canada,M3K 6L5
+374,Health Center 1,850 King Rd W,,Oshawa,Ontario,Canada,M4V 8E2
+375,Chemistry South Block 1,387 Philips Ln S,,Vaughan,Ontario,Canada,K1A 8A9
+376,Jane Austen Services 2,887 Main Ave N,,Brampton,Ontario,Canada,M8Y 7G5
+377,Federation Library 1,890 Main Blvd S,,Oshawa,Ontario,Canada,P8C 6P8
+378,Architecture Center 1,344 Main Ave S,,Oshawa,Ontario,Canada,L2G 7P0
+379,Pharmacy East Block 1,599 Philips St E,,Hamilton,Ontario,Canada,L0J 8P6
+380,Carl A. Pollock West Block 2,565 University St E,,Waterloo,Ontario,Canada,P4L 9Y9
+381,Arts Services 3,769 Queen Blvd N,,Brampton,Ontario,Canada,M6K 8R5
+382,Douglas Wright Hall 4,911 Queen Ln N,,Brampton,Ontario,Canada,L7H 3C8
+383,Minota Hagey Library 3,253 Philips Ave E,,Ottawa,Ontario,Canada,K3S 5E7
+384,Carl A. Pollock Hall 3,315 Main Ave W,,Toronto,Ontario,Canada,L0G 9H2
+385,Virginia Woolf Arena 1,686 Philips St S,,Vaughan,Ontario,Canada,L8R 9A4
+386,Chemistry Library 1,559 Main Rd W,,Kitchener,Ontario,Canada,L6G 9H9
+387,Virginia Woolf Campus 2,271 King Rd N,,Mississauga,Ontario,Canada,N6G 1A3
+388,Virginia Woolf South Block 2,616 Queen Ave N,,Kitchener,Ontario,Canada,N9B 8X1
+389,Chemistry Hall 2,775 Philips Ln N,,Sudbury,Ontario,Canada,N8S 5B8
+390,Claudette Millar Library 2,921 Queen Rd E,,Ottawa,Ontario,Canada,P1S 2L7
+391,Pharmacy West Block 3,979 University Blvd W,,Vaughan,Ontario,Canada,L0A 9X1
+392,Virginia Woolf Arena 2,484 Philips Blvd W,,Hamilton,Ontario,Canada,K2S 9L4
+393,Margaret Atwood Services 2,678 King Ln E,,Sudbury,Ontario,Canada,N3S 8Y7
+394,Arts Village 3,672 Main Rd E,,Vaughan,Ontario,Canada,P5R 2E3
+395,Ira G. Needles East Block 3,816 Philips St S,,Brampton,Ontario,Canada,N5Y 9B2
+396,Federation Center 4,105 University Ave W,,Ottawa,Ontario,Canada,N1C 4K5
+397,Chemistry Lecture Hall 1,138 Queen Rd E,,Ottawa,Ontario,Canada,K2V 7A3
+398,Virginia Woolf Campus 3,299 University Ln S,,Ottawa,Ontario,Canada,L0P 3A2
+399,Chemistry Campus 3,898 Queen Blvd W,,Windsor,Ontario,Canada,P3X 0C1
+400,Margaret Atwood Campus 5,843 Main Ln E,,Hamilton,Ontario,Canada,M3J 7R9
+401,Architecture Campus 1,279 Queen Ln N,,Brampton,Ontario,Canada,K8M 5E8
+402,Minota Hagey West Block 2,650 Main Blvd W,,Windsor,Ontario,Canada,P7K 5T7
+403,Jane Austen South Block 1,128 Queen St E,,Waterloo,Ontario,Canada,N3K 5S5
+404,Virginia Woolf Garage 3,109 King Ave E,,Waterloo,Ontario,Canada,N5C 8H7
+405,Columbia Lake Village 3,323 Main Blvd S,,Sudbury,Ontario,Canada,L7J 3K4
+406,Science Library 1,307 Philips Ln E,,Kitchener,Ontario,Canada,K1C 7A8
+407,Engineering South Block 3,593 King Ln E,,Oshawa,Ontario,Canada,P4V 2X4
+408,Federation Library 2,868 Main Ave N,,Brampton,Ontario,Canada,N7Y 0X5
+409,Federation South Block 3,802 Philips Rd N,,Brampton,Ontario,Canada,N5A 0J6
+410,Jane Austen Building 1,433 King Ln E,,Kitchener,Ontario,Canada,P4K 4V9
+411,Columbia Lake Village 4,288 Queen Rd S,,Windsor,Ontario,Canada,M5R 4T2
+412,Jane Austen Residence 2,689 Philips St E,,Mississauga,Ontario,Canada,P6R 3G2
+413,Carl A. Pollock East Block 3,109 Philips Rd W,,Kitchener,Ontario,Canada,P8N 7M4
+414,Margaret Atwood South Block 3,681 University Rd N,,Kitchener,Ontario,Canada,K3L 7E7
+415,Columbia Lake Campus 1,469 King Ln E,,Hamilton,Ontario,Canada,K6E 5J9
+416,Jane Austen Center 2,764 Main Ave E,,Hamilton,Ontario,Canada,M8V 7C6
+417,Dana Porter Hall 5,746 Philips Ave E,,Windsor,Ontario,Canada,P9R 1C2
+418,Columbia Lake Library 2,421 King Blvd E,,Ottawa,Ontario,Canada,N4T 5X7
+419,Claudette Millar Residence 2,288 University Ave S,,Sudbury,Ontario,Canada,M1J 2R1
+420,Math Building 1,999 Queen Ln N,,Toronto,Ontario,Canada,N8C 1L9
+421,Health Building 3,770 Queen Blvd S,,Mississauga,Ontario,Canada,M7G 2X2
+422,Architecture Arena 1,779 King Blvd W,,Oshawa,Ontario,Canada,P4Y 7G8
+423,Arts Lecture Hall 3,711 Queen Ln W,,Brampton,Ontario,Canada,P4P 7Y3
+424,Chemistry Hall 3,415 King Rd E,,Kitchener,Ontario,Canada,M0A 8G5
+425,Dana Porter Hall 6,647 University Rd W,,Vaughan,Ontario,Canada,K6M 9K0
+426,Margaret Atwood Village 3,293 Queen Ln W,,Windsor,Ontario,Canada,L2R 6K4
+427,Chemistry Services 1,740 Philips Ln E,,Vaughan,Ontario,Canada,P4S 3C2
+428,Health Campus 1,213 Queen Ln W,,Vaughan,Ontario,Canada,P7J 5A2
+429,Engineering Garage 3,122 Philips St E,,Vaughan,Ontario,Canada,L7A 3C2
+430,Architecture Hall 2,322 King Rd E,,Oshawa,Ontario,Canada,M7B 5C2
+431,Engineering Campus 1,894 Queen St W,,Kitchener,Ontario,Canada,L4R 0E3
+432,Federation East Block 4,553 Philips St S,,Oshawa,Ontario,Canada,K8J 7R4
+433,Columbia Lake Residence 2,744 University Ln N,,Vaughan,Ontario,Canada,N4J 5B3
+434,Math Library 1,748 Queen Blvd N,,Kitchener,Ontario,Canada,M9E 6K0
+435,Engineering Lecture Hall 3,902 Queen Ln S,,Hamilton,Ontario,Canada,K3H 7C9
+436,Columbia Lake West Block 1,877 University St E,,Sudbury,Ontario,Canada,L8E 2V3
+437,Columbia Lake Garage 1,907 King Rd S,,Toronto,Ontario,Canada,N5G 4B7
+438,Ira G. Needles Garage 3,401 Main Rd S,,Ottawa,Ontario,Canada,L8P 5T4
+439,Margaret Atwood Residence 2,170 Main Ave W,,Vaughan,Ontario,Canada,M8P 7A8
+440,Federation North Block 1,289 University Ln E,,Ottawa,Ontario,Canada,L5C 8R3
+441,Virginia Woolf Center 2,609 Main Ave E,,Hamilton,Ontario,Canada,N5E 1X1
+442,Engineering South Block 4,232 Philips St S,,Waterloo,Ontario,Canada,N3E 0R7
+443,Virginia Woolf Lecture Hall 3,818 Main Blvd N,,Hamilton,Ontario,Canada,L9C 0J7
+444,Chemistry Hall 4,920 University Blvd W,,Hamilton,Ontario,Canada,K9L 8B1
+445,Dana Porter Building 3,321 Main St N,,Mississauga,Ontario,Canada,P6J 3X3
+446,Jane Austen Center 3,283 Main Ln W,,Waterloo,Ontario,Canada,P5T 6E2
+447,Arts Garage 2,511 Main Blvd S,,Brampton,Ontario,Canada,P7P 5Y5
+448,Douglas Wright Services 2,882 Queen Blvd S,,Ottawa,Ontario,Canada,P3R 8L5
+449,Ira G. Needles Hall 2,506 University St E,,Ottawa,Ontario,Canada,K8G 4A4
+450,Pharmacy Library 2,976 King St E,,Brampton,Ontario,Canada,P8G 1B7
+451,Douglas Wright Residence 1,241 King Blvd S,,Mississauga,Ontario,Canada,M4C 9R9
+452,Science North Block 3,179 King Rd S,,Oshawa,Ontario,Canada,P1M 0R1
+453,Engineering West Block 3,889 King Blvd W,,Windsor,Ontario,Canada,K3A 6B4
+454,Virginia Woolf Arena 3,426 Main Ln S,,Hamilton,Ontario,Canada,P3G 0R7
+455,Jane Austen Garage 1,192 Philips Rd E,,Windsor,Ontario,Canada,L2N 1V9
+456,Engineering Garage 4,508 King St W,,Brampton,Ontario,Canada,N2G 7Y3
+457,Carl A. Pollock Services 3,767 Main Ave S,,Mississauga,Ontario,Canada,K4S 5C1
+458,Claudette Millar Services 2,474 King Ave E,,Hamilton,Ontario,Canada,P0M 2P9
+459,Ira G. Needles Lecture Hall 2,249 Queen St S,,Mississauga,Ontario,Canada,M2C 1B3
+460,Health South Block 2,952 King St E,,Waterloo,Ontario,Canada,M7V 0N3
+461,Margaret Atwood Library 3,308 Main Ln E,,Brampton,Ontario,Canada,N9G 0R9
+462,Virginia Woolf Arena 4,361 Philips St E,,Mississauga,Ontario,Canada,P4B 7A1
+463,Federation Center 5,377 King St N,,Vaughan,Ontario,Canada,N3R 8E5
+464,Carl A. Pollock South Block 2,711 Main St S,,Mississauga,Ontario,Canada,P7Y 0B3
+465,Virginia Woolf Campus 4,441 Queen Rd S,,Toronto,Ontario,Canada,M5P 4K8
+466,Minota Hagey East Block 4,163 King Rd N,,Brampton,Ontario,Canada,M3G 5R2
+467,Chemistry North Block 4,491 Main Ln S,,Windsor,Ontario,Canada,L9G 6M9
+468,Columbia Lake Hall 2,655 Philips Ave S,,Ottawa,Ontario,Canada,P3G 4X2
+469,Claudette Millar West Block 1,888 Philips Ln S,,Hamilton,Ontario,Canada,K8Y 1H5
+470,Health North Block 2,130 King Rd W,,Vaughan,Ontario,Canada,N4G 3E2
+471,Arts Arena 4,880 Main Ln E,,Ottawa,Ontario,Canada,P9K 9K3
+472,Architecture Village 3,181 Queen Ave W,,Sudbury,Ontario,Canada,M2R 7V2
+473,Arts Library 1,331 University Rd N,,Vaughan,Ontario,Canada,N3J 3C2
+474,Ira G. Needles South Block 2,731 Queen Blvd W,,Mississauga,Ontario,Canada,N6B 9R5
+475,Federation Lecture Hall 2,860 Main Ln N,,Brampton,Ontario,Canada,K7T 0K8
+476,Margaret Atwood Services 3,852 University Ln W,,Brampton,Ontario,Canada,K3M 7R4
+477,Dana Porter Hall 7,270 Queen Blvd N,,Brampton,Ontario,Canada,L7T 1X1
+478,Arts East Block 2,699 Main Ave W,,Windsor,Ontario,Canada,M7A 2T9
+479,Science West Block 2,565 University Blvd E,,Sudbury,Ontario,Canada,L1C 1T5
+480,Chemistry Garage 1,824 Queen Ln S,,Windsor,Ontario,Canada,P6B 2N9
+481,Health Residence 2,989 Philips Ave N,,Windsor,Ontario,Canada,M4T 4H1
+482,Health Library 3,103 Main Blvd N,,Oshawa,Ontario,Canada,N7Y 0V3
+483,Science Lecture Hall 3,775 Queen Rd W,,Oshawa,Ontario,Canada,K9A 3Y4
+484,Margaret Atwood South Block 4,945 Philips St S,,Kitchener,Ontario,Canada,K5B 2B9
+485,Dana Porter Village 1,189 University St W,,Kitchener,Ontario,Canada,L4Y 2T9
+486,Douglas Wright West Block 3,136 University Blvd E,,Hamilton,Ontario,Canada,N1S 8C4
+487,Carl A. Pollock Residence 2,224 King Blvd W,,Brampton,Ontario,Canada,L3B 1X1
+488,Carl A. Pollock North Block 3,805 Main Blvd W,,Ottawa,Ontario,Canada,M4X 9P2
+489,Jane Austen Hall 1,632 Queen Rd S,,Ottawa,Ontario,Canada,L4J 0E0
+490,Ira G. Needles Center 3,915 University Ave W,,Windsor,Ontario,Canada,K5P 8J0
+491,Science North Block 4,388 King St E,,Vaughan,Ontario,Canada,P8N 0E5
+492,Columbia Lake Services 2,841 Main Ln N,,Kitchener,Ontario,Canada,L5N 7V0
+493,Health Hall 2,259 Queen Ln E,,Oshawa,Ontario,Canada,N0X 4N8
+494,Margaret Atwood Arena 4,313 Main Blvd E,,Waterloo,Ontario,Canada,L4A 5R8
+495,Arts Lecture Hall 4,720 Queen Ave N,,Vaughan,Ontario,Canada,M0L 6C7
+496,Pharmacy Village 1,562 King Ave E,,Kitchener,Ontario,Canada,K5B 3C7
+497,Virginia Woolf Arena 5,918 Queen Ln S,,Mississauga,Ontario,Canada,M7X 4N2
+498,Math South Block 3,628 Philips Ave N,,Oshawa,Ontario,Canada,N8E 0M0
+499,Chemistry Village 2,578 University St E,,Toronto,Ontario,Canada,P4J 5J3
+500,Dana Porter Campus 2,645 King Rd N,,Vaughan,Ontario,Canada,L2L 1A9
+501,Margaret Atwood Garage 4,204 Philips Ln E,,Brampton,Ontario,Canada,M4G 4K2
+502,Chemistry Campus 4,727 King Ln W,,Toronto,Ontario,Canada,L0V 0E6
+503,Engineering Building 1,536 Queen Ave W,,Ottawa,Ontario,Canada,M4N 3Y1
+504,Ira G. Needles Lecture Hall 3,234 University Rd N,,Oshawa,Ontario,Canada,M7V 3K2
+505,Minota Hagey West Block 3,472 Queen Ave E,,Hamilton,Ontario,Canada,N7A 1V1
+506,Douglas Wright Hall 5,572 Philips Blvd E,,Ottawa,Ontario,Canada,P2X 1R1
+507,Columbia Lake Garage 2,765 University Blvd W,,Windsor,Ontario,Canada,P6K 9K8
+508,Arts Hall 2,493 University Blvd S,,Ottawa,Ontario,Canada,N6N 8K2
+509,Chemistry North Block 5,828 Main Rd N,,Ottawa,Ontario,Canada,P7N 8E7
+510,Arts Campus 3,515 University Ln N,,Sudbury,Ontario,Canada,P6N 7B1
+511,Science South Block 1,242 Main St S,,Sudbury,Ontario,Canada,L7Y 4R9
+512,Jane Austen Hall 2,300 Philips Blvd E,,Ottawa,Ontario,Canada,M6P 1A9
+513,Virginia Woolf Services 2,967 Philips Blvd N,,Hamilton,Ontario,Canada,P0A 8P1
+514,Dana Porter South Block 4,131 Philips Rd W,,Sudbury,Ontario,Canada,M6R 6S8
+515,Science Center 2,277 Queen Ave S,,Brampton,Ontario,Canada,N5S 2M2
+516,Health Arena 3,173 University Ave W,,Sudbury,Ontario,Canada,N2C 2S7
+517,Claudette Millar Lecture Hall 2,284 Queen Ln W,,Brampton,Ontario,Canada,N6P 3H6
+518,Architecture Lecture Hall 2,610 Philips Ln E,,Windsor,Ontario,Canada,P9P 0B9
+519,Carl A. Pollock North Block 4,477 University Ln W,,Waterloo,Ontario,Canada,L8L 7X1
+520,Virginia Woolf West Block 3,724 University Ave W,,Sudbury,Ontario,Canada,K8M 9B5
+521,Margaret Atwood East Block 3,111 Queen Rd W,,Ottawa,Ontario,Canada,M6P 4M2
+522,Engineering North Block 2,711 King Ln E,,Toronto,Ontario,Canada,N9H 9B4
+523,Architecture Campus 2,596 University Ave N,,Vaughan,Ontario,Canada,M2L 4L0
+524,Math Lecture Hall 3,278 Main Ave W,,Hamilton,Ontario,Canada,L4K 7H8
+525,Engineering Village 2,186 Philips Ln S,,Oshawa,Ontario,Canada,N6K 7H3
+526,Jane Austen North Block 2,962 King St E,,Waterloo,Ontario,Canada,K2T 6V4
+527,Carl A. Pollock North Block 5,870 Main Ave W,,Sudbury,Ontario,Canada,N7L 2X6
+528,Architecture Campus 3,916 Queen Rd E,,Brampton,Ontario,Canada,K1Y 5S9
+529,Minota Hagey Village 2,376 King St E,,Sudbury,Ontario,Canada,P6T 3J8
+530,Columbia Lake Center 3,806 Philips Blvd N,,Sudbury,Ontario,Canada,K1A 6E8
+531,Math Center 2,556 King Ave E,,Vaughan,Ontario,Canada,L0A 9C0
+532,Science Lecture Hall 4,753 University St N,,Ottawa,Ontario,Canada,L6H 1H4
+533,Dana Porter Hall 8,776 University Rd E,,Windsor,Ontario,Canada,M4H 1L0
+534,Federation Services 2,440 University Blvd E,,Kitchener,Ontario,Canada,N1V 3R2
+535,Carl A. Pollock Building 2,247 Main Rd S,,Ottawa,Ontario,Canada,K7L 1B1
+536,Chemistry Lecture Hall 2,845 King Rd N,,Oshawa,Ontario,Canada,L0B 6L2
+537,Columbia Lake West Block 2,500 Main St W,,Oshawa,Ontario,Canada,N6C 8K0
+538,Federation North Block 2,937 Queen St E,,Hamilton,Ontario,Canada,M6B 1P8
+539,Columbia Lake Building 2,961 Queen Blvd S,,Kitchener,Ontario,Canada,P0R 3M6
+540,Math Center 3,805 King Rd N,,Sudbury,Ontario,Canada,N3G 0J0
+541,Jane Austen Library 4,600 Queen St E,,Oshawa,Ontario,Canada,P7A 0N0
+542,Columbia Lake East Block 3,838 University Rd N,,Mississauga,Ontario,Canada,P7Y 2K1
+543,Engineering North Block 3,244 Queen St W,,Ottawa,Ontario,Canada,K3G 0H0
+544,Dana Porter South Block 5,912 University Rd S,,Ottawa,Ontario,Canada,K1E 7K1
+545,Science Services 2,445 Queen Blvd N,,Sudbury,Ontario,Canada,P8G 5J0
+546,Jane Austen Residence 3,443 University St E,,Kitchener,Ontario,Canada,N2P 8H7
+547,Pharmacy West Block 4,695 University Ave N,,Sudbury,Ontario,Canada,P6H 0V1
+548,Architecture Arena 2,283 University Ln E,,Windsor,Ontario,Canada,N2J 2L8
+549,Ira G. Needles Services 2,344 Philips Ln N,,Ottawa,Ontario,Canada,L7C 4P6
+550,Architecture Garage 1,341 Philips St N,,Ottawa,Ontario,Canada,M8X 3T3
+551,Minota Hagey Arena 4,298 University Ave W,,Oshawa,Ontario,Canada,L2B 0P4
+552,Science Services 3,357 King Ln W,,Toronto,Ontario,Canada,K0Y 2H0
+553,Carl A. Pollock Garage 4,218 University Ave W,,Ottawa,Ontario,Canada,P5S 3N3
+554,Math Village 2,333 University Ave W,,Mississauga,Ontario,Canada,N3C 7V0
+555,Claudette Millar Residence 3,321 Main Rd S,,Windsor,Ontario,Canada,M2T 3P4
+556,Science Village 2,230 University Ln N,,Vaughan,Ontario,Canada,L1T 7S2
+557,Columbia Lake Library 3,402 Main Ave S,,Ottawa,Ontario,Canada,P3C 6X7
+558,Science Lecture Hall 5,584 Queen Blvd N,,Windsor,Ontario,Canada,L3N 6K9
+559,Health West Block 1,687 University Rd N,,Toronto,Ontario,Canada,N8B 6X6
+560,Carl A. Pollock East Block 4,917 University Rd W,,Mississauga,Ontario,Canada,K8A 6J2
+561,Douglas Wright Campus 1,344 University St W,,Sudbury,Ontario,Canada,M2T 9A7
+562,Ira G. Needles East Block 4,241 Queen Ave E,,Sudbury,Ontario,Canada,N0C 6N8
+563,Engineering Campus 2,536 King Ln S,,Sudbury,Ontario,Canada,K9N 0X5
+564,Engineering Building 2,492 King Rd N,,Hamilton,Ontario,Canada,M2Y 1Y3
+565,Health Village 1,344 Main St W,,Ottawa,Ontario,Canada,L3N 5L8
+566,Claudette Millar Campus 2,155 University Blvd E,,Oshawa,Ontario,Canada,N8X 1V8
+567,Margaret Atwood West Block 1,399 Queen Ln E,,Sudbury,Ontario,Canada,K3T 1C6
+568,Arts Campus 4,178 University Ave E,,Waterloo,Ontario,Canada,L7G 3X0
+569,Dana Porter Services 1,798 Main Ave W,,Hamilton,Ontario,Canada,N7A 4J1
+570,Architecture South Block 1,921 Philips Ln E,,Windsor,Ontario,Canada,P5N 7X8
+571,Ira G. Needles Hall 3,411 Main Ave E,,Kitchener,Ontario,Canada,M3V 5M0
+572,Health Village 2,391 Queen Ave S,,Brampton,Ontario,Canada,M2H 2H3
+573,Math Arena 3,424 Main Ave W,,Vaughan,Ontario,Canada,M2J 8B5
+574,Douglas Wright Residence 2,481 Queen Ln S,,Brampton,Ontario,Canada,M1A 6V2
+575,Ira G. Needles West Block 2,427 Philips St E,,Sudbury,Ontario,Canada,M7M 9G9
+576,Ira G. Needles Village 2,805 University Rd N,,Kitchener,Ontario,Canada,P1M 0R9
+577,Pharmacy Hall 2,465 University Blvd N,,Ottawa,Ontario,Canada,L9X 3L3
+578,Architecture Building 2,651 Queen St W,,Mississauga,Ontario,Canada,N5X 0P6
+579,Health North Block 3,974 Queen Blvd W,,Hamilton,Ontario,Canada,K4P 5M7
+580,Margaret Atwood Building 2,320 Queen Rd W,,Vaughan,Ontario,Canada,L6S 2C2
+581,Science Campus 3,586 Main Blvd N,,Ottawa,Ontario,Canada,N1A 6L6
+582,Arts Garage 3,573 Main Ave S,,Kitchener,Ontario,Canada,N4Y 7B4
+583,Jane Austen Campus 2,605 Main Rd S,,Toronto,Ontario,Canada,K2L 4V1
+584,Dana Porter Services 2,283 Queen Ave N,,Waterloo,Ontario,Canada,M7C 9P9
+585,Carl A. Pollock Lecture Hall 3,546 King Rd N,,Hamilton,Ontario,Canada,P9A 4H9
+586,Engineering Residence 4,427 Queen Ave E,,Kitchener,Ontario,Canada,K4P 6P0
+587,Dana Porter Campus 3,642 University Ln S,,Sudbury,Ontario,Canada,L1H 8N5
+588,Dana Porter Campus 4,801 King St E,,Kitchener,Ontario,Canada,K2X 4P7
+589,Claudette Millar Village 2,266 University Ave S,,Brampton,Ontario,Canada,L3Y 9X8
+590,Margaret Atwood North Block 2,874 University Rd W,,Waterloo,Ontario,Canada,K2A 7P4
+591,Douglas Wright Residence 3,936 Queen Ln E,,Kitchener,Ontario,Canada,M0E 3G2
+592,Pharmacy Campus 3,228 Philips Ave N,,Windsor,Ontario,Canada,K1A 7S0
+593,Science Building 2,133 Main Ln N,,Oshawa,Ontario,Canada,K4B 1M0
+594,Math East Block 3,226 Main Ave S,,Kitchener,Ontario,Canada,M0C 2L9
+595,Douglas Wright Village 1,264 Main Ln S,,Brampton,Ontario,Canada,P1E 9A8
+596,Science North Block 5,296 King Ave N,,Waterloo,Ontario,Canada,L8V 5H7
+597,Math Residence 1,954 King Rd W,,Mississauga,Ontario,Canada,P3S 1N1
+598,Ira G. Needles Building 4,632 Philips Rd E,,Vaughan,Ontario,Canada,P0C 5V1
+599,Federation Campus 5,567 Main Blvd W,,Mississauga,Ontario,Canada,P6M 6J1
+600,Carl A. Pollock Center 1,476 Philips St W,,Sudbury,Ontario,Canada,K6T 8C1
+601,Health Services 1,510 Main St S,,Waterloo,Ontario,Canada,M3N 3R1
+602,Pharmacy South Block 1,534 Queen Blvd E,,Sudbury,Ontario,Canada,N5V 9R7
+603,Virginia Woolf Campus 5,250 Queen St N,,Vaughan,Ontario,Canada,N7K 2A1
+604,Engineering South Block 5,169 Queen St S,,Windsor,Ontario,Canada,P5G 4E1
+605,Virginia Woolf East Block 4,604 Queen Ave E,,Sudbury,Ontario,Canada,N7X 4Y5
+606,Margaret Atwood Garage 5,118 University Rd N,,Windsor,Ontario,Canada,N5R 7T0
+607,Engineering Residence 5,670 King Ave W,,Windsor,Ontario,Canada,L4R 7E9
+608,Carl A. Pollock Center 2,667 Main Ln W,,Oshawa,Ontario,Canada,P2X 0R4
+609,Carl A. Pollock Lecture Hall 4,486 Main Blvd E,,Hamilton,Ontario,Canada,K0B 2P5
+610,Jane Austen Arena 1,883 King Rd N,,Windsor,Ontario,Canada,M5S 5B3
+611,Pharmacy Library 3,763 King Ln N,,Waterloo,Ontario,Canada,M1N 2A8
+612,Columbia Lake Arena 2,571 Queen Ln W,,Vaughan,Ontario,Canada,K7A 5R9
+613,Federation Village 2,686 University Rd N,,Sudbury,Ontario,Canada,L5V 8N2
+614,Dana Porter Village 2,546 Philips Rd N,,Brampton,Ontario,Canada,L4L 0M9
+615,Federation East Block 5,331 Main St N,,Ottawa,Ontario,Canada,M4C 9X7
+616,Claudette Millar Library 3,455 University Blvd E,,Windsor,Ontario,Canada,P5J 6R4
+617,Virginia Woolf Hall 1,787 Main Ave N,,Sudbury,Ontario,Canada,P2V 3T4
+618,Margaret Atwood East Block 4,729 Queen Ln N,,Brampton,Ontario,Canada,L5T 2K2
+619,Dana Porter South Block 6,545 Queen Blvd N,,Sudbury,Ontario,Canada,L6L 4H4
+620,Pharmacy Services 2,344 University Ave S,,Toronto,Ontario,Canada,L4T 7Y6
+621,Claudette Millar Center 1,137 Philips Ave E,,Kitchener,Ontario,Canada,K4L 8H0
+622,Carl A. Pollock East Block 5,120 University St E,,Ottawa,Ontario,Canada,M1S 5C6
+623,Health Library 4,214 Main Ln N,,Brampton,Ontario,Canada,P8L 7C3
+624,Math East Block 4,926 King Blvd W,,Mississauga,Ontario,Canada,N3G 1H3
+625,Minota Hagey Hall 2,518 King Ln N,,Oshawa,Ontario,Canada,P5E 5Y6
+626,Carl A. Pollock Center 3,352 King Ave E,,Oshawa,Ontario,Canada,M4A 9B0
+627,Pharmacy Campus 4,665 Queen Blvd E,,Sudbury,Ontario,Canada,K8K 7R0
+628,Federation West Block 4,361 King St S,,Vaughan,Ontario,Canada,L2T 5S0
+629,Minota Hagey South Block 5,182 Queen Rd W,,Hamilton,Ontario,Canada,N1H 4X1
+630,Douglas Wright Services 3,716 Main Blvd W,,Toronto,Ontario,Canada,K2T 2A6
+631,Science Center 3,412 King Ln N,,Waterloo,Ontario,Canada,L3X 2S5
+632,Ira G. Needles Hall 4,994 Philips Blvd S,,Sudbury,Ontario,Canada,P5M 3C6
+633,Douglas Wright Residence 4,502 Queen Ln S,,Toronto,Ontario,Canada,K8K 1T3
+634,Minota Hagey North Block 2,972 Philips St W,,Ottawa,Ontario,Canada,N9L 2C5
+635,Arts Lecture Hall 5,220 University Ln W,,Oshawa,Ontario,Canada,N1K 3J4
+636,Dana Porter North Block 4,606 Queen Ave W,,Mississauga,Ontario,Canada,P3M 3S2
+637,Claudette Millar East Block 5,249 University Blvd E,,Mississauga,Ontario,Canada,P7K 5T1
+638,Architecture Hall 3,236 King Rd S,,Windsor,Ontario,Canada,N9L 1E8
+639,Engineering Arena 3,440 Philips Rd E,,Ottawa,Ontario,Canada,P0A 4X9
+640,Federation Campus 6,504 King Ave N,,Ottawa,Ontario,Canada,L4H 8V5
+641,Ira G. Needles Residence 2,191 King Ln W,,Kitchener,Ontario,Canada,M1N 0G7
+642,Minota Hagey North Block 3,469 Queen Blvd E,,Ottawa,Ontario,Canada,M8N 6H5
+643,Carl A. Pollock East Block 6,254 Main Rd N,,Mississauga,Ontario,Canada,L0K 2B7
+644,Minota Hagey Residence 2,822 Queen Rd N,,Oshawa,Ontario,Canada,K7P 8V7
+645,Carl A. Pollock Building 3,966 Philips St E,,Waterloo,Ontario,Canada,L4H 2X4
+646,Jane Austen West Block 2,779 Main Ave N,,Brampton,Ontario,Canada,P2S 1K7
+647,Math West Block 2,436 University Blvd N,,Windsor,Ontario,Canada,M9E 5G0
+648,Chemistry Hall 5,950 Queen Rd E,,Ottawa,Ontario,Canada,K5B 9T5
+649,Jane Austen Residence 4,316 University Blvd E,,Toronto,Ontario,Canada,K8R 1R4
+650,Arts Library 2,889 Queen St N,,Mississauga,Ontario,Canada,L6R 4G1
+651,Dana Porter Hall 9,920 Queen Blvd S,,Hamilton,Ontario,Canada,K5X 3V7
+652,Federation Hall 2,374 Main Ln W,,Waterloo,Ontario,Canada,N5H 6S1
+653,Engineering Garage 5,449 Queen Ave S,,Oshawa,Ontario,Canada,P8C 4T6
+654,Chemistry West Block 3,920 Queen Blvd S,,Kitchener,Ontario,Canada,M3X 6M9
+655,Engineering Garage 6,178 University Ln N,,Brampton,Ontario,Canada,N6E 7L5
+656,Minota Hagey Lecture Hall 2,183 Main St N,,Sudbury,Ontario,Canada,N2H 6B1
+657,Claudette Millar West Block 2,821 King Blvd W,,Sudbury,Ontario,Canada,N9L 5H3
+658,Arts Building 2,864 Main Blvd N,,Windsor,Ontario,Canada,P0A 6E0
+659,Arts Center 2,588 Queen Rd W,,Vaughan,Ontario,Canada,P9P 6M1
+660,Health Residence 3,114 Philips St N,,Mississauga,Ontario,Canada,K3V 2K6
+661,Margaret Atwood Library 4,188 King Rd S,,Oshawa,Ontario,Canada,N0E 2G7
+662,Carl A. Pollock Hall 4,120 Queen Ln S,,Mississauga,Ontario,Canada,M9R 0N0
+663,Math Center 4,967 Queen Rd W,,Ottawa,Ontario,Canada,P8M 0V6
+664,Carl A. Pollock Garage 5,705 Main Rd S,,Toronto,Ontario,Canada,P0S 9N8
+665,Chemistry Campus 5,763 Queen Rd N,,Oshawa,Ontario,Canada,P5T 6A2
+666,Dana Porter North Block 5,296 Queen Blvd W,,Mississauga,Ontario,Canada,P3N 9T2
+667,Dana Porter North Block 6,828 Queen Rd E,,Oshawa,Ontario,Canada,L9J 4C7
+668,Health Residence 4,304 Philips Ln W,,Waterloo,Ontario,Canada,N7M 3J8
+669,Engineering Arena 4,467 King Blvd S,,Kitchener,Ontario,Canada,P0C 5S1
+670,Pharmacy Building 2,675 Philips Rd E,,Hamilton,Ontario,Canada,M0Y 4G8
+671,Math North Block 1,151 Queen Rd N,,Waterloo,Ontario,Canada,P9E 8B8
+672,Math Residence 2,745 University Ave E,,Kitchener,Ontario,Canada,M7X 7E2
+673,Douglas Wright Village 2,938 Philips St S,,Oshawa,Ontario,Canada,N0K 7N4
+674,Virginia Woolf Residence 2,187 King Blvd W,,Hamilton,Ontario,Canada,L2X 6K2
+675,Claudette Millar Services 3,519 Queen Ln E,,Toronto,Ontario,Canada,N2A 8C1
+676,Columbia Lake Village 5,511 Philips Rd N,,Windsor,Ontario,Canada,K2B 8M6
+677,Federation West Block 5,797 Main Blvd E,,Hamilton,Ontario,Canada,K4X 9G6
+678,Ira G. Needles Center 4,310 Main Ln W,,Hamilton,Ontario,Canada,N3M 1B8
+679,Columbia Lake Services 3,842 Philips Ln E,,Mississauga,Ontario,Canada,K8Y 4X5
+680,Arts Arena 5,128 Main Ln E,,Mississauga,Ontario,Canada,M6X 1B5
+681,Minota Hagey Center 3,619 King St N,,Sudbury,Ontario,Canada,K7M 9A7
+682,Columbia Lake Library 4,924 Main Ln S,,Hamilton,Ontario,Canada,M4G 6X3
+683,Math Village 3,628 Main Ave E,,Oshawa,Ontario,Canada,K2S 6C1
+684,Engineering Services 3,233 Queen Ave W,,Waterloo,Ontario,Canada,M8R 9Y8
+685,Federation South Block 4,370 Main Rd W,,Oshawa,Ontario,Canada,N6H 2X2
+686,Carl A. Pollock North Block 6,568 Philips Ln N,,Mississauga,Ontario,Canada,N7B 2Y5
+687,Math Lecture Hall 4,972 Queen St N,,Hamilton,Ontario,Canada,P4B 8G1
+688,Douglas Wright Campus 2,483 King Blvd W,,Toronto,Ontario,Canada,L2S 0M4
+689,Science Residence 2,938 Queen St N,,Brampton,Ontario,Canada,M1B 6V9
+690,Dana Porter Lecture Hall 2,563 King Rd W,,Ottawa,Ontario,Canada,L2X 7T7
+691,Health South Block 3,845 King St W,,Windsor,Ontario,Canada,L6N 8B7
+692,Minota Hagey Center 4,190 Philips St E,,Brampton,Ontario,Canada,K8C 3Y9
+693,Engineering Lecture Hall 4,634 Philips Rd N,,Waterloo,Ontario,Canada,P2A 4J3
+694,Jane Austen Hall 3,186 Main Ln E,,Windsor,Ontario,Canada,P0V 0N6
+695,Arts Services 4,124 Main Blvd W,,Vaughan,Ontario,Canada,K1E 8H4
+696,Health Residence 5,361 University Ave E,,Windsor,Ontario,Canada,L0N 2A0
+697,Dana Porter Services 3,201 King Ave W,,Hamilton,Ontario,Canada,M6E 0J3
+698,Jane Austen Library 5,604 Main Ln W,,Waterloo,Ontario,Canada,M0N 7Y6
+699,Chemistry Hall 6,129 Queen Ave N,,Vaughan,Ontario,Canada,P9E 3Y2
+700,Dana Porter Lecture Hall 3,516 Queen St S,,Kitchener,Ontario,Canada,M8H 3Y6
+701,Margaret Atwood Hall 4,142 University Rd E,,Sudbury,Ontario,Canada,L0B 7L9
+702,Minota Hagey South Block 6,796 Queen Blvd S,,Ottawa,Ontario,Canada,P4B 2Y9
+703,Chemistry Campus 6,191 Queen St S,,Brampton,Ontario,Canada,M6J 9X5
+704,Columbia Lake Center 4,367 Queen Blvd S,,Sudbury,Ontario,Canada,M5J 7N0
+705,Health Center 2,102 Main Rd N,,Toronto,Ontario,Canada,L6Y 7R8
+706,Chemistry East Block 3,997 University Ln N,,Sudbury,Ontario,Canada,N1P 6P6
+707,Arts South Block 2,886 University St W,,Hamilton,Ontario,Canada,L7A 3A4
+708,Douglas Wright Library 1,192 Main Blvd S,,Mississauga,Ontario,Canada,N5B 4V9
+709,Science Arena 1,300 Queen St E,,Ottawa,Ontario,Canada,P7H 8J9
+710,Jane Austen Residence 5,166 Main Ave N,,Kitchener,Ontario,Canada,M9K 8L3
+711,Architecture North Block 2,794 Main Ln E,,Sudbury,Ontario,Canada,P7A 6B5
+712,Claudette Millar South Block 1,516 King St W,,Oshawa,Ontario,Canada,M8B 3B4
+713,Claudette Millar Garage 1,559 King St W,,Mississauga,Ontario,Canada,M1A 3S1
+714,Pharmacy Library 4,268 King Blvd N,,Sudbury,Ontario,Canada,K0V 6A9
+715,Columbia Lake South Block 3,356 Philips St W,,Mississauga,Ontario,Canada,M0N 8K1
+716,Ira G. Needles East Block 5,197 Queen Ln N,,Waterloo,Ontario,Canada,K0R 5C2
+717,Engineering West Block 4,921 Queen St E,,Ottawa,Ontario,Canada,N1E 0Y0
+718,Dana Porter South Block 7,490 Queen St W,,Mississauga,Ontario,Canada,P9A 7R7
+719,Claudette Millar West Block 3,735 Main St E,,Sudbury,Ontario,Canada,K7X 5J1
+720,Math Arena 4,709 University Ln S,,Ottawa,Ontario,Canada,L8L 5S7
+721,Ira G. Needles Residence 3,348 Philips St N,,Kitchener,Ontario,Canada,M9S 8P4
+722,Jane Austen West Block 3,654 Philips Ave W,,Vaughan,Ontario,Canada,P5M 5A8
+723,Jane Austen Center 4,794 Philips St S,,Brampton,Ontario,Canada,P0S 5J3
+724,Science East Block 2,170 King Ave W,,Oshawa,Ontario,Canada,P5N 9M6
+725,Columbia Lake Residence 3,207 Queen St W,,Mississauga,Ontario,Canada,K3K 7J3
+726,Carl A. Pollock North Block 7,886 King Rd S,,Windsor,Ontario,Canada,L0P 0C5
+727,Architecture Garage 2,217 Philips Blvd W,,Mississauga,Ontario,Canada,P5B 0J3
+728,Dana Porter Residence 1,324 King Ave E,,Brampton,Ontario,Canada,L2J 0H4
+729,Math Arena 5,951 Philips Rd N,,Hamilton,Ontario,Canada,L4T 3P5
+730,Arts Garage 4,918 Main Rd N,,Waterloo,Ontario,Canada,L2J 3Y6
+731,Douglas Wright Village 3,713 Queen Ave N,,Ottawa,Ontario,Canada,P3Y 4G5
+732,Pharmacy Arena 4,744 King Ave W,,Mississauga,Ontario,Canada,K7C 2X6
+733,Virginia Woolf Village 3,610 Main Rd S,,Hamilton,Ontario,Canada,M8V 7V4
+734,Jane Austen Services 3,753 Main St S,,Mississauga,Ontario,Canada,L7K 6J4
+735,Claudette Millar West Block 4,486 Main Ave E,,Vaughan,Ontario,Canada,P1G 1M7
+736,Virginia Woolf Village 4,335 Main St W,,Brampton,Ontario,Canada,P5S 7T6
+737,Claudette Millar Village 3,923 Queen Blvd E,,Windsor,Ontario,Canada,K2T 3L1
+738,Douglas Wright West Block 4,184 King Ln N,,Vaughan,Ontario,Canada,L1E 1P0
+739,Margaret Atwood Library 5,441 Philips Blvd E,,Vaughan,Ontario,Canada,M3G 8L0
+740,Dana Porter Campus 5,942 King Rd W,,Ottawa,Ontario,Canada,K7X 2R3
+741,Pharmacy North Block 3,867 Philips Rd S,,Brampton,Ontario,Canada,P8T 7N1
+742,Columbia Lake South Block 4,292 Queen Rd S,,Oshawa,Ontario,Canada,N8A 5G9
+743,Health Campus 2,855 University Rd E,,Hamilton,Ontario,Canada,L6S 6Y4
+744,Columbia Lake Lecture Hall 4,123 Main St S,,Kitchener,Ontario,Canada,M9R 6J6
+745,Chemistry Garage 2,495 Philips Rd N,,Hamilton,Ontario,Canada,P7M 1H1
+746,Margaret Atwood Residence 3,132 Main Rd N,,Kitchener,Ontario,Canada,L1R 4J3
+747,Dana Porter Center 2,636 University Rd N,,Hamilton,Ontario,Canada,P0H 5S6
+748,Arts Building 3,232 Main Rd W,,Waterloo,Ontario,Canada,N3G 3M6
+749,Carl A. Pollock Residence 3,718 Main Blvd S,,Brampton,Ontario,Canada,N4J 0G7
+750,Chemistry South Block 2,508 Main Ave E,,Ottawa,Ontario,Canada,N7T 9B1
+751,Dana Porter Center 3,567 King Blvd W,,Ottawa,Ontario,Canada,L6K 2S7
+752,Federation West Block 6,774 Philips Ln N,,Windsor,Ontario,Canada,K3H 4Y4
+753,Chemistry North Block 6,843 Philips Rd W,,Brampton,Ontario,Canada,K5C 1X5
+754,Claudette Millar Hall 3,268 King Ave N,,Oshawa,Ontario,Canada,K1T 6N6
+755,Science Services 4,138 University Blvd N,,Kitchener,Ontario,Canada,M7V 7C1
+756,Margaret Atwood Center 4,348 Queen Ave W,,Vaughan,Ontario,Canada,L2A 9E2
+757,Dana Porter Building 4,647 Queen Ave N,,Sudbury,Ontario,Canada,K4G 7P2
+758,Science North Block 6,135 Main Ave W,,Toronto,Ontario,Canada,P1R 4T0
+759,Architecture Arena 3,890 Queen Ave S,,Hamilton,Ontario,Canada,L3C 0S0
+760,Architecture Village 4,940 Philips St S,,Waterloo,Ontario,Canada,L2B 6X1
+761,Columbia Lake Village 6,675 Philips Ln S,,Brampton,Ontario,Canada,N6E 3J1
+762,Douglas Wright Village 4,277 University Rd E,,Toronto,Ontario,Canada,N3T 3C4
+763,Douglas Wright Arena 3,168 Philips Rd E,,Ottawa,Ontario,Canada,N1Y 9H4
+764,Math Lecture Hall 5,432 Queen Ave E,,Kitchener,Ontario,Canada,M7C 5A9
+765,Jane Austen Hall 4,491 Main Ave N,,Mississauga,Ontario,Canada,K9E 4K6
+766,Pharmacy Lecture Hall 2,181 University Ave E,,Oshawa,Ontario,Canada,M3G 6J0
+767,Pharmacy West Block 5,842 Main Rd E,,Kitchener,Ontario,Canada,M5B 8S4
+768,Architecture Library 1,967 King Blvd S,,Mississauga,Ontario,Canada,P0K 3R8
+769,Columbia Lake Residence 4,552 University St W,,Waterloo,Ontario,Canada,L0G 3G1
+770,Arts Lecture Hall 6,662 Philips Ave N,,Windsor,Ontario,Canada,N4H 3K6
+771,Arts Lecture Hall 7,354 King Blvd W,,Sudbury,Ontario,Canada,L4V 1P6
+772,Federation Residence 3,582 Queen Rd W,,Kitchener,Ontario,Canada,N0R 6C4
+773,Margaret Atwood Residence 4,666 Philips Blvd W,,Oshawa,Ontario,Canada,M7M 6Y9
+774,Carl A. Pollock Building 4,441 Philips Rd S,,Kitchener,Ontario,Canada,L0A 8P7
+775,Federation West Block 7,525 Queen Blvd W,,Oshawa,Ontario,Canada,M9C 6B1
+776,Federation West Block 8,679 Philips Ave W,,Vaughan,Ontario,Canada,M8V 5B6
+777,Claudette Millar North Block 2,352 Philips Rd N,,Hamilton,Ontario,Canada,K2L 9T2
+778,Minota Hagey Library 4,716 Main Ave N,,Waterloo,Ontario,Canada,K6R 9C8
+779,Science West Block 3,533 Philips Rd E,,Vaughan,Ontario,Canada,P8R 9M6
+780,Chemistry Building 1,751 Main Blvd S,,Vaughan,Ontario,Canada,L6M 0H7
+781,Architecture Building 3,171 Queen Ln W,,Sudbury,Ontario,Canada,M6H 2P2
+782,Health Library 5,598 Philips Ln N,,Oshawa,Ontario,Canada,P3H 3B2
+783,Science Campus 4,992 Queen Rd N,,Sudbury,Ontario,Canada,L1M 1R1
+784,Minota Hagey Building 2,450 University Ln S,,Oshawa,Ontario,Canada,N1A 0L0
+785,Jane Austen East Block 2,142 University Ave N,,Windsor,Ontario,Canada,P8L 7V5
+786,Claudette Millar Village 4,479 King Blvd S,,Hamilton,Ontario,Canada,N6B 5N1
+787,Architecture Hall 4,991 Queen Ave N,,Ottawa,Ontario,Canada,K8L 3P7
+788,Carl A. Pollock Garage 6,523 Philips St E,,Toronto,Ontario,Canada,M0N 7K9
+789,Carl A. Pollock Services 4,856 Main St E,,Windsor,Ontario,Canada,N1R 4J2
+790,Virginia Woolf West Block 4,685 Main St S,,Oshawa,Ontario,Canada,K4Y 7H7
+791,Math Hall 3,778 Main Ave S,,Mississauga,Ontario,Canada,L1E 6A2
+792,Columbia Lake West Block 3,492 King Ave E,,Sudbury,Ontario,Canada,N1G 8V1
+793,Columbia Lake South Block 5,329 Main Ln N,,Sudbury,Ontario,Canada,M6R 8S3
+794,Pharmacy Campus 5,218 King St N,,Waterloo,Ontario,Canada,M9J 1P2
+795,Columbia Lake Services 4,690 University Blvd N,,Ottawa,Ontario,Canada,P3R 6N5
+796,Health Garage 1,779 Main Ln S,,Waterloo,Ontario,Canada,N0Y 7N2
+797,Dana Porter South Block 8,324 Queen Rd S,,Ottawa,Ontario,Canada,M2B 9N4
+798,Virginia Woolf North Block 1,226 King Ln W,,Sudbury,Ontario,Canada,L7M 6B5
+799,Health South Block 4,833 Philips Ave N,,Kitchener,Ontario,Canada,N6M 2A8
+800,Federation Village 3,532 Queen Blvd W,,Windsor,Ontario,Canada,K8M 4J8
+801,Federation Building 2,234 King Ln N,,Vaughan,Ontario,Canada,N2G 7V4
+802,Health Library 6,323 Philips St E,,Ottawa,Ontario,Canada,K2R 6H0
+803,Math Village 4,585 Philips St N,,Brampton,Ontario,Canada,M9S 2R3
+804,Engineering Building 3,346 Queen Rd E,,Ottawa,Ontario,Canada,L6C 7R4
+805,Ira G. Needles Village 3,111 University St N,,Waterloo,Ontario,Canada,N8K 0V4
+806,Math East Block 5,707 Philips Rd W,,Sudbury,Ontario,Canada,N4G 1N1
+807,Margaret Atwood Residence 5,515 University Rd W,,Waterloo,Ontario,Canada,P9Y 1J1
+808,Arts South Block 3,713 Philips St W,,Hamilton,Ontario,Canada,K0G 9J2
+809,Chemistry Garage 3,362 University St N,,Brampton,Ontario,Canada,M5Y 2S0
+810,Pharmacy Campus 6,147 Main Blvd W,,Kitchener,Ontario,Canada,P7N 8P9
+811,Margaret Atwood Garage 6,314 University St S,,Toronto,Ontario,Canada,L2M 3G9
+812,Margaret Atwood Library 6,705 King Blvd S,,Ottawa,Ontario,Canada,N1Y 4L6
+813,Arts Services 5,567 University Blvd W,,Kitchener,Ontario,Canada,P3C 4J5
+814,Jane Austen Center 5,763 Main Ln S,,Windsor,Ontario,Canada,L5S 6A9
+815,Pharmacy Building 3,376 University Ln N,,Sudbury,Ontario,Canada,P6C 5C5
+816,Columbia Lake East Block 4,379 Philips Ave E,,Toronto,Ontario,Canada,K6K 6E1
+817,Arts Garage 5,845 King Ln W,,Waterloo,Ontario,Canada,P5M 8L9
+818,Math West Block 3,149 Philips Blvd W,,Kitchener,Ontario,Canada,M8Y 9R7
+819,Jane Austen Residence 6,365 University Ln S,,Sudbury,Ontario,Canada,L2R 9L0
+820,Douglas Wright North Block 3,896 Philips Ln W,,Oshawa,Ontario,Canada,L7P 7X4
+821,Minota Hagey Services 2,633 Philips Blvd N,,Vaughan,Ontario,Canada,N5C 1C3
+822,Chemistry Residence 1,689 University St E,,Brampton,Ontario,Canada,N0S 8G7
+823,Carl A. Pollock Garage 7,801 Main St W,,Toronto,Ontario,Canada,P3A 6Y5
+824,Pharmacy North Block 4,777 Main Ln N,,Ottawa,Ontario,Canada,N2X 3H1
+825,Douglas Wright South Block 3,236 Main Blvd N,,Windsor,Ontario,Canada,N6H 5E5
+826,Pharmacy South Block 2,652 University Blvd E,,Oshawa,Ontario,Canada,M4J 0R3
+827,Dana Porter West Block 2,758 Main St W,,Ottawa,Ontario,Canada,N0P 0T5
+828,Dana Porter Village 3,209 University Blvd S,,Windsor,Ontario,Canada,M0E 6V3
+829,Chemistry Garage 4,626 Philips Rd N,,Oshawa,Ontario,Canada,K2L 3V6
+830,Douglas Wright Campus 3,473 Queen Ave E,,Waterloo,Ontario,Canada,N7H 2P6
+831,Architecture Village 5,991 Philips St S,,Vaughan,Ontario,Canada,K2R 6N0
+832,Arts Center 3,303 Queen Blvd N,,Windsor,Ontario,Canada,N8V 2N6
+833,Virginia Woolf North Block 2,859 Queen Ave N,,Waterloo,Ontario,Canada,K2G 5X0
+834,Pharmacy Arena 5,794 King Rd N,,Windsor,Ontario,Canada,N4M 7C6
+835,Pharmacy Lecture Hall 3,256 Main Ave S,,Vaughan,Ontario,Canada,K4K 6J7
+836,Math North Block 2,847 Main Ln S,,Mississauga,Ontario,Canada,P2K 1G6
+837,Engineering Campus 3,296 Philips Rd N,,Ottawa,Ontario,Canada,L1B 6S8
+838,Dana Porter North Block 7,748 Philips Ave E,,Windsor,Ontario,Canada,N0X 6B4
+839,Math Campus 4,472 King Blvd W,,Mississauga,Ontario,Canada,M0H 0A0
+840,Columbia Lake Library 5,392 Queen Blvd N,,Windsor,Ontario,Canada,L4V 5N4
+841,Math Building 2,785 University Ln S,,Hamilton,Ontario,Canada,M5X 9P3
+842,Minota Hagey Library 5,698 Queen St N,,Kitchener,Ontario,Canada,P1B 9J3
+843,Ira G. Needles West Block 3,201 University Ln E,,Vaughan,Ontario,Canada,N3Y 2B2
+844,Science Services 5,663 King Ln E,,Hamilton,Ontario,Canada,N1S 1V6
+845,Virginia Woolf West Block 5,615 University Ave E,,Kitchener,Ontario,Canada,M0B 3R7
+846,Margaret Atwood South Block 5,625 University Ave W,,Brampton,Ontario,Canada,N8R 6L3
+847,Arts Arena 6,263 Main Ave N,,Brampton,Ontario,Canada,N8X 4M3
+848,Dana Porter North Block 8,374 Main St S,,Mississauga,Ontario,Canada,K8K 4B2
+849,Minota Hagey West Block 4,236 King St S,,Mississauga,Ontario,Canada,P1A 5P5
+850,Chemistry North Block 7,662 King Ave W,,Ottawa,Ontario,Canada,M5B 0P3
+851,Minota Hagey Residence 3,362 University Ln N,,Windsor,Ontario,Canada,M9Y 3T3
+852,Columbia Lake Campus 2,308 Main Rd S,,Oshawa,Ontario,Canada,L6P 2V1
+853,Carl A. Pollock Residence 4,570 Philips Ave S,,Ottawa,Ontario,Canada,N2M 0M2
+854,Arts South Block 4,503 Main Ave N,,Kitchener,Ontario,Canada,K6K 7R1
+855,Virginia Woolf Residence 3,844 University Ln N,,Windsor,Ontario,Canada,N0E 0B2
+856,Pharmacy East Block 2,185 King Ave N,,Toronto,Ontario,Canada,K8N 1J2
+857,Carl A. Pollock East Block 7,676 Queen Ave E,,Hamilton,Ontario,Canada,N2K 0Y4
+858,Margaret Atwood Building 3,121 University St E,,Waterloo,Ontario,Canada,P6G 0K0
+859,Pharmacy Services 3,494 Philips Blvd E,,Mississauga,Ontario,Canada,N1V 2E3
+860,Math Campus 5,465 University Ln E,,Waterloo,Ontario,Canada,M1B 9G2
+861,Claudette Millar Garage 2,442 Main Ave W,,Kitchener,Ontario,Canada,M9M 5E4
+862,Carl A. Pollock Center 4,477 King St N,,Kitchener,Ontario,Canada,L5G 6T7
+863,Chemistry Building 2,691 Queen Blvd S,,Waterloo,Ontario,Canada,M2H 6P5
+864,Carl A. Pollock Services 5,592 Queen Ln E,,Kitchener,Ontario,Canada,L6S 8V8
+865,Margaret Atwood Hall 5,645 Main Ave W,,Waterloo,Ontario,Canada,P6X 9K1
+866,Pharmacy Village 2,102 Philips St E,,Brampton,Ontario,Canada,N2E 0P5
+867,Health Campus 3,571 Philips Ln W,,Mississauga,Ontario,Canada,L3B 2E2
+868,Federation North Block 3,126 Queen Blvd N,,Waterloo,Ontario,Canada,P1V 9H0
+869,Health Village 3,244 University Ave N,,Toronto,Ontario,Canada,P6G 2V2
+870,Virginia Woolf North Block 3,406 Queen Rd E,,Oshawa,Ontario,Canada,K4E 2B0
+871,Arts Garage 6,264 University Rd W,,Sudbury,Ontario,Canada,N8L 9X4
+872,Pharmacy Services 4,260 King St W,,Kitchener,Ontario,Canada,L6B 3R2
+873,Margaret Atwood Lecture Hall 2,961 University Rd W,,Hamilton,Ontario,Canada,N6H 0P6
+874,Science Campus 5,211 University St E,,Ottawa,Ontario,Canada,M0K 4H8
+875,Math Building 3,316 Main St E,,Mississauga,Ontario,Canada,P3B 3L1
+876,Jane Austen Lecture Hall 1,145 Main Rd N,,Toronto,Ontario,Canada,M1M 0P4
+877,Federation Garage 4,299 King Rd E,,Kitchener,Ontario,Canada,K5S 8E8
+878,Health Arena 4,701 Queen Rd N,,Vaughan,Ontario,Canada,L2T 1C3
+879,Science East Block 3,797 Philips Ave E,,Oshawa,Ontario,Canada,L5M 5S0
+880,Federation Library 3,313 Main Ln N,,Kitchener,Ontario,Canada,P7E 0G4
+881,Margaret Atwood South Block 6,916 University Rd N,,Oshawa,Ontario,Canada,M2M 2C4
+882,Jane Austen Village 2,461 University St S,,Oshawa,Ontario,Canada,M7L 7G1
+883,Jane Austen Hall 5,140 King Blvd W,,Windsor,Ontario,Canada,P2T 5X9
+884,Columbia Lake Village 7,185 Queen Ln W,,Vaughan,Ontario,Canada,K9B 3Y0
+885,Health South Block 5,207 King Rd S,,Ottawa,Ontario,Canada,N1K 6T1
+886,Douglas Wright Hall 6,579 Main Rd N,,Waterloo,Ontario,Canada,L1R 6J6
+887,Columbia Lake Building 3,424 King Ln W,,Mississauga,Ontario,Canada,N1L 7B8
+888,Health Hall 3,249 Philips Blvd N,,Ottawa,Ontario,Canada,N0P 6V3
+889,Engineering Library 2,988 University Rd E,,Vaughan,Ontario,Canada,L1G 1L6
+890,Chemistry Campus 7,994 Queen Rd S,,Sudbury,Ontario,Canada,M2B 1S5
+891,Dana Porter Residence 2,303 King Rd W,,Oshawa,Ontario,Canada,P2S 5R0
+892,Margaret Atwood East Block 5,711 Philips St S,,Hamilton,Ontario,Canada,M0G 7G7
+893,Columbia Lake Building 4,911 Queen Blvd N,,Oshawa,Ontario,Canada,L7E 0J3
+894,Claudette Millar North Block 3,659 Philips Ln W,,Mississauga,Ontario,Canada,M3J 9A5
+895,Douglas Wright Arena 4,409 King Ln N,,Oshawa,Ontario,Canada,N6S 5P8
+896,Claudette Millar Garage 3,883 King St S,,Oshawa,Ontario,Canada,N5H 8H8
+897,Claudette Millar Services 4,391 Queen Blvd N,,Waterloo,Ontario,Canada,K1A 9S1
+898,Carl A. Pollock North Block 8,869 Main Ln N,,Sudbury,Ontario,Canada,N8B 4S3
+899,Pharmacy East Block 3,565 Main Rd N,,Mississauga,Ontario,Canada,N1P 7S6
+900,Architecture Village 6,900 Philips Ln E,,Vaughan,Ontario,Canada,M4S 3A6
+901,Engineering Arena 5,126 Philips Blvd E,,Hamilton,Ontario,Canada,L9S 3Y6
+902,Science Lecture Hall 6,759 Queen St W,,Kitchener,Ontario,Canada,N2R 5X2
+903,Claudette Millar Library 4,201 Philips Ln N,,Sudbury,Ontario,Canada,P6L 8H5
+904,Science Building 3,195 University Rd N,,Sudbury,Ontario,Canada,P2A 9Y1
+905,Jane Austen Services 4,125 Philips Rd E,,Kitchener,Ontario,Canada,L3M 3Y3
+906,Federation East Block 6,366 University Blvd N,,Kitchener,Ontario,Canada,K9E 1T9
+907,Math Building 4,245 King Blvd S,,Waterloo,Ontario,Canada,K7P 3R1
+908,Carl A. Pollock East Block 8,122 Queen St W,,Sudbury,Ontario,Canada,K3S 6N7
+909,Arts Residence 3,405 University Ave N,,Waterloo,Ontario,Canada,M5V 9Y0
+910,Arts Garage 7,859 King St S,,Ottawa,Ontario,Canada,K8A 8X2
+911,Science South Block 2,473 University Ave N,,Hamilton,Ontario,Canada,L3C 2L4
+912,Carl A. Pollock Library 2,194 King Ln E,,Oshawa,Ontario,Canada,N6X 6J4
+913,Arts Library 3,803 King Rd N,,Ottawa,Ontario,Canada,P4H 3V6
+914,Ira G. Needles Services 3,710 King Blvd N,,Ottawa,Ontario,Canada,N6J 9P5
+915,Chemistry Hall 7,271 University Ln E,,Ottawa,Ontario,Canada,N4X 5R0
+916,Math Residence 3,928 King Rd S,,Hamilton,Ontario,Canada,L1J 5P2
+917,Columbia Lake Building 5,109 King St E,,Mississauga,Ontario,Canada,N9N 3Y1
+918,Federation Campus 7,716 Philips Ln S,,Waterloo,Ontario,Canada,P4C 9S6
+919,Columbia Lake South Block 6,427 Philips Ave N,,Oshawa,Ontario,Canada,N0L 6E1
+920,Ira G. Needles Residence 4,715 King Ln W,,Mississauga,Ontario,Canada,P0M 0A7
+921,Dana Porter Residence 3,961 Queen St N,,Hamilton,Ontario,Canada,K1V 1S4
+922,Minota Hagey Village 3,871 King Rd N,,Brampton,Ontario,Canada,M7B 6M7
+923,Carl A. Pollock South Block 3,756 University Blvd N,,Toronto,Ontario,Canada,L0A 2E5
+924,Claudette Millar Library 5,274 University Ave E,,Brampton,Ontario,Canada,K0L 0E0
+925,Dana Porter Building 5,370 King Ln W,,Vaughan,Ontario,Canada,L2T 1G5
+926,Health East Block 4,698 Queen Rd N,,Brampton,Ontario,Canada,P3V 7L5
+927,Carl A. Pollock Library 3,194 King Blvd N,,Hamilton,Ontario,Canada,P3J 1C7
+928,Engineering Library 3,113 Philips Rd W,,Mississauga,Ontario,Canada,N1N 3X8
+929,Columbia Lake East Block 5,419 Queen Ave N,,Kitchener,Ontario,Canada,L5R 7X3
+930,Federation Library 4,170 King Rd S,,Sudbury,Ontario,Canada,M9E 2T1
+931,Math Library 2,116 Queen Ave E,,Toronto,Ontario,Canada,N8T 5L1
+932,Margaret Atwood Building 4,462 Queen Ave S,,Windsor,Ontario,Canada,P6X 5B7
+933,Minota Hagey Village 4,200 University Rd W,,Mississauga,Ontario,Canada,M3R 2L8
+934,Carl A. Pollock Garage 8,543 University St S,,Waterloo,Ontario,Canada,L1B 0L3
+935,Chemistry Garage 5,203 King Ave W,,Windsor,Ontario,Canada,N1K 4V3
+936,Arts East Block 3,308 King Blvd E,,Toronto,Ontario,Canada,K2X 9V4
+937,Pharmacy Residence 5,422 University Ave S,,Hamilton,Ontario,Canada,N2A 7S5
+938,Architecture Residence 1,370 University Ave N,,Ottawa,Ontario,Canada,M7A 7K7
+939,Math Arena 6,938 University Ln E,,Mississauga,Ontario,Canada,P8H 2E1
+940,Dana Porter East Block 1,853 King Rd W,,Hamilton,Ontario,Canada,P4V 4P7
+941,Architecture South Block 2,461 King Blvd W,,Waterloo,Ontario,Canada,M8A 2S3
+942,Health Village 4,609 University Ave W,,Hamilton,Ontario,Canada,L1J 6E4
+943,Margaret Atwood West Block 2,560 Main Ave E,,Sudbury,Ontario,Canada,M5R 9S4
+944,Dana Porter Library 4,142 Main Ln E,,Ottawa,Ontario,Canada,K6T 9P4
+945,Math Arena 7,610 Philips Rd S,,Brampton,Ontario,Canada,M9Y 2M7
+946,Dana Porter Building 6,918 King St W,,Toronto,Ontario,Canada,L4E 0V4
+947,Architecture Services 3,460 University St E,,Kitchener,Ontario,Canada,M4X 8G1
+948,Minota Hagey Residence 4,850 Philips Rd N,,Vaughan,Ontario,Canada,L0V 5K6
+949,Claudette Millar Services 5,200 King Blvd E,,Kitchener,Ontario,Canada,P6N 9G3
+950,Minota Hagey Residence 5,526 Main Ave E,,Vaughan,Ontario,Canada,K4T 8H6
+951,Claudette Millar Building 1,241 Main Rd E,,Brampton,Ontario,Canada,M7P 6T6
+952,Claudette Millar Hall 4,128 Main St W,,Waterloo,Ontario,Canada,L9M 3X5
+953,Health Lecture Hall 4,656 Main Blvd N,,Windsor,Ontario,Canada,L6A 7X7
+954,Engineering Building 4,156 King St E,,Ottawa,Ontario,Canada,K4V 5B1
+955,Jane Austen Center 6,623 University Ave S,,Brampton,Ontario,Canada,N2K 2M4
+956,Architecture East Block 2,596 Main Ave N,,Waterloo,Ontario,Canada,K2E 8E3
+957,Science Building 4,585 University Ln W,,Windsor,Ontario,Canada,K1M 6V2
+958,Pharmacy South Block 3,968 Main Blvd W,,Sudbury,Ontario,Canada,P1S 2A2
+959,Health South Block 6,862 Philips Ave S,,Oshawa,Ontario,Canada,N4M 1V5
+960,Minota Hagey Services 3,495 University Rd W,,Windsor,Ontario,Canada,L0M 7E9
+961,Federation Arena 4,694 King St W,,Toronto,Ontario,Canada,M2T 7L0
+962,Arts Village 4,612 Main Ave E,,Brampton,Ontario,Canada,N8C 2G5
+963,Jane Austen Village 3,570 Philips Blvd E,,Windsor,Ontario,Canada,K7R 7H9
+964,Virginia Woolf East Block 5,774 Main Blvd S,,Hamilton,Ontario,Canada,P9P 9R1
+965,Engineering Arena 6,972 Philips Ave N,,Sudbury,Ontario,Canada,K7V 5K3
+966,Math West Block 4,278 Queen Rd N,,Toronto,Ontario,Canada,P4E 0C7
+967,Douglas Wright Lecture Hall 1,746 University Ave E,,Waterloo,Ontario,Canada,N6G 9Y3
+968,Science Campus 6,602 Queen Blvd S,,Mississauga,Ontario,Canada,L6X 3C9
+969,Architecture Center 2,784 University Ave N,,Kitchener,Ontario,Canada,K5S 9Y1
+970,Columbia Lake Residence 5,798 Main Rd S,,Mississauga,Ontario,Canada,P7X 5P9
+971,Margaret Atwood South Block 7,241 University Rd W,,Sudbury,Ontario,Canada,N1C 2X4
+972,Math Building 5,610 Philips St E,,Toronto,Ontario,Canada,L4L 6P1
+973,Arts Campus 5,176 Main Ln S,,Brampton,Ontario,Canada,P8M 6B8
+974,Math Lecture Hall 6,582 King St N,,Hamilton,Ontario,Canada,N4J 5B2
+975,Science Garage 4,936 King St S,,Oshawa,Ontario,Canada,K9B 5C6
+976,Chemistry West Block 4,664 Queen Ave E,,Toronto,Ontario,Canada,K0V 8K5
+977,Claudette Millar Hall 5,410 Philips St N,,Toronto,Ontario,Canada,L8R 0Y7
+978,Engineering Services 4,884 Queen Ave W,,Windsor,Ontario,Canada,P2E 7E9
+979,Douglas Wright Village 5,298 King Rd N,,Mississauga,Ontario,Canada,L1A 3S8
+980,Jane Austen Arena 2,921 University Ave N,,Waterloo,Ontario,Canada,K2T 2M0
+981,Columbia Lake Village 8,716 Philips Blvd S,,Ottawa,Ontario,Canada,N7E 1C4
+982,Margaret Atwood Library 7,606 King Ave W,,Vaughan,Ontario,Canada,M8M 3X4
+983,Columbia Lake North Block 3,654 Main St N,,Hamilton,Ontario,Canada,N9V 4C3
+984,Health South Block 7,633 Philips Blvd S,,Waterloo,Ontario,Canada,M2B 3T7
+985,Math Arena 8,610 University Blvd E,,Ottawa,Ontario,Canada,N4C 0L9
+986,Federation Hall 3,119 Queen Rd W,,Toronto,Ontario,Canada,L3R 2S8
+987,Engineering Center 2,412 University Ln E,,Toronto,Ontario,Canada,P5L 9J0
+988,Columbia Lake North Block 4,949 Main Rd W,,Toronto,Ontario,Canada,K8R 4Y7
+989,Claudette Millar Lecture Hall 3,836 Main Ln E,,Kitchener,Ontario,Canada,N7K 2A4
+990,Minota Hagey Building 3,355 Main Blvd E,,Ottawa,Ontario,Canada,N0L 5L4
+991,Architecture Building 4,414 Main Blvd E,,Kitchener,Ontario,Canada,N7A 7A7
+992,Engineering Village 3,591 Main Ave W,,Toronto,Ontario,Canada,P1L 9Y5
+993,Chemistry Hall 8,284 King Blvd E,,Oshawa,Ontario,Canada,L3H 2B3
+994,Math Center 5,139 Philips Ln W,,Ottawa,Ontario,Canada,M0Y 3B4
+995,Minota Hagey Arena 5,794 King Ln N,,Ottawa,Ontario,Canada,L5E 1X7
+996,Math Garage 3,179 Philips Ave E,,Ottawa,Ontario,Canada,M6C 6M2
+997,Architecture Village 7,721 King Blvd W,,Sudbury,Ontario,Canada,M7M 9A2
+998,Douglas Wright Arena 5,397 Philips Ln N,,Waterloo,Ontario,Canada,P3N 8X9
+999,Douglas Wright Library 2,487 Main St S,,Windsor,Ontario,Canada,K1K 9X9

@@ -1,0 +1,15 @@
+Arena
+Building
+Residence
+Library
+Campus
+Village
+Services
+Hall
+Garage
+Lecture Hall
+Center
+North Block
+East Block
+South Block
+West Block

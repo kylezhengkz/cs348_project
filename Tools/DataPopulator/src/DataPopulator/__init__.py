@@ -1,3 +1,3 @@
-from .generators.SampleDataGenerator import SampleDataGenerator
+from .dataset_generators.SampleDataGenerator import SampleDataGenerator
 
 __all__ = ["SampleDataGenerator"]
