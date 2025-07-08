@@ -83,7 +83,8 @@ Currently supported features include:
 
 - The ability to filter available rooms based on room name, min. and max. capacity, and time-slot.
 - The ability to book a room.
-- The ability to cancel an existing booking.
+- The ability to view future bookings and cancel through there.
+- The ability to view past bookings including cancellations.
 
 <br>
 <br>
