@@ -12,6 +12,7 @@ import { Login } from './view/pages/login/Login';
 import { Signup } from './view/pages/signup/Signup';
 import { Home } from './view/pages/home';
 import { ViewBooking } from './view/pages/viewBooking/ViewBooking';
+import { BookingHistory } from './view/pages/bookingHistory/BookingHistory';
 import { CreateBooking } from './view/pages/createBooking/CreateBooking';
 import { CancelBooking } from './view/pages/cancelBooking/CancelBooking';
 
@@ -42,6 +43,7 @@ function App() {
             <Route path="viewBooking" element={<ProtectedRoutes><ViewBooking /></ProtectedRoutes>} />
             <Route path="bookRoom" element={<ProtectedRoutes><CreateBooking /></ProtectedRoutes>} />
             <Route path="cancelBooking" element={<ProtectedRoutes><CancelBooking /></ProtectedRoutes>} />
+            <Route path="bookingHistory" element={<ProtectedRoutes><BookingHistory/></ProtectedRoutes>} />
           </Routes>
           <Footer />
         </AuthProvider>
