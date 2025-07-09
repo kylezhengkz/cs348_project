@@ -65,7 +65,7 @@ class BuildingGenerator:
         used_building_names = {}
 
         for i in range(0, num_buildings):
-            building_name = f'{self.rng.choice(self.data['building_name_prefix'])} {self.rng.choice(self.data['building_name_suffix'])}'
+            building_name = f"{self.rng.choice(self.data['building_name_prefix'])} {self.rng.choice(self.data['building_name_suffix'])}"
             used_building_names[building_name] = used_building_names.get(building_name, 0) + 1
             building_name = building_name + ' ' + str(used_building_names.get(building_name, 0))
             building_tag = ''.join(word[0] for word in building_name.split())
@@ -74,9 +74,9 @@ class BuildingGenerator:
                 buildingID=i,
                 buildingName=building_name,
                 buildingTag=building_tag,
-                addressLine1=f'{self.rng.randint(100, 999)} {self.rng.choice(self.data['street_names'])} {self.rng.choice(self.data['street_types'])} {self.rng.choice(self.data['directional_prefixes'])}',
+                addressLine1=f"{self.rng.randint(100, 999)} {self.rng.choice(self.data['street_names'])} {self.rng.choice(self.data['street_types'])} {self.rng.choice(self.data['directional_prefixes'])}",
                 addressLine2='',
-                city=f'{self.rng.choice(self.data['cities'])}',
+                city=f"{self.rng.choice(self.data['cities'])}",
                 # HARDCODED ONTARIO CANADA
                 province='Ontario',
                 country='Canada',
@@ -110,4 +110,3 @@ class BuildingGenerator:
                 for b in buildings
             ])
         return buildings
-
