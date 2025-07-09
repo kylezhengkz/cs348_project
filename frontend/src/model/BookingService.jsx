@@ -30,8 +30,14 @@ export class BookingService extends BaseAPIService {
         return res;
     }
 
-     async getFutureBookings(userId) {
+    async getFutureBookings(userId) {
         const ext = `/getFutureBookings?userId=${userId}`;
+        const res = await this.apiTool.get(ext);
+        return res;
+    }
+
+    async getBookingsAndCancellations(userId) {
+        const ext = `/getBookingsAndCancellations?userId=${userId}`;
         const res = await this.apiTool.get(ext);
         return res;
     }

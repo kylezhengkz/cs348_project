@@ -139,6 +139,12 @@ class App():
             print(f"[GET] /getFutureBookings - userId: {userId}")
             return self._bookingService.getFutureBookings(userId)
 
+        @app.route("/getBookingsAndCancellations", methods=["GET"])
+        def getBookingsAndCancellations():
+            userId = request.args.get("userId")
+            print(f"[GET] /getBookingsAndCancellations - userId: {userId}")
+            return self._bookingService.getBookingsAndCancellations(userId)
+
         @app.route("/signup", methods=["POST"])
         def signup():
           data = request.get_json()

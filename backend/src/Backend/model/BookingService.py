@@ -162,3 +162,29 @@ class BookingService(BaseAPIService):
             return [True, result]
         except Exception as e:
             return [False, f"SQL execution error: {e}"]
+    
+    def getBookingsAndCancellations(self, user_id: str) -> Tuple[bool, list]:
+        try:
+            userUUID = uuid.UUID(user_id)
+        except ValueError as e:
+            return [False, "Invalid UUID format for user ID."]
+    
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R9/R9.sql")
+        
+        if not os.path.exists(sqlPath):
+            return [False, f"SQL file not found at {sqlPath}"]
+    
+        try:
+            query = PU.DBTool.readSQLFile(sqlPath)
+        except Exception as e:
+            return [False, f"Error reading SQL file: {e}"]
+    
+        try:
+            connData, cursor, error = self._dbTool.executeSQL(query,
+                                                              vars={"user_id": str(userUUID)},
+                                                              commit=False, closeConn=False)
+            result = cursor.fetchall()
+            connData.putConn()
+            return [True, result]
+        except Exception as e:
+            return [False, f"SQL execution error: {e}"]
