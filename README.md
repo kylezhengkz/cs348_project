@@ -49,7 +49,7 @@
 <br>
 
 ## Overview
-As we transition into Milestone 1, new tools have been developed and old tools have been depreciated.
+As we transitioned into Milestone 1 (and later, into Milestone 2), new tools have been developed and old tools have been depreciated.
 
 The following is a list of current apps/tools:
 - Room booking app (frontend + backend).
@@ -133,11 +133,27 @@ Follow the instructions at [Tools/DataImporter](Tools/DataImporter/README.md)
 <br>
 <br>
 
+## DataPopulator
+
+Documentation on all available flags and command line arguments are available via:
+```
+poetry run db_pop -h
+```
+Implementation is available [here](https://github.com/Alex-Au1/CampusBookingWebApp/tree/main/Tools/DataPopulator).
+Datasets and resource files stored [here](https://github.com/Alex-Au1/CampusBookingWebApp/tree/main/Data).
+
 ## DataPopulator: How to Load Sample Datasets
 
-To populate the `toy` database with sample data. Run the command:
+To populate the `development` database. Run the command:
 ```
-poetry run db_pop
+poetry run db_pop -e dev -o -g -nbu 100 -nro 100 -nus 100 -nbo 100 -nca 100 -p
+```
+
+## DataPopulator: How to Load Production Datasets
+
+To populate the `production` database. Run the command:
+```
+poetry run db_pop -e prod -o -g -p
 ```
 
 <br>
