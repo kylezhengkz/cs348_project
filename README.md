@@ -133,13 +133,16 @@ Follow the instructions at [Tools/DataImporter](Tools/DataImporter/README.md)
 <br>
 <br>
 
-## DataPopulator: How to Load Sample Datasets
+## DataPopulator: How to Load Production Datasets
 
-To populate the `toy` database with sample data. Run the command:
+To populate the `production` database with data. Run the command:
 ```
-poetry run db_pop
+poetry run db_pop -e prod -o -g -p
 ```
-
+Documentation on all available flags and command line arguments (including those not shown above) are available via:
+```
+poetry run db_pop -h
+```
 <br>
 <br>
 
