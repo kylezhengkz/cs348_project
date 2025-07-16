@@ -13,6 +13,7 @@ from .Config import Config
 from .model.RoomService import RoomService
 from .model.BookingService import BookingService
 from .model.UserService import UserService
+from .model.DashService import DashService
 
 class App():
     def __init__(self, env: EnvironmentModes):
@@ -25,6 +26,7 @@ class App():
         self._roomService = RoomService(self._dbTool)
         self._bookingService = BookingService(self._dbTool)
         self._userService = UserService(self._dbTool)
+        self._dashService = DashService(self._dbTool)
 
 
     # Reference: See the __call__ operator in app.py of Flask's source code
@@ -147,23 +149,30 @@ class App():
 
         @app.route("/signup", methods=["POST"])
         def signup():
-          data = request.get_json()
-          print("––––––––––––")
-          print("RECEIVED IN SIGNUP")
-          print(data)
-          print("––––––––––––")
+            data = request.get_json()
+            print("––––––––––––")
+            print("RECEIVED IN SIGNUP")
+            print(data)
+            print("––––––––––––")
                     
-          return self._userService.signup(data["username"], data["email"], data["password"])
+            return self._userService.signup(data["username"], data["email"], data["password"])
       
         @app.route("/login", methods=["POST"])
         def login():
-          data = request.get_json()
-          print("––––––––––––")
-          print("RECEIVED IN LOGIN")
-          print(data)
-          print("––––––––––––")
+            data = request.get_json()
+            print("––––––––––––")
+            print("RECEIVED IN LOGIN")
+            print(data)
+            print("––––––––––––")
                     
-          return self._userService.login(data["username"], data["password"])
+            return self._userService.login(data["username"], data["password"])
+        
+        @app.route("/getDashboardMetrics", methods=["GET"])
+        def getDashboardMetrics():
+            userId = request.args.get("userId")
+            print(f"[GET] /getDashboardMetrics - userId: {userId}")
+            success, result = self._dashService.getDashboardMetrics(userId)
+            return jsonify(result), 200 if success else 400
 
         self._app = app
         return app

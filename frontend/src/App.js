@@ -15,6 +15,7 @@ import { ViewBooking } from './view/pages/viewBooking/ViewBooking';
 import { BookingHistory } from './view/pages/bookingHistory/BookingHistory';
 import { CreateBooking } from './view/pages/createBooking/CreateBooking';
 import { CancelBooking } from './view/pages/cancelBooking/CancelBooking';
+import { Dashboard } from './view/pages/dashboard/Dashboard';
 
 import { AuthProvider } from './wrappers/AuthContext'
 import { ProtectedRoutes } from './wrappers/ProtectedRoutes'
@@ -44,6 +45,7 @@ function App() {
             <Route path="bookRoom" element={<ProtectedRoutes><CreateBooking /></ProtectedRoutes>} />
             <Route path="cancelBooking" element={<ProtectedRoutes><CancelBooking /></ProtectedRoutes>} />
             <Route path="bookingHistory" element={<ProtectedRoutes><BookingHistory/></ProtectedRoutes>} />
+            <Route path="dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
           </Routes>
           <Footer />
         </AuthProvider>

@@ -41,6 +41,12 @@ export class BookingService extends BaseAPIService {
         const res = await this.apiTool.get(ext);
         return res;
     }
+    async getDashboardMetrics(userId) {
+        const ext = `/getDashboardMetrics?userId=${userId}`;
+        const res = await this.apiTool.get(ext);
+        return res;
+    }
+    
 }
 
 
