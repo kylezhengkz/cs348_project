@@ -1,7 +1,6 @@
 import { BaseAPIService } from "./BaseAPIService"
 import { apiTool } from "../tools/ApiTool";
 
-
 export class BookingService extends BaseAPIService {
     async bookRoom(userId, roomId, startDateTime, endDateTime, participants) {
         const kwargs = {
@@ -40,13 +39,7 @@ export class BookingService extends BaseAPIService {
         const ext = `/getBookingsAndCancellations?userId=${userId}`;
         const res = await this.apiTool.get(ext);
         return res;
-    }
-    async getDashboardMetrics(userId) {
-        const ext = `/getDashboardMetrics?userId=${userId}`;
-        const res = await this.apiTool.get(ext);
-        return res;
-    }
-    
+    }    
 }
 
 
