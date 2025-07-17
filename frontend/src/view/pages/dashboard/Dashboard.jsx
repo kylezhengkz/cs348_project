@@ -4,7 +4,7 @@ import { Container, Box, CircularProgress } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { useAuth } from "../../../wrappers/AuthContext";
-import { bookingService } from "../../../model/BookingService"; 
+import { dashBoardService } from "../../../model/DashBoardService"; 
 
 export function Dashboard() {
     const { authUserId } = useAuth();
@@ -21,7 +21,7 @@ export function Dashboard() {
     useEffect(() => {
         if (!authUserId) return;
 
-        bookingService.getDashboardMetrics(authUserId)
+        dashBoardService.getDashboardMetrics(authUserId)
             .then(res => {
                 console.log("📦 Dashboard API response:", res.data);
                 setMetrics(res.data);
