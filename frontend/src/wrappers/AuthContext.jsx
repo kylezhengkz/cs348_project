@@ -4,6 +4,8 @@ const AuthContext = createContext()
 
 export function AuthProvider({children}) {
   const [authUserId, setAuthUserId] = useState(() => sessionStorage.getItem("authUserId"));
+  const [username, setUsername] = useState(() => sessionStorage.getItem("username"));
+  const [userPerm, setUserPerm] = useState(() => sessionStorage.getItem("userPerm"));
 
   useEffect(() => {
     if (authUserId !== null) {
@@ -11,8 +13,20 @@ export function AuthProvider({children}) {
     }
   }, [authUserId]);
 
+  useEffect(() => {
+    if (username !== null) {
+      sessionStorage.setItem("username", username);
+    }
+  }, [username]);
+
+  useEffect(() => {
+    if (userPerm !== null) {
+      sessionStorage.setItem("userPerm", userPerm);
+    }
+  }, [userPerm]);
+
   return (
-    <AuthContext.Provider value={{authUserId, setAuthUserId}}>
+    <AuthContext.Provider value={{authUserId, setAuthUserId, username, setUsername, userPerm, setUserPerm}}>
       {children}
     </AuthContext.Provider>
   )

@@ -7,14 +7,15 @@ import { useAuth } from "../../../wrappers/AuthContext"
 
 export function Login() {
 
-  const { setAuthUserId } = useAuth();
+  const { setAuthUserId, setUsername, setUserPerm } = useAuth();
 
   async function myLogin(username, password) {
     let res = await userService.login(username, password);
     console.log("Response", res)
-    if (res[0] === true) {
-      console.log(`Setting userId to ${res[2]}`);
-      setAuthUserId(res[2]);
+    if (res["loginStatus"] === true) {
+      setAuthUserId(res["userId"]);
+      setUsername(username)
+      setUserPerm(res["permLevel"]);
       return true;
     } else {
       console.log("Returning false")

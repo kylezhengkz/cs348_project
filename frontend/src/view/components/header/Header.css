@@ -1,0 +1,10 @@
+#profilePic {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  background-color: transparent;
+}
+
+#profilePic img {
+  height: 2.5em;
+}

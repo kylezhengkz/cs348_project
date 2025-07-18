@@ -150,20 +150,14 @@ class App():
         @app.route("/signup", methods=["POST"])
         def signup():
             data = request.get_json()
-            print("––––––––––––")
-            print("RECEIVED IN SIGNUP")
-            print(data)
-            print("––––––––––––")
+            print("RECEIVED IN SIGNUP", data)
                     
             return self._userService.signup(data["username"], data["email"], data["password"])
       
         @app.route("/login", methods=["POST"])
         def login():
             data = request.get_json()
-            print("––––––––––––")
-            print("RECEIVED IN LOGIN")
-            print(data)
-            print("––––––––––––")
+            print("RECEIVED IN LOGIN", data)
                     
             return self._userService.login(data["username"], data["password"])
         
