@@ -7,19 +7,7 @@ import { useAuth } from "../../../wrappers/AuthContext"
 
 export function Signup() {
 
-  const { setAuthUserId } = useAuth();
-
-  async function createAccount(username, email, password) {
-    let res = await userService.signup(username, email, password);
-    console.log("Response", res)
-    if (res[0] === true) {
-      setAuthUserId(res[2]) // res[2] is the userId under the account created
-      return [true];
-    } else {
-      console.log("Returning false")
-      return [false, res[1]];
-    }
-  }
+  const { setAuthUserId, setUsername, setUserPerm } = useAuth();
 
   const {
     register,
@@ -32,6 +20,34 @@ export function Signup() {
 
   const navigate = useNavigate();
 
+  async function createAccount(username, email, password) { // also manages the navigation logic
+    let res = await userService.signup(username, email, password);
+    console.log("Response", res)
+    if (res["signupStatus"] === true) {
+      setAuthUserId(res["userId"])
+      setUsername(username)
+      setUserPerm(1)
+      navigate("/home");
+    } else {
+        if (res["errorMessage"].includes("Username")) {
+        setError("username", {
+          type: "databaseError",
+          message: res["errorMessage"]
+        })
+      } else if (res["errorMessage"].includes("Email")) {
+        setError("email", {
+          type: "databaseError",
+          message: res["errorMessage"]
+        })
+      } else {
+        setError("creationError", {
+          type: "databaseError",
+          message: res["errorMessage"]
+        })
+      }
+    }
+  }
+
   const onSubmit = async (data) => {
     console.log(data.username, data.email, data.password, data.passwordConfirm)
     if (data.password !== data.passwordConfirm) {
@@ -39,33 +55,10 @@ export function Signup() {
         type: "notMatch",
         message: "Passwords do not match",
       });
-      console.log("Passwords do not match")
       return;
     }
 
-    let status = await createAccount(data.username, data.email, data.password);
-    if (status[0]) {
-      navigate("/home");
-      return
-    }
-    console.log(status[1])
-    
-    if (status[1].includes("Username")) {
-      setError("username", {
-        type: "databaseError",
-        message: status[1]
-      })
-    } else if (status[1].includes("Email")) {
-      setError("email", {
-        type: "databaseError",
-        message: status[1]
-      })
-    } else {
-      setError("creationError", {
-        type: "databaseError",
-        message: status[1]
-      })
-    }
+    await createAccount(data.username, data.email, data.password);
   }
 
   return (

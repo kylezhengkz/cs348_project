@@ -22,7 +22,10 @@ class UserService(BaseAPIService):
             with open(sqlPath, 'r') as f:
                 bookingSQL = f.read()
         except FileNotFoundError:
-            return [False, f"Booking SQL file not found at {sqlPath}", None]
+            return {
+              "signupStatus": False,
+              "errorMessage": f"Signup SQL file not found at {sqlPath}"
+            }
         
         connData, cursor, error = self._dbTool.executeSQL(bookingSQL, 
                                                           vars = {
@@ -36,16 +39,25 @@ class UserService(BaseAPIService):
         if (error is not None):
             errorMsg = self._getSignupErrorMsg(f"{error}")
             print(errorMsg)
-            return [False, errorMsg, None]
+            return {
+              "signupStatus": False,
+              "errorMessage": errorMsg
+            }
         
         row = cursor.fetchone()
         connData.putConn()
 
         if row:
             userId = row[0]
-            return [True, f"Signup successful! User ID: {userId}", userId]
+            return {
+              "signupStatus": True,
+              "userId": userId
+            }
         else:
-            return [False, "Unable to create user", None]
+            return {
+              "signupStatus": False,
+              "errorMessage": "Unable to create user"
+            }
     
     
     def login(self, username, password):
@@ -54,7 +66,10 @@ class UserService(BaseAPIService):
             with open(sqlPath, 'r') as f:
                 bookingSQL = f.read()
         except FileNotFoundError:
-            return [False, f"Booking SQL file not found at {sqlPath}", None]
+            return {
+              "loginStatus": False,
+              "errorMessage": f"Login SQL file not found at {sqlPath}"
+            }
         
         connData, cursor, error = self._dbTool.executeSQL(bookingSQL, 
                                                           vars = {
@@ -65,13 +80,25 @@ class UserService(BaseAPIService):
                                                           raiseException = False)
         
         if (error is not None):
-            return [False, "Invalid credentials", None]
+            return {
+              "loginStatus": False,
+              "errorMessage": "Invalid credentials"
+            }
         
         row = cursor.fetchone()
         connData.putConn()
 
         if row:
             userId = row[0]
-            return [True, f"Login successful! User ID: {userId}", userId]
+            permLevel = row[1]
+            print("Permission level", permLevel)
+            return {
+              "loginStatus": True,
+              "userId": userId,
+              "permLevel": permLevel
+            }
         else:
-            return [False, "Unable to login", None]
+            return {
+              "loginStatus": False,
+              "errorMessage": "Unable to login",
+            }
