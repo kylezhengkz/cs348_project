@@ -42,6 +42,7 @@ export function CreateBooking() {
 
         bookingService.bookRoom(userId, roomId, startDateTime, endDateTime, participants).then(res => {
             bookSuccess.current = res.data[0];
+            console.log(res.data[1])
             bookResultMsg.current = res.data[1];
             setOpenModal(true);
         });
