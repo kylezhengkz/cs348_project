@@ -9,9 +9,12 @@ import PyUtils as PU
 from .BaseAPIService import BaseAPIService
 
 
-class UserService(BaseAPIService):    
-    def _getBookingErrorMsg(self, errorMsg: str) -> str:
-        return self._getErrorMsg("booking", errorMsg, "Signup encountered an unknown error!", self._buildBookingErrorSearchDFA)
+class UserService(BaseAPIService):
+    def _getSignupErrorMsg(self, errorMsg: str) -> str:
+        if ("User_email_key" in errorMsg):
+          return "Email already exists"
+        elif ("User_username_key" in errorMsg):
+          return "Username already exists"
   
     def signup(self, username, email, password):
         sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R10/R10a.sql")
@@ -31,7 +34,8 @@ class UserService(BaseAPIService):
                                                           raiseException = False)
         
         if (error is not None):
-            errorMsg = f"{error}"
+            errorMsg = self._getSignupErrorMsg(f"{error}")
+            print(errorMsg)
             return [False, errorMsg, None]
         
         row = cursor.fetchone()
@@ -41,7 +45,7 @@ class UserService(BaseAPIService):
             userId = row[0]
             return [True, f"Signup successful! User ID: {userId}", userId]
         else:
-            return [False, "Signup failed", None]
+            return [False, "Unable to create user", None]
     
     
     def login(self, username, password):
@@ -61,8 +65,7 @@ class UserService(BaseAPIService):
                                                           raiseException = False)
         
         if (error is not None):
-            errorMsg = f"{error}"
-            return [False, errorMsg, None]
+            return [False, "Invalid credentials", None]
         
         row = cursor.fetchone()
         connData.putConn()
@@ -71,4 +74,4 @@ class UserService(BaseAPIService):
             userId = row[0]
             return [True, f"Login successful! User ID: {userId}", userId]
         else:
-            return [False, "Login failed", None]
+            return [False, "Unable to login", None]

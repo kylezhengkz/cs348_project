@@ -42,5 +42,4 @@ export class BookingService extends BaseAPIService {
     }    
 }
 
-
 export const bookingService = new BookingService(apiTool);
