@@ -4,8 +4,23 @@ from typing import Optional, Tuple
 
 import PyUtils as PU
 from .BaseAPIService import BaseAPIService
+from ..view.BaseView import BaseView
 
 class DashService(BaseAPIService):
+    def __init__(self, dbTool: PU.DBTool, view: Optional[BaseView] = None):
+        super().__init__(dbTool, view = view)
+
+        self._prefix = "[DASH]"
+        self._errorPrefix = "[DASH SQL ERROR]"
+
+    def print(self, *args, **kwargs):
+        prefix = self._prefix
+        super().print(*args, **kwargs, prefix = prefix)
+
+    def printError(self, *args, **kwargs):
+        prefix = self._errorPrefix
+        super().print(*args, **kwargs, prefix = prefix)
+
     def getDashboardMetrics(self, user_id: Optional[str]) -> Tuple[bool, dict]:
         try:
             userUUID = uuid.UUID(user_id)
@@ -19,8 +34,8 @@ class DashService(BaseAPIService):
 
         try:
             query = PU.DBTool.readSQLFile(sqlPath)
-            print("[DASH] Running getDashboardMetrics for", user_id)
-            print("[DASH] SQL Path:", sqlPath)
+            self.print(f"Running getDashboardMetrics for {user_id}")
+            self.print(f"SQL Path: {sqlPath}")
         except Exception as e:
             return [False, f"Error reading SQL file: {e}"]
 
@@ -30,7 +45,7 @@ class DashService(BaseAPIService):
                                                               commit=False, closeConn=False)
 
             result = cursor.fetchone()
-            print("[DASH] Query result:", result)
+            self.print(f"Query result: {result}")
             connData.putConn()
 
             if result:
@@ -41,6 +56,6 @@ class DashService(BaseAPIService):
             else:
                 return [False, "No booking data found."]
         except Exception as e:
-            print("[DASH SQL ERROR]", e)
+            self.printError(f"{e}")
             return [False, f"SQL execution error: {e}"]
     

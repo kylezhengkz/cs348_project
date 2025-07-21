@@ -6,11 +6,11 @@ def main():
     command = CommandBuilder()
     args = command.parse()
 
-    app = App(args.env)
+    app = App(args.env, isDebug = args.debug)
     flaskApp = app.initialize()
 
     if (args.debug):
-        app.run(debug = True)
+        app.run()
     else:
         print(f"Serving at port {app.port}...")
         serve(app, port = app.port)
