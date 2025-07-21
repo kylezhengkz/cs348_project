@@ -16,11 +16,6 @@ A unit tester to test the backend SQL queries of the app
 
 Run the following command:
 
-### Python
-```bash
-python3 main.py [command name]
-```
-
 <br>
 
 ### Poetry
@@ -44,7 +39,6 @@ For the different command names see the list below
 ## Command Options
 
 Most of the options/arguments are based off the options/arguments from Python's [unittest](https://docs.python.org/3/library/unittest.html) package
-except for the `--env` option and `command` argument
 
 ### Positional Arguments
 | Argument Name | Description |
@@ -65,7 +59,7 @@ except for the `--env` option and `command` argument
 | -c, --catch | Catch Ctrl-C and display results so far |
 | -b, --buffer | Buffer stdout and stderr during tests |
 | -k TESTNAMEPATTERNS | Only run tests which match the given substring |
-| -e ENV, --env ENV | The environment mode to run the tester. <br> <br> The available environment modes are: <br> - toy <br> - dev <br> -prod |
+| -e ENV, --env ENV | The environment mode to run the tester. <br> If this option is not specified, then will run the tester against the datasets of every environment mode <br> <br> The available environment modes are: <br> - toy <br> - dev <br> -prod |
 | -u USERNAME, --username USERNAME | Override the username to the database |
 | -p PASSWORD, --password PASSWORD | Override the password to the database |
 | -ho HOST, --host HOST | Override the host to the database |
@@ -78,7 +72,7 @@ except for the `--env` option and `command` argument
 Sometimes, you only want to verify whether a single module is working correctly. You can do this by running the following command:
 
 ```bash
-python3 main.py [commandName] [TestSuiteName]
+poetry run unit_test [commandName] [TestSuiteName]
 ```
 
 <br>
@@ -88,5 +82,5 @@ python3 main.py [commandName] [TestSuiteName]
 For easier debugging or to save time, you may only want to run a single test. You can do this by running the following command:
 
 ```bash
-python3 main.py [commandName] [TestSuiteName].[TestName]
+poetry run unit_test [commandName] [TestSuiteName].[TestName]
 ```

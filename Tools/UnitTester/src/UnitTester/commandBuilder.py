@@ -31,7 +31,9 @@ class CommandBuilder(PU.BaseCommandBuilder, Generic[GenericTypes.ConfigKey.value
         allEnvironments = set(map(lambda command: f"  - {command}", EnvironmentModes.getAll()))
         allEnvironments = "\n".join(allEnvironments)
 
-        self._argParser.add_argument(ShortCommandOpts.EnvironmentMode.value, CommandOpts.EnvironmentMode.value, action='store', type=str, help=f"The environment mode to run the tester.\n\nThe available environment modes are:\n{allEnvironments}")
+        environmentOptHelpStr = f"The environment mode to run the tester.\nIf this option is not specified, then will run the tester against the datasets of every environment mode\n\nThe available environment modes are:\n{allEnvironments}"
+
+        self._argParser.add_argument(ShortCommandOpts.EnvironmentMode.value, CommandOpts.EnvironmentMode.value, action='store', type=str, help=environmentOptHelpStr)
         self._argParser.add_argument(ShortCommandOpts.DBUserName.value, CommandOpts.DBUserName.value, action='store', type=str, help=f"Override the username to the database")
         self._argParser.add_argument(ShortCommandOpts.DBPassword.value, CommandOpts.DBPassword.value, action='store', type=str, help=f"Override the password to the database")
         self._argParser.add_argument(ShortCommandOpts.DBHost.value, CommandOpts.DBHost.value, action='store', type=str, help=f"Override the host to the database")
