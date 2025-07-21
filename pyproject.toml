@@ -41,6 +41,7 @@ fixraidenboss2 = "4.5.2"
 hello_world = "hello_world.main:main"
 db_pop = "Tools.DataPopulator.main:main"
 unit_test = "Tools.UnitTester.main:main"
+backend = "backend.main:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

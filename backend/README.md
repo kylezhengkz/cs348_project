@@ -14,7 +14,7 @@ Run the following command and replace `[env]` with either `prod`, `dev` or `toy`
 you are running.
 
 ```
-Poetry run python main.py -e [env]
+poetry run backend -e [env]
 ```
 
 <br>
