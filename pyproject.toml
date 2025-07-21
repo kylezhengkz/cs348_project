@@ -35,7 +35,7 @@ waitress = ">=3.0.2,<4.0.0"
 flask-cors = "^6.0.1"
 pytz = "^2025.2"
 tzlocal = "^5.3.1"
-fixraidenboss2 = "4.5.2"
+fixraidenboss2 = "4.5.4"
 
 [tool.poetry.scripts]
 hello_world = "hello_world.main:main"
