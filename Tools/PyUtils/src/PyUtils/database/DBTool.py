@@ -41,6 +41,7 @@ class DBTool():
 
         self._database = otherDatabase
         self.connPools[otherDatabase] = self.createConnPool()
+        self._sqlEngine = None
 
     @property
     def useConnPool(self) -> bool:

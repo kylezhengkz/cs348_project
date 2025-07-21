@@ -10,5 +10,5 @@ from .constants.EnvironmentModes import EnvironmentModes
 Config = {ConfigKeys.Command: Commands.RunSuite,
           ConfigKeys.DbTool: None,
           ConfigKeys.DbCleaner: None,
-          ConfigKeys.EnvironmentMode: EnvironmentModes.Dev,
+          ConfigKeys.EnvironmentMode: None,
           ConfigKeys.UserDBSecrets: PU.DBSecrets()}

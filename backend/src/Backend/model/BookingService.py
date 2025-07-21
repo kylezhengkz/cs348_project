@@ -77,7 +77,6 @@ class BookingService(BaseAPIService):
         
         if (error is not None):
             errorMsg = self._getBookingErrorMsg(f"{error}")
-            print(errorMsg)
             return [False, errorMsg, None]
         
         row = cursor.fetchone()
