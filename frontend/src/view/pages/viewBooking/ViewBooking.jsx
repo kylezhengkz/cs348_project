@@ -27,6 +27,7 @@ import "./ViewBooking.css";
 
 import BookingModal from './BookingModal';
 import EditModal from './EditModal';
+import DeleteModal from './DeleteModal';
 
 export function ViewBooking() {
     const { authUserId } = useAuth();
@@ -83,7 +84,11 @@ export function ViewBooking() {
           case "edit":
             const editModal = new bootstrap.Modal(document.getElementById('editModal'));
             editModal.show();
+            break
           case "delete":
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+            deleteModal.show();
+            break
         }
     }
 
@@ -130,6 +135,26 @@ export function ViewBooking() {
         }
     }
 
+    async function deleteRoom() {
+        const roomId = selectedRoomId.current;
+        console.log("Deleting room with", roomId)
+
+        try {
+            const res = await roomService.deleteRoom(roomId)
+            setAlertSeverity("success");
+            setAlertMessage("Room deleted");
+            setAlertOpen(true);
+            getRooms(setData);
+        } catch {
+            setAlertSeverity("error");
+            setAlertMessage("Unable to delete room");
+            setAlertOpen(true);
+        } finally {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+            console.log("CLOSING MODAL", modal)
+            modal.hide();
+        }
+    }
 
     const columns = [
         // {title: "Room Id", data: "roomID", width: "400px"},
@@ -243,6 +268,7 @@ export function ViewBooking() {
 
             <BookingModal submitBooking={submitBooking}></BookingModal>
             <EditModal></EditModal>
+            <DeleteModal deleteRoom={deleteRoom}></DeleteModal>
 
             <Snackbar open={alertOpen} autoHideDuration={5000} onClose={() => setAlertOpen(false)}>
             <Alert

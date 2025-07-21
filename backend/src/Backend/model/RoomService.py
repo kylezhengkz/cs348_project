@@ -42,3 +42,31 @@ class RoomService(BaseAPIService):
         result = pd.read_sql(sql, sqlEngine, params = params)
 
         return result.to_dict('records')
+
+    def deleteRoom(self, roomID):
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "ModifyRooms/DeleteRoom.sql")
+        try:
+            with open(sqlPath, 'r') as f:
+                deleteRoomSQL = f.read()
+        except FileNotFoundError:
+            return {
+              "loginStatus": False,
+              "errorMessage": f"Login SQL file not found at {sqlPath}"
+            }
+        
+        connData, cursor, error = self._dbTool.executeSQL(deleteRoomSQL, 
+                                                          vars = {
+                                                                  "roomID": roomID
+                                                                  },
+                                                          commit = True, closeConn = False,
+                                                          raiseException = False)
+        
+        if (error is not None):
+            return {
+              "deleteStatus": True
+            }
+        else:
+            return {
+              "deleteStatus": False
+            }
+        

@@ -78,6 +78,12 @@ class App():
                 response = self._roomService.fetchAvailableRooms()
 
             return response
+    
+        @app.route("/deleteRoom", methods=["POST"])
+        def delete():
+            data = request.get_json()
+            print("RECEIVED IN DELETE", data)
+            return self._roomService.deleteRoom(data["roomID"])
         
         @app.route("/bookRoom", methods=["POST"])
         def bookRoom():
