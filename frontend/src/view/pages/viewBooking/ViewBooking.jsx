@@ -19,6 +19,15 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
+import bookingIcon from "../../../resources/booking_icon.jpg";
+import editIcon from "../../../resources/edit_icon.png";
+import garbageCan from "../../../resources/garbage_can.png";
+
+import "./ViewBooking.css";
+
+import BookingModal from './BookingModal';
+import EditModal from './EditModal';
+
 export function ViewBooking() {
     const { authUserId } = useAuth();
     const selectedRoomId = useRef();
@@ -50,6 +59,8 @@ export function ViewBooking() {
         let minCapacity = minCapactiyRef.current.value;
         let maxCapacity = maxCapacityRef.current.value;
         let startTime = startTimeRef.current.value;
+        console.log(startTime)
+        console.log("HEHEHEHA", startTime)
         let endTime = endTimeRef.current.value;
 
         if (roomName === "") roomName = undefined;
@@ -61,20 +72,23 @@ export function ViewBooking() {
         getRooms(setData, roomName, minCapacity, maxCapacity, startTime, endTime);
     }
 
-    function handleBookButtonClick(roomId) {
-        
+    function handleOperationButtonClick(roomId, operation) {
         selectedRoomId.current = roomId;
         console.log("clicked", roomId);
-        const modal = new bootstrap.Modal(document.getElementById('bookModal'));
-        modal.show();
+        switch (operation) {
+          case "book":
+            const bookModal = new bootstrap.Modal(document.getElementById('bookModal'));
+            bookModal.show();
+            break
+          case "edit":
+            const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+            editModal.show();
+          case "delete":
+        }
     }
 
-    async function submitBooking() {
-
+    async function submitBooking(startTime, endTime, participants) {
         const roomId = selectedRoomId.current;
-        const startTime = startTimeRef.current.value;
-        const endTime = endTimeRef.current.value;
-        const participants = minCapactiyRef.current.value;
 
         if (!startTime || !endTime) {
             alert("Please provide both start and end time.");
@@ -87,6 +101,8 @@ export function ViewBooking() {
           
             const { success, message } = res.data || {};
 
+            console.log("Reach this line", res.data)
+
             if (success) {
               setAlertSeverity("success");
               setAlertMessage("Booking successful!");
@@ -95,26 +111,23 @@ export function ViewBooking() {
               setAlertMessage("Booking failed: " + (message || "Unknown error"));
             }
             setAlertOpen(true);
-            } catch (error) {
-            console.error("Booking request failed:", error);
+		} catch (error) {
+			console.error("Booking request failed:", error);
 
-                if (error.response && error.response.data && error.response.data.message) {
-                    setAlertMessage("Booking failed: " + error.response.data.message);
-                } else {
-                    setAlertMessage("Booking failed due to a server error.");
-                }
+			if (error.response && error.response.data && error.response.data.message) {
+				setAlertMessage("Booking failed: " + error.response.data.message);
+			} else {
+				setAlertMessage("Booking failed due to a server error.");
+			}
 
-             setAlertSeverity("error");
-            setAlertOpen(true);
-            }
-
-        // Close the modal
-        const modal = bootstrap.Modal.getInstance(document.getElementById('bookModal'));
-        modal.hide();
-
-        document.body.classList.remove('modal-open');
-        const backdrops = document.querySelectorAll('.modal-backdrop');
-        backdrops.forEach(b => b.remove());
+			setAlertSeverity("error");
+			setAlertOpen(true);
+        } finally {
+            // Close the modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('bookModal'));
+            console.log("CLOSING MODAL", modal)
+            modal.hide();
+        }
     }
 
 
@@ -130,55 +143,44 @@ export function ViewBooking() {
         {title: "Country", data: "country", width: "140px"},
         {title: "Postal Code", data: "postalCode", width: "170px"},
         {
-        title: "Actions",
-        data: null,
-        width: "150px",
-        render: function (data, type, row) {
-    return `<button 
-        class='book-btn'
-        data-room-id='${row.roomID}' 
-        style="
-            min-width: 150px;
-            padding: 6px 12px;
-            background-color: #9b5aa7;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: all 0.3s ease;"
-        onmouseover="this.style.backgroundColor='transparent'; this.style.color='#9b5aa7';"
-        onmouseout="this.style.backgroundColor='#9b5aa7'; this.style.color='white';"
-    >Book</button>`;
-}
-    }
+          title: "Actions",
+          data: null,
+          width: "150px",
+          render: function (data, type, row) {
+            return (
+              `<div id="imageWrapper">
+                  <button class='action-btn' data-op='book' data-room-id='${row.roomID}'>
+                      <img id="book" src="${bookingIcon}"></img>
+                  </button>
+                  <button class='action-btn' data-op='edit' data-room-id='${row.roomID}'>
+                      <img id="edit" src="${editIcon}"></img>
+                  </button>
+                  <button class='action-btn' data-op='delete' data-room-id='${row.roomID}'>
+                      <img id="delete" src="${garbageCan}"></img>
+                  </button>
+              </div>`
+          );
+        }
+      }
     ];
 
     useEffect(() => {
         getRooms(setData);
     }, []);
+    
     useEffect(() => {
-    const wrapper = document.querySelector('#DataTables_Table_0_wrapper');
-    console.log("Wrapper found?", wrapper);
-
-    const handleClick = (event) => {
-        const target = event.target.closest('.book-btn');
-        if (target) {
+        const handleClick = (event) => {
+            const target = event.target.closest('.action-btn');
+            if (target && document.contains(target)) {
             const roomId = target.getAttribute('data-room-id');
-            console.log("CLICK DETECTED:", roomId);
-            handleBookButtonClick(roomId);
-        }
-    };
+            const operation = target.getAttribute('data-op');
+            handleOperationButtonClick(roomId, operation);
+            }
+        };
 
-    if (wrapper) {
-        wrapper.addEventListener('click', handleClick);
-    }
-
-    return () => {
-        if (wrapper) {
-            wrapper.removeEventListener('click', handleClick);
-        }
-    };
-}, [data]);
+        document.body.addEventListener('click', handleClick);
+        return () => document.body.removeEventListener('click', handleClick);
+    }, []);
 
     return (
         <Container maxWidth="xl">
@@ -233,69 +235,24 @@ export function ViewBooking() {
                         tableContainerProps={{ style: { width: '100%' } }}
                         dataTableKwargs={{
                             autoWidth: false,
-                            scrollX: true, 
-                            drawCallback: function () {
-                                const buttons = document.querySelectorAll('.book-btn');
-                                buttons.forEach(button => {
-                                    button.onclick = (e) => {
-                                        const roomId = button.getAttribute('data-room-id');
-                                        handleBookButtonClick(roomId);
-                                    };
-                                });
-                            }
+                            scrollX: true
                         }}
                     />
                 </Box>
             </Box>
 
-            <div className="modal fade" id="bookModal" tabIndex="-1" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Book Room</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <TextField
-                                fullWidth
-                                label="Start Time"
-                                type="datetime-local"
-                                inputRef={startTimeRef}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                            <TextField
-                                fullWidth
-                                className="mt-3"
-                                label="End Time"
-                                type="datetime-local"
-                                inputRef={endTimeRef}
-                                InputLabelProps={{ shrink: true }}
-                            />
-                            <TextField
-                                fullWidth
-                                className="mt-3"
-                                label="Participants"
-                                inputRef={minCapactiyRef}
-                                type="number"
-                            />
-                        </div>
-                        <div className="modal-footer">
-                            <Button variant="contained" onClick={submitBooking}>
-                                Confirm Booking
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <BookingModal submitBooking={submitBooking}></BookingModal>
+            <EditModal></EditModal>
+
             <Snackbar open={alertOpen} autoHideDuration={5000} onClose={() => setAlertOpen(false)}>
-  <Alert
-    onClose={() => setAlertOpen(false)}
-    severity={alertSeverity}
-    sx={{ width: '100%', backgroundColor: '#9b5aa7', color: 'white' }}
-  >
-    {alertMessage}
-  </Alert>
-</Snackbar>
+            <Alert
+              onClose={() => setAlertOpen(false)}
+              severity={alertSeverity}
+              sx={{ width: '100%', backgroundColor: '#9b5aa7', color: 'white' }}
+            >
+              {alertMessage}
+            </Alert>
+          </Snackbar>
         </Container>
     );
 }
