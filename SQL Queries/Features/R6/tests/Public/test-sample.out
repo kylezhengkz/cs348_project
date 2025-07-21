@@ -1,0 +1,1 @@
+{'roomID': UUID('00000000-0000-0000-0000-000000000000'), 'buildingName': 'Pharmacy Residence 1', 'roomName': 'PR1 1', 'overlappingBookings': 0, 'capacity': 75, 'addressLine1': '573 Queen Blvd S', 'addressLine2': '', 'city': 'Sudbury', 'province': 'Ontario', 'country': 'Canada', 'postalCode': 'M0K 0N6'}

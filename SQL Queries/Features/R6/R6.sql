@@ -2,9 +2,10 @@
 with bookingCount as (
   select 
   	r."roomID",
-	count(bo."bookingID") as "overlappingBookings"
+	  count(bo."bookingID") as "overlappingBookings"
   from "Room" as r 
-  left outer join "Booking" as bo on bo."roomID" = r."roomID"
+  left outer join "Booking" as bo 
+    on bo."roomID" = r."roomID"
   and (
 	  not exists ( -- disregard cancelled bookings and join bookings that overlap with [start_time, end_time]
 		select 1 

@@ -4,7 +4,7 @@ import os
 import signal
 import traceback
 import psycopg2
-from typing import Optional, Type
+from typing import Optional
 
 import PyUtils as PU
 
@@ -35,7 +35,6 @@ class UnitTester():
         self._dbCleaner = PU.DBCleaner(self.DbTool)
 
         self._testLoader = unittest.TestLoader()
-        self._testSuite = unittest.TestSuite()
 
         Config[ConfigKeys.DbCleaner] = self._dbCleaner
         Config[ConfigKeys.DbTool] = self.DbTool
@@ -49,10 +48,6 @@ class UnitTester():
 
     def setup(self):
         self.registerShutdown()
-
-    def addTestSuite(self, testCls: Type[unittest.TestCase]):
-        test = self._testLoader.loadTestsFromTestCase(testCls)
-        self._testSuite.addTest(test)
 
     def _updateDBSecrets(self):
         newSecrets = Config[ConfigKeys.UserDBSecrets]
@@ -69,27 +64,46 @@ class UnitTester():
         if (newSecrets.port != ""):
             self._secrets.port = newSecrets.port
 
-    def _run(self):
-        with open(TestFileTools.UnitTestResultsFile, "w", encoding = PU.FileEncodings.UTF8.value) as f:
-            runner = unittest.TextTestRunner(f)
-            unitTester = UnitTestProgram(testRunner=runner, exit = False)
-            unitTester.testCommandBuilder.parse()
+    def _runEnv(self, unitTester: UnitTestProgram, env: EnvironmentModes, fileWriteMode: str = "w"):
+        with open(TestFileTools.UnitTestResultsFile, fileWriteMode, encoding = PU.FileEncodings.UTF8.value) as f:
+            f.write(f"===== Environment Mode: {env.value} =====\n")
 
-            self._updateDBSecrets()
-            self.DbTool._secrets = self._secrets
-
-            environmentMode = Config[ConfigKeys.EnvironmentMode]
-            self._dbname = self.DBNames[environmentMode]
+        with open(TestFileTools.UnitTestResultsFile, "a", encoding = PU.FileEncodings.UTF8.value) as f:
+            self._dbname = self.DBNames[env]
             self.DbTool.database = self._dbname
             self.DbTool.useConnPool = True
 
-            unitTester.run(self._testSuite)
+            unitTester.testRunner = unittest.TextTestRunner(f)
+            unitTester.run()
+
+    def _run(self):
+        unitTester = UnitTestProgram(testRunner = None, exit = False)
+        unitTester.testCommandBuilder.parse()
+
+        self._updateDBSecrets()
+        self.DbTool._secrets = self._secrets
+
+        environmentMode = Config[ConfigKeys.EnvironmentMode]
+        runAllEnv = environmentMode is None
+
+        if (runAllEnv):
+            unitTestResultCleared = False
+            for env in EnvironmentModes:
+                Config[ConfigKeys.EnvironmentMode] = env
+                self._runEnv(unitTester, env, fileWriteMode = "a" if (unitTestResultCleared) else "w")
+
+                if (not unitTestResultCleared):
+                    unitTestResultCleared = True
+
+            Config[ConfigKeys.EnvironmentMode] = None
+        else:
+            self._runEnv(unitTester, environmentMode)
 
         testResults = TestFileTools.readTestResults()
         print(testResults)
 
-        testScore = testResults.split("\n", 1)[0]
-        if (testScore.find("F") > -1 or testScore.find("E") > -1):
+        testPassed = TestFileTools.evalTestResult(testResults)
+        if (not testPassed):
             raise PU.TesterFailed("unit")
 
     def tearDown(self):
