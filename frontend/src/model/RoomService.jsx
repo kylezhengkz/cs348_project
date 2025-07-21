@@ -29,6 +29,21 @@ export class RoomService extends BaseAPIService {
         const res = await this.apiTool.get(ext);
         return res.data;
     }
+
+    async deleteRoom(roomID) {
+        const kwargs = {
+            "roomID": roomID
+        }
+
+        let ext = "/deleteRoom";
+        console.log("EXT: ", ext);
+
+        const res = await this.apiTool.post(ext, kwargs);
+
+        console.log(res.data)
+
+        return res.data;
+    }
 }
 
 
