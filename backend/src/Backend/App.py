@@ -1,10 +1,9 @@
 import sys
 import signal
-import pytz
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from typing import Optional, Iterable, List, Dict, Any, Tuple
-from datetime import time, datetime
+from typing import Optional, Iterable, List, Dict, Any
+from datetime import datetime
 
 import PyUtils as PU
 
@@ -14,19 +13,25 @@ from .model.RoomService import RoomService
 from .model.BookingService import BookingService
 from .model.UserService import UserService
 from .model.DashService import DashService
+from .view.LogView import LogView
 
 class App():
-    def __init__(self, env: EnvironmentModes):
+    def __init__(self, env: EnvironmentModes, isDebug: bool = False):
         self._isInitalized = False
         self._env = env
         self._app: Optional[Flask] = None
         self._config = Config.load(env)
+        self._isDebug = isDebug
 
         self._dbTool = PU.DBTool(self._config.dbSecrets, database = self._config.database, useConnPool = True)
-        self._roomService = RoomService(self._dbTool)
-        self._bookingService = BookingService(self._dbTool)
-        self._userService = UserService(self._dbTool)
-        self._dashService = DashService(self._dbTool)
+
+        self._logView = LogView(verbose = isDebug)
+        self._logView.includePrefix = False
+
+        self._roomService = RoomService(self._dbTool, view = self._logView)
+        self._bookingService = BookingService(self._dbTool, view = self._logView)
+        self._userService = UserService(self._dbTool, view = self._logView)
+        self._dashService = DashService(self._dbTool, view = self._logView)
 
 
     # Reference: See the __call__ operator in app.py of Flask's source code
@@ -45,6 +50,18 @@ class App():
     @property
     def port(self):
         return self._config.port
+    
+    @property
+    def isDebug(self) -> bool:
+        return self._isDebug
+    
+    @isDebug.setter
+    def isDebug(self, newIsDebug: bool):
+        self._isDebug = newIsDebug
+        self._logView.verbose = newIsDebug
+
+    def print(self, *args, **kwargs):
+        self._logView.print(*args, **kwargs)
 
     def initialize(self):
         if (self._isInitalized):
@@ -108,7 +125,7 @@ class App():
 
                 # Call booking service
                 success, message, bookingId = self._bookingService.bookRoom(userId, roomId, start_dt, end_dt, participants)
-                #print(" BookingService.bookRoom returned ->", success, message, bookingId)
+                # self.print(" BookingService.bookRoom returned ->", success, message, bookingId)
 
                 return jsonify({
                     "success": success,
@@ -117,7 +134,7 @@ class App():
                 }), 200 if success else 400
 
             except Exception as e:
-                print(" Booking validation failed:", str(e))
+                self.print(" Booking validation failed:", str(e))
                 return jsonify({
                     "success": False,
                     "message": str(e) or "Booking failed due to an unknown error."
@@ -137,40 +154,40 @@ class App():
                 success, message = self._bookingService.cancelBooking(bookingId, userId)
                 return jsonify({ "success": success, "message": message }), 200 if success else 400
             except Exception as e:
-                print("CancelBooking error:", str(e))
+                self.print("CancelBooking error:", str(e))
                 return jsonify({ "success": False, "message": "Cancellation failed due to server error." }), 500
 
         
         @app.route("/getFutureBookings", methods=["GET"])
         def getFutureBookings():
             userId = request.args.get("userId")
-            print(f"[GET] /getFutureBookings - userId: {userId}")
+            self.print(f"[GET] /getFutureBookings - userId: {userId}")
             return self._bookingService.getFutureBookings(userId)
 
         @app.route("/getBookingsAndCancellations", methods=["GET"])
         def getBookingsAndCancellations():
             userId = request.args.get("userId")
-            print(f"[GET] /getBookingsAndCancellations - userId: {userId}")
+            self.print(f"/getBookingsAndCancellations - userId: {userId}", prefix = "[GET]")
             return self._bookingService.getBookingsAndCancellations(userId)
 
         @app.route("/signup", methods=["POST"])
         def signup():
             data = request.get_json()
-            print("RECEIVED IN SIGNUP", data)
+            self.print("RECEIVED IN SIGNUP", data)
                     
             return self._userService.signup(data["username"], data["email"], data["password"])
       
         @app.route("/login", methods=["POST"])
         def login():
             data = request.get_json()
-            print("RECEIVED IN LOGIN", data)
+            self.print("RECEIVED IN LOGIN", data)
                     
             return self._userService.login(data["username"], data["password"])
         
         @app.route("/getDashboardMetrics", methods=["GET"])
         def getDashboardMetrics():
             userId = request.args.get("userId")
-            print(f"[GET] /getDashboardMetrics - userId: {userId}")
+            self.print(f"/getDashboardMetrics - userId: {userId}", prefix = "[GET]")
             success, result = self._dashService.getDashboardMetrics(userId)
             return jsonify(result), 200 if success else 400
 
@@ -186,4 +203,4 @@ class App():
         signal.signal(signal.SIGINT, self.shutdown)
 
     def run(self, *args, **kwargs):
-        self._app.run(*args, port = self.port, **kwargs)
+        self._app.run(port = self.port, *args, debug = self._isDebug, **kwargs)

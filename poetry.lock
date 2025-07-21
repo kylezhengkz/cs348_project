@@ -230,14 +230,14 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "fixraidenboss2"
-version = "4.5.2"
+version = "4.5.4"
 description = "A library to help remap the mods installed on a character onto the skins of the character"
 optional = false
 python-versions = ">=3.6"
 groups = ["main"]
 files = [
-    {file = "fixraidenboss2-4.5.2-py3-none-any.whl", hash = "sha256:f66b1d9aa55f2d2b9d9f5e73ac2988869a89f0e7a7f8a06f7cde3d96b95faa2c"},
-    {file = "fixraidenboss2-4.5.2.tar.gz", hash = "sha256:11824dc56487f3124fdce2607d649d32979a3e39e2bba89d5bfdec59f0f41ee0"},
+    {file = "fixraidenboss2-4.5.4-py3-none-any.whl", hash = "sha256:a2e8689d35b7e217d5057e19703170152831bd11df9912ded0d2579117f83e40"},
+    {file = "fixraidenboss2-4.5.4.tar.gz", hash = "sha256:3544454226ae06cb64accf131101a513532f6dcadf982e4a7cae792d9fad505b"},
 ]
 
 [[package]]
@@ -1187,4 +1187,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4.0"
-content-hash = "d0a5cbff5dc558634911f5f61529ac6140cf1a2aac47f4447d46b151f792ac78"
+content-hash = "d64054a8a4fc5eb3161d1eec003038ce99c1d8aa380c3e1dc7789d7e69d89243"

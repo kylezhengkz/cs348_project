@@ -1,8 +1,4 @@
-import uuid
 import os
-import FixRaidenBoss2 as FRB
-from datetime import datetime, timezone
-from typing import Optional, Tuple, Callable
 
 import PyUtils as PU
 
@@ -38,7 +34,7 @@ class UserService(BaseAPIService):
         
         if (error is not None):
             errorMsg = self._getSignupErrorMsg(f"{error}")
-            print(errorMsg)
+            self.print(errorMsg)
             return {
               "signupStatus": False,
               "errorMessage": errorMsg
@@ -91,7 +87,7 @@ class UserService(BaseAPIService):
         if row:
             userId = row[0]
             permLevel = row[1]
-            print("Permission level", permLevel)
+            self.print("Permission level", permLevel)
             return {
               "loginStatus": True,
               "userId": userId,
