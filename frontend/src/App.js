@@ -11,11 +11,12 @@ import { Splash } from './view/pages/splash/Splash';
 import { Login } from './view/pages/login/Login';
 import { Signup } from './view/pages/signup/Signup';
 import { Home } from './view/pages/home';
-import { ViewBooking } from './view/pages/viewBooking/ViewBooking';
+import { ViewRooms } from './view/pages/viewRooms/ViewRooms';
 import { BookingHistory } from './view/pages/bookingHistory/BookingHistory';
 import { CreateBooking } from './view/pages/createBooking/CreateBooking';
 import { CancelBooking } from './view/pages/cancelBooking/CancelBooking';
 import { Dashboard } from './view/pages/dashboard/Dashboard';
+import { ViewBuildings } from './view/pages/viewBuildings/ViewBuildings';
 
 import { AuthProvider } from './wrappers/AuthContext'
 import { ProtectedRoutes } from './wrappers/ProtectedRoutes'
@@ -41,11 +42,14 @@ function App() {
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
             <Route path="home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
-            <Route path="viewBooking" element={<ProtectedRoutes><ViewBooking /></ProtectedRoutes>} />
+            <Route path="viewBookings" element={<ProtectedRoutes><ViewRooms/></ProtectedRoutes>} />
+            <Route path="editRooms/:buildingID" element={<ProtectedRoutes><ViewRooms mode="edit"/></ProtectedRoutes>} />
+            <Route path="deleteRooms/:buildingID" element={<ProtectedRoutes><ViewRooms mode="delete"/></ProtectedRoutes>} />
             <Route path="bookRoom" element={<ProtectedRoutes><CreateBooking /></ProtectedRoutes>} />
             <Route path="cancelBooking" element={<ProtectedRoutes><CancelBooking /></ProtectedRoutes>} />
             <Route path="bookingHistory" element={<ProtectedRoutes><BookingHistory/></ProtectedRoutes>} />
             <Route path="dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
+            <Route path="manageFacilities" element={<ProtectedRoutes><ViewBuildings /></ProtectedRoutes>} />
           </Routes>
           <Footer />
         </AuthProvider>

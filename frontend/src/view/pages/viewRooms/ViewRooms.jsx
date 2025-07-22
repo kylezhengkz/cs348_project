@@ -19,17 +19,17 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-import bookingIcon from "../../../resources/booking_icon.jpg";
-import editIcon from "../../../resources/edit_icon.png";
-import garbageCan from "../../../resources/garbage_can.png";
-
-import "./ViewBooking.css";
+import "./ViewRooms.css";
 
 import BookingModal from './BookingModal';
 import EditModal from './EditModal';
 import DeleteModal from './DeleteModal';
+import { useParams } from 'react-router-dom';
 
-export function ViewBooking() {
+export function ViewRooms({mode = "book"}) {
+    const { buildingID } = useParams();
+    console.log(buildingID)
+
     const { authUserId } = useAuth();
     const selectedRoomId = useRef();
     const [data, setData] = useState([]);
@@ -47,6 +47,13 @@ export function ViewBooking() {
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
+
+    function getRoomsByBuildingID(setData, buildingID) {
+        roomService.getRoomsByBuildingID(buildingID).then(rooms => {
+            console.log("ROOMS: ", rooms);
+            setData(rooms);
+        });
+    }
 
     function getRooms(setData, roomName, minCapacity, maxCapacity, startTime, endTime) {
         roomService.getAvailable(roomName, minCapacity, maxCapacity, startTime, endTime).then(rooms => {
@@ -144,7 +151,7 @@ export function ViewBooking() {
             setAlertSeverity("success");
             setAlertMessage("Room deleted");
             setAlertOpen(true);
-            getRooms(setData);
+            getRoomsByBuildingID(setData, buildingID);
         } catch {
             setAlertSeverity("error");
             setAlertMessage("Unable to delete room");
@@ -172,25 +179,72 @@ export function ViewBooking() {
           data: null,
           width: "150px",
           render: function (data, type, row) {
-            return (
-              `<div id="imageWrapper">
-                  <button class='action-btn' data-op='book' data-room-id='${row.roomID}'>
-                      <img id="book" src="${bookingIcon}"></img>
-                  </button>
-                  <button class='action-btn' data-op='edit' data-room-id='${row.roomID}'>
-                      <img id="edit" src="${editIcon}"></img>
-                  </button>
-                  <button class='action-btn' data-op='delete' data-room-id='${row.roomID}'>
-                      <img id="delete" src="${garbageCan}"></img>
-                  </button>
-              </div>`
-          );
+            if (mode == "book") {
+                return `<button
+                    class='action-btn'
+                    data-op='book'
+                    data-room-id='${row.roomID}' 
+                    style="
+                        min-width: 150px;
+                        padding: 6px 12px;
+                        background-color: #9b5aa7;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        font-weight: 500;
+                        transition: all 0.3s ease;"
+                    onmouseover="this.style.backgroundColor='transparent'; this.style.color='#9b5aa7';"
+                    onmouseout="this.style.backgroundColor='#9b5aa7'; this.style.color='white';"
+                >Book</button>`;
+            } else if (mode == "edit") {
+                return `<button
+                    class='action-btn'
+                    data-op='edit'
+                    data-room-id='${row.roomID}' 
+                    style="
+                        min-width: 150px;
+                        padding: 6px 12px;
+                        background-color: #9b5aa7;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        font-weight: 500;
+                        transition: all 0.3s ease;"
+                    onmouseover="this.style.backgroundColor='transparent'; this.style.color='#9b5aa7';"
+                    onmouseout="this.style.backgroundColor='#9b5aa7'; this.style.color='white';"
+                >Edit</button>`;
+            } else if (mode == "delete") {
+                return `<button
+                    class='action-btn'
+                    data-op='delete'
+                    data-room-id='${row.roomID}' 
+                    style="
+                        min-width: 150px;
+                        padding: 6px 12px;
+                        background-color: #9b5aa7;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        font-weight: 500;
+                        transition: all 0.3s ease;"
+                    onmouseover="this.style.backgroundColor='transparent'; this.style.color='#9b5aa7';"
+                    onmouseout="this.style.backgroundColor='#9b5aa7'; this.style.color='white';"
+                >Delete</button>`;
+            }
         }
       }
     ];
 
     useEffect(() => {
-        getRooms(setData);
+        if (mode == "book") {
+            getRooms(setData);
+        } else if (mode == "edit") {
+            console.log("EDIT")
+            console.log(buildingID)
+            getRoomsByBuildingID(setData, buildingID);
+        } else if (mode == "delete") {
+            getRoomsByBuildingID(setData, buildingID);
+        }
     }, []);
     
     useEffect(() => {
@@ -211,45 +265,47 @@ export function ViewBooking() {
         <Container maxWidth="xl">
             <Typography variant="h2" gutterBottom className='mt-5 mb-5'>Available Rooms</Typography>
 
-            <Accordion className='mt-3'>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content">
-                    <Typography component="span">Filters</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Box>
+            {mode == "book" &&
+                <Accordion className='mt-3'>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content">
+                        <Typography component="span">Filters</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
                         <Box>
-                            <Typography variant='subtitle1'>Room Name</Typography>
-                            <TextField label="Room Name" variant="outlined" inputRef={roomRef}></TextField>
+                            <Box>
+                                <Typography variant='subtitle1'>Room Name</Typography>
+                                <TextField label="Room Name" variant="outlined" inputRef={roomRef}></TextField>
+                            </Box>
+
+                            <Box className="mt-3" display={"flex"} gap={"30px"}>
+                                <Box>
+                                    <Typography variant='subtitle1'>Min Capacity</Typography>
+                                    <TextField label="Minimum Capacity" variant="outlined" inputRef={minCapactiyRef} type="number"></TextField>
+                                </Box>
+
+                                <Box>
+                                    <Typography variant='subtitle1'>Max Capacity</Typography>
+                                    <TextField label="Maximum Capacity" variant="outlined" inputRef={maxCapacityRef} type="number"></TextField>
+                                </Box>
+                            </Box>
+
+                            <Box className="mt-3" display={"flex"} gap={"30px"}>
+                                <Box>
+                                    <Typography variant='subtitle1'>Start DateTime</Typography>
+                                    <TextField variant="outlined" inputRef={startTimeRef} type="datetime-local"></TextField>
+                                </Box>
+
+                                <Box>
+                                    <Typography variant='subtitle1'>End DateTime</Typography>
+                                    <TextField variant="outlined" inputRef={endTimeRef} type="datetime-local"></TextField>
+                                </Box>
+                            </Box>
+
+                            <Button variant="contained" className='mt-4' onClick={filterRooms}>Filter</Button>
                         </Box>
-
-                        <Box className="mt-3" display={"flex"} gap={"30px"}>
-                            <Box>
-                                <Typography variant='subtitle1'>Min Capacity</Typography>
-                                <TextField label="Minimum Capacity" variant="outlined" inputRef={minCapactiyRef} type="number"></TextField>
-                            </Box>
-
-                            <Box>
-                                <Typography variant='subtitle1'>Max Capacity</Typography>
-                                <TextField label="Maximum Capacity" variant="outlined" inputRef={maxCapacityRef} type="number"></TextField>
-                            </Box>
-                        </Box>
-
-                        <Box className="mt-3" display={"flex"} gap={"30px"}>
-                            <Box>
-                                <Typography variant='subtitle1'>Start DateTime</Typography>
-                                <TextField variant="outlined" inputRef={startTimeRef} type="datetime-local"></TextField>
-                            </Box>
-
-                            <Box>
-                                <Typography variant='subtitle1'>End DateTime</Typography>
-                                <TextField variant="outlined" inputRef={endTimeRef} type="datetime-local"></TextField>
-                            </Box>
-                        </Box>
-
-                        <Button variant="contained" className='mt-4' onClick={filterRooms}>Filter</Button>
-                    </Box>
-                </AccordionDetails>
-            </Accordion>
+                    </AccordionDetails>
+                </Accordion>
+            }
 
           
             <Box display="flex" justifyContent="center">

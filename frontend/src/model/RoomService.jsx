@@ -3,6 +3,14 @@ import { APITool, apiTool } from "../tools/ApiTool";
 
 
 export class RoomService extends BaseAPIService {
+    async getRoomsByBuildingID(buildingID) {
+        let ext = `/viewRoomsByBuildingID?building_id=${buildingID}&db_operation=filter`
+        console.log("EXT: ", ext);
+
+        const res = await this.apiTool.get(ext);
+        return res.data;
+    }
+
     async getAvailable(roomName, minCapacity, maxCapacity, 
                  startTimeStr, endTimeStr) {
         
@@ -27,6 +35,24 @@ export class RoomService extends BaseAPIService {
         console.log("EXT: ", ext);
 
         const res = await this.apiTool.get(ext);
+        return res.data;
+    }
+
+    async addRoom(roomName, capacity, buildingID) {
+        const kwargs = {
+            "roomName": roomName,
+            "capacity": capacity,
+            "buildingID": buildingID
+        }
+
+        let ext = "/addRoom";
+        console.log("EXT: ", ext);
+        console.log(kwargs)
+
+        const res = await this.apiTool.post(ext, kwargs);
+
+        console.log(res.data)
+
         return res.data;
     }
 
