@@ -15,7 +15,7 @@ class LogView(FRB.Logger, BaseView):
             self.prefix = prefix
 
         if (args):
-            txt += "".join(args)
+            txt += " ".join(args)
 
         self.log(txt)
 

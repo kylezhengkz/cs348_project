@@ -251,6 +251,36 @@ class App():
             return self._dashService.getBookingFrequency(userId, startDateTime, endDateTime, queryLimit = queryLimit)
 
 
+        @app.route("/updateUsername", methods=["POST"])
+        def updateUsername():
+            data = request.get_json()
+            self.print("[POST] /updateUsername", data)
+
+            oldUsername = data.get("oldUsername")
+            newUsername = data.get("newUsername")
+
+            if not oldUsername or not newUsername:
+                return jsonify({ "success": False, "message": "Missing old or new username." }), 400
+
+            success, message = self._dashService.updateUsername(oldUsername, newUsername)
+            return jsonify({ "success": success, "message": message }), 200 if success else 400
+
+        @app.route("/updatePassword", methods=["POST"])
+        def updatePassword():
+            data = request.get_json()
+            self.print("[POST] /updatePassword", data)
+
+            userId = data.get("userId")
+            oldPassword = data.get("oldPassword")
+            newPassword = data.get("newPassword")
+
+            if not userId or not oldPassword or not newPassword:
+                return jsonify({ "success": False, "message": "Missing required fields." }), 400
+
+            success, message = self._dashService.updatePassword(userId, oldPassword, newPassword)
+            return jsonify({ "success": success, "message": message }), 200 if success else 400
+
+
         self._app = app
         return app
 
