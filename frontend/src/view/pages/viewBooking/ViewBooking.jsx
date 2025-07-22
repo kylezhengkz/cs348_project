@@ -19,17 +19,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-import "./ViewRooms.css";
+import "./ViewBooking.css";
+
+import bookIcon from "../../../resources/booking_icon.jpg";
 
 import BookingModal from './BookingModal';
-import EditModal from './EditModal';
-import DeleteModal from './DeleteModal';
-import { useParams } from 'react-router-dom';
 
-export function ViewRooms({mode = "book"}) {
-    const { buildingID } = useParams();
-    console.log(buildingID)
-
+export function ViewBooking({mode = "book"}) {
     const { authUserId } = useAuth();
     const selectedRoomId = useRef();
     const [data, setData] = useState([]);
@@ -67,8 +63,6 @@ export function ViewRooms({mode = "book"}) {
         let minCapacity = minCapactiyRef.current.value;
         let maxCapacity = maxCapacityRef.current.value;
         let startTime = startTimeRef.current.value;
-        console.log(startTime)
-        console.log("HEHEHEHA", startTime)
         let endTime = endTimeRef.current.value;
 
         if (roomName === "") roomName = undefined;
@@ -86,15 +80,8 @@ export function ViewRooms({mode = "book"}) {
         switch (operation) {
           case "book":
             const bookModal = new bootstrap.Modal(document.getElementById('bookModal'));
+            console.log(bookModal)
             bookModal.show();
-            break
-          case "edit":
-            const editModal = new bootstrap.Modal(document.getElementById('editModal'));
-            editModal.show();
-            break
-          case "delete":
-            const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-            deleteModal.show();
             break
         }
     }
@@ -142,27 +129,6 @@ export function ViewRooms({mode = "book"}) {
         }
     }
 
-    async function deleteRoom() {
-        const roomId = selectedRoomId.current;
-        console.log("Deleting room with", roomId)
-
-        try {
-            const res = await roomService.deleteRoom(roomId)
-            setAlertSeverity("success");
-            setAlertMessage("Room deleted");
-            setAlertOpen(true);
-            getRoomsByBuildingID(setData, buildingID);
-        } catch {
-            setAlertSeverity("error");
-            setAlertMessage("Unable to delete room");
-            setAlertOpen(true);
-        } finally {
-            const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
-            console.log("CLOSING MODAL", modal)
-            modal.hide();
-        }
-    }
-
     const columns = [
         // {title: "Room Id", data: "roomID", width: "400px"},
         {title: "Building", data: "buildingName", width: "200px"},
@@ -179,72 +145,17 @@ export function ViewRooms({mode = "book"}) {
           data: null,
           width: "150px",
           render: function (data, type, row) {
-            if (mode == "book") {
-                return `<button
-                    class='action-btn'
-                    data-op='book'
-                    data-room-id='${row.roomID}' 
-                    style="
-                        min-width: 150px;
-                        padding: 6px 12px;
-                        background-color: #9b5aa7;
-                        color: white;
-                        border: none;
-                        border-radius: 5px;
-                        font-weight: 500;
-                        transition: all 0.3s ease;"
-                    onmouseover="this.style.backgroundColor='transparent'; this.style.color='#9b5aa7';"
-                    onmouseout="this.style.backgroundColor='#9b5aa7'; this.style.color='white';"
-                >Book</button>`;
-            } else if (mode == "edit") {
-                return `<button
-                    class='action-btn'
-                    data-op='edit'
-                    data-room-id='${row.roomID}' 
-                    style="
-                        min-width: 150px;
-                        padding: 6px 12px;
-                        background-color: #9b5aa7;
-                        color: white;
-                        border: none;
-                        border-radius: 5px;
-                        font-weight: 500;
-                        transition: all 0.3s ease;"
-                    onmouseover="this.style.backgroundColor='transparent'; this.style.color='#9b5aa7';"
-                    onmouseout="this.style.backgroundColor='#9b5aa7'; this.style.color='white';"
-                >Edit</button>`;
-            } else if (mode == "delete") {
-                return `<button
-                    class='action-btn'
-                    data-op='delete'
-                    data-room-id='${row.roomID}' 
-                    style="
-                        min-width: 150px;
-                        padding: 6px 12px;
-                        background-color: #9b5aa7;
-                        color: white;
-                        border: none;
-                        border-radius: 5px;
-                        font-weight: 500;
-                        transition: all 0.3s ease;"
-                    onmouseover="this.style.backgroundColor='transparent'; this.style.color='#9b5aa7';"
-                    onmouseout="this.style.backgroundColor='#9b5aa7'; this.style.color='white';"
-                >Delete</button>`;
+            return `<div id="imageWrapper">
+                        <button class='action-btn' data-op='book' data-room-id='${row.roomID}'>
+                            <img id="book" src="${bookIcon}"></img>
+                        </button>
+                    </div>`
             }
         }
-      }
     ];
 
     useEffect(() => {
-        if (mode == "book") {
-            getRooms(setData);
-        } else if (mode == "edit") {
-            console.log("EDIT")
-            console.log(buildingID)
-            getRoomsByBuildingID(setData, buildingID);
-        } else if (mode == "delete") {
-            getRoomsByBuildingID(setData, buildingID);
-        }
+        getRooms(setData);
     }, []);
     
     useEffect(() => {
@@ -323,8 +234,6 @@ export function ViewRooms({mode = "book"}) {
             </Box>
 
             <BookingModal submitBooking={submitBooking}></BookingModal>
-            <EditModal></EditModal>
-            <DeleteModal deleteRoom={deleteRoom}></DeleteModal>
 
             <Snackbar open={alertOpen} autoHideDuration={5000} onClose={() => setAlertOpen(false)}>
             <Alert
