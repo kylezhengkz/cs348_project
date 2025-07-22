@@ -6,7 +6,8 @@ import MuiAlert from '@mui/material/Alert';
 import { useAuth } from "../../../wrappers/AuthContext";
 import { dashBoardService } from "../../../model/DashBoardService"; 
 
-export function Dashboard() {
+
+export function Dashboard({ containerProps }) {
     const { authUserId } = useAuth();
     const [metrics, setMetrics] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -38,7 +39,7 @@ export function Dashboard() {
 
 
     return (
-        <Container maxWidth="md">
+        <Container maxWidth="md" {...containerProps}>
             <Typography variant="h3" className="mt-5 mb-4">📊 My Dashboard</Typography>
 
             {loading ? (

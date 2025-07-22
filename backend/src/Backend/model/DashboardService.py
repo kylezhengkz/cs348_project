@@ -57,7 +57,7 @@ class DashboardService(BaseAPIService):
                     "most_booked_hour": result[1]
                 }]
             else:
-                return [False, "No booking data found."]
+                return [True, "No booking data found."]
         except Exception as e:
             self.printError(f"{e}")
             return [False, f"SQL execution error: {e}"]
