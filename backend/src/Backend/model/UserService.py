@@ -1,4 +1,6 @@
 import os
+import uuid
+from typing import Tuple
 
 import PyUtils as PU
 
@@ -98,3 +100,67 @@ class UserService(BaseAPIService):
               "loginStatus": False,
               "errorMessage": "Unable to login",
             }
+        
+    def updateUsername(self, userId: uuid.UUID, oldUserName: str, newUserName: str) -> Tuple[bool, str]:
+        try:
+            query = """
+            UPDATE "User"
+            SET "userID" = %(new_username)s
+            WHERE "userID" = %(old_username)s;
+            """
+
+            self.print(f"Updating username from {oldUserName} to {newUserName}")
+
+            _, _, error = self._dbTool.executeSQL(query,
+                                                vars={"old_username": oldUserName, "new_username": newUserName},
+                                                commit=True)
+
+            if error:
+                self.printError(error)
+                return [False, str(error)]
+            return [True, "Username updated successfully."]
+        except Exception as e:
+            self.printError(e)
+            return [False, str(e)]
+
+    def updatePassword(self, user_id: uuid.UUID, old_password: str, new_password: str) -> Tuple[bool, str]:
+        try:
+            check_query = """
+            SELECT COUNT(*) FROM "User"
+            WHERE "userID" = %(user_id)s AND "password" = %(old_password)s;
+            """
+
+            connData, cursor, error = self._dbTool.executeSQL(check_query,
+                                                            vars={"user_id": user_id, "old_password": old_password},
+                                                            commit=False, closeConn=False)
+
+            if error:
+                connData.putConn()
+                self.printError(error)
+                return [False, "Password check failed."]
+
+            result = cursor.fetchone()
+            if not result or result[0] == 0:
+                connData.putConn()
+                return [False, "Old password incorrect."]
+
+
+            update_query = """
+            UPDATE "User"
+            SET "password" = %(new_password)s
+            WHERE "userID" = %(user_id)s;
+            """
+
+            _, _, update_error = self._dbTool.executeSQL(update_query,
+                                                        vars={"user_id": user_id, "new_password": new_password},
+                                                        commit=True)
+
+            connData.putConn()
+
+            if update_error:
+                self.printError(update_error)
+                return [False, "Password update failed."]
+            return [True, "Password updated successfully."]
+        except Exception as e:
+            self.printError(e)
+            return [False, str(e)]

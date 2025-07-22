@@ -17,6 +17,7 @@ import { CreateBooking } from './view/pages/createBooking/CreateBooking';
 import { CancelBooking } from './view/pages/cancelBooking/CancelBooking';
 import { Dashboard } from './view/pages/dashboard/Dashboard';
 import { ViewBuildings } from './view/pages/viewBuildings/ViewBuildings';
+import { EditAccount } from './view/pages/editAccount/EditAccount';
 
 import { AuthProvider } from './wrappers/AuthContext'
 import { ProtectedRoutes } from './wrappers/ProtectedRoutes'
@@ -50,6 +51,7 @@ function App() {
             <Route path="bookingHistory" element={<ProtectedRoutes><BookingHistory/></ProtectedRoutes>} />
             <Route path="dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
             <Route path="manageFacilities" element={<ProtectedRoutes><ViewBuildings /></ProtectedRoutes>} />
+            <Route path="editAccount" element={<ProtectedRoutes><EditAccount/></ProtectedRoutes>} />
           </Routes>
           <Footer />
         </AuthProvider>
