@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { userService } from '../../../model/UserService';
 import { useAuth } from "../../../wrappers/AuthContext"
+import { USER_PERMS } from "../../../constants/authContants";
 
 export function Signup() {
 
@@ -26,7 +27,7 @@ export function Signup() {
     if (res["signupStatus"] === true) {
       setAuthUserId(res["userId"])
       setUsername(username)
-      setUserPerm(1)
+      setUserPerm(USER_PERMS.USER)
       navigate("/home");
     } else {
         if (res["errorMessage"].includes("Username")) {

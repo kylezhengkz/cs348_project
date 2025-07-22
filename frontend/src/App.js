@@ -20,6 +20,7 @@ import { ViewBuildings } from './view/pages/viewBuildings/ViewBuildings';
 
 import { AuthProvider } from './wrappers/AuthContext'
 import { ProtectedRoutes } from './wrappers/ProtectedRoutes'
+import { PublicRoutes } from './wrappers/PublicRoutes';
 
 function App() {
   return (
@@ -38,11 +39,11 @@ function App() {
         <AuthProvider>
           <Header />
           <Routes>
-            <Route path="/" element={<Splash />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="login" element={<Login />} />
+            <Route path="/" element={<PublicRoutes><Splash /></PublicRoutes>} />
+            <Route path="signup" element={<PublicRoutes><Signup /></PublicRoutes>} />
+            <Route path="login" element={<PublicRoutes><Login /></PublicRoutes>} />
             <Route path="home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
-            <Route path="viewBookings" element={<ProtectedRoutes><ViewRooms/></ProtectedRoutes>} />
+            <Route path="viewBooking" element={<ProtectedRoutes><ViewRooms/></ProtectedRoutes>} />
             <Route path="editRooms/:buildingID" element={<ProtectedRoutes><ViewRooms mode="edit"/></ProtectedRoutes>} />
             <Route path="deleteRooms/:buildingID" element={<ProtectedRoutes><ViewRooms mode="delete"/></ProtectedRoutes>} />
             <Route path="bookRoom" element={<ProtectedRoutes><CreateBooking /></ProtectedRoutes>} />

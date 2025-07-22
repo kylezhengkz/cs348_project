@@ -5,6 +5,6 @@ export function ProtectedRoutes({children}) {
   const { authUserId } = useAuth()
   
   return (
-    authUserId === null ? <Navigate to="/login"/> : children
+    authUserId === null ? <Navigate to="/"/> : children
   )
 }
