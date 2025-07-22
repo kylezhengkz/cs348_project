@@ -14,7 +14,7 @@ class LogView(FRB.Logger, BaseView):
         if (self.includePrefix):
             self.prefix = prefix
 
-        self.log(txt, *args, **kwargs)
+        #self.log(txt, *args, **kwargs)
 
         if (self.includePrefix != oldIncludePrefix):
             self.includePrefix = oldIncludePrefix
