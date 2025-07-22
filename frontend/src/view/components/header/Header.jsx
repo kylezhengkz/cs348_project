@@ -16,7 +16,8 @@ export function Header() {
     const navigate = useNavigate();
     const { authUserId, setAuthUserId, username, setUsername, userPerm, setUserPerm } = useAuth();
 
-    const [show, setShow] = useState(false);
+    const [showProfile, setShowProfile] = useState(false);
+    const [showNavBar, setShowNavBar] = useState(false);
 
     const style = {
       position: 'absolute',
@@ -42,6 +43,11 @@ export function Header() {
                         color="inherit"
                         aria-label="menu"
                         sx={{ mr: 2 }}
+                        onClick = { () => {
+                            console.log("HEHEHEHA")
+                            setShowNavBar(!showNavBar)
+                          }
+                        }
                     >
                         <MenuIcon />
                     </IconButton>
@@ -61,12 +67,12 @@ export function Header() {
                     {authUserId === null && <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>}
                     {authUserId === null && <Button color="inherit" onClick={() => navigate("/signup")}>Signup</Button>}
 
-                    <Button id="profilePic" onClick={() => setShow(true)}>
+                    <Button id="profilePic" onClick={() => setShowProfile(true)}>
                       <img src={require('../../../resources/profile.png')}></img>
                     </Button>
                     <Modal
-                      open={show}
-                      onClose={() => setShow(false)}
+                      open={showProfile}
+                      onClose={() => setShowProfile(false)}
                       aria-labelledby="modal-modal-title"
                       aria-describedby="modal-modal-description"
                     >

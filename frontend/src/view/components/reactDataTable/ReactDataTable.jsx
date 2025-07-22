@@ -17,6 +17,8 @@ export function ReactDataTable({data, columns, tableContainerProps, tableProps, 
         containerClsName += " " + tableContainerProps["className"];
     } 
 
+    require('../../../resources/booking_icon.jpg')
+
     useEffect(() => {
         const dataTable = $(ref.current).DataTable({
             data: data,

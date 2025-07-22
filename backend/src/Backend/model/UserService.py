@@ -16,14 +16,14 @@ class UserService(BaseAPIService):
         sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R10/R10a.sql")
         try:
             with open(sqlPath, 'r') as f:
-                bookingSQL = f.read()
+                signupSQL = f.read()
         except FileNotFoundError:
             return {
               "signupStatus": False,
               "errorMessage": f"Signup SQL file not found at {sqlPath}"
             }
         
-        connData, cursor, error = self._dbTool.executeSQL(bookingSQL, 
+        connData, cursor, error = self._dbTool.executeSQL(signupSQL, 
                                                           vars = {
                                                                   "username": username,
                                                                   "email": email,
@@ -60,14 +60,14 @@ class UserService(BaseAPIService):
         sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R10/R10b.sql")
         try:
             with open(sqlPath, 'r') as f:
-                bookingSQL = f.read()
+                loginSQL = f.read()
         except FileNotFoundError:
             return {
               "loginStatus": False,
               "errorMessage": f"Login SQL file not found at {sqlPath}"
             }
         
-        connData, cursor, error = self._dbTool.executeSQL(bookingSQL, 
+        connData, cursor, error = self._dbTool.executeSQL(loginSQL, 
                                                           vars = {
                                                                   "username": username,
                                                                   "passwrd": password
@@ -87,7 +87,7 @@ class UserService(BaseAPIService):
         if row:
             userId = row[0]
             permLevel = row[1]
-            self.print("Permission level", permLevel)
+            self.print(f"Permission level {permLevel}")
             return {
               "loginStatus": True,
               "userId": userId,

@@ -1,12 +1,15 @@
 import os
 import uuid
-from typing import Optional, Tuple
+import pandas as pd
+from datetime import datetime
+from typing import Optional, Tuple, List, Dict, Any, Union
 
 import PyUtils as PU
 from .BaseAPIService import BaseAPIService
 from ..view.BaseView import BaseView
 
-class DashService(BaseAPIService):
+
+class DashboardService(BaseAPIService):
     def __init__(self, dbTool: PU.DBTool, view: Optional[BaseView] = None):
         super().__init__(dbTool, view = view)
 
@@ -124,3 +127,28 @@ class DashService(BaseAPIService):
             return [False, str(e)]
 
     
+        
+    def getBookingFrequency(self, userId: uuid.UUID, startDateTime: Optional[datetime], endDateTime: Optional[datetime], queryLimit: Optional[int]) -> Tuple[bool, Union[str, List[Dict[str, Any]]]]:
+        if (startDateTime is not None and endDateTime is not None and startDateTime > endDateTime):
+            return [False, "Query end datetime cannot be earlier than the query start datetime"]
+        elif (queryLimit is not None and queryLimit < 0):
+            return [False, "Query limit must be non-negative"]
+        
+        sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "AF1/AF1.sql")
+        sql = PU.DBTool.readSQLFile(sqlFile)
+
+        if (queryLimit is not None):
+            sql = f"{sql[:-1]} LIMIT %(queryLimit)s;"
+
+        params = {
+            'userId': userId,
+            'startDateTime': startDateTime,
+            'endDateTime': endDateTime,
+            'queryLimit': queryLimit
+        }
+
+        sqlEngine = self._dbTool.getSQLEngine()
+        result = pd.read_sql(sql, sqlEngine, params = params)
+        result = result.to_dict('records')
+
+        return [True, result]

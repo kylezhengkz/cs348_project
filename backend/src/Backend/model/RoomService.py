@@ -8,11 +8,35 @@ import PyUtils as PU
 
 from .BaseAPIService import BaseAPIService
 
+import uuid
 
 class RoomService(BaseAPIService):
     
+    @staticmethod
+    def _safe_uuid(value):
+        try:
+            return str(uuid.UUID(value))
+        except (ValueError, TypeError):
+            return None
+    
+    def _getAddRoomMessageError(self, errorMsg: str) -> str:
+        if ("duplicate key" in errorMsg):
+          return "Room name already exists in building"
+    
+    def fetchRoomsByBuildingID(self, buildingId):
+        sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R6/GetRoomsByBuildingID.sql")
+        sql = PU.DBTool.readSQLFile(sqlFile)
+        params = {
+            'building_id': RoomService._safe_uuid(buildingId),
+        }
+        
+        sqlEngine = self._dbTool.getSQLEngine()
+        result = pd.read_sql(sql, sqlEngine, params = params)
+        
+        return result.to_dict('records')
+    
     # fetchAvailableRooms(roomName, minCapacity, maxCapacity, startTimeStr, endTimeStr): Retrieves all the available rooms
-    def fetchAvailableRooms(self, roomName: Optional[str] = None, minCapacity:Optional[str] = None, maxCapacity: Optional[str] = None, 
+    def fetchAvailableRooms(self, buildingId: Optional[str] = None, roomName: Optional[str] = None, minCapacity:Optional[str] = None, maxCapacity: Optional[str] = None, 
                             startTimeStr: Optional[str] = None, endTimeStr: Optional[str] = None) -> List[Dict[str, Any]]:
         
         useCurrent = True
@@ -29,7 +53,7 @@ class RoomService(BaseAPIService):
 
         sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R6/R6.sql")
         sql = PU.DBTool.readSQLFile(sqlFile)
-
+        
         params = {
             'room_name': f'%{roomName}%' if roomName and roomName.strip() != '' else None,
             'min_capacity': int(minCapacity) if minCapacity is not None and minCapacity.strip() != "" else None,
@@ -37,8 +61,67 @@ class RoomService(BaseAPIService):
             'start_time': current_datetime if useCurrent else dtStartTime,
             'end_time': current_datetime if useCurrent else dtEndTime
         }
-
+        
         sqlEngine = self._dbTool.getSQLEngine()
         result = pd.read_sql(sql, sqlEngine, params = params)
 
         return result.to_dict('records')
+
+    def addRoom(self, roomName, capacity, buildingID):
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "ModifyRooms/AddRoom.sql")
+        try:
+            with open(sqlPath, 'r') as f:
+                deleteRoomSQL = f.read()
+        except FileNotFoundError:
+            return {
+              "addStatus": False
+            }
+        
+        connData, cursor, error = self._dbTool.executeSQL(deleteRoomSQL, 
+                                                          vars = {
+                                                                  "roomName": roomName,
+                                                                  "capacity": capacity,
+                                                                  "buildingID": buildingID
+                                                                  },
+                                                          commit = True, closeConn = True,
+                                                          raiseException = False)
+                
+        if (error is not None):
+            errorMsg = self._getAddRoomMessageError(f"{error}")
+            return {
+              "addStatus": False,
+              "errorMessage": errorMsg
+            }
+        else:
+            return {
+              "addStatus": True
+            }
+        
+
+    def deleteRoom(self, roomID):
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "ModifyRooms/DeleteRoom.sql")
+        try:
+            with open(sqlPath, 'r') as f:
+                deleteRoomSQL = f.read()
+        except FileNotFoundError:
+            return {
+              "deleteStatus": False
+            }
+        
+        connData, cursor, error = self._dbTool.executeSQL(deleteRoomSQL, 
+                                                          vars = {
+                                                                  "roomID": roomID
+                                                                  },
+                                                          commit = True, closeConn = True,
+                                                          raiseException = False)
+        
+        if (error is not None):
+            print(error)
+            return {
+              "deleteStatus": False
+            }
+        else:
+            return {
+              "deleteStatus": True
+            }
+        
