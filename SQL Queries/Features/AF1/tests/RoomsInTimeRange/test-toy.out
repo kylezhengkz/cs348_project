@@ -1,0 +1,2 @@
+{'roomID': UUID('00000000-0000-0000-0000-000000000002'), 'roomName': 'MC 4021', 'bookingCount': 1}
+{'roomID': UUID('00000000-0000-0000-0000-00000000000a'), 'roomName': 'Versailled Ball Room', 'bookingCount': 1}
