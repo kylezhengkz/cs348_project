@@ -20,17 +20,15 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 import addIcon from "../../../resources/better_add_icon.png";
-import editIcon from "../../../resources/edit_icon.png";
-import garbageCan from "../../../resources/garbage_can.png";
 
-import "./ViewBuildings.css"
+import "./ManageBuildings.css"
 
 import "./AddRoomModal"
 
 import { useNavigate } from "react-router-dom";
 import AddRoomModal from './AddRoomModal';
 
-export function ViewBuildings() {
+export function ManageBuildings() {
     const { authUserId } = useAuth();
     const selectedBuildingId = useRef();
     const [data, setData] = useState([]);
@@ -115,12 +113,6 @@ export function ViewBuildings() {
             const addRoomModal = new bootstrap.Modal(document.getElementById('addRoomModal'));
             addRoomModal.show()
             break
-          case "edit":
-            navigate(`/editRooms/${buildingId}`);
-            break
-          case "delete":
-            navigate(`/deleteRooms/${buildingId}`);
-            break
         }
     }
 
@@ -143,12 +135,6 @@ export function ViewBuildings() {
               `<div id="imageWrapper">
                     <button class='action-btn' data-op='add' data-room-id='${row.buildingID}'>
                         <img id="add" src="${addIcon}"></img>
-                    </button>
-                    <button class='action-btn' data-op='edit' data-room-id='${row.buildingID}'>
-                        <img id="edit" src="${editIcon}"></img>
-                    </button>
-                    <button class='action-btn' data-op='delete' data-room-id='${row.buildingID}'>
-                        <img id="delete" src="${garbageCan}"></img>
                     </button>
               </div>`
           );
@@ -185,46 +171,39 @@ export function ViewBuildings() {
                 <AccordionDetails>
                     <Box>
                         <Box>
-                            <Typography variant='subtitle1'>Building Name</Typography>
                             <TextField label="Building Name" variant="outlined" inputRef={buildingNameRef}></TextField>
                         </Box>
 
                         <Box className="mt-3" display={"flex"} gap={"30px"}>
                             <Box>
-                                <Typography variant='subtitle1'>Address Line 1</Typography>
                                 <TextField label="Address Line 1" variant="outlined" inputRef={addressLine1Ref}></TextField>
                             </Box>
 
                             <Box>
-                                <Typography variant='subtitle1'>Address Line 2</Typography>
                                 <TextField label="Address Line 2" variant="outlined" inputRef={addressLine2Ref}></TextField>
                             </Box>
                         </Box>
 
                         <Box className="mt-3" display={"flex"} gap={"30px"}>
                             <Box>
-                                <Typography variant='subtitle1'>City</Typography>
                                 <TextField label="City" variant="outlined" inputRef={cityRef}></TextField>
                             </Box>
                         </Box>
 
                         <Box className="mt-3" display={"flex"} gap={"30px"}>
                             <Box>
-                                <Typography variant='subtitle1'>Province</Typography>
                                 <TextField label="Province" variant="outlined" inputRef={provinceRef}></TextField>
                             </Box>
                         </Box>
 
                         <Box className="mt-3" display={"flex"} gap={"30px"}>
                             <Box>
-                                <Typography variant='subtitle1'>Country</Typography>
                                 <TextField label="Country" variant="outlined" inputRef={countryRef}></TextField>
                             </Box>
                         </Box>
 
                         <Box className="mt-3" display={"flex"} gap={"30px"}>
                             <Box>
-                                <Typography variant='subtitle1'>Postal Code</Typography>
                                 <TextField label="Postal Code" variant="outlined" inputRef={postalCodeRef}></TextField>
                             </Box>
                         </Box>
