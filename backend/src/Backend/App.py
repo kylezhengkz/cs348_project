@@ -141,6 +141,12 @@ class App():
             print("RECEIVED IN DELETE", data)
             return self._roomService.deleteRoom(data["roomID"])
         
+        @app.route("/editRoom", methods=["POST"])
+        def editRoom():
+            data = request.get_json()
+            print("RECEIVED IN EDIT", data)
+            return self._roomService.editRoom(data["roomID"], data["roomName"], data["capacity"])
+        
         @app.route("/bookRoom", methods=["POST"])
         def bookRoom():
             data = request.get_json()

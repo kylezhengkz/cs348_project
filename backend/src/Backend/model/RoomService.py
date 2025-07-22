@@ -124,4 +124,33 @@ class RoomService(BaseAPIService):
             return {
               "deleteStatus": True
             }
+            
+    def editRoom(self, roomID, roomName, capacity):
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "ModifyRooms/EditRoom.sql")
+        try:
+            with open(sqlPath, 'r') as f:
+                editRoomSQL = f.read()
+        except FileNotFoundError:
+            return {
+              "editStatus": False
+            }
+        
+        connData, cursor, error = self._dbTool.executeSQL(editRoomSQL, 
+                                                          vars = {
+                                                                  "roomID": roomID,
+                                                                  "roomName": roomName,
+                                                                  "capacity": capacity
+                                                                  },
+                                                          commit = True, closeConn = True,
+                                                          raiseException = False)
+        
+        if (error is not None):
+            print(error)
+            return {
+              "editStatus": False
+            }
+        else:
+            return {
+              "editStatus": True
+            }
         

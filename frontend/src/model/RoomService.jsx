@@ -70,6 +70,21 @@ export class RoomService extends BaseAPIService {
 
         return res.data;
     }
+
+    async editRoom(roomID, roomName, capacity) {
+        const kwargs = {
+            "roomID": roomID,
+            "roomName": roomName,
+            "capacity": capacity
+        }
+
+        let ext = "/editRoom";
+        console.log("EXT: ", ext);
+
+        const res = await this.apiTool.post(ext, kwargs);
+        console.log(res.data)
+        return res.data;
+    }
 }
 
 

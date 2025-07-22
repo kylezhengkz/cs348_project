@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useEffect, useState, useRef } from 'react';
-import { useAuth } from "../../../wrappers/AuthContext";
 
 import { roomService } from '../../../model/RoomService';
 import { ReactDataTable } from '../../components/reactDataTable/ReactDataTable';
@@ -28,7 +27,6 @@ import editIcon from "../../../resources/edit_icon.png";
 import garbageCan from "../../../resources/garbage_can.png";
 
 export function ManageRooms() {
-    const { authUserId } = useAuth();
     const selectedRoomId = useRef();
     const [data, setData] = useState([]);
 
@@ -37,6 +35,9 @@ export function ManageRooms() {
     const maxCapacityRef = useRef();
     const startTimeRef = useRef();
     const endTimeRef = useRef();
+
+    const [roomNameState, setRoomNameState] = useState()
+    const [capacityState, setCapacityState] = useState()
 
     const [alertOpen, setAlertOpen] = useState(false);
     const [alertSeverity, setAlertSeverity] = useState("info");
@@ -51,6 +52,7 @@ export function ManageRooms() {
             console.log("ROOMS: ", rooms);
             setData(rooms);
         });
+        console.log(data)
     }
 
     function filterRooms() {
@@ -83,6 +85,27 @@ export function ManageRooms() {
             const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
             deleteModal.show();
             break
+        }
+    }
+
+    async function editRoom(roomName, capacity) {
+        const roomId = selectedRoomId.current;
+        console.log("Editing room with", roomId, roomName, capacity)
+
+        try {
+            const res = await roomService.editRoom(roomId, roomName, capacity)
+            setAlertSeverity("success");
+            setAlertMessage("Edit success!");
+            setAlertOpen(true);
+            getRooms(setData)
+        } catch {
+            setAlertSeverity("error");
+            setAlertMessage("Unable to edit room");
+            setAlertOpen(true);
+        } finally {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+            console.log("CLOSING MODAL", modal)
+            modal.hide();
         }
     }
 
@@ -125,7 +148,7 @@ export function ManageRooms() {
           render: function (data, type, row) {
             return (
                 `<div id="imageWrapper">
-                    <button class='action-btn' data-op='edit' data-room-id='${row.roomID}'>
+                    <button class='action-btn' data-op='edit' data-room-id='${row.roomID}' data-room-name='${row.roomName}' data-room-capacity='${row.capacity}'>
                         <img id="edit" src="${editIcon}"></img>
                     </button>
                     <button class='action-btn' data-op='delete' data-room-id='${row.roomID}'>
@@ -148,6 +171,10 @@ export function ManageRooms() {
                 console.log(target)
                 console.log(target.getAttribute('data-room-id'))
                 const roomId = target.getAttribute('data-room-id');
+
+                setRoomNameState(target.getAttribute('data-room-name'));
+                setCapacityState(target.getAttribute('data-room-capacity'))
+
                 const operation = target.getAttribute('data-op');
                 handleOperationButtonClick(roomId, operation);
             }
@@ -216,7 +243,11 @@ export function ManageRooms() {
                 </Box>
             </Box>
 
-            <EditModal></EditModal>
+            <EditModal 
+                roomName={roomNameState} 
+                capacity={capacityState}
+                editRoom={editRoom}
+            ></EditModal>
             <DeleteModal deleteRoom={deleteRoom}></DeleteModal>
 
             <Snackbar open={alertOpen} autoHideDuration={5000} onClose={() => setAlertOpen(false)}>
