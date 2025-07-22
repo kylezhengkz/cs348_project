@@ -11,6 +11,7 @@ import PyUtils as PU
 from .constants.EnvironmentModes import EnvironmentModes
 from .Config import Config
 from .model.RoomService import RoomService
+from .model.BuildingService import BuildingService
 from .model.BookingService import BookingService
 from .model.UserService import UserService
 from .model.DashboardService import DashboardService
@@ -29,6 +30,7 @@ class App():
         self._logView = LogView(verbose = isDebug)
         self._logView.includePrefix = False
 
+        self._buildingService = BuildingService(self._dbTool, view = self._logView)
         self._roomService = RoomService(self._dbTool, view = self._logView)
         self._bookingService = BookingService(self._dbTool, view = self._logView)
         self._userService = UserService(self._dbTool, view = self._logView)
@@ -79,6 +81,26 @@ class App():
         def index():
             return 'This is the backend server for the room booking app.'
         
+        @app.route("/viewBuildings", methods=["GET"])
+        def viewBuildings() -> List[Dict[str, Any]]:
+            queryParams = {}
+            db_operation = request.args.get("db_operation")
+            
+            if db_operation == "filter":
+                buildingName = request.args.get("buildingName")
+                addressLine1 = request.args.get("addressLine1")
+                addressLine2 = request.args.get("addressLine2")
+                city = request.args.get("city")
+                province = request.args.get("province")
+                country = request.args.get("country")
+                postalCode = request.args.get("postalCode")
+                response = self._buildingService.fetchBuildings(buildingName, addressLine1, addressLine2, 
+                    city, province, country, postalCode)
+            else:
+                response = self._buildingService.fetchBuildings()
+            
+            return response
+        
         @app.route("/viewAvailableRooms", methods=["GET"])
         def viewAvailableRooms() -> List[Dict[str, Any]]:
             
@@ -86,19 +108,35 @@ class App():
             db_operation = request.args.get("db_operation")
 
             if db_operation == "filter":
+                buildingId = request.args.get("building_id")
                 roomName = request.args.get("room_name")
                 minCapacity = request.args.get("min_capacity")
                 maxCapacity = request.args.get("max_capacity")
                 startTime = request.args.get("start_time")
                 endTime = request.args.get("end_time")
-                response = self._roomService.fetchAvailableRooms(roomName, minCapacity, maxCapacity, startTime, endTime)
+                response = self._roomService.fetchAvailableRooms(buildingId, roomName, minCapacity, maxCapacity, startTime, endTime)
             else:
                 response = self._roomService.fetchAvailableRooms()
 
             return response
     
+        @app.route("/viewRoomsByBuildingID", methods=["GET"])
+        def getRoomsByBuildingID() -> List[Dict[str, Any]]:
+            response = []
+            buildingId = request.args.get("building_id")
+            print(buildingId)
+            response = self._roomService.fetchRoomsByBuildingID(buildingId)
+            print("INTERCEPT", response)
+            return response
+        
+        @app.route("/addRoom", methods=["POST"])
+        def addRoom():
+            data = request.get_json()
+            print("RECEIVED IN ADD", data)
+            return self._roomService.addRoom(data["roomName"], data["capacity"], data["buildingID"])
+    
         @app.route("/deleteRoom", methods=["POST"])
-        def delete():
+        def deleteRoom():
             data = request.get_json()
             print("RECEIVED IN DELETE", data)
             return self._roomService.deleteRoom(data["roomID"])
