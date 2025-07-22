@@ -1,11 +1,11 @@
 #imageWrapper {
   width: 6rem;
   height: 2.5rem;
-  /* border: 1px solid black; */
   display: flex;
   overflow: hidden;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid black; */
 }
 
 .action-btn {
@@ -19,11 +19,6 @@
   padding: 0px;
   background: transparent;
   border: none;
-}
-
-#add {
-  max-width: 80%;
-  max-height: 80%;
 }
 
 #edit {

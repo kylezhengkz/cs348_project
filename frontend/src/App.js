@@ -11,16 +11,17 @@ import { Splash } from './view/pages/splash/Splash';
 import { Login } from './view/pages/login/Login';
 import { Signup } from './view/pages/signup/Signup';
 import { Home } from './view/pages/home';
-import { ViewRooms } from './view/pages/viewRooms/ViewRooms';
+import { ViewBooking } from './view/pages/viewBooking/ViewBooking';
 import { BookingHistory } from './view/pages/bookingHistory/BookingHistory';
-import { CreateBooking } from './view/pages/createBooking/CreateBooking';
 import { CancelBooking } from './view/pages/cancelBooking/CancelBooking';
 import { Dashboard } from './view/pages/dashboard/Dashboard';
-import { ViewBuildings } from './view/pages/viewBuildings/ViewBuildings';
+import { ManageRooms } from './view/pages/manageRooms/ManageRooms';
+import { ManageBuildings } from './view/pages/manageBuildings/ManageBuildings';
 import { EditAccount } from './view/pages/editAccount/EditAccount';
 
 import { AuthProvider } from './wrappers/AuthContext'
 import { ProtectedRoutes } from './wrappers/ProtectedRoutes'
+import { PublicRoutes } from './wrappers/PublicRoutes';
 
 function App() {
   return (
@@ -39,18 +40,16 @@ function App() {
         <AuthProvider>
           <Header />
           <Routes>
-            <Route path="/" element={<Splash />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="login" element={<Login />} />
+            <Route path="/" element={<PublicRoutes><Splash /></PublicRoutes>} />
+            <Route path="signup" element={<PublicRoutes><Signup /></PublicRoutes>} />
+            <Route path="login" element={<PublicRoutes><Login /></PublicRoutes>} />
             <Route path="home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
-            <Route path="viewBookings" element={<ProtectedRoutes><ViewRooms/></ProtectedRoutes>} />
-            <Route path="editRooms/:buildingID" element={<ProtectedRoutes><ViewRooms mode="edit"/></ProtectedRoutes>} />
-            <Route path="deleteRooms/:buildingID" element={<ProtectedRoutes><ViewRooms mode="delete"/></ProtectedRoutes>} />
-            <Route path="bookRoom" element={<ProtectedRoutes><CreateBooking /></ProtectedRoutes>} />
+            <Route path="viewBooking" element={<ProtectedRoutes><ViewBooking/></ProtectedRoutes>} />
             <Route path="cancelBooking" element={<ProtectedRoutes><CancelBooking /></ProtectedRoutes>} />
             <Route path="bookingHistory" element={<ProtectedRoutes><BookingHistory/></ProtectedRoutes>} />
             <Route path="dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
-            <Route path="manageFacilities" element={<ProtectedRoutes><ViewBuildings /></ProtectedRoutes>} />
+            <Route path="manageRooms" element={<ProtectedRoutes><ManageRooms /></ProtectedRoutes>} />
+            <Route path="manageBuildings" element={<ProtectedRoutes><ManageBuildings /></ProtectedRoutes>} />
             <Route path="editAccount" element={<ProtectedRoutes><EditAccount/></ProtectedRoutes>} />
           </Routes>
           <Footer />

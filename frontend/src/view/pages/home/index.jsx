@@ -6,7 +6,8 @@ import { Box } from '@mui/material';
 
 import { useAuth } from "../../../wrappers/AuthContext";
 import { ButtonRouterLink } from '../../components/buttonRouterLink/ButtonRouterLink';
-import { Dashboard } from "../dashboard/Dashboard";
+import { useAuth } from '../../../wrappers/AuthContext';
+import { USER_PERMS } from "../../../constants/authContants";import { Dashboard } from "../dashboard/Dashboard";
 
 
 
@@ -26,7 +27,7 @@ export function FeatureButtonLink({buttonProps, linkProps, children}) {
 
 
 export function Home() {
-    const { username } = useAuth();
+    const { username, userPerm } = useAuth();
 
     return (
         <Container>
@@ -40,6 +41,9 @@ export function Home() {
                     <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/cancelBooking"}}>View/Cancel Bookings</FeatureButtonLink>
                     <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/bookingHistory"}}>Booking History</FeatureButtonLink>
                     <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/dashboard"}}>My Dashboard</FeatureButtonLink>
+                    { userPerm === USER_PERMS.ADMIN && (
+                        <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/manageFacilities"}}>Administration</FeatureButtonLink>
+                    )}
                 </Box> 
 
                 <Dashboard containerProps={{sx: { mt: "100px", mb: 5 }}}></Dashboard>

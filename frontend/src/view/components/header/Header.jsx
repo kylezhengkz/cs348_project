@@ -7,6 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from 'react';
 import Button from '@mui/material/Button';
+import { USER_ROLES } from '../../../constants/authContants';
 
 import { useAuth } from "../../../wrappers/AuthContext";
 import { AccountMenu } from '../accountMenu/AccountMenu';
@@ -14,11 +15,22 @@ import "./Header.css"
 
 export function Header() {
     const navigate = useNavigate();
-    const { authUserId, setAuthUserId, username, setUsername, userPerm, setUserPerm } = useAuth();
+    const { authUserId, setAuthUserId, username, setUsername, userPerm, setUserPerm, logout } = useAuth();
 
     const [showProfile, setShowProfile] = useState(false);
     const [showNavBar, setShowNavBar] = useState(false);
 
+    const style = {
+      position: 'absolute',
+      top: '10%',
+      left: '85%',
+      transform: 'translate(-50%, -50%)',
+      width: '25%',
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      boxShadow: 24,
+      p: 4,
+    };
     const profileIconRef = useRef(null);
 
     return (
@@ -44,9 +56,7 @@ export function Header() {
                     {authUserId !== null && (
                       <>
                         <Button color="inherit" onClick={() => {
-                          setAuthUserId(null)
-                          setUsername(null)
-                          setUserPerm(null)
+                          logout();
                         }}>Logout</Button>
                       </>
                     )}
