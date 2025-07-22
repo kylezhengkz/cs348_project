@@ -87,7 +87,7 @@ class UserService(BaseAPIService):
         if row:
             userId = row[0]
             permLevel = row[1]
-            self.print("Permission level", permLevel)
+            self.print(f"Permission level {permLevel}")
             return {
               "loginStatus": True,
               "userId": userId,

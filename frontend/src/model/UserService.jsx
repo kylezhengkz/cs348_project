@@ -1,5 +1,5 @@
 import { BaseAPIService } from "./BaseAPIService";
-import { APITool, apiTool } from "../tools/ApiTool";
+import { apiTool } from "../tools/ApiTool";
 
 export class UserService extends BaseAPIService {
     async signup(username, email, password) {
