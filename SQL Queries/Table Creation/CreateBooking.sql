@@ -20,3 +20,6 @@ CREATE TABLE {BookingTable} (
     CONSTRAINT bookingStartWindow CHECK ("bookStartDateTime"::time >= TIME '07:00'),
     CONSTRAINT bookingEndWindow CHECK ("bookEndDateTime"::time <= TIME '23:00')
 );
+
+CREATE INDEX IF NOT EXISTS idx_user_start_time
+ON "Booking"("userID", "bookStartDateTime");
