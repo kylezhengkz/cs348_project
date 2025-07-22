@@ -9,12 +9,13 @@ import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
+import { USER_ROLES } from '../../../constants/authContants';
 
 import "./Header.css"
 
 export function Header() {
     const navigate = useNavigate();
-    const { authUserId, setAuthUserId, username, setUsername, userPerm, setUserPerm } = useAuth();
+    const { authUserId, setAuthUserId, username, setUsername, userPerm, setUserPerm, logout } = useAuth();
 
     const [showProfile, setShowProfile] = useState(false);
     const [showNavBar, setShowNavBar] = useState(false);
@@ -30,8 +31,6 @@ export function Header() {
       boxShadow: 24,
       p: 4,
     };
-
-    const roles = {1: "User", 2: "Admin", 3: "Manager"}
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -57,9 +56,7 @@ export function Header() {
                     {authUserId !== null && (
                       <>
                         <Button color="inherit" onClick={() => {
-                          setAuthUserId(null)
-                          setUsername(null)
-                          setUserPerm(null)
+                          logout();
                         }}>Logout</Button>
                       </>
                     )}
@@ -84,7 +81,7 @@ export function Header() {
                             </Typography>
                             <Typography id="modal-modal-description" sx={{ mt: 0 }}>
                               Permission: {""}
-                              {roles[userPerm]}
+                              {USER_ROLES[userPerm]}
                             </Typography>
                           </>
                         )}

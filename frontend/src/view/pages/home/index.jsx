@@ -4,7 +4,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Box } from '@mui/material';
 import { ButtonRouterLink } from '../../components/buttonRouterLink/ButtonRouterLink';
-
+import { useAuth } from '../../../wrappers/AuthContext';
+import { USER_PERMS } from "../../../constants/authContants";
 
 
 export function FeatureButtonLink({buttonProps, linkProps, children}) {
@@ -23,6 +24,8 @@ export function FeatureButtonLink({buttonProps, linkProps, children}) {
 
 
 export function Home() {
+    const { userPerm } = useAuth();
+
     return (
         <Container>
             <Box minHeight="600px">
@@ -39,6 +42,9 @@ export function Home() {
                     <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/cancelBooking"}}>View/Cancel Bookings</FeatureButtonLink>
                     <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/bookingHistory"}}>Booking History</FeatureButtonLink>
                     <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/dashboard"}}>My Dashboard</FeatureButtonLink>
+                    { userPerm === USER_PERMS.ADMIN && (
+                        <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/manageFacilities"}}>Administration</FeatureButtonLink>
+                    )}
                 </Box> 
             </Box>
         </Container>
