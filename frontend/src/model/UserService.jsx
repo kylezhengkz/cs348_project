@@ -26,6 +26,17 @@ export class UserService extends BaseAPIService {
         return res.data;
     }
 
+    async viewAdminLog(userID) {
+        const kwargs = {
+            "userID": userID
+        }
+
+        let ext = "/viewAdminLog";
+        const res = await this.apiTool.post(ext, kwargs);
+        
+        return res.data;
+    }
+
     async updateUsername(userId, newUsername) {
         const kwargs = {
             "userId": userId,
