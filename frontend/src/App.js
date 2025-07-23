@@ -18,15 +18,14 @@ import { Dashboard } from './view/pages/dashboard/Dashboard';
 import { ManageRooms } from './view/pages/manageRooms/ManageRooms';
 import { ManageBuildings } from './view/pages/manageBuildings/ManageBuildings';
 import { EditAccount } from './view/pages/editAccount/EditAccount';
+import { ViewAdminLog } from './view/pages/viewAdminLog/ViewAdminLog';
 import { AccessDenied } from './view/pages/accessDenied/AccessDenied';
 import { RouteTracker } from './view/components/routeTracker/RouteTracker';
-
 
 import { AuthProvider } from './wrappers/AuthContext'
 import { ProtectedRoutes } from './wrappers/ProtectedRoutes'
 import { PublicRoutes } from './wrappers/PublicRoutes';
 import { AdminProtectedRoutes } from './wrappers/AdminProtectedRoutes';
-
 
 function App() {
   return (
@@ -56,6 +55,7 @@ function App() {
             <Route path="dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
             <Route path="manageRooms" element={<AdminProtectedRoutes><ManageRooms /></AdminProtectedRoutes>} />
             <Route path="manageBuildings" element={<AdminProtectedRoutes><ManageBuildings /></AdminProtectedRoutes>} />
+            <Route path="viewAdminLog" element={<AdminProtectedRoutes><ViewAdminLog /></AdminProtectedRoutes>} />
             <Route path="accessDenied" element={<AccessDenied />} />
             <Route path="editAccount" element={<ProtectedRoutes><EditAccount/></ProtectedRoutes>} />
           </Routes>

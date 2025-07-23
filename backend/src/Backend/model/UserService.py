@@ -3,6 +3,7 @@ import uuid
 from typing import Tuple
 
 import PyUtils as PU
+import pandas as pd
 
 from .BaseAPIService import BaseAPIService
 
@@ -100,6 +101,19 @@ class UserService(BaseAPIService):
               "loginStatus": False,
               "errorMessage": "Unable to login",
             }
+            
+    def viewAdminLog(self, userID):
+        sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "AF4/AdminLog.sql")
+        sql = PU.DBTool.readSQLFile(sqlFile)
+        
+        params = {
+            'userID': userID
+        }
+        
+        sqlEngine = self._dbTool.getSQLEngine()
+        result = pd.read_sql(sql, sqlEngine, params = params)
+
+        return result.to_dict('records')
         
     def updateUsername(self, userId: uuid.UUID, newUsername: str) -> Tuple[bool, str]:
         sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "AF5/AF5a.sql")

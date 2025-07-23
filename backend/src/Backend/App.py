@@ -146,6 +146,12 @@ class App():
             data = request.get_json()
             print("RECEIVED IN DELETE", data)
             return self._roomService.deleteRoom(data["roomID"], data["userID"] )
+    
+        @app.route("/viewAdminLog", methods=["POST"])
+        def viewAdminLog():
+            data = request.get_json()
+            print("RECEIVED IN VIEWADMINLOG", data)
+            return self._userService.viewAdminLog(data["userID"] )
         
         @app.route("/bookRoom", methods=["POST"])
         def bookRoom():
