@@ -153,6 +153,7 @@ export function ViewBooking({mode = "book"}) {
         {title: "City", data: "city", width: "140px"},
         {title: "Country", data: "country", width: "140px"},
         {title: "Postal Code", data: "postalCode", width: "170px"},
+        {title: "Overlaps", data: "overlappingBookings", width: "170px"},
         {
           title: "Actions",
           data: null,
