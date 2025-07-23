@@ -38,11 +38,12 @@ export class RoomService extends BaseAPIService {
         return res.data;
     }
 
-    async addRoom(roomName, capacity, buildingID) {
+    async addRoom(roomName, capacity, buildingID, userID) {
         const kwargs = {
             "roomName": roomName,
             "capacity": capacity,
-            "buildingID": buildingID
+            "buildingID": buildingID,
+            "userID": userID
         }
 
         let ext = "/addRoom";
@@ -56,9 +57,10 @@ export class RoomService extends BaseAPIService {
         return res.data;
     }
 
-    async deleteRoom(roomID) {
+    async deleteRoom(roomID, userID) {
         const kwargs = {
-            "roomID": roomID
+            "roomID": roomID,
+            "userID": userID,
         }
 
         let ext = "/deleteRoom";
@@ -71,11 +73,12 @@ export class RoomService extends BaseAPIService {
         return res.data;
     }
 
-    async editRoom(roomID, roomName, capacity) {
+    async editRoom(roomID, roomName, capacity, userID) {
         const kwargs = {
             "roomID": roomID,
             "roomName": roomName,
-            "capacity": capacity
+            "capacity": capacity,
+            "userID": userID
         }
 
         let ext = "/editRoom";

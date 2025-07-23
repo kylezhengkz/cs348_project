@@ -133,19 +133,19 @@ class App():
         def addRoom():
             data = request.get_json()
             print("RECEIVED IN ADD", data)
-            return self._roomService.addRoom(data["roomName"], data["capacity"], data["buildingID"])
-    
-        @app.route("/deleteRoom", methods=["POST"])
-        def deleteRoom():
-            data = request.get_json()
-            print("RECEIVED IN DELETE", data)
-            return self._roomService.deleteRoom(data["roomID"])
+            return self._roomService.addRoom(data["roomName"], data["capacity"], data["buildingID"], data["userID"])
         
         @app.route("/editRoom", methods=["POST"])
         def editRoom():
             data = request.get_json()
             print("RECEIVED IN EDIT", data)
-            return self._roomService.editRoom(data["roomID"], data["roomName"], data["capacity"])
+            return self._roomService.editRoom(data["roomID"], data["roomName"], data["capacity"], data["userID"])
+        
+        @app.route("/deleteRoom", methods=["POST"])
+        def deleteRoom():
+            data = request.get_json()
+            print("RECEIVED IN DELETE", data)
+            return self._roomService.deleteRoom(data["roomID"], data["userID"] )
         
         @app.route("/bookRoom", methods=["POST"])
         def bookRoom():
