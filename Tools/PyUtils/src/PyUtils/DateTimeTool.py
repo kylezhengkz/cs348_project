@@ -13,7 +13,8 @@ class DateTimeTool():
                   '%Y-%m-%d %H:%M',
                   
                   # Used by Javascript
-                  '%Y-%m-%dT%H:%M']
+                  '%Y-%m-%dT%H:%M',
+                  '%Y-%m-%dT%H:%M:%S']
     
     @classmethod
     def getLocalDateTime(cls, dateTime: datetime):

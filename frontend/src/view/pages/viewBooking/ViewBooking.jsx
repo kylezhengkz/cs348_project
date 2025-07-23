@@ -46,14 +46,12 @@ export function ViewBooking({mode = "book"}) {
 
     function getRoomsByBuildingID(setData, buildingID) {
         roomService.getRoomsByBuildingID(buildingID).then(rooms => {
-            console.log("ROOMS: ", rooms);
             setData(rooms);
         });
     }
 
     function getRooms(setData, roomName, minCapacity, maxCapacity, startTime, endTime) {
         roomService.getAvailable(roomName, minCapacity, maxCapacity, startTime, endTime).then(rooms => {
-            console.log("ROOMS: ", rooms);
             setData(rooms);
         });
     }
@@ -176,7 +174,7 @@ export function ViewBooking({mode = "book"}) {
         <Container maxWidth="xl">
             <Typography variant="h2" gutterBottom className='mt-5 mb-5'>Available Rooms</Typography>
 
-            {mode == "book" &&
+            {mode === "book" &&
                 <Accordion className='mt-3'>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content">
                         <Typography component="span">Filters</Typography>

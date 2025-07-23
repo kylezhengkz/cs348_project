@@ -42,6 +42,7 @@ const DefaultTheme = createTheme({
         surface: {
             main: "rgb(255, 255, 255)",
             secondary: "rgb(251, 252, 248)",
+            tertiary: "#f5f5f5",
             dark: "rgb(55, 62, 73)"
         }
     },

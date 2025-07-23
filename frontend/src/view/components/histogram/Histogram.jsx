@@ -1,80 +1,129 @@
 import * as d3 from "d3";
+import { useRef, useEffect } from "react";
+
+import { VisualTools } from "../../../tools/VisualTools";
 
 
 // Reference: https://observablehq.com/@d3/horizontal-bar-chart/2
-export function Histogram({data}) {
+export function Histogram({data, freqAtt, binAtt, textAtt, compareFunc, 
+    title="", yAxisTitle="", xAxisTitle="", figureProps}) {
     const ref = useRef();
 
     // Specify the chart’s dimensions, based on a bar’s height.
-    const barHeight = 25;
-    const marginTop = 30;
-    const marginRight = 0;
+    const barHeight = 50;
+    const marginTop = 180;
+    const marginRight = 100;
     const marginBottom = 10;
-    const marginLeft = 30;
-    const width = 928;
+    const marginLeft = 200;
+    const graphWidth = 800;
+
+    const width = marginLeft + graphWidth + marginRight;
     const height = Math.ceil((data.length + 0.1) * barHeight) + marginTop + marginBottom;
 
+    const headingFontSize = 30;
+    const axesFontSize = 24;
+    const tickFontSize = 14;
+
     useEffect(() => {
+        if (compareFunc) {
+            data.sort(compareFunc);
+        }
+
+        const svgContainer = d3.select(ref.current);
+        svgContainer.selectAll("*").remove();
+
         // Create the scales.
         const x = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.frequency)])
+            .domain([0, d3.max(data, d => d[freqAtt])])
             .range([marginLeft, width - marginRight]);
 
         const y = d3.scaleBand()
-            .domain(d3.sort(data, d => -d.frequency).map(d => d.letter))
+            .domain(d3.sort(data, d => -d[freqAtt]).map(d => d[binAtt]))
             .rangeRound([marginTop, height - marginBottom])
             .padding(0.1);
 
-        // Create a value format.
-        const format = x.tickFormat(20, "%");
-
         // Create the SVG container.
-        const svg = d3
-            .select(ref.current)
+        const svg = svgContainer
             .append("svg")
             .attr("width", width)
             .attr("height", height)
             .attr("viewBox", [0, 0, width, height])
-            .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
+            .attr("style", "max-width: 100%; height: auto;");
+
+        svg.selectAll("*").remove();
+
+        // heading
+        const heading = svg.append("g")
+            .append("text")
+            .attr("text-anchor", "middle")
+            .attr("font-size", headingFontSize)
+            .attr("x", marginLeft + graphWidth / 2)
+            .attr("y", headingFontSize * 1.25)
+            .style("font-weight", "bold");
+
+        VisualTools.drawText({textGroup: heading, text: title, width: graphWidth, fontSize: headingFontSize, textX: marginLeft + graphWidth / 2});
 
         // Append a rect for each letter.
         svg.append("g")
-            .attr("fill", "steelblue")
+            .attr("fill", "var(--mui-palette-primary-main)")
             .selectAll()
             .data(data)
             .join("rect")
                 .attr("x", x(0))
-                .attr("y", (d) => y(d.letter))
-                .attr("width", (d) => x(d.frequency) - x(0))
+                .attr("y", (d) => y(d[binAtt]))
+                .attr("width", (d) => x(d[freqAtt]) - x(0))
                 .attr("height", y.bandwidth());
 
         // Append a label for each letter.
         svg.append("g")
             .attr("fill", "white")
             .attr("text-anchor", "end")
-        .selectAll()
-        .data(data)
-        .join("text")
-            .attr("x", (d) => x(d.frequency))
-            .attr("y", (d) => y(d.letter) + y.bandwidth() / 2)
+            .selectAll()
+            .data(data)
+            .join("text")
+            .attr("x", (d) => x(d[freqAtt]))
+            .attr("y", (d) => y(d[binAtt]) + y.bandwidth() / 2)
             .attr("dy", "0.35em")
-            .attr("dx", -4)
-            .text((d) => format(d.frequency))
-        .call((text) => text.filter(d => x(d.frequency) - x(0) < 20) // short bars
+            .attr("dx", -8)
+            .text((d) => d[freqAtt])
+            .call((text) => text.filter(d => x(d[freqAtt]) - x(0) < 20) // short bars
             .attr("dx", +4)
             .attr("fill", "black")
             .attr("text-anchor", "start"));
 
         // Create the axes.
-        svg.append("g")
+        const xAxis = svg.append("g");
+        const xAxisLine = xAxis.append("g")
             .attr("transform", `translate(0,${marginTop})`)
-            .call(d3.axisTop(x).ticks(width / 80, "%"))
-            .call(g => g.select(".domain").remove());
+            .call(d3.axisTop(x))
+            .attr("font-size", tickFontSize);
 
-        svg.append("g")
+        const xAxisLabel = xAxis.append("text")
+            .transition()
+            .attr("font-size", axesFontSize)
+            .attr("x", marginLeft + graphWidth / 2)
+            .attr("y", marginTop - axesFontSize * 2)
+            .text(xAxisTitle);
+
+        const yAxis = svg.append("g");
+        const yAxisLine = yAxis.append("g")
             .attr("transform", `translate(${marginLeft},0)`)
-            .call(d3.axisLeft(y).tickSizeOuter(0));
-    }, []);
+            .call(d3.axisLeft(y).tickFormat((binLabel, binInd) => {
+                return textAtt ? data[binInd][textAtt] : binLabel; 
+            }))
+            .attr("font-size", tickFontSize);
 
-    return <svg width={width} height={height} id="barchart" ref={ref} />;
+        const yAxisLabel = yAxis.append("text")
+            .transition()
+            .attr("font-size", axesFontSize)
+            .attr("transform", "rotate(-90)")
+            .attr("text-anchor", "middle")
+            .attr("y", marginLeft / 4)
+            .attr("x", -((height + marginTop) / 2))
+            .text(yAxisTitle);
+    }, [data]);
+
+    return (
+        <figure ref={ref} {...figureProps}></figure>
+    );
 }
