@@ -285,7 +285,6 @@ class App():
             data = request.get_json()
 
             userId = data.get("userId")
-            oldPassword = data.get("oldPassword")
             newPassword = data.get("newPassword")
 
             try:
@@ -293,10 +292,11 @@ class App():
             except ValueError:
                 return [False, "Invalid UUID format for user ID"]
 
-            if (not oldPassword or not newPassword):
+            if not newPassword:
                 return [False, "Missing required fields."]
 
-            return self._userService.updatePassword(userId, oldPassword, newPassword)
+            return self._userService.updatePassword(userId, newPassword)
+
 
         self._app = app
         return app
