@@ -17,7 +17,11 @@ export function Footer() {
 
                     <Box display="flex" gap="10px" justifyContent="center" sx={{mt: 2}}>
                         <Typography color="primary.light" fontWeight="bold" fontSize="12px">Made by:</Typography>
-                        <Typography color="primary.light" fontSize="12px">Alex Au, Anika Awasthi, Ananya Ohrie, Anthony Tieu, Kyle Zheng</Typography>
+                        <Typography color="primary.light" fontSize="12px">
+                            Alex Au, Anika Awasthi, Ananya Ohrie, 
+                            <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" underline="none" color="inherit"> Anthony Tieu</Link>
+                            , Kyle Zheng
+                        </Typography>
                     </Box>
                 </Box>
             </FooterContainer>
