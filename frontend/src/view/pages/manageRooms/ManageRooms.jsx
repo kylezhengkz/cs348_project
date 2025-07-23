@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useEffect, useState, useRef } from 'react';
+import { useAuth } from "../../../wrappers/AuthContext";
 
 import { roomService } from '../../../model/RoomService';
 import { ReactDataTable } from '../../components/reactDataTable/ReactDataTable';
@@ -27,6 +28,7 @@ import editIcon from "../../../resources/edit_icon.png";
 import garbageCan from "../../../resources/garbage_can.png";
 
 export function ManageRooms() {
+    const { authUserId } = useAuth();
     const selectedRoomId = useRef();
     const [data, setData] = useState([]);
 
@@ -90,14 +92,20 @@ export function ManageRooms() {
 
     async function editRoom(roomName, capacity) {
         const roomId = selectedRoomId.current;
-        console.log("Editing room with", roomId, roomName, capacity)
+        console.log("Editing room with", roomId, roomName, capacity, authUserId)
 
         try {
-            const res = await roomService.editRoom(roomId, roomName, capacity)
-            setAlertSeverity("success");
-            setAlertMessage("Edit success!");
-            setAlertOpen(true);
-            getRooms(setData)
+            const res = await roomService.editRoom(roomId, roomName, capacity, authUserId)
+            if (res["editStatus"] === false) {
+                setAlertSeverity("error");
+                setAlertMessage(res["errorMessage"]);
+                setAlertOpen(true);
+            } else {
+                setAlertSeverity("success");
+                setAlertMessage("Edit success!");
+                setAlertOpen(true);
+                getRooms(setData)
+            }
         } catch {
             setAlertSeverity("error");
             setAlertMessage("Unable to edit room");
@@ -111,14 +119,20 @@ export function ManageRooms() {
 
     async function deleteRoom() {
         const roomId = selectedRoomId.current;
-        console.log("Deleting room with", roomId)
+        console.log("Deleting room with", roomId, authUserId)
 
         try {
-            const res = await roomService.deleteRoom(roomId)
-            setAlertSeverity("success");
-            setAlertMessage("Room deleted");
-            setAlertOpen(true);
-            getRooms(setData)
+            const res = await roomService.deleteRoom(roomId, authUserId)
+            if (res["deleteStatus"] === false) {
+                setAlertSeverity("error");
+                setAlertMessage(res["errorMessage"]);
+                setAlertOpen(true);
+            } else {
+                setAlertSeverity("success");
+                setAlertMessage("Room deleted");
+                setAlertOpen(true);
+                getRooms(setData)
+            }
         } catch {
             setAlertSeverity("error");
             setAlertMessage("Unable to delete room");

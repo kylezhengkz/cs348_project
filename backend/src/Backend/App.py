@@ -133,19 +133,25 @@ class App():
         def addRoom():
             data = request.get_json()
             print("RECEIVED IN ADD", data)
-            return self._roomService.addRoom(data["roomName"], data["capacity"], data["buildingID"])
-    
-        @app.route("/deleteRoom", methods=["POST"])
-        def deleteRoom():
-            data = request.get_json()
-            print("RECEIVED IN DELETE", data)
-            return self._roomService.deleteRoom(data["roomID"])
+            return self._roomService.addRoom(data["roomName"], data["capacity"], data["buildingID"], data["userID"])
         
         @app.route("/editRoom", methods=["POST"])
         def editRoom():
             data = request.get_json()
             print("RECEIVED IN EDIT", data)
-            return self._roomService.editRoom(data["roomID"], data["roomName"], data["capacity"])
+            return self._roomService.editRoom(data["roomID"], data["roomName"], data["capacity"], data["userID"])
+        
+        @app.route("/deleteRoom", methods=["POST"])
+        def deleteRoom():
+            data = request.get_json()
+            print("RECEIVED IN DELETE", data)
+            return self._roomService.deleteRoom(data["roomID"], data["userID"] )
+    
+        @app.route("/viewAdminLog", methods=["POST"])
+        def viewAdminLog():
+            data = request.get_json()
+            print("RECEIVED IN VIEWADMINLOG", data)
+            return self._userService.viewAdminLog(data["userID"] )
         
         @app.route("/bookRoom", methods=["POST"])
         def bookRoom():
@@ -284,7 +290,6 @@ class App():
             data = request.get_json()
 
             userId = data.get("userId")
-            oldPassword = data.get("oldPassword")
             newPassword = data.get("newPassword")
 
             try:
@@ -292,10 +297,11 @@ class App():
             except ValueError:
                 return [False, "Invalid UUID format for user ID"]
 
-            if (not oldPassword or not newPassword):
+            if not newPassword:
                 return [False, "Missing required fields."]
 
-            return self._userService.updatePassword(userId, oldPassword, newPassword)
+            return self._userService.updatePassword(userId, newPassword)
+
 
         self._app = app
         return app

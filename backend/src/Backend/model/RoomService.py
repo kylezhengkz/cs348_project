@@ -19,9 +19,11 @@ class RoomService(BaseAPIService):
         except (ValueError, TypeError):
             return None
     
-    def _getAddRoomMessageError(self, errorMsg: str) -> str:
+    def _getModifyRoomError(self, errorMsg: str) -> str:
         if ("duplicate key" in errorMsg):
           return "Room name already exists in building"
+        if ("Non-admin" in errorMsg):
+          return "Non-admin attempted to execute restricted query"
     
     def fetchRoomsByBuildingID(self, buildingId):
         sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "R6/GetRoomsByBuildingID.sql")
@@ -67,8 +69,8 @@ class RoomService(BaseAPIService):
 
         return result.to_dict('records')
 
-    def addRoom(self, roomName, capacity, buildingID):
-        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "ModifyRooms/AddRoom.sql")
+    def addRoom(self, roomName, capacity, buildingID, userID):
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "AF3/AddRoom.sql")
         try:
             with open(sqlPath, 'r') as f:
                 deleteRoomSQL = f.read()
@@ -81,13 +83,14 @@ class RoomService(BaseAPIService):
                                                           vars = {
                                                                   "roomName": roomName,
                                                                   "capacity": capacity,
-                                                                  "buildingID": buildingID
+                                                                  "buildingID": buildingID,
+                                                                  "userID": userID
                                                                   },
                                                           commit = True, closeConn = True,
                                                           raiseException = False)
                 
         if (error is not None):
-            errorMsg = self._getAddRoomMessageError(f"{error}")
+            errorMsg = self._getModifyRoomError(f"{error}")
             return {
               "addStatus": False,
               "errorMessage": errorMsg
@@ -96,37 +99,9 @@ class RoomService(BaseAPIService):
             return {
               "addStatus": True
             }
-        
-
-    def deleteRoom(self, roomID):
-        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "ModifyRooms/DeleteRoom.sql")
-        try:
-            with open(sqlPath, 'r') as f:
-                deleteRoomSQL = f.read()
-        except FileNotFoundError:
-            return {
-              "deleteStatus": False
-            }
-        
-        connData, cursor, error = self._dbTool.executeSQL(deleteRoomSQL, 
-                                                          vars = {
-                                                                  "roomID": roomID
-                                                                  },
-                                                          commit = True, closeConn = True,
-                                                          raiseException = False)
-        
-        if (error is not None):
-            print(error)
-            return {
-              "deleteStatus": False
-            }
-        else:
-            return {
-              "deleteStatus": True
-            }
             
-    def editRoom(self, roomID, roomName, capacity):
-        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "ModifyRooms/EditRoom.sql")
+    def editRoom(self, roomID, roomName, capacity, userID):
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "AF3/EditRoom.sql")
         try:
             with open(sqlPath, 'r') as f:
                 editRoomSQL = f.read()
@@ -139,18 +114,48 @@ class RoomService(BaseAPIService):
                                                           vars = {
                                                                   "roomID": roomID,
                                                                   "roomName": roomName,
-                                                                  "capacity": capacity
+                                                                  "capacity": capacity,
+                                                                  "userID": userID
                                                                   },
                                                           commit = True, closeConn = True,
                                                           raiseException = False)
         
         if (error is not None):
-            print(error)
+            errorMsg = self._getModifyRoomError(f"{error}")
             return {
-              "editStatus": False
+              "editStatus": False,
+              "errorMessage": errorMsg
             }
         else:
             return {
               "editStatus": True
             }
+            
+    def deleteRoom(self, roomID, userID):
+        sqlPath = os.path.join(PU.Paths.SQLFeaturesFolder.value, "AF3/DeleteRoom.sql")
+        try:
+            with open(sqlPath, 'r') as f:
+                deleteRoomSQL = f.read()
+        except FileNotFoundError:
+            return {
+              "deleteStatus": False
+            }
         
+        connData, cursor, error = self._dbTool.executeSQL(deleteRoomSQL, 
+                                                          vars = {
+                                                                  "roomID": roomID,
+                                                                  "userID": userID
+                                                                  },
+                                                          commit = True, closeConn = True,
+                                                          raiseException = False)
+        
+        if (error is not None):
+            errorMsg = self._getModifyRoomError(f"{error}")
+            return {
+              "deleteStatus": False,
+              "errorMessage": errorMsg
+            }
+        else:
+            return {
+              "deleteStatus": True
+            }

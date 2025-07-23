@@ -36,13 +36,12 @@ export function EditAccount() {
     };
 
     const handlePasswordUpdate = async () => {
-        const oldPassword = oldPasswordRef.current.value;
         const newPassword = newPasswordRef.current.value;
-
-        const [success, message] = await userService.updatePassword(authUserId, oldPassword, newPassword);
+    
+        const { success, message } = await userService.updatePassword(authUserId, newPassword);
         showAlert(success, message);
     };
-
+    
     return (
         <Container>
             <Box minHeight="600px">
