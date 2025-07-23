@@ -25,6 +25,8 @@ export class BookingService extends BaseAPIService {
 
         let ext = "/cancelBooking";
 
+        console.log("CANCEL BOOK", ext, " AND ", kwargs);
+
         const res = await this.apiTool.post(ext, kwargs);
         return res;
     }

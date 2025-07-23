@@ -91,7 +91,8 @@ class BookingService(BaseAPIService):
         
     def _buildCancelErrorSearchDFA(self) -> FRB.BaseAhoCorasickDFA:
         data = {
-            "CancelEarlierThanBookingError": None
+            "CancelEarlierThanBookingError": None,
+            "checkCancellationDateTime": None
         }
 
         return FRB.AhoCorasickBuilder().build(data = data)
@@ -113,10 +114,14 @@ class BookingService(BaseAPIService):
         except FileNotFoundError:
             return [False, f"Cancel SQL file not found at {sqlPath}"]
         
+        # temporary fake
+        cancelDate = datetime.now(timezone.utc)
+        cancelDate = cancelDate.replace(year=cancelDate.year + 2)
+        
         connData, cursor, error = self._dbTool.executeSQL(cancelSQL, 
                                                           vars = {"booking_id": str(bookingUUID), 
                                                                   "user_id": str(userUUID),
-                                                                  "cancel_date": datetime.now(timezone.utc)}, 
+                                                                  "cancel_date": cancelDate}, 
                                                           commit = True, closeConn = False,
                                                           raiseException = False)
         
