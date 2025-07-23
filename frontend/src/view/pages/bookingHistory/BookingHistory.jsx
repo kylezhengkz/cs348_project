@@ -73,7 +73,7 @@ export function BookingHistory() {
 
     return (
         <Container className="mt-5 mb-5" maxWidth="xl">
-            <Box minHeight="600px">
+            <Box sx={{minHeight: "80vh"}}>
                 <Typography variant="h2" gutterBottom className="mt-5 mb-5">Your Booking History</Typography>
                 <ReactDataTable
                     data={futureBookings}

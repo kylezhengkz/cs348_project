@@ -48,9 +48,10 @@ export class UserService extends BaseAPIService {
         return res.data;
     }
 
-    async updatePassword(userId, newPassword) {
+    async updatePassword(userId, oldPassword, newPassword) {
         const kwargs = {
             "userId": userId,
+            "oldPassword": oldPassword,
             "newPassword": newPassword
         }
     

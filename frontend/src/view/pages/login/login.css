@@ -2,11 +2,11 @@
   .container-sm {
     padding-left: 20vw !important;
     padding-right: 20vw !important;
-    outline: 3px solid rgb(176, 126, 126) !important;
-    background-color: rgb(7, 7, 7);
+    outline: 3px solid var(--mui-palette-primary-main) !important;
+    background-color:  var(--mui-palette-surface-tertiary);
   }
 }
 
 .btn-primary:hover {
-  background-color: #39313981 !important;
+  background-color: var(--mui-palette-primary-light) !important;
 }

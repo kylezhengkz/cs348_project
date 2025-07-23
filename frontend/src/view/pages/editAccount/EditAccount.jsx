@@ -9,7 +9,7 @@ import { useAuth } from "../../../wrappers/AuthContext";
 
 
 export function EditAccount() {
-    const { authUserId } = useAuth();
+    const { authUserId, setUsername } = useAuth();
 
     const newUsernameRef = useRef();
     const oldPasswordRef = useRef();
@@ -28,23 +28,25 @@ export function EditAccount() {
 
     const handleUsernameUpdate = async () => {
         const newUsername = newUsernameRef.current.value;
-
-        console.log("YSER ID: ", authUserId);
-
         const [success, message] = await userService.updateUsername(authUserId, newUsername);
+
+        if (success) {
+            setUsername(newUsername);
+        }
+
         showAlert(success, message);
     };
 
     const handlePasswordUpdate = async () => {
         const newPassword = newPasswordRef.current.value;
-    
-        const { success, message } = await userService.updatePassword(authUserId, newPassword);
+        const oldPassword = oldPasswordRef.current.value;
+        const [ success, message ] = await userService.updatePassword(authUserId, oldPassword, newPassword);
         showAlert(success, message);
     };
     
     return (
         <Container>
-            <Box minHeight="600px">
+            <Box sx={{minHeight: "80vh"}}>
                 <Box justifyContent="center" display="flex" className="mt-5">
                     <Typography variant="h2" gutterBottom>Edit Account</Typography>
                 </Box>
