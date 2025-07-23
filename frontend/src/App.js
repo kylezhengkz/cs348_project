@@ -17,10 +17,14 @@ import { CancelBooking } from './view/pages/cancelBooking/CancelBooking';
 import { Dashboard } from './view/pages/dashboard/Dashboard';
 import { ManageRooms } from './view/pages/manageRooms/ManageRooms';
 import { ManageBuildings } from './view/pages/manageBuildings/ManageBuildings';
+import { AccessDenied } from './view/pages/accessDenied/AccessDenied';
+import { RouteTracker } from './view/components/routeTracker/RouteTracker';
 
 import { AuthProvider } from './wrappers/AuthContext'
 import { ProtectedRoutes } from './wrappers/ProtectedRoutes'
 import { PublicRoutes } from './wrappers/PublicRoutes';
+import { AdminProtectedRoutes } from './wrappers/AdminProtectedRoutes';
+
 
 function App() {
   return (
@@ -38,6 +42,7 @@ function App() {
 
         <AuthProvider>
           <Header />
+          <RouteTracker />
           <Routes>
             <Route path="/" element={<PublicRoutes><Splash /></PublicRoutes>} />
             <Route path="signup" element={<PublicRoutes><Signup /></PublicRoutes>} />
@@ -47,8 +52,9 @@ function App() {
             <Route path="cancelBooking" element={<ProtectedRoutes><CancelBooking /></ProtectedRoutes>} />
             <Route path="bookingHistory" element={<ProtectedRoutes><BookingHistory/></ProtectedRoutes>} />
             <Route path="dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
-            <Route path="manageRooms" element={<ProtectedRoutes><ManageRooms /></ProtectedRoutes>} />
-            <Route path="manageBuildings" element={<ProtectedRoutes><ManageBuildings /></ProtectedRoutes>} />
+            <Route path="manageRooms" element={<AdminProtectedRoutes><ManageRooms /></AdminProtectedRoutes>} />
+            <Route path="manageBuildings" element={<AdminProtectedRoutes><ManageBuildings /></AdminProtectedRoutes>} />
+            <Route path="accessDenied" element={<AccessDenied />} />
           </Routes>
           <Footer />
         </AuthProvider>
