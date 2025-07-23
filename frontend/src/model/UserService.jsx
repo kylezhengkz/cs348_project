@@ -10,10 +10,7 @@ export class UserService extends BaseAPIService {
         }
 
         let ext = "/signup";
-        console.log("EXT: ", ext);
-
         const res = await this.apiTool.post(ext, kwargs);
-
         return res.data;
     }
 
@@ -24,10 +21,31 @@ export class UserService extends BaseAPIService {
         }
 
         let ext = "/login";
-        console.log("EXT: ", ext);
-
         const res = await this.apiTool.post(ext, kwargs);
         
+        return res.data;
+    }
+
+    async updateUsername(userId, newUsername) {
+        const kwargs = {
+            "userId": userId,
+            "newUsername": newUsername
+        }
+
+        const ext = "/updateUsername";
+        const res = await this.apiTool.post(ext, kwargs);
+        return res.data;
+    }
+
+    async updatePassword(userId, oldPassword, newPassword) {
+        const kwargs = {
+            "userId": userId,
+            "oldPassword": oldPassword,
+            "newPassword": newPassword
+        }
+
+        const ext = "/updatePassword";
+        const res = await this.apiTool.post(ext, kwargs);
         return res.data;
     }
 }

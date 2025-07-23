@@ -4,13 +4,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useAuth } from "../../../wrappers/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
-import Modal from '@mui/material/Modal';
+import { useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import { USER_ROLES } from '../../../constants/authContants';
 
+import { useAuth } from "../../../wrappers/AuthContext";
+import { AccountMenu } from '../accountMenu/AccountMenu';
 import "./Header.css"
 
 export function Header() {
@@ -19,6 +19,8 @@ export function Header() {
 
     const [showProfile, setShowProfile] = useState(false);
     const [showNavBar, setShowNavBar] = useState(false);
+
+    const isLogin = authUserId !== null;
 
     const style = {
       position: 'absolute',
@@ -31,6 +33,7 @@ export function Header() {
       boxShadow: 24,
       p: 4,
     };
+    const profileIconRef = useRef(null);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -43,14 +46,17 @@ export function Header() {
                         aria-label="menu"
                         sx={{ mr: 2 }}
                         onClick = { () => {
-                            console.log("HEHEHEHA")
                             setShowNavBar(!showNavBar)
                           }
                         }
                     >
                         <MenuIcon />
                     </IconButton>
-                    <div style={{ flexGrow: 1 }} />
+
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: "bold" }}>
+                        Room Booking App
+                    </Typography>
+
                     {authUserId !== null && (
                       <>
                         <Button color="inherit" onClick={() => {
@@ -62,37 +68,21 @@ export function Header() {
                     {authUserId === null && <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>}
                     {authUserId === null && <Button color="inherit" onClick={() => navigate("/signup")}>Signup</Button>}
 
-                    <Button id="profilePic" onClick={() => setShowProfile(true)}>
+                    <Button sx={{display: isLogin ? "inherit": "none"}} id="profilePic" ref={profileIconRef} onClick={() => { setShowProfile(true) }}>
                       <img src={require('../../../resources/profile.png')}></img>
                     </Button>
-                    <Modal
-                      open={showProfile}
-                      onClose={() => setShowProfile(false)}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      <Box sx={style}>
-                        {username && userPerm && (
-                          <>
-                            <Typography id="modal-modal-description" sx={{ mt: 0 }}>
-                              Username: {username ? username : "Not logged in"}
-                            </Typography>
-                            <Typography id="modal-modal-description" sx={{ mt: 0 }}>
-                              Permission: {""}
-                              {USER_ROLES[userPerm]}
-                            </Typography>
-                          </>
-                        )}
-                        {(!username || !userPerm) && (
-                          <>
-                            <Typography id="modal-modal-description" sx={{ mt: 0 }}>
-                              Not logged in
-                            </Typography>
-                          </>
-                        )}
-                      </Box>
-                    </Modal>
 
+                    <AccountMenu 
+                      username={username} 
+                      anchorEl={profileIconRef} 
+                      open={showProfile} 
+                      onClose={() => setShowProfile(false) } 
+                      logOutHandler={() => {
+                        setAuthUserId(null)
+                        setUsername(null)
+                        setUserPerm(null)
+                      }}>
+                    </AccountMenu>
                 </Toolbar>
             </AppBar>
         </Box>

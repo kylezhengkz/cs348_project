@@ -1,4 +1,6 @@
 import os
+import uuid
+from typing import Tuple
 
 import PyUtils as PU
 
@@ -98,3 +100,53 @@ class UserService(BaseAPIService):
               "loginStatus": False,
               "errorMessage": "Unable to login",
             }
+        
+    def updateUsername(self, userId: uuid.UUID, newUsername: str) -> Tuple[bool, str]:
+        sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "AF5/AF5a.sql")
+        sql = PU.DBTool.readSQLFile(sqlFile)
+
+        vars = {
+            "newUsername": newUsername,
+            "userId": f"{userId}"
+        }
+
+        try:
+            _, _, error = self._dbTool.executeSQL(sql, vars=vars, commit=True)
+            return [True, "Username updated successfully."]
+        except Exception as e:
+            self.print(e)
+            return [False, str(e)]
+
+    def updatePassword(self, userId: uuid.UUID, oldPassword: str, newPassword: str) -> Tuple[bool, str]:
+      check_query = """
+      SELECT COUNT(*) FROM "User"
+      WHERE "userID" = %(userId)s AND "password" = %(oldPassword)s;
+      """
+
+      vars = {
+          "oldPassword": oldPassword,
+          "newPassword": newPassword,
+          "userId": userId
+      }
+
+      connData, cursor, error = self._dbTool.executeSQL(check_query, vars = vars, commit=False, closeConn=False, raiseException = False)
+
+      if error is not None:
+          connData.putConn()
+          self.print(error)
+          return [False, "Password check failed."]
+
+      result = cursor.fetchone()
+      if not result or result[0] == 0:
+          connData.putConn()
+          return [False, "Old password incorrect."]
+
+      sqlFile = os.path.join(PU.Paths.SQLFeaturesFolder.value, "AF5/AF5b.sql")
+      sql = PU.DBTool.readSQLFile(sqlFile)
+
+      _, _, update_error = self._dbTool.executeSQL(sql, vars = vars, commit = True, connData = connData, raiseException = False)
+
+      if update_error:
+          self.print(update_error)
+          return [False, "Password update failed."]
+      return [True, "Password updated successfully."]
