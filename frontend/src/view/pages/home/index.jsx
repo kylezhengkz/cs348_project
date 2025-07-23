@@ -39,7 +39,6 @@ export function Home() {
                     <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/viewBooking"}}>View/Book Rooms</FeatureButtonLink>
                     <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/cancelBooking"}}>View/Cancel Bookings</FeatureButtonLink>
                     <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/bookingHistory"}}>Booking History</FeatureButtonLink>
-                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/dashboard"}}>My Dashboard</FeatureButtonLink>
                     { userPerm === USER_PERMS.ADMIN && (
                         <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/manageFacilities"}}>Administration</FeatureButtonLink>
                     )}

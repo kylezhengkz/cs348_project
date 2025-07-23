@@ -240,19 +240,24 @@ class App():
         def getBookingFrequency() -> Tuple[bool, Union[str, List[Dict[str, Any]]]]:
             data = request.get_json()
 
-            userId = data.get("user_id")
-            startDateTime = data.get("start_time")
-            endDateTime = data.get("end_time")
-            queryLimit = data.get("participants")
+            userId = data.get("userId")
+            startDateTime = data.get("startDateTime")
+            endDateTime = data.get("endDateTime")
+            queryLimit = data.get("queryLimit")
 
             try:
                 userId  = uuid.UUID(userId)
             except ValueError:
                 return [False, "Invalid UUID format for user ID"]
             
-            startDateTime = PU.DateTimeTool.strToDateTime(startDateTime)
-            endDateTime = PU.DateTimeTool.strToDateTime(endDateTime)
-            queryLimit = int(queryLimit)
+            if (startDateTime is not None):
+                startDateTime = PU.DateTimeTool.strToDateTime(startDateTime)
+
+            if (endDateTime is not None):
+                endDateTime = PU.DateTimeTool.strToDateTime(endDateTime)
+
+            if (queryLimit is not None):
+                queryLimit = int(queryLimit)
             
             return self._dashService.getBookingFrequency(userId, startDateTime, endDateTime, queryLimit = queryLimit)
 

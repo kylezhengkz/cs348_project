@@ -53,7 +53,6 @@ function App() {
             <Route path="viewBooking" element={<ProtectedRoutes><ViewBooking/></ProtectedRoutes>} />
             <Route path="cancelBooking" element={<ProtectedRoutes><CancelBooking /></ProtectedRoutes>} />
             <Route path="bookingHistory" element={<ProtectedRoutes><BookingHistory/></ProtectedRoutes>} />
-            <Route path="dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
             <Route path="manageRooms" element={<AdminProtectedRoutes><ManageRooms /></AdminProtectedRoutes>} />
             <Route path="manageBuildings" element={<AdminProtectedRoutes><ManageBuildings /></AdminProtectedRoutes>} />
             <Route path="accessDenied" element={<AccessDenied />} />

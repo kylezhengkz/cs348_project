@@ -1,5 +1,5 @@
 import "./signup.css"
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom";
 
 import { userService } from '../../../model/UserService';
