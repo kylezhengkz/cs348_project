@@ -150,7 +150,7 @@ export function CancelBooking() {
                 </div>
             </Modal>
 
-            <Box minHeight="600px">
+            <Box sx={{minHeight: "80vh"}}>
                 <Typography variant="h2" gutterBottom className="mt-5 mb-5">Your Future Bookings</Typography>
 
                 <ReactDataTable

@@ -1,6 +1,7 @@
 import "./signup.css"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
 import { userService } from '../../../model/UserService';
 import { useAuth } from "../../../wrappers/AuthContext"
@@ -63,50 +64,52 @@ export function Signup() {
   }
 
   return (
-    <div className="container-sm mt-5 mb-5 pt-5 pb-5">
-      <h1 className="text-center mt-3" style={{ color: 'white' }}>Sign up</h1>
+    <Box sx={{minHeight: "80vh"}}>
+      <Box className="container-sm mt-5 mb-5 pt-5 pb-5" sx={{borderRadius: 2}}>
+        <h1 className="text-center mt-3" >Sign up</h1>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-group pt-3">
-          <label htmlFor="username" style={{ color: 'white' }}>Username</label>
-          <input type="text" id="username" name="username" className="form-control" {...register("username", { required: true })}></input>
-          {errors.username?.type === "required" && <span className="text-warning">This field is required</span>}
-          {errors.username?.type === "databaseError" && <span className="text-warning">{errors.username?.message}</span>}
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-group pt-3">
+            <label htmlFor="username" >Username</label>
+            <input type="text" id="username" name="username" className="form-control" {...register("username", { required: true })}></input>
+            {errors.username?.type === "required" && <span className="text-warning">This field is required</span>}
+            {errors.username?.type === "databaseError" && <span className="text-warning">{errors.username?.message}</span>}
+          </div>
 
-        <div className="form-group pt-3">
-          <label htmlFor="email" style={{ color: 'white' }}>Email</label>
-          <input type="text" id="email" name="email" className="form-control" {...register("email", { required: true })}></input>
-          {errors.email?.type === "required" && <span className="text-warning">This field is required</span>}
-          {errors.email?.type === "databaseError" && <span className="text-warning">{errors.email?.message}</span>}
-        </div>
-        
-        <div className="form-group pt-3">
-          <label htmlFor="password" style={{ color: 'white' }}>Password</label>
-          <input type="password" id="password" name="password" className="form-control" {...register("password", { required: true, minLength: {value: 8, message: "Password must be at least 8 characters long"} })}></input>
-          {errors.password?.type === "required" && <span className="text-warning">This field is required</span>}
-          {errors.password?.type === "minLength" && <span className="text-warning">{errors.password?.message}</span>}
-        </div>
+          <div className="form-group pt-3">
+            <label htmlFor="email" >Email</label>
+            <input type="text" id="email" name="email" className="form-control" {...register("email", { required: true })}></input>
+            {errors.email?.type === "required" && <span className="text-warning">This field is required</span>}
+            {errors.email?.type === "databaseError" && <span className="text-warning">{errors.email?.message}</span>}
+          </div>
+          
+          <div className="form-group pt-3">
+            <label htmlFor="password" >Password</label>
+            <input type="password" id="password" name="password" className="form-control" {...register("password", { required: true, minLength: {value: 8, message: "Password must be at least 8 characters long"} })}></input>
+            {errors.password?.type === "required" && <span className="text-warning">This field is required</span>}
+            {errors.password?.type === "minLength" && <span className="text-warning">{errors.password?.message}</span>}
+          </div>
 
-        <div className="form-group pt-3">
-          <label htmlFor="passwordConfirm" style={{ color: 'white' }}>Confirm Password</label>
-          <input type="password" id="passwordConfirm" name="passwordConfirm" className="form-control" {...register("passwordConfirm", { required: true })}></input>
-          {errors.passwordConfirm?.type === "required" && <span className="text-warning">This field is required</span>}
-          {errors.passwordConfirm?.type === "notMatch" && <span className="text-warning">{errors.passwordConfirm?.message}</span>}
-        </div>
-        
-        <div className="form-group pt-4 mx-auto text-center">
-          <button type="submit" className="btn btn-primary">Sign up</button>
-          <>
-            {errors.creationError?.type === "databaseError" && (
-              <>
-                <br></br>
-                <span className="text-warning">Unable to create account</span>
-              </>
-            )}
-          </>
-        </div>
-      </form>
-    </div>
+          <div className="form-group pt-3">
+            <label htmlFor="passwordConfirm" >Confirm Password</label>
+            <input type="password" id="passwordConfirm" name="passwordConfirm" className="form-control" {...register("passwordConfirm", { required: true })}></input>
+            {errors.passwordConfirm?.type === "required" && <span className="text-warning">This field is required</span>}
+            {errors.passwordConfirm?.type === "notMatch" && <span className="text-warning">{errors.passwordConfirm?.message}</span>}
+          </div>
+          
+          <div className="form-group pt-4 mx-auto text-center">
+            <button type="submit" className="btn btn-primary">Sign up</button>
+            <>
+              {errors.creationError?.type === "databaseError" && (
+                <>
+                  <br></br>
+                  <span className="text-warning">Unable to create account</span>
+                </>
+              )}
+            </>
+          </div>
+        </form>
+      </Box>
+    </Box>
   );
 }

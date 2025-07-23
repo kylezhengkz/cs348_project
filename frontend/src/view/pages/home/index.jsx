@@ -30,7 +30,7 @@ export function Home() {
 
     return (
         <Container>
-            <Box minHeight="600px">
+            <Box sx={{minHeight: "80vh"}}>
                 <Box justifyContent="center" display="flex" className="mt-5">
                     <Typography variant="h2" gutterBottom>Welcome back {username}!</Typography>
                 </Box>
