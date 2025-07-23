@@ -13,12 +13,14 @@ export function Histogram({data, freqAtt, binAtt, textAtt, compareFunc,
     const barHeight = 50;
     const marginTop = 180;
     const marginRight = 100;
-    const marginBottom = 10;
+    const marginBottom = 100;
     const marginLeft = 200;
+
     const graphWidth = 800;
+    const graphHeight = Math.ceil((data.length + 0.1) * barHeight);
 
     const width = marginLeft + graphWidth + marginRight;
-    const height = Math.ceil((data.length + 0.1) * barHeight) + marginTop + marginBottom;
+    const height = marginTop + graphHeight + marginBottom;
 
     const headingFontSize = 30;
     const axesFontSize = 24;
@@ -119,7 +121,7 @@ export function Histogram({data, freqAtt, binAtt, textAtt, compareFunc,
             .attr("transform", "rotate(-90)")
             .attr("text-anchor", "middle")
             .attr("y", marginLeft / 4)
-            .attr("x", -((height + marginTop) / 2))
+            .attr("x", -(graphHeight / 2 + marginTop))
             .text(yAxisTitle);
     }, [data]);
 
