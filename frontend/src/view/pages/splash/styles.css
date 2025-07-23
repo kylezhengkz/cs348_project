@@ -1,3 +1,98 @@
 .featureButtonLink {
-    color: var(--mui-palette-onPrimary-main);
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: clamp(1rem, 5vh, 1.1rem) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-transform: none !important;
+}
+
+.splashBackground {
+    background-image: url('../../../resources/splash_background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+.splashPanel {
+    height: 64vh;
+    width: 55vw;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0rem 4rem;
+    /* background-color: rgba(255, 0, 0, 0.5); */
+}
+
+.splashTopBar {
+    /* background-color: rgba(255, 0, 0, 0.5); */
+    height: clamp(1.5rem, 5vh, 3rem);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 3.5rem 0rem;
+}
+
+.splashNavBar {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+.splashBody {
+    /* background-color: rgba(255, 0, 0, 0.5); */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+}
+
+.splashHeader {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.splashLogoText {
+    font-family: 'DM Serif Text', serif !important;
+    font-weight: 400 !important;
+    font-size: clamp(0.5rem, 5vh, 1.5rem) !important;
+    color: rgba(255, 255, 255, 0.9);
+    flex-grow: 1;
+}
+
+.splashHeaderText {
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Roboto Serif', serif !important;
+    font-weight: 500 !important;
+    font-size: clamp(1.5rem, 5vh, 3rem) !important;
+}
+
+.splashBodyText {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: clamp(1rem, 5vh, 1.1rem) !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.splashBottomBar {
+    height: clamp(1.5rem, 5vh, 3rem);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem 0rem;
 }
