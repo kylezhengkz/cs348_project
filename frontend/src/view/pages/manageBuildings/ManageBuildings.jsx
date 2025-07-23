@@ -161,7 +161,7 @@ export function ManageBuildings() {
 
     return (
         <Container maxWidth="xl">
-            <Typography variant="h2" gutterBottom className='mt-5 mb-5'>Available Rooms</Typography>
+            <Typography variant="h2" gutterBottom className='mt-5 mb-5'>Manage Buildings</Typography>
 
             <Accordion className='mt-3'>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content">

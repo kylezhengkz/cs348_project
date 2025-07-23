@@ -64,7 +64,7 @@ export function ViewAdminLog({mode = "book"}) {
 
     return (
         <Container maxWidth="xl">
-            <Typography variant="h2" gutterBottom className='mt-5 mb-5'>Available Rooms</Typography>
+            <Typography variant="h2" gutterBottom className='mt-5 mb-5'>Admin Log</Typography>
           
             <Box display="flex" justifyContent="center">
                 <Box className="mt-5 mb-5" sx={{ width: '100%' }}>
