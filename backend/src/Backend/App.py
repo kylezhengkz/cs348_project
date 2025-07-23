@@ -291,16 +291,17 @@ class App():
 
             userId = data.get("userId")
             newPassword = data.get("newPassword")
+            oldPassword = data.get("oldPassword")
 
             try:
                 userId  = uuid.UUID(userId)
             except ValueError:
                 return [False, "Invalid UUID format for user ID"]
 
-            if not newPassword:
+            if (newPassword is None or oldPassword is None):
                 return [False, "Missing required fields."]
 
-            return self._userService.updatePassword(userId, newPassword)
+            return self._userService.updatePassword(userId, oldPassword, newPassword)
 
 
         self._app = app
