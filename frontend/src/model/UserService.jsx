@@ -37,17 +37,16 @@ export class UserService extends BaseAPIService {
         return res.data;
     }
 
-    async updatePassword(userId, oldPassword, newPassword) {
+    async updatePassword(userId, newPassword) {
         const kwargs = {
             "userId": userId,
-            "oldPassword": oldPassword,
             "newPassword": newPassword
         }
-
+    
         const ext = "/updatePassword";
         const res = await this.apiTool.post(ext, kwargs);
         return res.data;
-    }
+    }    
 }
 
 export const userService = new UserService(apiTool);
