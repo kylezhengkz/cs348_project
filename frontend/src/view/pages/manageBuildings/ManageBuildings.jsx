@@ -29,6 +29,7 @@ import { useNavigate } from "react-router-dom";
 import AddRoomModal from './AddRoomModal';
 
 export function ManageBuildings() {
+    const { authUserId } = useAuth();
     const selectedBuildingId = useRef();
     const [data, setData] = useState([]);
 
