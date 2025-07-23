@@ -80,7 +80,7 @@ export function ManageBuildings() {
 
     async function onAdd(roomName, capacity) {
         try {
-            const res = await roomService.addRoom(roomName, capacity, selectedBuildingId.current)
+            const res = await roomService.addRoom(roomName, capacity, selectedBuildingId.current, authUserId)
             console.log(res)
             if (res["addStatus"] === false) {
                 setAlertSeverity("error");

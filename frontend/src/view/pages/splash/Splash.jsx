@@ -24,21 +24,46 @@ export function FeatureButtonLink({buttonProps, linkProps, children}) {
 
 export function Splash() {
     return (
-        <Container>
-            <Box minHeight="600px">
-                <Box justifyContent="center" display="flex" className="mt-5">
-                    <Typography variant="h1" gutterBottom>Welcome</Typography>
-                </Box>
-
-                <Box justifyContent="center" display="flex" className="mt-3">
-                    <Typography variant="p" gutterBottom>This is where the splash page should be. In the meantime you can explore the following function below</Typography>
-                </Box>    
-
-                <Box justifyContent="center" display="flex" className="mt-3" gap={"20px"}>
-                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/signup"}}>Sign up</FeatureButtonLink>
-                    <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/login"}}>login</FeatureButtonLink>
-                </Box> 
-            </Box>
-        </Container>
+        <div className="splashBackground">
+            <div className="splashPanel">
+                <div className="splashTopBar">
+                    <Typography className="splashLogoText">CampusBooking</Typography>
+                    <div className="splashNavBar">
+                        <FeatureButtonLink buttonProps={{variant: "text"}} linkProps={{"to": "/signup"}}>Sign up</FeatureButtonLink>
+                        <FeatureButtonLink buttonProps={{variant: "text"}} linkProps={{"to": "/login"}}>Login</FeatureButtonLink>
+                    </div>
+                </div>
+                <div className="splashBody">
+                    <div className="splashHeader">
+                        <Typography className="splashHeaderText">Study. Meet. Chill.</Typography>
+                        <Typography className="splashHeaderText">Find your space at UW.</Typography>
+                    </div>
+                    <Typography className="splashBodyText" style={{width: "60%"}}>
+                        Tip: Appease campus geese with a selection of apples, grapes, earth worms, and duckweed!
+                    </Typography>
+                </div>
+                <div className="splashBottomBar">
+                    <FeatureButtonLink buttonProps={{
+                            variant: "contained",
+                            sx: {
+                                background: 'linear-gradient(45deg, #996bfeff 30%, #9e64b0ff 90%)',
+                                textTransform: 'none',
+                                padding: '7px 23px',
+                                marginBottom: '2rem',
+                                boxShadow: '0 0 12px rgba(158, 100, 176, 0.6)',
+                                transition: 'box-shadow 0.3s ease, background 0.3s ease',
+                                '&:hover': {
+                                    background: 'linear-gradient(45deg, #825bd7ff 30%, #a468b3ff 90%)',
+                                    boxShadow: 'none',
+                                },
+                            }
+                        }}
+                        linkProps={{"to": "/login"}}
+                    >
+                        Get Started
+                    </FeatureButtonLink>
+                </div>
+            </div>
+        </div>
     );
 }
