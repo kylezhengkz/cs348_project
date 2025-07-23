@@ -52,9 +52,11 @@ export function Header() {
                     >
                         <MenuIcon />
                     </IconButton>
+
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: "bold" }}>
                         Room Booking App
                     </Typography>
+
                     {authUserId !== null && (
                       <>
                         <Button color="inherit" onClick={() => {
