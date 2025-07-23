@@ -74,6 +74,23 @@ export function Histogram({data, freqAtt, binAtt, textAtt, compareFunc,
                 .attr("width", (d) => x(d[freqAtt]) - x(0))
                 .attr("height", y.bandwidth());
 
+        // Append a label for each letter.
+        svg.append("g")
+            .attr("fill", "white")
+            .attr("text-anchor", "end")
+            .selectAll()
+            .data(data)
+            .join("text")
+            .attr("x", (d) => x(d[freqAtt]))
+            .attr("y", (d) => y(d[binAtt]) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("dx", -8)
+            .text((d) => d[freqAtt])
+            .call((text) => text.filter(d => x(d[freqAtt]) - x(0) < 20) // short bars
+            .attr("dx", +4)
+            .attr("fill", "black")
+            .attr("text-anchor", "start"));
+
         // Create the axes.
         const xAxis = svg.append("g");
         const xAxisLine = xAxis.append("g")
