@@ -3,9 +3,11 @@ import "./styles.css"
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { Box } from '@mui/material';
+
+import { useAuth } from "../../../wrappers/AuthContext";
 import { ButtonRouterLink } from '../../components/buttonRouterLink/ButtonRouterLink';
-import { useAuth } from '../../../wrappers/AuthContext';
-import { USER_PERMS } from "../../../constants/authContants";
+import { USER_PERMS } from "../../../constants/authContants";import { Dashboard } from "../dashboard/Dashboard";
+
 
 
 export function FeatureButtonLink({buttonProps, linkProps, children}) {
@@ -24,18 +26,14 @@ export function FeatureButtonLink({buttonProps, linkProps, children}) {
 
 
 export function Home() {
-    const { userPerm } = useAuth();
+    const { username, userPerm } = useAuth();
 
     return (
         <Container>
             <Box minHeight="600px">
                 <Box justifyContent="center" display="flex" className="mt-5">
-                    <Typography variant="h1" gutterBottom>This is the homepage</Typography>
+                    <Typography variant="h2" gutterBottom>Welcome back {username}!</Typography>
                 </Box>
-
-                <Box justifyContent="center" display="flex" className="mt-3">
-                    <Typography variant="p" gutterBottom>This is where the homepage should be. In the meantime you can explore the following function below</Typography>
-                </Box>    
 
                 <Box justifyContent="center" display="flex" className="mt-3" gap={"20px"}>
                     <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/viewBooking"}}>View/Book Rooms</FeatureButtonLink>
@@ -46,6 +44,8 @@ export function Home() {
                         <FeatureButtonLink buttonProps={{variant: "contained"}} linkProps={{"to": "/manageFacilities"}}>Administration</FeatureButtonLink>
                     )}
                 </Box> 
+
+                <Dashboard containerProps={{sx: { mt: "100px", mb: 5 }}}></Dashboard>
             </Box>
         </Container>
     );

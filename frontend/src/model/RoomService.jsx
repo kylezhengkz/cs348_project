@@ -5,8 +5,6 @@ import { APITool, apiTool } from "../tools/ApiTool";
 export class RoomService extends BaseAPIService {
     async getRoomsByBuildingID(buildingID) {
         let ext = `/viewRoomsByBuildingID?building_id=${buildingID}&db_operation=filter`
-        console.log("EXT: ", ext);
-
         const res = await this.apiTool.get(ext);
         return res.data;
     }
@@ -32,8 +30,6 @@ export class RoomService extends BaseAPIService {
 
         ext += APITool.getQueryKwargsStr(kwargs);
 
-        console.log("EXT: ", ext);
-
         const res = await this.apiTool.get(ext);
         return res.data;
     }
@@ -47,13 +43,7 @@ export class RoomService extends BaseAPIService {
         }
 
         let ext = "/addRoom";
-        console.log("EXT: ", ext);
-        console.log(kwargs)
-
         const res = await this.apiTool.post(ext, kwargs);
-
-        console.log(res.data)
-
         return res.data;
     }
 
@@ -64,8 +54,6 @@ export class RoomService extends BaseAPIService {
         }
 
         let ext = "/deleteRoom";
-        console.log("EXT: ", ext);
-
         const res = await this.apiTool.post(ext, kwargs);
 
         console.log(res.data)
@@ -82,10 +70,7 @@ export class RoomService extends BaseAPIService {
         }
 
         let ext = "/editRoom";
-        console.log("EXT: ", ext);
-
         const res = await this.apiTool.post(ext, kwargs);
-        console.log(res.data)
         return res.data;
     }
 }

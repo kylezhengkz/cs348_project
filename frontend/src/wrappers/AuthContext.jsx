@@ -3,12 +3,17 @@ import { useState, createContext, useContext, useEffect } from "react"
 const AuthContext = createContext()
 
 export function AuthProvider({children}) {
+  const [loading, setLoading] = useState(true);
   const [authUserId, setAuthUserId] = useState(() => sessionStorage.getItem("authUserId"));
   const [username, setUsername] = useState(() => sessionStorage.getItem("username"));
   const [userPerm, setUserPerm] = useState(() => {
     const perm = sessionStorage.getItem("userPerm");
     return perm != null ? Number(perm) : null;
   });
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
     if (authUserId !== null) {
@@ -41,7 +46,7 @@ export function AuthProvider({children}) {
   };
 
   return (
-    <AuthContext.Provider value={{authUserId, setAuthUserId, username, setUsername, userPerm, setUserPerm, logout}}>
+    <AuthContext.Provider value={{authUserId, setAuthUserId, username, setUsername, userPerm, setUserPerm, logout, loading}}>
       {children}
     </AuthContext.Provider>
   )
