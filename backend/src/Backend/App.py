@@ -196,17 +196,17 @@ class App():
         def cancelBooking():
             data = request.get_json()
             if not data:
-                return jsonify({ "success": False, "message": "No JSON data received" }), 400
+                return jsonify({ "success": False, "message": "No JSON data received" })
 
             bookingId = data.get("booking_id")
             userId = data.get("user_id")
 
             try:
                 success, message = self._bookingService.cancelBooking(bookingId, userId)
-                return jsonify({ "success": success, "message": message }), 200 if success else 400
+                return jsonify({ "success": success, "message": message })
             except Exception as e:
                 self.print(f"CancelBooking error: {str(e)}")
-                return jsonify({ "success": False, "message": "Cancellation failed due to server error." }), 500
+                return jsonify({ "success": False, "message": "Cancellation failed due to server error." })
 
         
         @app.route("/getFutureBookings", methods=["GET"])
@@ -291,16 +291,17 @@ class App():
 
             userId = data.get("userId")
             newPassword = data.get("newPassword")
+            oldPassword = data.get("oldPassword")
 
             try:
                 userId  = uuid.UUID(userId)
             except ValueError:
                 return [False, "Invalid UUID format for user ID"]
 
-            if not newPassword:
+            if (newPassword is None or oldPassword is None):
                 return [False, "Missing required fields."]
 
-            return self._userService.updatePassword(userId, newPassword)
+            return self._userService.updatePassword(userId, oldPassword, newPassword)
 
 
         self._app = app

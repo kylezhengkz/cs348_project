@@ -30,6 +30,7 @@ import AddRoomModal from './AddRoomModal';
 
 export function ManageBuildings() {
     const { authUserId } = useAuth();
+
     const selectedBuildingId = useRef();
     const [data, setData] = useState([]);
 
@@ -53,7 +54,6 @@ export function ManageBuildings() {
 
     function getBuildings(setData, buildingName, addressLine1, addressLine2, city, province, country, postalCode) {
         buildingService.fetchBuildings(buildingName, addressLine1, addressLine2, city, province, country, postalCode).then(buildings => {
-            console.log("BUILDINGS: ", buildings);
             setData(buildings);
         });
     }
@@ -99,7 +99,6 @@ export function ManageBuildings() {
             setAlertOpen(true);
         } finally {
             const addRoomModal = bootstrap.Modal.getInstance(document.getElementById('addRoomModal'));
-            console.log("CLOSING MODAL", addRoomModal)
             addRoomModal.hide();
         }
     }

@@ -93,6 +93,21 @@ export function ViewBooking({mode = "book"}) {
         }
 
         try {
+            participants = parseInt(participants);
+        } catch {
+            alert("Participants must be an integer");
+            return;
+        }
+
+        if (Number.isNaN(participants)) {
+            alert("Participants cannot be NaN");
+            return;
+        } else if (participants < 0) {
+            alert("Participants cannot be less than 0");
+            return;
+        }
+
+        try {
             const res = await bookingService.bookRoom(authUserId, roomId, startTime, endTime, participants);
 
           

@@ -1,4 +1,4 @@
-import { Container, Box, Typography, FormControl } from "@mui/material"
+import { Container, Box, Typography, FormControl, Paper, Stack } from "@mui/material"
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState, useRef } from "react";
@@ -9,7 +9,7 @@ import { useAuth } from "../../../wrappers/AuthContext";
 
 
 export function EditAccount() {
-    const { authUserId } = useAuth();
+    const { authUserId, setUsername } = useAuth();
 
     const newUsernameRef = useRef();
     const oldPasswordRef = useRef();
@@ -28,84 +28,107 @@ export function EditAccount() {
 
     const handleUsernameUpdate = async () => {
         const newUsername = newUsernameRef.current.value;
-
-        console.log("YSER ID: ", authUserId);
-
         const [success, message] = await userService.updateUsername(authUserId, newUsername);
+
+        if (success) {
+            setUsername(newUsername);
+        }
+
         showAlert(success, message);
     };
 
     const handlePasswordUpdate = async () => {
         const newPassword = newPasswordRef.current.value;
-    
-        const { success, message } = await userService.updatePassword(authUserId, newPassword);
+        const oldPassword = oldPasswordRef.current.value;
+        const [ success, message ] = await userService.updatePassword(authUserId, oldPassword, newPassword);
         showAlert(success, message);
     };
     
     return (
         <Container>
-            <Box minHeight="600px">
-                <Box justifyContent="center" display="flex" className="mt-5">
-                    <Typography variant="h2" gutterBottom>Edit Account</Typography>
-                </Box>
-                
-                <Box justifyContent="center" display="flex" className="mt-5">
-                    <FormControl sx={{ border: '1px solid #ccc', borderRadius: 2, p: 3, mb: 3, backgroundColor: '#f5f5f5' }}>
-                        <Typography variant="h6">Update Username</Typography>
-                        <TextField
-                            fullWidth
-                            label="New Username"
-                            margin="normal"
-                            variant="outlined"
-                            inputRef={newUsernameRef}
-                        />
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleUsernameUpdate}
-                            sx={{ mt: 2 }}
-                        >
+            <Box sx={{ minHeight: "80vh", py: 5 }}>
+                <Typography variant="h3" align="center" gutterBottom>
+                    Edit Account
+                </Typography>
+
+                <Stack spacing={5} alignItems="center">
+                    {/* Username Box */}
+                    <Paper elevation={2} sx={{ p: 4, width: '100%', maxWidth: 500, backgroundColor: '#f5f5f5' }}>
+                        <Typography variant="h6" gutterBottom>
                             Update Username
-                        </Button>
-                        <Typography variant="body1" className="mt-2"></Typography>
-                    </FormControl>
-                </Box>
-                <Box justifyContent="center" display="flex" className="mt-5">
-                    <Box sx={{ border: '1px solid #ccc', borderRadius: 2, p: 3, mb: 3, backgroundColor: '#f5f5f5' }}>
-                        <Typography variant="h6">Update Password</Typography>
-                        <FormControl variant="body1" className="mt-2">
+                        </Typography>
+                        <Stack spacing={2}>
                             <TextField
-                                fullWidth
-                                type="password"
-                                label="Old Password"
-                                margin="normal"
+                                label="New Username"
                                 variant="outlined"
-                                inputRef={oldPasswordRef}
-                            />
-                            <TextField
+                                inputRef={newUsernameRef}
                                 fullWidth
-                                type="password"
-                                label="New Password"
-                                margin="normal"
-                                variant="outlined"
-                                inputRef={newPasswordRef}
+                                InputProps={{
+                                    sx: {
+                                        '& input:-webkit-autofill': {
+                                        boxShadow: '0 0 0 1000px #f5f5f5 inset',
+                                        WebkitTextFillColor: '#000',
+                                        },
+                                    }
+                                }}
                             />
                             <Button
                                 variant="contained"
-                                color="primary"
+                                sx={{ backgroundColor: '#9b5fa0' }}
+                                onClick={handleUsernameUpdate}
+                            >
+                                Update Username
+                            </Button>
+                        </Stack>
+                    </Paper>
+
+                    {/* Password Box */}
+                    <Paper elevation={2} sx={{ p: 4, width: '100%', maxWidth: 500, backgroundColor: '#f5f5f5' }}>
+                        <Typography variant="h6" gutterBottom>
+                            Update Password
+                        </Typography>
+                        <Stack spacing={2}>
+                            <TextField
+                                label="Old Password"
+                                type="password"
+                                variant="outlined"
+                                inputRef={oldPasswordRef}
+                                fullWidth
+                                InputProps={{
+                                    sx: {
+                                        '& input:-webkit-autofill': {
+                                        boxShadow: '0 0 0 1000px #f5f5f5 inset',
+                                        WebkitTextFillColor: '#000',
+                                        },
+                                    }
+                                }}
+                            />
+                            <TextField
+                                label="New Password"
+                                type="password"
+                                variant="outlined"
+                                inputRef={newPasswordRef}
+                                fullWidth
+                            />
+                            <Button
+                                variant="contained"
+                                sx={{ backgroundColor: '#9b5fa0' }}
                                 onClick={handlePasswordUpdate}
-                                sx={{ mt: 2 }}
                             >
                                 Update Password
                             </Button>
-                        </FormControl>
-                    </Box>
-                </Box>
-            </Box>
+                        </Stack>
+                    </Paper>
+                </Stack>
 
-            <PopupInfo open={alertOpen} onClose={() => setAlertOpen(false)} alertSeverity={alertSeverity}>
-                {alertMessage}
-            </PopupInfo>
+                <PopupInfo
+                    open={alertOpen}
+                    onClose={() => setAlertOpen(false)}
+                    alertSeverity={alertSeverity}
+                >
+                    {alertMessage}
+                </PopupInfo>
+            </Box>
         </Container>
     );
 }
