@@ -25,9 +25,6 @@ export class BuildingService extends BaseAPIService {
         }
 
         ext += APITool.getQueryKwargsStr(kwargs);
-
-        console.log("EXT: ", ext);
-
         const res = await this.apiTool.get(ext);
         return res.data;
     }

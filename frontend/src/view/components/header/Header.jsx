@@ -20,6 +20,8 @@ export function Header() {
     const [showProfile, setShowProfile] = useState(false);
     const [showNavBar, setShowNavBar] = useState(false);
 
+    const isLogin = authUserId !== null;
+
     const style = {
       position: 'absolute',
       top: '10%',
@@ -64,7 +66,7 @@ export function Header() {
                     {authUserId === null && <Button color="inherit" onClick={() => navigate("/login")}>Login</Button>}
                     {authUserId === null && <Button color="inherit" onClick={() => navigate("/signup")}>Signup</Button>}
 
-                    <Button id="profilePic" ref={profileIconRef} onClick={() => { setShowProfile(true) }}>
+                    <Button sx={{display: isLogin ? "inherit": "none"}} id="profilePic" ref={profileIconRef} onClick={() => { setShowProfile(true) }}>
                       <img src={require('../../../resources/profile.png')}></img>
                     </Button>
 
@@ -77,7 +79,8 @@ export function Header() {
                         setAuthUserId(null)
                         setUsername(null)
                         setUserPerm(null)
-                      }}></AccountMenu>
+                      }}>
+                    </AccountMenu>
                 </Toolbar>
             </AppBar>
         </Box>

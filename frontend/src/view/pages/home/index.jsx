@@ -6,7 +6,6 @@ import { Box } from '@mui/material';
 
 import { useAuth } from "../../../wrappers/AuthContext";
 import { ButtonRouterLink } from '../../components/buttonRouterLink/ButtonRouterLink';
-import { useAuth } from '../../../wrappers/AuthContext';
 import { USER_PERMS } from "../../../constants/authContants";import { Dashboard } from "../dashboard/Dashboard";
 
 

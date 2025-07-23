@@ -1,51 +1,47 @@
-import { Container, Box, Typography } from "@mui/material"
+import { Container, Box, Typography, FormControl } from "@mui/material"
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { styled } from "@mui/system";
+
+import { userService } from "../../../model/UserService";
+import { PopupInfo } from "../../components/popupInfo/PopupInfo";
+import { useAuth } from "../../../wrappers/AuthContext";
 
 
 export function EditAccount() {
-    const [oldUsername, setOldUsername] = useState("");
-    const [newUsername, setNewUsername] = useState("");
-    const [oldPassword, setOldPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
+    const { authUserId } = useAuth();
+
+    const newUsernameRef = useRef();
+    const oldPasswordRef = useRef();
+    const newPasswordRef = useRef();
+
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [alertSeverity, setAlertSeverity] = useState("info");
+    const [alertMessage, setAlertMessage] = useState("");
+
+    function showAlert(success, message) {
+        const alertType = success ? "success" : "error";
+        setAlertSeverity(alertType);
+        setAlertMessage(message);
+        setAlertOpen(true);
+    }
 
     const handleUsernameUpdate = async () => {
-        try {
-            const res = await dashBoardService.updateUsername(oldUsername, newUsername);
-            if (res.success) {
-                setAlertSeverity("success");
-                setAlertMessage("Username updated successfully!");
-            } else {
-                setAlertSeverity("error");
-                setAlertMessage(res.message || "Failed to update username.");
-            }
-        } catch (err) {
-            console.error(err);
-            setAlertSeverity("error");
-            setAlertMessage("Server error occurred.");
-        } finally {
-            setAlertOpen(true);
-        }
+        const newUsername = newUsernameRef.current.value;
+
+        console.log("YSER ID: ", authUserId);
+
+        const [success, message] = await userService.updateUsername(authUserId, newUsername);
+        showAlert(success, message);
     };
 
     const handlePasswordUpdate = async () => {
-        try {
-            const res = await dashBoardService.updatePassword(authUserId, oldPassword, newPassword);
-            if (res.success) {
-                setAlertSeverity("success");
-                setAlertMessage("Password updated successfully!");
-            } else {
-                setAlertSeverity("error");
-                setAlertMessage(res.message || "Failed to update password.");
-            }
-        } catch (err) {
-            console.error(err);
-            setAlertSeverity("error");
-            setAlertMessage("Server error occurred.");
-        } finally {
-            setAlertOpen(true);
-        }
+        const oldPassword = oldPasswordRef.current.value;
+        const newPassword = newPasswordRef.current.value;
+
+        const [success, message] = await userService.updatePassword(authUserId, oldPassword, newPassword);
+        showAlert(success, message);
     };
 
     return (
@@ -53,22 +49,17 @@ export function EditAccount() {
             <Box minHeight="600px">
                 <Box justifyContent="center" display="flex" className="mt-5">
                     <Typography variant="h2" gutterBottom>Edit Account</Typography>
-
-                    <Box sx={{ border: '1px solid #ccc', borderRadius: 2, p: 3, mb: 3, backgroundColor: '#f5f5f5' }}>
+                </Box>
+                
+                <Box justifyContent="center" display="flex" className="mt-5">
+                    <FormControl sx={{ border: '1px solid #ccc', borderRadius: 2, p: 3, mb: 3, backgroundColor: '#f5f5f5' }}>
                         <Typography variant="h6">Update Username</Typography>
-                        <TextField
-                            fullWidth
-                            label="Old Username"
-                            margin="normal"
-                            value={oldUsername}
-                            onChange={(e) => setOldUsername(e.target.value)}
-                        />
                         <TextField
                             fullWidth
                             label="New Username"
                             margin="normal"
-                            value={newUsername}
-                            onChange={(e) => setNewUsername(e.target.value)}
+                            variant="outlined"
+                            inputRef={newUsernameRef}
                         />
                         <Button
                             variant="contained"
@@ -78,29 +69,28 @@ export function EditAccount() {
                         >
                             Update Username
                         </Button>
-                        <Typography variant="body1" className="mt-2">
-                            
-                        </Typography>
-                    </Box>
-
+                        <Typography variant="body1" className="mt-2"></Typography>
+                    </FormControl>
+                </Box>
+                <Box justifyContent="center" display="flex" className="mt-5">
                     <Box sx={{ border: '1px solid #ccc', borderRadius: 2, p: 3, mb: 3, backgroundColor: '#f5f5f5' }}>
                         <Typography variant="h6">Update Password</Typography>
-                        <Typography variant="body1" className="mt-2">
+                        <FormControl variant="body1" className="mt-2">
                             <TextField
                                 fullWidth
                                 type="password"
                                 label="Old Password"
                                 margin="normal"
-                                value={oldPassword}
-                                onChange={(e) => setOldPassword(e.target.value)}
+                                variant="outlined"
+                                inputRef={oldPasswordRef}
                             />
                             <TextField
                                 fullWidth
                                 type="password"
                                 label="New Password"
                                 margin="normal"
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
+                                variant="outlined"
+                                inputRef={newPasswordRef}
                             />
                             <Button
                                 variant="contained"
@@ -110,10 +100,14 @@ export function EditAccount() {
                             >
                                 Update Password
                             </Button>
-                        </Typography>
+                        </FormControl>
                     </Box>
                 </Box>
             </Box>
+
+            <PopupInfo open={alertOpen} onClose={() => setAlertOpen(false)} alertSeverity={alertSeverity}>
+                {alertMessage}
+            </PopupInfo>
         </Container>
     );
 }

@@ -11,10 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-// const DUMMY_USER_ID = "6a51e4df-f4d8-4398-b603-5fd42c7738d0";
-
-
-
 
 export function CancelBooking() {
     const { authUserId } = useAuth();

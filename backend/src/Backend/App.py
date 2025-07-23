@@ -258,34 +258,39 @@ class App():
 
 
         @app.route("/updateUsername", methods=["POST"])
-        def updateUsername():
+        def updateUsername() -> Tuple[bool, str]:
             data = request.get_json()
-            self.print("[POST] /updateUsername", data)
-
-            oldUsername = data.get("oldUsername")
+            
+            userId = data.get("userId")
             newUsername = data.get("newUsername")
 
-            if not oldUsername or not newUsername:
-                return jsonify({ "success": False, "message": "Missing old or new username." }), 400
+            try:
+                userId  = uuid.UUID(userId)
+            except ValueError:
+                return [False, "Invalid UUID format for user ID"]
 
-            success, message = self._dashService.updateUsername(oldUsername, newUsername)
-            return jsonify({ "success": success, "message": message }), 200 if success else 400
+            if (not newUsername):
+                return [False, "Missing old or new username."]
+
+            return self._userService.updateUsername(userId, newUsername)
 
         @app.route("/updatePassword", methods=["POST"])
-        def updatePassword():
+        def updatePassword() -> Tuple[bool, str]:
             data = request.get_json()
-            self.print("[POST] /updatePassword", data)
 
             userId = data.get("userId")
             oldPassword = data.get("oldPassword")
             newPassword = data.get("newPassword")
 
-            if not userId or not oldPassword or not newPassword:
-                return jsonify({ "success": False, "message": "Missing required fields." }), 400
+            try:
+                userId  = uuid.UUID(userId)
+            except ValueError:
+                return [False, "Invalid UUID format for user ID"]
 
-            success, message = self._dashService.updatePassword(userId, oldPassword, newPassword)
-            return jsonify({ "success": success, "message": message }), 200 if success else 400
+            if (not oldPassword or not newPassword):
+                return [False, "Missing required fields."]
 
+            return self._userService.updatePassword(userId, oldPassword, newPassword)
 
         self._app = app
         return app
